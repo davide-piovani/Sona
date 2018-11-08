@@ -22,8 +22,8 @@
 \contentsline {subsection}{\numberline {3.5}- Flowchart}{5}{subsection.3.5}
 \contentsline {section}{\numberline {4}Characters}{6}{section.4}
 \contentsline {subsection}{\numberline {4.1}Player characters}{6}{subsection.4.1}
-\contentsline {subsubsection}{\numberline {4.1.1}? Jack}{6}{subsubsection.4.1.1}
-\contentsline {subsubsection}{\numberline {4.1.2}Hannan}{6}{subsubsection.4.1.2}
+\contentsline {subsubsection}{\numberline {4.1.1}Jack}{6}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}Hannah}{6}{subsubsection.4.1.2}
 \contentsline {subsubsection}{\numberline {4.1.3}Charlie}{6}{subsubsection.4.1.3}
 \contentsline {subsection}{\numberline {4.2}Non player characters}{6}{subsection.4.2}
 \contentsline {subsubsection}{\numberline {4.2.1}Dr. James Dertham}{6}{subsubsection.4.2.1}
