@@ -30,25 +30,19 @@
 \contentsline {subsubsection}{\numberline {4.2.2}Guards}{6}{subsubsection.4.2.2}
 \contentsline {section}{\numberline {5}Story}{7}{section.5}
 \contentsline {subsection}{\numberline {5.1}Synopsis}{7}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Complete story}{7}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}- Backstory}{7}{subsection.5.3}
-\contentsline {subsection}{\numberline {5.4}? Narrative devices}{7}{subsection.5.4}
-\contentsline {subsection}{\numberline {5.5}- Subplots}{7}{subsection.5.5}
-\contentsline {section}{\numberline {6}World}{8}{section.6}
-\contentsline {subsection}{\numberline {6.1}- Overview}{8}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}- Key locations}{8}{subsection.6.2}
-\contentsline {subsection}{\numberline {6.3}- Travel}{8}{subsection.6.3}
-\contentsline {subsection}{\numberline {6.4}- Mapping}{8}{subsection.6.4}
-\contentsline {subsection}{\numberline {6.5}- Scale}{8}{subsection.6.5}
-\contentsline {subsection}{\numberline {6.6}- Physical objects}{8}{subsection.6.6}
-\contentsline {subsection}{\numberline {6.7}- Weather conditions}{8}{subsection.6.7}
-\contentsline {subsection}{\numberline {6.8}- Day and night}{8}{subsection.6.8}
-\contentsline {subsection}{\numberline {6.9}- Time}{8}{subsection.6.9}
-\contentsline {subsection}{\numberline {6.10}- Physics}{8}{subsection.6.10}
-\contentsline {subsection}{\numberline {6.11}- Society/culture}{8}{subsection.6.11}
-\contentsline {section}{\numberline {7}Media list}{9}{section.7}
-\contentsline {subsection}{\numberline {7.1}- Interface assets}{9}{subsection.7.1}
-\contentsline {subsection}{\numberline {7.2}- Environments}{9}{subsection.7.2}
-\contentsline {subsection}{\numberline {7.3}- Characters}{9}{subsection.7.3}
-\contentsline {subsection}{\numberline {7.4}- Animation}{9}{subsection.7.4}
-\contentsline {subsection}{\numberline {7.5}- Music and sound effects}{9}{subsection.7.5}
+\contentsline {subsection}{\numberline {5.2}Backstory}{7}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Complete story}{7}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Narrative devices}{7}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Subplots}{8}{subsection.5.5}
+\contentsline {section}{\numberline {6}World}{9}{section.6}
+\contentsline {subsection}{\numberline {6.1}- Overview}{9}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}- Key locations}{9}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}- Travel}{9}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}- Physical objects}{9}{subsection.6.4}
+\contentsline {subsection}{\numberline {6.5}- Time}{9}{subsection.6.5}
+\contentsline {section}{\numberline {7}Media list}{10}{section.7}
+\contentsline {subsection}{\numberline {7.1}- Interface assets}{10}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}- Environments}{10}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}- Characters}{10}{subsection.7.3}
+\contentsline {subsection}{\numberline {7.4}- Animation}{10}{subsection.7.4}
+\contentsline {subsection}{\numberline {7.5}- Music and sound effects}{11}{subsection.7.5}
