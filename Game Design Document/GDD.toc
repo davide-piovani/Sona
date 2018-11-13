@@ -16,9 +16,9 @@
 \contentsline {subsubsection}{\numberline {3.3.2}Rules}{5}{subsubsection.3.3.2}
 \contentsline {subsubsection}{\numberline {3.3.3}Scoring/winning conditions}{5}{subsubsection.3.3.3}
 \contentsline {subsection}{\numberline {3.4}- Levels}{5}{subsection.3.4}
-\contentsline {subsubsection}{\numberline {3.4.1}- Tutorial / Level 1}{5}{subsubsection.3.4.1}
-\contentsline {subsubsection}{\numberline {3.4.2}- Intermediate level}{5}{subsubsection.3.4.2}
-\contentsline {subsubsection}{\numberline {3.4.3}- Final level}{5}{subsubsection.3.4.3}
+\contentsline {subsubsection}{\numberline {3.4.1}Introductory level}{5}{subsubsection.3.4.1}
+\contentsline {subsubsection}{\numberline {3.4.2}Intermediate level}{5}{subsubsection.3.4.2}
+\contentsline {subsubsection}{\numberline {3.4.3}Final level}{5}{subsubsection.3.4.3}
 \contentsline {subsection}{\numberline {3.5}- Flowchart}{5}{subsection.3.5}
 \contentsline {section}{\numberline {4}Characters}{6}{section.4}
 \contentsline {subsection}{\numberline {4.1}Player characters}{6}{subsection.4.1}
