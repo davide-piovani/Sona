@@ -36,6 +36,7 @@ ModelImporter:
     100060: pollice.R_end
     100062: spalla.L
     100064: spalla.R
+    100066: Character.001
     400000: avambraccio.L
     400002: avambraccio.R
     400004: Bone
@@ -69,6 +70,7 @@ ModelImporter:
     400060: pollice.R_end
     400062: spalla.L
     400064: spalla.R
+    400066: Character.001
     2100000: Material.010
     2100002: Material.003
     4300000: Circle
@@ -81,6 +83,7 @@ ModelImporter:
     7400012: Character|salto
     9500000: //RootNode
     13700000: Circle
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1

@@ -1,1 +1,4 @@
-sceneSetups: []
+sceneSetups:
+- path: "Assets/Scenes/main menu\u0300.unity"
+  isLoaded: 1
+  isActive: 1
