@@ -8,6 +8,9 @@ namespace ApplicationConstants
         public static int playerLayer = 9;
         public static int dashableObjectsLayer = 10;
 
+        public static float runningSpeed = 0.03f;
+        public static float animationsSpeed = 0.5f;
+
         public static float jackPowerDuration = 5f;
         public static float charliePowerDuration = 5f;
         public static float hannahPowerDuration = 5f;
