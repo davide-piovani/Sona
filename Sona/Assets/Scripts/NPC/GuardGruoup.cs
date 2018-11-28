@@ -24,12 +24,14 @@ public class GuardGruoup : MonoBehaviour {
     {
         EventManager.AllarmIsActivatedMethods += MoveToAllarm;
         EventManager.GuardIsCallingMethods += CallOtherGuards;
+        EventManager.ChangeStateMethods += ChangeStateGuards;
     }
 
     void OnDisable()
     {
         EventManager.AllarmIsActivatedMethods -= MoveToAllarm;
-        EventManager.GuardIsCallingMethods += CallOtherGuards;
+        EventManager.GuardIsCallingMethods -= CallOtherGuards;
+        EventManager.ChangeStateMethods -= ChangeStateGuards;
     }
 
     void MoveToAllarm()
@@ -40,6 +42,15 @@ public class GuardGruoup : MonoBehaviour {
     public void CallOtherGuards()
     {
         GoTo(player.transform);
+    }
+
+    public void ChangeStateGuards()
+    {
+        for (int i = 0; i < guards.Length; i++)
+        {
+            guards[i].ChangeState(new SleepState());
+            Debug.Log("Guards changed state");
+        }
     }
 
 }

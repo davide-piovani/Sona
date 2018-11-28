@@ -10,6 +10,9 @@ public class EventManager : MonoBehaviour {
     public delegate void GuardIsCalling();
     public static event GuardIsCalling GuardIsCallingMethods;
 
+    public delegate void ChangeState();
+    public static event ChangeState ChangeStateMethods;
+
 
     public static void AllarmRinging()
     {
@@ -21,5 +24,11 @@ public class EventManager : MonoBehaviour {
     {
         Debug.Log("A guard spotted you! Go away, you fool!");
         GuardIsCallingMethods();
+    }
+
+    public static void ChangeStateGuards()
+    {
+        Debug.Log("Guards are changing state");
+        AllarmIsActivatedMethods();
     }
 }

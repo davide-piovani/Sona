@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
         }
         //GetMouseButtonDown(1) is right mouse click
         if (Input.GetMouseButtonDown(1))
-        {
+        {              
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100))
@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
                     SetFocus(interactable);
                 }
             }
+            
         }
     }
 
