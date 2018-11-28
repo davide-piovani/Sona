@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Camera_controller : MonoBehaviour {
 
-	private const float rot_speed = 5f;
+	private const float rot_speed = 2.5f;
 	private const float narrow = 2.5f;
 	private const float speed = 2f;
 
@@ -14,6 +14,9 @@ public class Camera_controller : MonoBehaviour {
 	private Transform p_tr;
 	private bool toFirst = false;
 	private bool toThird = false;
+	//positioned only for testing purposes
+	public Vector3 mov;
+	public int layerMask;
 	
 	public GameObject player;
 
@@ -24,6 +27,7 @@ public class Camera_controller : MonoBehaviour {
 		offset = player.transform.position - tr.position;
 		base_dist = offset.magnitude;
 		dist = base_dist;
+		layerMask = ~ (1 << 9);
 	}
 
 	void Awake () {
@@ -37,7 +41,7 @@ public class Camera_controller : MonoBehaviour {
 
 
 	void LateUpdate () {
-		Vector3 mov;
+		//Vector3 mov;
 		Quaternion new_rotation;
 		RaycastHit hit;
 		
@@ -104,8 +108,8 @@ public class Camera_controller : MonoBehaviour {
 	
 			mov = new Vector3 (x,y,z);
 	
-			if (Physics.Raycast (player.transform.position, mov, out hit, base_dist)){
-				mov = mov * (hit.distance/base_dist);
+			if (Physics.Raycast (player.transform.position, mov, out hit, dist, layerMask)){
+				mov = mov * (hit.distance/dist);
 			}
 
 			tr.position = player.transform.position + mov; 
