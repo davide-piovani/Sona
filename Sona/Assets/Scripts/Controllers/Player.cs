@@ -7,7 +7,7 @@ public abstract class Player : MonoBehaviour {
 
     [SerializeField] Camera characterCamera;
 
-    private float speed = GameConstants.playerMovementDefaultSpeed;
+    private float speed = GameConstants.runningSpeed;
 
     protected float powerDuration;
     protected float rechargeSpeed;
@@ -17,12 +17,13 @@ public abstract class Player : MonoBehaviour {
     public bool protectToChangeCharacter = false;
     protected bool powerActive = false;
     //private ActiveCharacterController controller;
+    private GameController gameController;
 
 
     //Animations
     public bool isGrounded;
-    private float w_speed = 0.002f;
-    public float rotSpeed = 2f;
+    private float w_speed = 2f;
+    private float rotSpeed = 85f;
     public float jumpHeight = 200f;
     Rigidbody rb;
     Animator anim;
@@ -33,6 +34,7 @@ public abstract class Player : MonoBehaviour {
 
     protected void Start(){
         //controller = FindObjectOfType<ActiveCharacterController>();
+        gameController = FindObjectOfType<GameController>();
 
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
@@ -41,6 +43,7 @@ public abstract class Player : MonoBehaviour {
 
         LoadPowerSettings();
         powerTimeLeft = powerDuration;
+        gameController.UpdatePowerLevelIndicator(powerTimeLeft / powerDuration);
         PowerToggle(false);
 
         anim.speed = GameConstants.animationsSpeed;
@@ -68,6 +71,7 @@ public abstract class Player : MonoBehaviour {
     private void checkPowerDuration(){
         if (powerActive) {
             powerTimeLeft -= Time.deltaTime;
+
             if (powerTimeLeft <= 0) PowerToggle(false);
         } else {
             if (powerTimeLeft < powerDuration) {
@@ -76,6 +80,7 @@ public abstract class Player : MonoBehaviour {
                 powerTimeLeft = powerDuration;
             }
         }
+        gameController.UpdatePowerLevelIndicator(powerTimeLeft / powerDuration);
         //print("Power time left: " + powerTimeLeft.ToString());
     }
 
@@ -146,8 +151,8 @@ public abstract class Player : MonoBehaviour {
         }
 
         //rotSpeed = 2f;
-        transform.Translate(0, 0, z*speed);
-        transform.Rotate(0, y*rotSpeed, 0);
+        transform.Translate(0, 0, z*speed*Time.deltaTime);
+        transform.Rotate(0, y*rotSpeed*Time.deltaTime, 0);
 
     }
 

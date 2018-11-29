@@ -2,9 +2,12 @@
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Characters/Hannah.cs">
     <Files>
-      <File FileName="Assets/Scripts/Controllers/Player.cs" Line="141" Column="44" />
-      <File FileName="Assets/Scripts/Utils/GameConstants.cs" Line="11" Column="50" />
-      <File FileName="Assets/Scripts/Characters/Hannah.cs" Line="15" Column="32" />
+      <File FileName="Assets/Scripts/Characters/GruntMovement.cs" Line="17" Column="27" />
+      <File FileName="../../../Unity/Poli/Sona/Sona/Assets/Scripts/EnemySight.cs" Line="63" Column="9" />
+      <File FileName="Assets/Scripts/Controllers/Player.cs" Line="24" Column="28" />
+      <File FileName="Assets/Scripts/Utils/GameConstants.cs" Line="12" Column="9" />
+      <File FileName="Assets/Scripts/Controllers/GameController.cs" Line="20" Column="6" />
+      <File FileName="Assets/Scripts/Characters/Hannah.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

@@ -4,11 +4,10 @@ using UnityEngine;
 namespace ApplicationConstants
 {
     public class GameConstants{
-        public static float playerMovementDefaultSpeed = 10f;
         public static int playerLayer = 9;
         public static int dashableObjectsLayer = 10;
 
-        public static float runningSpeed = 0.03f;
+        public static float runningSpeed = 4f;
         public static float animationsSpeed = 0.5f;
 
         public static float jackPowerDuration = 5f;
