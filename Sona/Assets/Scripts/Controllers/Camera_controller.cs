@@ -14,9 +14,7 @@ public class Camera_controller : MonoBehaviour {
 	private Transform p_tr;
 	private bool toFirst = false;
 	private bool toThird = false;
-	//positioned only for testing purposes
-	public Vector3 mov;
-	public int layerMask;
+	private int layerMask;
 	
 	public GameObject player;
 
@@ -41,7 +39,7 @@ public class Camera_controller : MonoBehaviour {
 
 
 	void LateUpdate () {
-		//Vector3 mov;
+		Vector3 mov;
 		Quaternion new_rotation;
 		RaycastHit hit;
 		
@@ -82,6 +80,10 @@ public class Camera_controller : MonoBehaviour {
 		} else if (Input.GetKey("j")){
 			new_rotation = Quaternion.AngleAxis (-rot_speed, Vector3.up);
 			tr.rotation = new_rotation * tr.rotation;
+		} else if (Input.GetAxis ("Vertical") != 0){
+			//puts the camera behind the player when moving
+			new_rotation = Quaternion.Euler(30, player.transform.rotation.eulerAngles[1], 0);
+			tr.rotation = Quaternion.RotateTowards (tr.rotation, new_rotation, rot_speed);
 		}
 		
 		if (toFirst){
@@ -109,7 +111,7 @@ public class Camera_controller : MonoBehaviour {
 			mov = new Vector3 (x,y,z);
 	
 			if (Physics.Raycast (player.transform.position, mov, out hit, dist, layerMask)){
-				mov = mov * (hit.distance/dist);
+				mov = mov * ((hit.distance + 0.01f)/dist);
 			}
 
 			tr.position = player.transform.position + mov; 
