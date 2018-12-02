@@ -13,11 +13,13 @@ public class LevelManager : MonoBehaviour {
 
 	public GameObject player;
 	public GameObject prefab;
-	public GameObject MovableWall;
+	public GameObject MovableWall1;
+	public GameObject MovableWall2;
 
 	// Use this for initialization
 	void Start () {
 		GameObject obj;
+		int i;
 
 		p_position [0] = new Vector3 (3f, -0.25f, 23f);
 		p_position [1] = new Vector3 (6f, -0.25f, 23f);
@@ -29,6 +31,10 @@ public class LevelManager : MonoBehaviour {
 		p_position [7] = new Vector3 (6f, -0.25f, 17f);
 		p_position [8] = new Vector3 (9f, -0.25f, 17f);
 		p_position [9] = new Vector3 (12f, -0.25f, 17f);
+
+		for (i=0; i<10; i++){
+			p_script[1] = null;
+		}
 
 		//Instantiate the first platform
 		obj = Instantiate (prefab, p_position[0], Quaternion.Euler (-90,0,0));
@@ -53,20 +59,23 @@ public class LevelManager : MonoBehaviour {
 
 	public void PlatformTriggered (int id){
 		GameObject obj;
-		if (id < 9){
+		if (id < 9 && p_script[id+1] == null){
 			obj = Instantiate (prefab, p_position[id + 1], Quaternion.Euler (-90,0,0));
 			p_script [id+1] = obj.AddComponent<Platform>() as Platform;
 			p_script [id+1].SetData (id+1, this);
 		}
+		else if (id >= 9){
+			Destroy (MovableWall1);
+		}
 	}
 
-	public void MoveWall (bool open){
+	public void ButtonMoveWall (bool open){
 		Vector3 mov = new Vector3 (0, 5, 0);
 		if (open && !this.open){
-			MovableWall.transform.position = MovableWall.transform.position + mov;
+			MovableWall2.transform.position = MovableWall2.transform.position + mov;
 			this.open = true;
 		} else if (!open && this.open){
-			MovableWall.transform.position = MovableWall.transform.position - mov;
+			MovableWall2.transform.position = MovableWall2.transform.position - mov;
 			this.open = false;
 		}
 	}

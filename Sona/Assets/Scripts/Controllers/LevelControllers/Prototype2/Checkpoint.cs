@@ -20,7 +20,7 @@ public class Checkpoint : MonoBehaviour {
 	public void OnCollisionEnter (Collision other){
 		if (other.collider.CompareTag("Player")){
 			manager.CheckpointReached ((GetComponent<Transform>()).position,
-				Quaternion.Euler (0,90,0));
+				Quaternion.Euler (0,180,0));
 		}
 	}
 }

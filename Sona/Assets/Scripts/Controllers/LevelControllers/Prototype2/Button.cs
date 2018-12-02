@@ -19,7 +19,7 @@ public class Button : MonoBehaviour {
 
 	void OnCollisionEnter(Collision other){
 		if(other.collider.CompareTag("Player")){
-			manager.MoveWall(open);
+			manager.ButtonMoveWall(open);
 		}
 	}
 }

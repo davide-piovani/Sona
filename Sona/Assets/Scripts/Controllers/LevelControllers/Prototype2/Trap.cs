@@ -16,7 +16,7 @@ public class Trap : MonoBehaviour {
 		
 	}
 
-	public void OnCollisionEnter (Collision other){
+	public void OnCollisionStay (Collision other){
 		if (other.collider.CompareTag ("Player")){
 			manager.PlayerDies();
 		}
