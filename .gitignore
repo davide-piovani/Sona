@@ -18,3 +18,6 @@ Sona/Temp/__Backupscenes/0.backup
 *.cache
 Sona/Library/metadata/ca/caa6a33e5875243aba958e7fc270a39f
 Sona/Library/metadata/24/2402a5ae8735d4ef3af696ecd23cd543
+Sona/Library/ScriptMapper
+*.dll
+Sona/Library/ScriptAssemblies/Assembly-CSharp.dll.mdb

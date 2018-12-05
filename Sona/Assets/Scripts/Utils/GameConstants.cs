@@ -36,13 +36,13 @@ namespace ApplicationConstants
 
         public static string[][] menuButtonsText = {
             new string[] {"New Game", "Load Game", "Select Level", "Settings", "Prototypes"},
-            new string[] {"Level 1", "Level 2", "Level 3", "", "Back"}
+            new string[] {"Level 1", "Level 2", "Hannah Level", "", "Back"}
         };
     }
 
     public class SceneNames {
         public static string prototype1 = "Prototype 1";
         public static string prototype2 = "Prototype 2";
-        public static string prototype3 = "Prototype 3";
+        public static string prototype3 = "Hannah Level";
     }
 }

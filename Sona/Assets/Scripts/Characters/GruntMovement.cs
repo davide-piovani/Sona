@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GruntMovement : MonoBehaviour {
 
@@ -14,10 +16,15 @@ public class GruntMovement : MonoBehaviour {
     int nextWaypoint = 0;
     bool increasingOrder = true;
     bool changeDirectionAtTheEndOfPath = true;
-    float gruntSpeed = 1f;
+    float gruntSpeed = 0.8f;
+    NavMeshAgent agent;
 
     private void Start(){
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
+        anim.speed = 1f;
+        agent = GetComponent<NavMeshAgent>();
+        moveGrunt(path[nextWaypoint].position);
+
     }
 
     // Update is called once per frame
@@ -35,15 +42,48 @@ public class GruntMovement : MonoBehaviour {
 
     private void followPath(){
         setAnimBools(Mode.walking);
-        Vector3 currentPos = transform.position;
+        if (destinationReached()) {
+            calculateNextWaypoint();
+            moveGrunt(path[nextWaypoint].position);
+        }
+
+
+        /*Vector3 currentPos = transform.position;
         Vector3 nextPos = path[nextWaypoint].position;
 
-        if (currentPos != nextPos){
-            transform.position = Vector3.MoveTowards(currentPos, nextPos, Time.deltaTime * gruntSpeed);
+        if (!checkIfEqualPos(currentPos, nextPos)){
+            Vector3 towardPos = Vector3.MoveTowards(currentPos, nextPos, Time.deltaTime * gruntSpeed);
+            //print("Step x: " + (towardPos.x - transform.position.x));
+            //print("Step y: " + (towardPos.y - transform.position.y));
+            //print("Step z: " + (towardPos.z - transform.position.z));
+            transform.position = new Vector3(towardPos.x, transform.position.y, towardPos.z);
         } else {
             calculateNextWaypoint();
             rotateGrunt();
+        }*/
+    }
+
+    private void moveGrunt(Vector3 position){
+        //print("Moving grunt to this position: " + position);
+        agent.SetDestination(position);
+    }
+
+    private bool destinationReached(){
+        if (!agent.pathPending){
+            if (agent.remainingDistance <= agent.stoppingDistance){
+                if (!agent.hasPath || Math.Abs(agent.velocity.sqrMagnitude) < 0.001f){
+                    return true;
+                }
+            }
         }
+        return false;
+    }
+
+    private bool checkIfEqualPos(Vector3 pos1, Vector3 pos2){
+        float epsilon = 0.001f;
+        if (System.Math.Abs(pos1.x - pos2.x) < epsilon &&
+            System.Math.Abs(pos1.z - pos2.z) < epsilon) return true;
+        return false;
     }
 
     private void calculateNextWaypoint(){
