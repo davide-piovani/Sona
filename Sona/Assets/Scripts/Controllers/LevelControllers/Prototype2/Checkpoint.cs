@@ -5,6 +5,8 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour {
 
 	public LevelManager manager;
+	public float y_rotation;
+	private bool used = false;
 	
 
 	// Use this for initialization
@@ -18,9 +20,9 @@ public class Checkpoint : MonoBehaviour {
 	}
 
 	public void OnCollisionEnter (Collision other){
-		if (other.collider.CompareTag("Player")){
+		if (other.collider.CompareTag("Player") && !used){
 			manager.CheckpointReached ((GetComponent<Transform>()).position,
-				Quaternion.Euler (0,180,0));
+				Quaternion.Euler(0, y_rotation, 0));
 		}
 	}
 }

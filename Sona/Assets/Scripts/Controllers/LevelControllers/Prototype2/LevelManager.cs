@@ -7,14 +7,15 @@ public class LevelManager : MonoBehaviour {
 	private Vector3 checkPosition = new Vector3 (0,0,0);
 	private Quaternion checkRotation = Quaternion.Euler (0,0,0);
 
-	private Vector3 [] p_position = new Vector3 [10];
-	private Platform [] p_script = new Platform [10];
+	private Vector3 [] p_position = new Vector3 [15];
+	private Platform [] p_script = new Platform [15];
 	private bool open = false;
 
 	public GameObject player;
 	public GameObject prefab;
 	public GameObject MovableWall1;
 	public GameObject MovableWall2;
+	public LastTrapMobileWall MobileWall3;
 
 	// Use this for initialization
 	void Start () {
@@ -31,8 +32,13 @@ public class LevelManager : MonoBehaviour {
 		p_position [7] = new Vector3 (6f, -0.25f, 17f);
 		p_position [8] = new Vector3 (9f, -0.25f, 17f);
 		p_position [9] = new Vector3 (12f, -0.25f, 17f);
+		p_position [10] = new Vector3 (2f, -0.25f, 10f);
+		p_position [11] = new Vector3 (2f, -0.25f, 3.5f);
+		p_position [12] = new Vector3 (7f, -0.25f, 3.5f);
+		p_position [13] = new Vector3 (7f, -0.25f, 10f);
+		p_position [14] = new Vector3 (11f, -0.25f, 10f);
 
-		for (i=0; i<10; i++){
+		for (i=0; i<15; i++){
 			p_script[1] = null;
 		}
 
@@ -40,6 +46,7 @@ public class LevelManager : MonoBehaviour {
 		obj = Instantiate (prefab, p_position[0], Quaternion.Euler (-90,0,0));
 		p_script [0] = obj.AddComponent<Platform>() as Platform;
 		p_script [0].SetData (0, this);
+
 	}
 	
 	// Update is called once per frame
@@ -59,12 +66,12 @@ public class LevelManager : MonoBehaviour {
 
 	public void PlatformTriggered (int id){
 		GameObject obj;
-		if (id < 9 && p_script[id+1] == null){
+		if (id <  14 && p_script[id+1] == null){
 			obj = Instantiate (prefab, p_position[id + 1], Quaternion.Euler (-90,0,0));
 			p_script [id+1] = obj.AddComponent<Platform>() as Platform;
 			p_script [id+1].SetData (id+1, this);
 		}
-		else if (id >= 9){
+		if (id == 9){
 			Destroy (MovableWall1);
 		}
 	}
@@ -79,4 +86,10 @@ public class LevelManager : MonoBehaviour {
 			this.open = false;
 		}
 	}
+
+	public void LastTrapTrigger (){
+		MobileWall3.Open();
+	}
+
+	
 }
