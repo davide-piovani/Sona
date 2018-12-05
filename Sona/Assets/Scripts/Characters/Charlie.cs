@@ -3,6 +3,7 @@ using ApplicationConstants;
 
 public class Charlie : Player {
 
+
     protected override void LoadPowerSettings(){
         powerDuration = GameConstants.charliePowerDuration;
         rechargeSpeed = GameConstants.charlieRechargeSpeed;
