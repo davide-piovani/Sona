@@ -37,6 +37,8 @@ ModelImporter:
     100062: spalla.L
     100064: spalla.R
     100066: Character.001
+    100068: Camera
+    100070: Lamp
     400000: avambraccio.L
     400002: avambraccio.R
     400004: Bone
@@ -71,6 +73,9 @@ ModelImporter:
     400062: spalla.L
     400064: spalla.R
     400066: Character.001
+    400068: Camera
+    400070: Lamp
+    2000000: Camera
     2100000: Material.010
     2100002: Material.003
     4300000: Circle
@@ -82,6 +87,7 @@ ModelImporter:
     7400010: Character|idle
     7400012: Character|salto
     9500000: //RootNode
+    10800000: Lamp
     13700000: Circle
     2186277476908879412: ImportLogs
   externalObjects: {}
@@ -123,7 +129,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -151,7 +157,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -179,7 +185,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -207,7 +213,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -235,7 +241,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -295,7 +301,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    rootMotionBoneName: 
+    rootMotionBoneName: Character.001
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

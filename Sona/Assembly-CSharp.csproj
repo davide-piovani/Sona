@@ -72,6 +72,10 @@
     <Compile Include="Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
     <Compile Include="Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
     <Compile Include="Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
+    <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshLink.cs" />
+    <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshModifier.cs" />
+    <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshModifierVolume.cs" />
+    <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshSurface.cs" />
     <Compile Include="Assets\Scripts\Characters\Charlie.cs" />
     <Compile Include="Assets\Scripts\Characters\GruntMovement.cs" />
     <Compile Include="Assets\Scripts\Characters\Hannah.cs" />

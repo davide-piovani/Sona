@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -325,6 +325,35 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 33743082037419614, guid: 90f6a9e4cc6a4b241b634b3c7a5fa41e,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300002, guid: c171fd2615feb43f0ab50d3b6b919632, type: 3}
+    - target: {fileID: 4301217243003784, guid: 90f6a9e4cc6a4b241b634b3c7a5fa41e, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301217243003784, guid: 90f6a9e4cc6a4b241b634b3c7a5fa41e, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301217243003784, guid: 90f6a9e4cc6a4b241b634b3c7a5fa41e, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301217243003784, guid: 90f6a9e4cc6a4b241b634b3c7a5fa41e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301217243003784, guid: 90f6a9e4cc6a4b241b634b3c7a5fa41e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301217243003784, guid: 90f6a9e4cc6a4b241b634b3c7a5fa41e, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90f6a9e4cc6a4b241b634b3c7a5fa41e, type: 2}
@@ -1083,6 +1112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0d5ed058b62499a9ee387502910e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mov: {x: 0, y: 0, z: 0}
+  layerMask: 0
   player: {fileID: 284127621}
 --- !u!1 &966382027
 GameObject:

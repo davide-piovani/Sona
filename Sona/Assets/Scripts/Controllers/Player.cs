@@ -2,6 +2,7 @@
 using ApplicationConstants;
 using UnityStandardAssets.CrossPlatformInput;
 using System;
+using UnityEngine.AI;
 
 public abstract class Player : MonoBehaviour {
 
@@ -23,11 +24,12 @@ public abstract class Player : MonoBehaviour {
     //Animations
     public bool isGrounded;
     private float w_speed = 2f;
-    private float rotSpeed = 85f;
+    private float rotSpeed = 95f;
     public float jumpHeight = 200f;
     Rigidbody rb;
     Animator anim;
     CapsuleCollider col_size;
+    NavMeshAgent agent;
 
     public bool isPowerActive() { return powerActive; }
     public Camera GetCharacterCamera() { return characterCamera; }
@@ -39,6 +41,7 @@ public abstract class Player : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         col_size = GetComponent<CapsuleCollider>();
+        agent = GetComponent<NavMeshAgent>();
         isGrounded = true;
 
         LoadPowerSettings();
@@ -46,7 +49,8 @@ public abstract class Player : MonoBehaviour {
         gameController.UpdatePowerLevelIndicator(powerTimeLeft / powerDuration);
         PowerToggle(false);
 
-        anim.speed = GameConstants.animationsSpeed;
+        //anim.speed = GameConstants.animationsSpeed;
+        anim.speed = 1f;
     }
 
     protected abstract void LoadPowerSettings();
@@ -150,7 +154,17 @@ public abstract class Player : MonoBehaviour {
             }
         }
 
-        //rotSpeed = 2f;
+        /*if (Math.Abs(z) > 0.0001f){
+            float step = z * speed * Time.deltaTime * 100;
+            print("Movement: " + step);
+            print("Forward: " + transform.forward);
+            Vector3 newPos = transform.position + transform.forward * step;
+            print("New Pos: " + newPos);
+            agent.SetDestination(newPos);
+        }*/
+
+
+        //agent.Move(new Vector3(0, 0, z * speed * Time.deltaTime));
         transform.Translate(0, 0, z*speed*Time.deltaTime);
         transform.Rotate(0, y*rotSpeed*Time.deltaTime, 0);
 
