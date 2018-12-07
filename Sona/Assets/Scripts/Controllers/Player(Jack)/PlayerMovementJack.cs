@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovementJack : MonoBehaviour {
 
     public float Speed = 5.5f;
     public float JumpHeight = 2f;

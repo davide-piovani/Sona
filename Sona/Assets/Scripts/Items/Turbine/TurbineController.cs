@@ -21,6 +21,7 @@ public class TurbineController : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
+
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.transform.position = new Vector3(checkPoint.transform.position.x, 1.3f, checkPoint.transform.position.z);
