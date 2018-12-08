@@ -22,6 +22,12 @@ namespace ApplicationConstants
         public static string enterButton = "EnterButton";
         public static string jumpButton = "Jump";
 
+	//Camera Controller
+	public static string CameraUp = "CamUp";
+	public static string CameraDown = "CamDown";
+	public static string CameraLeft = "CamLeft";
+	public static string CameraRight = "CamRight";
+
         public static string killingObjectTag = "KillingObject";
     }
 
@@ -42,7 +48,7 @@ namespace ApplicationConstants
 
     public class SceneNames {
         public static string prototype1 = "Prototype 1";
-        public static string prototype2 = "Prototype 2";
+        public static string prototype2 = "Charlie_level";
         public static string prototype3 = "Hannah Level";
     }
 }

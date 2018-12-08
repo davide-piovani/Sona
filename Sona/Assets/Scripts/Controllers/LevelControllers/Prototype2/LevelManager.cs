@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour {
 	public GameObject MovableWall1;
 	public GameObject MovableWall2;
 	public LastTrapMobileWall MobileWall3;
+	public SceneLoader load;
 
 	// Use this for initialization
 	void Start () {
@@ -32,8 +33,8 @@ public class LevelManager : MonoBehaviour {
 		p_position [7] = new Vector3 (6f, -0.25f, 17f);
 		p_position [8] = new Vector3 (9f, -0.25f, 17f);
 		p_position [9] = new Vector3 (12f, -0.25f, 17f);
-		p_position [10] = new Vector3 (2f, -0.25f, 10f);
-		p_position [11] = new Vector3 (2f, -0.25f, 3.5f);
+		p_position [10] = new Vector3 (2.3f, -0.25f, 10f);
+		p_position [11] = new Vector3 (2.3f, -0.25f, 3.5f);
 		p_position [12] = new Vector3 (7f, -0.25f, 3.5f);
 		p_position [13] = new Vector3 (7f, -0.25f, 10f);
 		p_position [14] = new Vector3 (11f, -0.25f, 10f);
@@ -91,5 +92,10 @@ public class LevelManager : MonoBehaviour {
 		MobileWall3.Open();
 	}
 
+	public void BackToMenu () {
+		//Call the scene loader to load the main menu;
+		print ("Level finished");
+		//load.LoadScene ("0. Main menù");
+	}
 	
 }
