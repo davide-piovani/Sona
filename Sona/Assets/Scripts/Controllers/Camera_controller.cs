@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
+using ApplicationConstants;
 
 public class Camera_controller : MonoBehaviour {
 
@@ -15,6 +17,8 @@ public class Camera_controller : MonoBehaviour {
 	private bool toFirst = false;
 	private bool toThird = false;
 	private int layerMask;
+
+	private float c_dist = 0f;
 	
 	public GameObject player;
 
@@ -26,6 +30,8 @@ public class Camera_controller : MonoBehaviour {
 		base_dist = offset.magnitude;
 		dist = base_dist;
 		layerMask = ~ (1 << 9);
+
+		c_dist = compute_dist ();
 	}
 
 	void Awake () {
@@ -50,7 +56,7 @@ public class Camera_controller : MonoBehaviour {
 		float y = 0;
 		float z = -1;
 
-		if (Input.GetKey("i")){
+		if (CrossPlatformInputManager.GetButton(GameConstants.CameraUp)){
 			new_rotation = Quaternion.AngleAxis (-rot_speed, Vector3.right);
 			tr.rotation = tr.rotation * new_rotation;
 			if (tr.rotation.eulerAngles.x < 315 && tr.rotation.eulerAngles.x > 270){
@@ -62,7 +68,7 @@ public class Camera_controller : MonoBehaviour {
 			}
 			
 			
-		} else if (Input.GetKey("k")){
+		} else if (CrossPlatformInputManager.GetButton(GameConstants.CameraDown)){
 			new_rotation = Quaternion.AngleAxis (rot_speed, Vector3.right);
 			tr.rotation = tr.rotation * new_rotation;
 			if (tr.rotation.eulerAngles.x > 45 && tr.rotation.eulerAngles.x < 90){
@@ -74,13 +80,13 @@ public class Camera_controller : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetKey("l")){
+		if (CrossPlatformInputManager.GetButton(GameConstants.CameraRight)){
 			new_rotation = Quaternion.AngleAxis (rot_speed, Vector3.up);
 			tr.rotation = new_rotation * tr.rotation;
-		} else if (Input.GetKey("j")){
+		} else if (CrossPlatformInputManager.GetButton(GameConstants.CameraLeft)){
 			new_rotation = Quaternion.AngleAxis (-rot_speed, Vector3.up);
 			tr.rotation = new_rotation * tr.rotation;
-		} else if (Input.GetAxis ("Vertical") != 0){
+		} else if (CrossPlatformInputManager.GetAxis ("Vertical") != 0){
 			//puts the camera behind the player when moving
 			new_rotation = Quaternion.Euler(30, player.transform.rotation.eulerAngles[1], 0);
 			tr.rotation = Quaternion.RotateTowards (tr.rotation, new_rotation, rot_speed);
@@ -110,8 +116,8 @@ public class Camera_controller : MonoBehaviour {
 	
 			mov = new Vector3 (x,y,z);
 	
-			if (Physics.Raycast (player.transform.position, mov, out hit, dist, layerMask)){
-				mov = mov * ((hit.distance + 0.01f)/dist);
+			if (Physics.Raycast (player.transform.position, mov, out hit, dist + c_dist, layerMask)){
+				mov = mov * ((hit.distance - c_dist)/dist);
 			}
 
 			tr.position = player.transform.position + mov; 
@@ -137,6 +143,33 @@ public class Camera_controller : MonoBehaviour {
 			dist = base_dist;
 			toThird = false;
 		}
+	}
+
+	//Compute the distance of the camera from objects to avoid cutting them
+	private float compute_dist (){
+		Camera cam = gameObject.GetComponent<Camera>();
+		//base_dist: distance from player
+		float p_dist = cam.nearClipPlane;
+		float playerColliderRadius;
+		float nClipPlaneHWidth;
+		
+		float result;
+
+		GameObject parent = gameObject.transform.parent.gameObject;
+		CapsuleCollider col = parent.GetComponent<Collider> () as CapsuleCollider;
+		float scale;
+
+		if (parent.transform.localScale[0] > parent.transform.localScale[2]){
+			scale = parent.transform.localScale[0];
+		} else {
+			scale = parent.transform.localScale[2];
+		}
+
+		playerColliderRadius = col.radius * scale;
+		nClipPlaneHWidth = p_dist * Mathf.Tan(cam.fieldOfView * Mathf.Deg2Rad);
+		result = ((nClipPlaneHWidth * base_dist - playerColliderRadius * p_dist) / 
+			(playerColliderRadius - nClipPlaneHWidth)) + 0.01f;
+		return (result);
 	}
 	
 	//set the boolean to start the transition to the first person camera if no transition is already happening
