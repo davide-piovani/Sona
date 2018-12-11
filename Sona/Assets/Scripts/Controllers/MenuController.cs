@@ -52,7 +52,7 @@ public class MenuController : MonoBehaviour {
     }
 
     private void checkEnterButton(){
-        if (CrossPlatformInputManager.GetButtonDown(GameConstants.enterButton)){
+        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.enterButton)){
             switch (currentMenu){
                 case 0:
                     Menu0EnterPressed();

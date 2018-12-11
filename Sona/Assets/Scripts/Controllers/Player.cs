@@ -8,7 +8,7 @@ public abstract class Player : MonoBehaviour {
 
     [SerializeField] Camera characterCamera;
 
-    private float speed = GameConstants.runningSpeed;
+    private float speed = PlayersConstants.runningSpeed;
 
     protected float powerDuration;
     protected float rechargeSpeed;
@@ -31,6 +31,8 @@ public abstract class Player : MonoBehaviour {
     CapsuleCollider col_size;
     NavMeshAgent agent;
 
+    public Checkpoint lastCheckpointReached;
+
     public bool isPowerActive() { return powerActive; }
     public Camera GetCharacterCamera() { return characterCamera; }
 
@@ -51,6 +53,11 @@ public abstract class Player : MonoBehaviour {
 
         //anim.speed = GameConstants.animationsSpeed;
         anim.speed = 1f;
+        reloadCheckPoint();
+    }
+
+    private void reloadCheckPoint(){
+
     }
 
     protected abstract void LoadPowerSettings();
@@ -65,7 +72,7 @@ public abstract class Player : MonoBehaviour {
     }
 
     private void checkPower(){
-        if (CrossPlatformInputManager.GetButtonDown(GameConstants.powerButtonName)) {
+        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName)) {
             PowerToggle(!powerActive);
         }
     }
@@ -101,7 +108,7 @@ public abstract class Player : MonoBehaviour {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.tag == GameConstants.killingObjectTag) {
+        if (collision.gameObject.tag == PlayersConstants.killingObjectTag) {
             print("Death");
         }
     }
@@ -145,7 +152,7 @@ public abstract class Player : MonoBehaviour {
             }
         } else {
             //Running
-            speed = (z < 0) ? w_speed : GameConstants.runningSpeed;
+            speed = (z < 0) ? w_speed : PlayersConstants.runningSpeed;
             if (Math.Abs(z) > Mathf.Epsilon){
                 setAnimBools(Mode.running);
                 //anim.SetBool("backward", z < 0);

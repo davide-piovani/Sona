@@ -4,10 +4,9 @@ using UnityEngine;
 
 class AllertState : GuardState {
 
-    private float radius = 10f;
+    private float radius = 8f;
 
-    public override float GetRadius()
-    {
+    public override float GetRadius(){
        return radius;
     }
 

@@ -17,8 +17,8 @@ public class Hannah : Player {
     [SerializeField] Renderer hairRenderer;
 
     protected override void LoadPowerSettings(){
-        powerDuration = GameConstants.hannahPowerDuration;
-        rechargeSpeed = GameConstants.hannahRechargeSpeed;
+        powerDuration = PlayersConstants.hannahPowerDuration;
+        rechargeSpeed = PlayersConstants.hannahRechargeSpeed;
     }
 
     protected override void PowerToggle(bool isActive) {

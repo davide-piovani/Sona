@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GameController : MonoBehaviour {
 
@@ -16,6 +17,5 @@ public class GameController : MonoBehaviour {
     public void UpdatePowerLevelIndicator(float level){
         float newHeight = fullHeight * level;
         powerLevelIndicator.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);
-        
     }
 }

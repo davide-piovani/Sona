@@ -3,6 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour {
 
+    private void Awake(){
+        var sceneLoaders = FindObjectsOfType<SceneLoader>();
+        if (sceneLoaders.Length > 1) Destroy(gameObject);
+    }
+
     public void LoadNextScene(){
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         if (currentSceneIndex == SceneManager.sceneCount-1) {
@@ -10,6 +15,10 @@ public class SceneLoader : MonoBehaviour {
         } else {
             SceneManager.LoadScene(currentSceneIndex + 1);
         }
+    }
+
+    public void ReloadCurrentScene() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void LoadStartScene(){
