@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ApplicationConstants;
 
-public class Checkpoint : MonoBehaviour {
+public class CheckpointDavide : MonoBehaviour {
 
     public bool reached = false;
     private CheckpointController controller;

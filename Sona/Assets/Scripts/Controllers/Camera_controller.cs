@@ -56,7 +56,7 @@ public class Camera_controller : MonoBehaviour {
 		float y = 0;
 		float z = -1;
 
-		if (CrossPlatformInputManager.GetButton(GameConstants.CameraUp)){
+		if (CrossPlatformInputManager.GetButton(CameraConstants.CameraUp)){
 			new_rotation = Quaternion.AngleAxis (-rot_speed, Vector3.right);
 			tr.rotation = tr.rotation * new_rotation;
 			if (tr.rotation.eulerAngles.x < 315 && tr.rotation.eulerAngles.x > 270){
@@ -68,7 +68,7 @@ public class Camera_controller : MonoBehaviour {
 			}
 			
 			
-		} else if (CrossPlatformInputManager.GetButton(GameConstants.CameraDown)){
+		} else if (CrossPlatformInputManager.GetButton(CameraConstants.CameraDown)){
 			new_rotation = Quaternion.AngleAxis (rot_speed, Vector3.right);
 			tr.rotation = tr.rotation * new_rotation;
 			if (tr.rotation.eulerAngles.x > 45 && tr.rotation.eulerAngles.x < 90){
@@ -80,10 +80,10 @@ public class Camera_controller : MonoBehaviour {
 			}
 		}
 
-		if (CrossPlatformInputManager.GetButton(GameConstants.CameraRight)){
+		if (CrossPlatformInputManager.GetButton(CameraConstants.CameraRight)){
 			new_rotation = Quaternion.AngleAxis (rot_speed, Vector3.up);
 			tr.rotation = new_rotation * tr.rotation;
-		} else if (CrossPlatformInputManager.GetButton(GameConstants.CameraLeft)){
+		} else if (CrossPlatformInputManager.GetButton(CameraConstants.CameraLeft)){
 			new_rotation = Quaternion.AngleAxis (-rot_speed, Vector3.up);
 			tr.rotation = new_rotation * tr.rotation;
 		} else if (CrossPlatformInputManager.GetAxis ("Vertical") != 0){

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CheckpointController : MonoBehaviour {
 
-    public Checkpoint[] checkpoints;
+    public CheckpointDavide[] checkpoints;
     private int lastCheckpoint = 0;
 
     private void Awake() {
@@ -30,14 +30,14 @@ public class CheckpointController : MonoBehaviour {
         return true;
     }
 
-    private int GetCheckpointIndex(Checkpoint checkpoint){
+    private int GetCheckpointIndex(CheckpointDavide checkpoint){
         for (int i = 0; i < checkpoints.Length; i++){
             if (checkpoints[i] == checkpoint) return i;
         }
         return 0;
     }
 
-    public void AddCheckpoint(Checkpoint checkpoint){
+    public void AddCheckpoint(CheckpointDavide checkpoint){
         int checkpointIndex = GetCheckpointIndex(checkpoint);
         lastCheckpoint = (checkpointIndex > lastCheckpoint) ? checkpointIndex : lastCheckpoint;
     }

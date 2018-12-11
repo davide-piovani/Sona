@@ -31,7 +31,7 @@ public abstract class Player : MonoBehaviour {
     CapsuleCollider col_size;
     NavMeshAgent agent;
 
-    public Checkpoint lastCheckpointReached;
+    public CheckpointDavide lastCheckpointReached;
 
     public bool isPowerActive() { return powerActive; }
     public Camera GetCharacterCamera() { return characterCamera; }

@@ -3,6 +3,15 @@ using UnityEngine;
 
 namespace ApplicationConstants
 {
+
+    public class CameraConstants{
+        //Camera Controller
+        public static string CameraUp = "CamUp";
+        public static string CameraDown = "CamDown";
+        public static string CameraLeft = "CamLeft";
+        public static string CameraRight = "CamRight";
+    }
+
     public class PlayersConstants{
         public static int playerLayer = 9;
         public static int dashableObjectsLayer = 10;
@@ -21,12 +30,6 @@ namespace ApplicationConstants
         public static string changeCharacterButton = "ChangeCharacterButton";
         public static string enterButton = "EnterButton";
         public static string jumpButton = "Jump";
-
-	//Camera Controller
-	public static string CameraUp = "CamUp";
-	public static string CameraDown = "CamDown";
-	public static string CameraLeft = "CamLeft";
-	public static string CameraRight = "CamRight";
 
         public static string killingObjectTag = "KillingObject";
 

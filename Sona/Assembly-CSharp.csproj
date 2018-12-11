@@ -84,8 +84,8 @@
     <Compile Include="Assets\Scripts\Characters\PlayerMotor.cs" />
     <Compile Include="Assets\Scripts\Controllers\Camera_controller.cs" />
     <Compile Include="Assets\Scripts\Controllers\CameraControllerProvvisoria.cs" />
-    <Compile Include="Assets\Scripts\Controllers\Checkpoint.cs" />
     <Compile Include="Assets\Scripts\Controllers\CheckpointController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\CheckpointDavide.cs" />
     <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
     <Compile Include="Assets\Scripts\Controllers\GuardController.cs" />
     <Compile Include="Assets\Scripts\Controllers\GuardGroupController.cs" />
