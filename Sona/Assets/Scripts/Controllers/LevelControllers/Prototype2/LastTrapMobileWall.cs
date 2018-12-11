@@ -26,5 +26,6 @@ public class LastTrapMobileWall : MonoBehaviour {
 
 	public void Open (){
 		this.opening = true;
+		print ("opening");
 	}
 }
