@@ -89,6 +89,14 @@
     <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
     <Compile Include="Assets\Scripts\Controllers\GuardController.cs" />
     <Compile Include="Assets\Scripts\Controllers\GuardGroupController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LevelControllers\Prototype2\Button.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LevelControllers\Prototype2\Checkpoint.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LevelControllers\Prototype2\EndLevel.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LevelControllers\Prototype2\LastTrapButton.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LevelControllers\Prototype2\LastTrapMobileWall.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LevelControllers\Prototype2\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LevelControllers\Prototype2\Platform.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LevelControllers\Prototype2\Trap.cs" />
     <Compile Include="Assets\Scripts\Controllers\MenuController.cs" />
     <Compile Include="Assets\Scripts\Controllers\NewGuardController.cs" />
     <Compile Include="Assets\Scripts\Controllers\NewGuardGroup.cs" />

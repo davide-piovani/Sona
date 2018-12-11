@@ -91,7 +91,7 @@ public abstract class Player : MonoBehaviour {
                 powerTimeLeft = powerDuration;
             }
         }
-        gameController.UpdatePowerLevelIndicator(powerTimeLeft / powerDuration);
+        //gameController.UpdatePowerLevelIndicator(powerTimeLeft / powerDuration);
         //print("Power time left: " + powerTimeLeft.ToString());
     }
 
