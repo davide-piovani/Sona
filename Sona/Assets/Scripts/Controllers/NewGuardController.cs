@@ -66,7 +66,7 @@ public class NewGuardController : MonoBehaviour {
         foreach(Player player in playersInRange){
             //printSomething(player);
             if (!characterInvisible(player) && PlayerIsInSightAngle(player) && !SomethingBetweenPlayerAndEnemy(player)){
-                print("Visto");
+                //print("Visto");
                 if (!visiblePlayers.Contains(player)) visiblePlayers.Add(player);
                 guardGroup.AddPlayer(player);
             } else {

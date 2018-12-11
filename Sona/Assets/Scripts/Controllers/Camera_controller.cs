@@ -29,9 +29,10 @@ public class Camera_controller : MonoBehaviour {
 		offset = player.transform.position - tr.position;
 		base_dist = offset.magnitude;
 		dist = base_dist;
-		layerMask = ~ (1 << 9);
+        layerMask = ~ (1 << 9);
 
 		c_dist = compute_dist ();
+        print(c_dist);
 	}
 
 	void Awake () {
@@ -86,9 +87,10 @@ public class Camera_controller : MonoBehaviour {
 		} else if (CrossPlatformInputManager.GetButton(CameraConstants.CameraLeft)){
 			new_rotation = Quaternion.AngleAxis (-rot_speed, Vector3.up);
 			tr.rotation = new_rotation * tr.rotation;
-		} else if (CrossPlatformInputManager.GetAxis ("Vertical") != 0){
-			//puts the camera behind the player when moving
-			new_rotation = Quaternion.Euler(30, player.transform.rotation.eulerAngles[1], 0);
+		} else if (System.Math.Abs(CrossPlatformInputManager.GetAxis("Vertical")) > 0.0001f)
+        {
+            //puts the camera behind the player when moving
+            new_rotation = Quaternion.Euler(30, player.transform.rotation.eulerAngles[1], 0);
 			tr.rotation = Quaternion.RotateTowards (tr.rotation, new_rotation, rot_speed);
 		}
 		
@@ -115,8 +117,11 @@ public class Camera_controller : MonoBehaviour {
 			y = base_dist * Mathf.Sin(phi * Mathf.Deg2Rad);
 	
 			mov = new Vector3 (x,y,z);
-	
-			if (Physics.Raycast (player.transform.position, mov, out hit, dist + c_dist, layerMask)){
+
+            Debug.DrawRay(player.transform.position, mov * dist, Color.green);
+            bool doesHit=Physics.Raycast(player.transform.position, mov, out hit, dist + c_dist, layerMask);
+            //print(doesHit);
+            if (doesHit){
 				mov = mov * ((hit.distance - c_dist)/dist);
 			}
 

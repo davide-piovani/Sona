@@ -5,7 +5,7 @@ using ApplicationConstants;
 
 public class CheckpointDavide : MonoBehaviour {
 
-    public bool reached = false;
+    [SerializeField] int index;
     private CheckpointController controller;
 
     private void Start(){
@@ -14,8 +14,10 @@ public class CheckpointDavide : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == PlayersConstants.playerTag){
-            reached = true;
+            print("Checkpoint raggiunto");
             controller.AddCheckpoint(this);
         }
     }
+
+    public int GetIndex() { return index; }
 }

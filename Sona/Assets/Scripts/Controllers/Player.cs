@@ -31,8 +31,6 @@ public abstract class Player : MonoBehaviour {
     CapsuleCollider col_size;
     NavMeshAgent agent;
 
-    public CheckpointDavide lastCheckpointReached;
-
     public bool isPowerActive() { return powerActive; }
     public Camera GetCharacterCamera() { return characterCamera; }
 
@@ -53,11 +51,6 @@ public abstract class Player : MonoBehaviour {
 
         //anim.speed = GameConstants.animationsSpeed;
         anim.speed = 1f;
-        reloadCheckPoint();
-    }
-
-    private void reloadCheckPoint(){
-
     }
 
     protected abstract void LoadPowerSettings();
@@ -91,7 +84,7 @@ public abstract class Player : MonoBehaviour {
                 powerTimeLeft = powerDuration;
             }
         }
-        //gameController.UpdatePowerLevelIndicator(powerTimeLeft / powerDuration);
+        gameController.UpdatePowerLevelIndicator(powerTimeLeft / powerDuration);
         //print("Power time left: " + powerTimeLeft.ToString());
     }
 
