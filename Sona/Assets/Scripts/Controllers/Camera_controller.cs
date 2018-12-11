@@ -25,14 +25,18 @@ public class Camera_controller : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Vector3 offset;
+		Camera cam = gameObject.GetComponent<Camera>();
+
+		cam.nearClipPlane = 0.01f;
+		c_dist = 0.3f;
 		
 		offset = player.transform.position - tr.position;
 		base_dist = offset.magnitude;
 		dist = base_dist;
-        layerMask = ~ (1 << 9);
+        layerMask = 1 << 11 | 1 << 8 | 1 << 10;
 
-		c_dist = compute_dist ();
-        print(c_dist);
+		//c_dist = compute_dist ();
+        //print(c_dist);
 	}
 
 	void Awake () {
@@ -150,32 +154,6 @@ public class Camera_controller : MonoBehaviour {
 		}
 	}
 
-	//Compute the distance of the camera from objects to avoid cutting them
-	private float compute_dist (){
-		Camera cam = gameObject.GetComponent<Camera>();
-		//base_dist: distance from player
-		float p_dist = cam.nearClipPlane;
-		float playerColliderRadius;
-		float nClipPlaneHWidth;
-		
-		float result;
-
-		GameObject parent = gameObject.transform.parent.gameObject;
-		CapsuleCollider col = parent.GetComponent<Collider> () as CapsuleCollider;
-		float scale;
-
-		if (parent.transform.localScale[0] > parent.transform.localScale[2]){
-			scale = parent.transform.localScale[0];
-		} else {
-			scale = parent.transform.localScale[2];
-		}
-
-		playerColliderRadius = col.radius * scale;
-		nClipPlaneHWidth = p_dist * Mathf.Tan(cam.fieldOfView * Mathf.Deg2Rad);
-		result = ((nClipPlaneHWidth * base_dist - playerColliderRadius * p_dist) / 
-			(playerColliderRadius - nClipPlaneHWidth)) + 0.01f;
-		return (result);
-	}
 	
 	//set the boolean to start the transition to the first person camera if no transition is already happening
 	public void MoveToFirst (){
