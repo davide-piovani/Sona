@@ -4,3 +4,5 @@ Sona/Assembly-CSharp.csproj
 Sona/Temp/*
 *.backup
 *.cache
+Sona/.vs/*
+Sona/Library/*

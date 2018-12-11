@@ -6,8 +6,8 @@ using ApplicationConstants;
 public class Jack : Player {
 
     protected override void LoadPowerSettings(){
-        powerDuration = GameConstants.jackPowerDuration;
-        rechargeSpeed = GameConstants.jackRechargeSpeed;
+        powerDuration = PlayersConstants.jackPowerDuration;
+        rechargeSpeed = PlayersConstants.jackRechargeSpeed;
     }
 
     protected override void PowerToggle(bool isActive){

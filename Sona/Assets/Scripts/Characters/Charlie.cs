@@ -3,14 +3,15 @@ using ApplicationConstants;
 
 public class Charlie : Player {
 
+
     protected override void LoadPowerSettings(){
-        powerDuration = GameConstants.charliePowerDuration;
-        rechargeSpeed = GameConstants.charlieRechargeSpeed;
+        powerDuration = PlayersConstants.charliePowerDuration;
+        rechargeSpeed = PlayersConstants.charlieRechargeSpeed;
     }
 
     protected override void PowerToggle(bool isActive){
         powerActive = isActive;
-        Physics.IgnoreLayerCollision(GameConstants.playerLayer, GameConstants.dashableObjectsLayer, powerActive);
+        Physics.IgnoreLayerCollision(PlayersConstants.playerLayer, PlayersConstants.dashableObjectsLayer, powerActive);
         Debug.Log("Collisions: " + (!powerActive).ToString());
     }
 }

@@ -1,18 +1,15 @@
 ﻿<Properties StartupConfiguration="{F070CAF0-2AF1-6984-1F52-380ADDB611DD}|">
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Characters/GruntMovement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Utils/PlayersConstants.cs">
     <Files>
-      <File FileName="Assets/Scripts/Controllers/Player.cs" Line="157" Column="11" />
-      <File FileName="Assets/Scripts/Utils/GameConstants.cs" Line="11" Column="50" />
-      <File FileName="Assets/Scripts/Characters/GruntMovement.cs" Line="21" Column="5" />
-      <File FileName="Assets/Scripts/Characters/Charlie.cs" Line="15" Column="6" />
-      <File FileName="../../../Unity/Udemy/3D/NavMesh Example/Assets/PlayerController.cs" Line="16" Column="49" />
+      <File FileName="Assets/Scripts/Controllers/Camera_controller.cs" Line="59" Column="1" />
+      <File FileName="Assets/Scripts/Utils/PlayersConstants.cs" Line="7" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
 </Properties>

@@ -3,7 +3,16 @@ using UnityEngine;
 
 namespace ApplicationConstants
 {
-    public class GameConstants{
+
+    public class CameraConstants{
+        //Camera Controller
+        public static string CameraUp = "CamUp";
+        public static string CameraDown = "CamDown";
+        public static string CameraLeft = "CamLeft";
+        public static string CameraRight = "CamRight";
+    }
+
+    public class PlayersConstants{
         public static int playerLayer = 9;
         public static int dashableObjectsLayer = 10;
 
@@ -23,6 +32,17 @@ namespace ApplicationConstants
         public static string jumpButton = "Jump";
 
         public static string killingObjectTag = "KillingObject";
+
+        public static string playerTag = "Player";
+    }
+
+    public class GuardConstants {
+        public static float guardWalkingSpeed = 1f;
+        public static float guardRunningSpeed = 1.5f;
+        public static float guardVisionAngle = 85f;
+        public static float playerCatchedMaxDistance = 1.4f;
+
+        public static string guardTag = "Guard";
     }
 
     public class MenuConstants {
@@ -42,7 +62,7 @@ namespace ApplicationConstants
 
     public class SceneNames {
         public static string prototype1 = "Prototype 1";
-        public static string prototype2 = "Prototype 2";
+        public static string prototype2 = "Charlie_level";
         public static string prototype3 = "Hannah Level";
     }
 }
