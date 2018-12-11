@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -16291,7 +16291,7 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -42314,7 +42314,7 @@ Prefab:
     - target: {fileID: 13700000, guid: 55b15e0f62fa746a788bb852d33323e2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f39c3e84e5f3198498e672e4b51db9e9, type: 2}
+      objectReference: {fileID: 2100000, guid: 008e5504028144b9090c64f18b810cb9, type: 2}
     - target: {fileID: 100018, guid: 55b15e0f62fa746a788bb852d33323e2, type: 3}
       propertyPath: m_Name
       value: Charlie
@@ -42462,7 +42462,7 @@ Prefab:
     - target: {fileID: 9500000, guid: 55b15e0f62fa746a788bb852d33323e2, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 5fca1a71fcacea443abb066324c4db86, type: 2}
+      objectReference: {fileID: 9100000, guid: 0d208101c0d824332a0409bcaa79d715, type: 2}
     - target: {fileID: 400018, guid: 55b15e0f62fa746a788bb852d33323e2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -56975,7 +56975,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3dd84ec06755c74f88110373429deae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 526912992}
 --- !u!1001 &1857953546
 Prefab:
   m_ObjectHideFlags: 0

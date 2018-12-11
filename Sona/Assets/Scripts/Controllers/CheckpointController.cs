@@ -5,41 +5,48 @@ using UnityEngine;
 
 public class CheckpointController : MonoBehaviour {
 
-    public CheckpointDavide[] checkpoints;
-    private int lastCheckpoint = 0;
+    public List<CheckpointDavide> checkpointsReached = new List<CheckpointDavide>();
 
     private void Awake() {
         var controllers = FindObjectsOfType<CheckpointController>();
         if (controllers.Length > 1){
             if (EqualControllers(controllers[0], controllers[1])){
-                Destroy(gameObject);
+                Destroy(this.gameObject);
             } else {
                 Destroy(gameObject == controllers[0] ? controllers[1] : controllers[0]);
-                DontDestroyOnLoad(gameObject);
+                DontDestroyOnLoad(this.gameObject);
             }
         } else {
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this.gameObject);
+        }
+    }
+
+    private void Start(){
+        CheckpointDavide lastCheckpoint = GetLastCheckpoint();
+        if (lastCheckpoint != null){
+            FindObjectOfType<Player>().transform.position = lastCheckpoint.transform.position;
         }
     }
 
     private bool EqualControllers(CheckpointController c1, CheckpointController c2){
-        if (c1.checkpoints.Length != c2.checkpoints.Length) return false;
-        for(int i = 0; i < c1.checkpoints.Length; i++){
-            if (c1.checkpoints[i] != c2.checkpoints[i]) return false;
+        if (c1.checkpointsReached.Count != c2.checkpointsReached.Count) return false;
+        for(int i = 0; i < c1.checkpointsReached.Count; i++){
+            if (c1.checkpointsReached[i] != c2.checkpointsReached[i]) return false;
         }
         return true;
     }
 
-    private int GetCheckpointIndex(CheckpointDavide checkpoint){
-        for (int i = 0; i < checkpoints.Length; i++){
-            if (checkpoints[i] == checkpoint) return i;
-        }
-        return 0;
+    public void AddCheckpoint(CheckpointDavide checkpoint){
+        checkpointsReached.Add(checkpoint);
     }
 
-    public void AddCheckpoint(CheckpointDavide checkpoint){
-        int checkpointIndex = GetCheckpointIndex(checkpoint);
-        lastCheckpoint = (checkpointIndex > lastCheckpoint) ? checkpointIndex : lastCheckpoint;
+    private CheckpointDavide GetLastCheckpoint(){
+        if (checkpointsReached.Count == 0) return null;
+        CheckpointDavide lastCheckpoint = checkpointsReached[0];
+        foreach(CheckpointDavide checkpoint in checkpointsReached){
+            if (checkpoint.GetIndex() > lastCheckpoint.GetIndex()) lastCheckpoint = checkpoint;
+        }
+        return lastCheckpoint;
     }
 
     public void LoadLastCheckPoint(){
