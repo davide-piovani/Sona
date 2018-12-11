@@ -14,6 +14,9 @@ public abstract class Player : MonoBehaviour {
     protected float rechargeSpeed;
     protected float powerTimeLeft;
 
+    protected int layerMask;
+    float radius;
+
     public bool active = false;
     public bool protectToChangeCharacter = false;
     protected bool powerActive = false;
@@ -48,6 +51,15 @@ public abstract class Player : MonoBehaviour {
         powerTimeLeft = powerDuration;
         gameController.UpdatePowerLevelIndicator(powerTimeLeft / powerDuration);
         PowerToggle(false);
+
+        if ((GetComponent<Transform>()).localScale[0] > (GetComponent<Transform>()).localScale[2]){
+	    radius = col_size.radius * (GetComponent<Transform>()).localScale[0];
+        }
+	else {
+	    radius = col_size.radius * (GetComponent<Transform>()).localScale[2];
+	}
+	//layerMask = ~(1 << 2 | 1 << 9);
+	layerMask = 1 << 8 | 1 << 10 | 1 << 11;
 
         //anim.speed = GameConstants.animationsSpeed;
         anim.speed = 1f;
@@ -116,6 +128,11 @@ public abstract class Player : MonoBehaviour {
         var z = CrossPlatformInputManager.GetAxis("Vertical");
         var y = CrossPlatformInputManager.GetAxis("Horizontal");
 
+        Vector3 movement;
+	Transform tr = gameObject.GetComponent<Transform>();
+	RaycastHit data;
+	float a,b;
+
 
         /*if (isGrounded){
             if (CrossPlatformInputManager.GetButtonDown(GameConstants.jumpButton)){
@@ -165,7 +182,18 @@ public abstract class Player : MonoBehaviour {
 
 
         //agent.Move(new Vector3(0, 0, z * speed * Time.deltaTime));
-        transform.Translate(0, 0, z*speed*Time.deltaTime);
+        movement = new Vector3 (0, 0, z*speed*Time.deltaTime);
+        if (Physics.Raycast (tr.position + col_size.center, Mathf.Sign(z) * tr.forward,
+            out data, radius + movement.magnitude, layerMask)){
+	    a = (data.point[0] - tr.position[0] - radius * Mathf.Sign(z) * tr.forward[0]);
+            b = (data.point[2] - tr.position[2] - radius * Mathf.Sign(z) * tr.forward[2]);
+	    movement = new Vector3 (a, 0, b);
+            tr.position = transform.position + movement;
+	    print (tr.position + ", " + data.point);
+	}
+	else{
+            transform.Translate(0, 0, z*speed*Time.deltaTime);
+	}
         transform.Rotate(0, y*rotSpeed*Time.deltaTime, 0);
 
     }
