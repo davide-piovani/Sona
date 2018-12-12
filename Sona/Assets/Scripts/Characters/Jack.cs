@@ -11,7 +11,8 @@ public class Jack : Player {
     }
 
     protected override void PowerToggle(bool isActive){
-
+        powerActive = isActive;
+        TimeController.changeTime(isActive);
     }
 
 }

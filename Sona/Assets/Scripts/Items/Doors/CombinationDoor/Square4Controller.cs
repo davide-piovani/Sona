@@ -8,7 +8,7 @@ public class Square4Controller : MonoBehaviour, SquareInterface {
     public Material _allarmed;
     public Material _safe;
 
-    void Start()
+    void Awake()
     {
         _squares = GetComponentsInChildren<Transform>();
 

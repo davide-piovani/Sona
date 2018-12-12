@@ -18,8 +18,8 @@ public class TimeController : MonoBehaviour {
         }
     }
 
-    public static void changeTime() {
-        slow = !slow;
+    public static void changeTime(bool slowTime) {
+        slow = slowTime;
     }
 
 }

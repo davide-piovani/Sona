@@ -21,32 +21,34 @@ public class OpenDoor : MonoBehaviour {
 
     void Update()
     {
-
-        float dist = (_player.transform.position - _display.transform.position).magnitude;
-
-        if (dist > 5)
+        if (_display)
         {
-            closeToDisplay = false;
-        }
-        else {
-            closeToDisplay = true;
-        }
+            float dist = (_player.transform.position - _display.transform.position).magnitude;
 
-        if (closeToDisplay & dist <= _minDistance)
-        {
-            _pressKeyString.text = "Press 'B'";
-        }
+            if (dist > 5)
+            {
+                closeToDisplay = false;
+            }
+            else
+            {
+                closeToDisplay = true;
+            }
 
-        if (closeToDisplay & dist > _minDistance)
-        {
-            _pressKeyString.text = "";
-        }
+            if (closeToDisplay & dist <= _minDistance)
+            {
+                _pressKeyString.text = "Press 'B'";
+            }
 
-        if (closeToDisplay & dist <= _minDistance & Input.GetKeyDown(KeyCode.B))
-        {
-            _pressKeyString.text = "";
-            _openCloseManager.OpenCloseDoor(true);
-        }
+            if (closeToDisplay & dist > _minDistance)
+            {
+                _pressKeyString.text = "";
+            }
 
+            if (closeToDisplay & dist <= _minDistance & Input.GetKeyDown(KeyCode.B))
+            {
+                _pressKeyString.text = "";
+                _openCloseManager.OpenCloseDoor(true);
+            }
+        }
     }
 }

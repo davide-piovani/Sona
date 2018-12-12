@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Prototypes/JackPrototypeLevel.unity
+- path: Assets/Scenes/Prototypes/Charlie_level.unity
   isLoaded: 1
   isActive: 1

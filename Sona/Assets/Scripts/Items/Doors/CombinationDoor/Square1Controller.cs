@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Square1Controller : MonoBehaviour, SquareInterface {
 
-    Transform[] _squares;
+    [SerializeField] Transform[] _squares;
     public Material _allarmed;
     public Material _safe;
 
-    void Start()
+    void Awake()
     {
         _squares = GetComponentsInChildren<Transform>();
 
@@ -17,7 +17,7 @@ public class Square1Controller : MonoBehaviour, SquareInterface {
     }
 
     void ClearSquares() {
-        for (int i = 1; i < 50; i++)
+        for (int i = 1; i < _squares.Length; i++)
         {
             _squares[i].gameObject.GetComponent<Renderer>().material = _allarmed;
         }

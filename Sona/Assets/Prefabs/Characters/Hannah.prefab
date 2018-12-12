@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4921923079083092}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ditapiede.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4998379381383110}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: coscia.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4695074037184436}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pollice.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4569109345204576}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bone.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 136546415070093140}
   - component: {fileID: 114777266336589136}
   - component: {fileID: 208150403609168812}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hannah
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4577802648071412}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pollice.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4067313038841110}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: braccio.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4245287147160152}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: dita.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4836045474668644}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: gamba.L.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4111757531782888}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ditapiede.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4684274227351528}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: dita.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4783024323334900}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pollice.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4629639210661348}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: gamba.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4589350166885050}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: mano.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4932066798290272}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: spalla.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4988241804020074}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ditapiede.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4562993705632124}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: dita.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4337728526317630}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bone.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4457318630093284}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bone.002_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4523422504463530}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ditapiede.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4778614465070658}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: piede.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4664731272733190}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: spalla.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4009275030125846}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: braccio.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4820303628026576}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4348293223138082}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: dita.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,7 +399,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4980587516543918}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: avambraccio.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 20110873593790682}
   - component: {fileID: 81350141836604182}
   - component: {fileID: 114530847059394566}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hannah Cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4688312974746584}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: gamba.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +447,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4103548428378164}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: piede.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +463,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4734090171879920}
   - component: {fileID: 137187510303149578}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,7 +478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4956233943051538}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: mano.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4020655819872012}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: avambraccio.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4354419022773746}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pollice.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -523,7 +523,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4705788128625210}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: gamba.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +538,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4247328427132208}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: coscia.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,7 +554,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4304577380241910}
   - component: {fileID: 137402536914805360}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -569,7 +569,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4149689392564352}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Character2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1113,7 +1113,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -1184,8 +1184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0d5ed058b62499a9ee387502910e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mov: {x: 0, y: 0, z: 0}
-  layerMask: 0
   player: {fileID: 1118640999553850}
 --- !u!114 &114777266336589136
 MonoBehaviour:
