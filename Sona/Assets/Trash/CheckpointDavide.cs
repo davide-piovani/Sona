@@ -5,8 +5,8 @@ using ApplicationConstants;
 
 public class CheckpointDavide : MonoBehaviour {
 
-    [SerializeField] int index;
     private CheckpointController controller;
+    [SerializeField] Quaternion rotation;
 
     private void Start(){
         controller = FindObjectOfType<CheckpointController>();
@@ -15,9 +15,9 @@ public class CheckpointDavide : MonoBehaviour {
     private void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == PlayersConstants.playerTag){
             print("Checkpoint raggiunto");
-            controller.AddCheckpoint(this);
+            Player player = other.gameObject.GetComponent<Player>();
+            controller.NewCheckpointReached(player, transform.position, rotation);
         }
     }
 
-    public int GetIndex() { return index; }
 }

@@ -38,6 +38,20 @@ public abstract class Player : MonoBehaviour {
     public Camera GetCharacterCamera() { return characterCamera; }
 
     protected void Start(){
+        LoadComponents();
+
+        //isGrounded = true;
+        LoadPowerInfo();
+
+        ManageLayers();
+
+        //anim.speed = GameConstants.animationsSpeed;
+        anim.speed = 1f;
+
+        FindObjectOfType<CheckpointController>().RestorePlayerCheckpoint(this);
+    }
+
+    private void LoadComponents() {
         //controller = FindObjectOfType<ActiveCharacterController>();
         gameController = FindObjectOfType<GameController>();
 
@@ -45,24 +59,23 @@ public abstract class Player : MonoBehaviour {
         anim = GetComponent<Animator>();
         col_size = GetComponent<CapsuleCollider>();
         agent = GetComponent<NavMeshAgent>();
-        //isGrounded = true;
+    }
 
+    private void LoadPowerInfo() {
         LoadPowerSettings();
         powerTimeLeft = powerDuration;
         gameController.UpdatePowerLevelIndicator(powerTimeLeft / powerDuration);
         PowerToggle(false);
+    }
 
-        if ((GetComponent<Transform>()).localScale[0] > (GetComponent<Transform>()).localScale[2]){
-	    radius = col_size.radius * (GetComponent<Transform>()).localScale[0];
+    private void ManageLayers(){
+        if (GetComponent<Transform>().localScale[0] > GetComponent<Transform>().localScale[2]) {
+            radius = col_size.radius * (GetComponent<Transform>()).localScale[0];
+        } else {
+            radius = col_size.radius * (GetComponent<Transform>()).localScale[2];
         }
-	else {
-	    radius = col_size.radius * (GetComponent<Transform>()).localScale[2];
-	}
-	//layerMask = ~(1 << 2 | 1 << 9);
-	layerMask = 1 << 8 | 1 << 10 | 1 << 11;
-
-        //anim.speed = GameConstants.animationsSpeed;
-        anim.speed = 1f;
+        //layerMask = ~(1 << 2 | 1 << 9);
+        layerMask = 1 << 8 | 1 << 10 | 1 << 11;
     }
 
     protected abstract void LoadPowerSettings();
@@ -74,6 +87,7 @@ public abstract class Player : MonoBehaviour {
             performAnimations();
         }
         checkPowerDuration();
+        if (Input.GetKeyDown(KeyCode.T)) { FindObjectOfType<CheckpointController>().printCheck(); }
     }
 
     private void checkPower(){

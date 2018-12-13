@@ -5,12 +5,27 @@ using UnityEngine;
 
 public class CheckpointController : MonoBehaviour {
 
-    public List<CheckpointDavide> checkpointsReached = new List<CheckpointDavide>();
+    struct PlayerCheckpoint {
+        public String playerName;
+        public bool reached;
+        public Vector3 position;
+        public Quaternion rotation;
+
+        public void Initialize(Player player){
+            this.playerName = player.name;
+            this.reached = false;
+            this.position = player.transform.position;
+        }
+    }
+
+    private List<PlayerCheckpoint> playerCheckpoints = new List<PlayerCheckpoint>();
+    protected int levelIndex;
 
     private void Awake() {
+        levelIndex = FindObjectOfType<SceneLoader>().GetSceneIndex();
         var controllers = FindObjectsOfType<CheckpointController>();
         if (controllers.Length > 1){
-            if (EqualControllers(controllers[0], controllers[1])){
+            if (controllers[0].levelIndex == controllers[1].levelIndex){
                 Destroy(this.gameObject);
             } else {
                 Destroy(gameObject == controllers[0] ? controllers[1] : controllers[0]);
@@ -22,34 +37,47 @@ public class CheckpointController : MonoBehaviour {
     }
 
     private void Start(){
-        CheckpointDavide lastCheckpoint = GetLastCheckpoint();
-        if (lastCheckpoint != null){
-            FindObjectOfType<Player>().transform.position = lastCheckpoint.transform.position;
+        InitializeCheckpoints();
+    }
+
+    private void InitializeCheckpoints(){
+        Player[] players = FindObjectsOfType<Player>();
+        foreach(Player player in players){
+            PlayerCheckpoint checkpoint = new PlayerCheckpoint();
+            checkpoint.Initialize(player);
+            playerCheckpoints.Add(checkpoint);
         }
     }
 
-    private bool EqualControllers(CheckpointController c1, CheckpointController c2){
-        if (c1.checkpointsReached.Count != c2.checkpointsReached.Count) return false;
-        for(int i = 0; i < c1.checkpointsReached.Count; i++){
-            if (c1.checkpointsReached[i] != c2.checkpointsReached[i]) return false;
+    public void NewCheckpointReached(Player player, Vector3 checkPos, Quaternion checkpointRotation){
+        for(int i = 0; i < playerCheckpoints.Count; i++){
+            PlayerCheckpoint checkpoint = playerCheckpoints[i];
+            if (checkpoint.playerName == player.name) {
+                checkpoint.reached = true;
+                checkpoint.position = new Vector3(checkPos.x, player.transform.position.y, checkPos.z);
+                checkpoint.rotation = checkpointRotation;
+                playerCheckpoints[i] = checkpoint;
+            }
         }
-        return true;
+        printCheck();
     }
 
-    public void AddCheckpoint(CheckpointDavide checkpoint){
-        checkpointsReached.Add(checkpoint);
-    }
-
-    private CheckpointDavide GetLastCheckpoint(){
-        if (checkpointsReached.Count == 0) return null;
-        CheckpointDavide lastCheckpoint = checkpointsReached[0];
-        foreach(CheckpointDavide checkpoint in checkpointsReached){
-            if (checkpoint.GetIndex() > lastCheckpoint.GetIndex()) lastCheckpoint = checkpoint;
+    public void printCheck()
+    {
+        foreach(PlayerCheckpoint c in playerCheckpoints)
+        {
+            print("Player: " + c.playerName + "   Reached: " + c.reached + "   Pos: " + c.position + "   Rotation:" + c.rotation);
         }
-        return lastCheckpoint;
     }
 
-    public void LoadLastCheckPoint(){
-        FindObjectOfType<SceneLoader>().ReloadCurrentScene();
+    public void RestorePlayerCheckpoint(Player player){
+        print("Restoring position");
+        foreach (PlayerCheckpoint checkpoint in playerCheckpoints) {
+            if (checkpoint.playerName == player.name && checkpoint.reached){
+                print("Trovato player checkpoint for: " + player.name);
+                player.transform.position = checkpoint.position;
+                player.transform.rotation = checkpoint.rotation;
+            }
+        }
     }
 }

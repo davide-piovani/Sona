@@ -5,22 +5,22 @@ using ApplicationConstants;
 public class NewGuard : MonoBehaviour {
     GuardState state;
 
-    float viewDistance;
+    [SerializeField] float viewDistance = 15f;
     float viewAngle = GuardConstants.guardVisionAngle;
     float heightMultiplier = 1.6f; //Only for debug purpose
-    SphereCollider sphereCollider;
 
+    private Player[] playersInScene;
     public List<Player> playersInRange = new List<Player>();
-
+    private List<Player> visiblePlayers = new List<Player>();
+   
     NewGuardGroup guardGroup;
-    List<Player> visiblePlayers = new List<Player>();
     GuardMovement movement;
 
     void Start(){
         guardGroup = GetComponentInParent<NewGuardGroup>();
-        sphereCollider = GetComponent<SphereCollider>();
+        playersInScene = FindObjectOfType<GameController>().GetScenePlayers();
         movement = GetComponent<GuardMovement>();
-        ChangeState(new AllertState());
+        //ChangeState(new AllertState());
     }
 
     void Update(){
@@ -46,7 +46,7 @@ public class NewGuard : MonoBehaviour {
         foreach(Player player in playersInRange){
             if (!characterInvisible(player)){
                 if (Vector3.Distance(transform.position, player.transform.position) < GuardConstants.playerCatchedMaxDistance){
-                    //FindObjectOfType<CheckpointController>().LoadLastCheckPoint();
+                    FindObjectOfType<SceneLoader>().ReloadCurrentScene();
                 }
             }
         }
@@ -63,10 +63,9 @@ public class NewGuard : MonoBehaviour {
     public List<Player> GetVisiblePlayers() { return visiblePlayers; }
 
     private void LookForPlayers(){
+        DetectPlayers();
         foreach(Player player in playersInRange){
-            printSomething(player);
             if (!characterInvisible(player) && PlayerIsInSightAngle(player) && !SomethingBetweenPlayerAndEnemy(player)){
-                //print("Visto");
                 if (!visiblePlayers.Contains(player)) visiblePlayers.Add(player);
                 guardGroup.AddPlayer(player);
             } else {
@@ -76,19 +75,14 @@ public class NewGuard : MonoBehaviour {
         }
     }
 
-    private void printSomething(Player player)
-    {
-        if (isRightGuard())
-        {
-            print("Character visible: " + !characterInvisible(player));
-            print("Player in sight angle: " + PlayerIsInSightAngle(player));
-            print("Something between? " + SomethingBetweenPlayerAndEnemy(player));
+    private void DetectPlayers(){
+        foreach(Player player in playersInScene){
+            if (Vector3.Distance(transform.position, player.transform.position) < viewDistance){
+                if (!playersInRange.Contains(player)) playersInRange.Add(player);
+            } else {
+                playersInRange.Remove(player);
+            }
         }
-    }
-
-    private bool isRightGuard()
-    {
-        return (transform.parent.name == "Group (2)" && gameObject.name == "Guard");
     }
 
     private void ChaseNearestPlayer(){
@@ -119,9 +113,16 @@ public class NewGuard : MonoBehaviour {
         RaycastHit[] hits = Physics.RaycastAll(transform.position, player.transform.position - transform.position, distanceToPlayer);
         int collisions = 0;
         foreach (RaycastHit hit in hits){
-            if (hit.collider.gameObject.tag != GuardConstants.guardTag) collisions++;
+            if (isInGuardSightCollisionLayers(hit.collider.gameObject.layer)) collisions++;
         }
         return (collisions > 1);
+    }
+
+    private bool isInGuardSightCollisionLayers(int layer){
+        foreach(int guardSightLayer in GuardConstants.guardSightCollisionLayers){
+            if (layer == guardSightLayer) return true;
+        }
+        return false;
     }
 
     private Player IdentifyNearestPlayer(List<Player> players){
@@ -138,28 +139,11 @@ public class NewGuard : MonoBehaviour {
         return nearestPlayer;
     }
 
-    private void OnTriggerStay(Collider other){
-        if (isRightGuard() && other.gameObject.layer != 8) print("Collision with: " + other.gameObject.name);
-
-        if (other.tag == PlayersConstants.playerTag){
-            Player player = other.gameObject.GetComponent<Player>();
-            if (!playersInRange.Contains(player)) playersInRange.Add(player);
-        }
-    }
-
-    private void OnTriggerExit(Collider other){
-        if (other.tag == PlayersConstants.playerTag){
-            playersInRange.Remove(other.gameObject.GetComponent<Player>());
-        }
-    }
-
     /**
      * This method is used to change guard state
      */
     public void ChangeState(GuardState newState){
         state = newState;
         viewDistance = newState.GetRadius();
-        sphereCollider.radius = viewDistance;
-        //Debug.Log(viewDistance);
     }
 }
