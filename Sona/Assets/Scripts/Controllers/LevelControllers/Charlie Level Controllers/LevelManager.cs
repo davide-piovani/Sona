@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ApplicationConstants;
 
 public class LevelManager : MonoBehaviour {
 
@@ -78,7 +79,7 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void ButtonMoveWall (bool open){
-		Vector3 mov = new Vector3 (0, 5, 0);
+		Vector3 mov = new Vector3 (0, 0, 2);
 		if (open && !this.open){
 			MovableWall2.transform.position = MovableWall2.transform.position + mov;
 			this.open = true;
@@ -95,7 +96,7 @@ public class LevelManager : MonoBehaviour {
 	public void BackToMenu () {
 		//Call the scene loader to load the main menu;
 		print ("Level finished");
-		//load.LoadScene ("0. Main menù");
+		load.LoadScene (SceneNames.menu);
 	}
 	
 }
