@@ -63,8 +63,8 @@ namespace ApplicationConstants
     }
 
     public class SceneNames {
-        public static string prototype1 = "JackPrototypeLevel";
-        public static string prototype2 = "Charlie_level";
+        public static string prototype1 = "Jack Level";
+        public static string prototype2 = "Charlie Level";
         public static string prototype3 = "Hannah Level";
     }
 }

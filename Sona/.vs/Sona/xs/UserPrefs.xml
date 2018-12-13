@@ -1,13 +1,9 @@
 ﻿<Properties StartupConfiguration="{F070CAF0-2AF1-6984-1F52-380ADDB611DD}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Utils/PlayersConstants.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Controllers/SceneLoader.cs">
     <Files>
-      <File FileName="Assets/Trash/CheckpointDavide.cs" Line="17" Column="43" />
-      <File FileName="Assets/Trash/CheckpointController.cs" Line="59" Column="51" />
-      <File FileName="Assets/Scripts/Controllers/SceneLoader.cs" Line="32" Column="83" />
-      <File FileName="Assets/Scripts/Characters/Player.cs" Line="90" Column="99" />
-      <File FileName="Assets/Scripts/NPC/NewGuardGroup.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/NPC/NewGuard.cs" Line="126" Column="6" />
-      <File FileName="Assets/Scripts/Utils/PlayersConstants.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Utils/PlayersConstants.cs" Line="67" Column="57" />
+      <File FileName="Assets/Scripts/Characters/Player.cs" Line="51" Column="1" />
+      <File FileName="Assets/Scripts/Controllers/SceneLoader.cs" Line="8" Column="38" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

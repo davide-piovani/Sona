@@ -5,7 +5,11 @@ public class SceneLoader : MonoBehaviour {
 
     private void Awake(){
         var sceneLoaders = FindObjectsOfType<SceneLoader>();
-        if (sceneLoaders.Length > 1) Destroy(gameObject);
+        if (sceneLoaders.Length > 1) {
+            Destroy(gameObject);
+        } else {
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 
     public void LoadNextScene(){
