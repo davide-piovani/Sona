@@ -48,6 +48,7 @@ public abstract class Player : MonoBehaviour {
         //anim.speed = GameConstants.animationsSpeed;
         anim.speed = 1f;
 
+
 	if (FindObjectOfType<CheckpointController>()){
         FindObjectOfType<CheckpointController>().RestorePlayerCheckpoint(this);}
     }

@@ -122,6 +122,7 @@
     <Compile Include="Assets\Scripts\Items\Doors\DistanceDoor\DistanceController.cs" />
     <Compile Include="Assets\Scripts\Items\Doors\OpenCloseManager.cs" />
     <Compile Include="Assets\Scripts\Items\Doors\OpenDoor.cs" />
+    <Compile Include="Assets\Scripts\Items\Goal.cs" />
     <Compile Include="Assets\Scripts\Items\Infrared\InfraRedController.cs" />
     <Compile Include="Assets\Scripts\Items\Infrared\InfraRedsActivator.cs" />
     <Compile Include="Assets\Scripts\Items\Infrared\InfraRedScript.cs" />

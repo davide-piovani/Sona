@@ -1,10 +1,9 @@
 ﻿<Properties StartupConfiguration="{F070CAF0-2AF1-6984-1F52-380ADDB611DD}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NPC/NewGuard.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Controllers/SceneLoader.cs">
     <Files>
-      <File FileName="Assets/Scripts/Characters/Player.cs" Line="174" Column="7" />
-      <File FileName="Assets/Scripts/Controllers/CameraController.cs" Line="7" Column="21" />
-      <File FileName="Assets/Scripts/NPC/NewGuard.cs" Line="115" Column="11" />
-      <File FileName="Assets/Scripts/NPC/GuardMovement.cs" Line="28" Column="5" />
+      <File FileName="Assets/Scripts/Utils/PlayersConstants.cs" Line="67" Column="57" />
+      <File FileName="Assets/Scripts/Characters/Player.cs" Line="51" Column="1" />
+      <File FileName="Assets/Scripts/Controllers/SceneLoader.cs" Line="8" Column="38" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

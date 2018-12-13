@@ -30,7 +30,7 @@ public class GuardMovement : MonoBehaviour {
         nextWaypoint = 0;
         if (path.Length > 1) {
             MoveGrunt(path[nextWaypoint].position, Mode.walking);
-        } else{
+        } else {
             SetAnimBools(Mode.idle);
             if (path.Length == 0) SetGuardSpot();
         }
@@ -64,7 +64,7 @@ public class GuardMovement : MonoBehaviour {
     }
 
     private void FollowOneWaypointPath(){
-        if (needToRestorePosition){
+        if (needToRestorePosition && DestinationReached()){
             MoveGrunt(path[0].position, Mode.walking);
             needToRestorePosition = false;
         } else {
