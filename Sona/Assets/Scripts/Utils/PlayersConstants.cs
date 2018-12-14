@@ -19,7 +19,7 @@ namespace ApplicationConstants
         public static float runningSpeed = 4f;
         public static float animationsSpeed = 0.5f;
 
-        public static float jackPowerDuration = 5f;
+        public static float jackPowerDuration = 10f;
         public static float charliePowerDuration = 5f;
         public static float hannahPowerDuration = 5f;
         public static float jackRechargeSpeed = 1.5f;

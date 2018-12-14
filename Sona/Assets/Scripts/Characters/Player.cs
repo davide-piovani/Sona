@@ -26,6 +26,7 @@ public abstract class Player : MonoBehaviour {
 
     //Animations
     //public bool isGrounded;
+    protected float r_speed = PlayersConstants.runningSpeed;
     private float w_speed = 2f;
     private float rotSpeed = 95f;
     //public float jumpHeight = 200f;
@@ -89,7 +90,6 @@ public abstract class Player : MonoBehaviour {
             performAnimations();
         }
         checkPowerDuration();
-        if (Input.GetKeyDown(KeyCode.T)) { FindObjectOfType<CheckpointController>().printCheck(); }
     }
 
     private void checkPower(){
@@ -167,7 +167,7 @@ public abstract class Player : MonoBehaviour {
             }
         } else {
             //Running
-            speed = (z < 0) ? w_speed : PlayersConstants.runningSpeed;
+            speed = (z < 0) ? w_speed : r_speed;
             if (Math.Abs(z) > Mathf.Epsilon){
                 setAnimBools(Mode.running);
                 //anim.SetBool("backward", z < 0);
