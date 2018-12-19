@@ -25,7 +25,7 @@ public class LookDecision : Decision
         }
         else
         {
-            EventManager.StopFollow();
+            //EventManager.StopFollow();
             controller.changedStateLately = false;
             //Debug.Log("LookDecision else branch");
             nextAction = new LookingForSomeone();

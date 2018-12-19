@@ -38,7 +38,7 @@ public class GuardGruoup : MonoBehaviour {
     {
         EventManager.AllarmIsActivatedMethods += MoveToAllarm;
         EventManager.GuardIsCallingMethods += CallOtherGuards;
-        EventManager.StopFollowPlayerMethods += StopFollowPlayer;
+        //EventManager.StopFollowPlayerMethods += StopFollowPlayer;
         //EventManager.ChangeStateMethods += ChangeStateGuards;
         //EventManager.ChangeInInvestigationStateMethods += ChangeAllertState;
         //EventManager.ChangeInPatrollingStateMethods += ChangeInvestigationState;
@@ -48,7 +48,7 @@ public class GuardGruoup : MonoBehaviour {
     {
         EventManager.AllarmIsActivatedMethods -= MoveToAllarm;
         EventManager.GuardIsCallingMethods -= CallOtherGuards;
-        EventManager.StopFollowPlayerMethods -= StopFollowPlayer;
+        //EventManager.StopFollowPlayerMethods -= StopFollowPlayer;
         //EventManager.ChangeStateMethods -= ChangeStateGuards;
         //EventManager.ChangeInInvestigationStateMethods -= ChangeAllertState;
         //EventManager.ChangeInPatrollingStateMethods -= ChangeInvestigationState;

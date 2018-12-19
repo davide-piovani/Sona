@@ -17,11 +17,13 @@ public class Chase : Action
         {
             controller.setAction(new LookingForSomeone());
         }
+        /*
         if (controller.GameManager.playerIsSpottable)
         {
             Debug.Log("Il giocatore è: " + controller.GameManager.playerIsSpottable);
             ChaseTarget(controller);
         }
+        */
 
     }
 

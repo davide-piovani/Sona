@@ -17,6 +17,7 @@ public class LookingForSomeone : Action {
         bool targetVisible = Investigate(controller);
 
         Decision decision = new ScanDecision();
+        /*
         if (decision.Decide(controller).GetType() == typeof(Chase) && controller.GameManager.playerIsSpottable)
         {
             controller.setAction(new Chase());
@@ -25,6 +26,7 @@ public class LookingForSomeone : Action {
         {
             controller.setAction(decision.Decide(controller));
         }
+        */
     }
 
     /**
@@ -35,7 +37,7 @@ public class LookingForSomeone : Action {
         RaycastHit hit;
 
         Debug.DrawRay(controller.transform.position, controller.transform.forward.normalized * controller.viewDistance, Color.green);
-
+        /*
         if (Physics.SphereCast(controller.transform.position, controller.currentState.catchingRadius, controller.transform.forward, out hit, controller.viewDistance) && hit.collider.CompareTag("Player"))
         {
             controller.target = hit.transform;
@@ -45,6 +47,8 @@ public class LookingForSomeone : Action {
         {
             return false;
         }
+        */
+        return false;
     }
  
        

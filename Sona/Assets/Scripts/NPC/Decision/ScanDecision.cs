@@ -13,7 +13,8 @@ public class ScanDecision : Decision
         //float currentTime = 0;
         Action nextAction;
         Transform noPlayerInsight = Investigate(controller);
-        if (noPlayerInsight != null && controller.GameManager.playerIsSpottable)
+        if (noPlayerInsight != null)
+            //&& controller.GameManager.playerIsSpottable)
         {
             nextAction = new Chase();
         }
