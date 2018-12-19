@@ -13,6 +13,8 @@ public class Goal : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision){
         if (collision.gameObject.tag == PlayersConstants.playerTag){
+            CheckpointController controller = FindObjectOfType<CheckpointController>();
+            if (controller) controller.InitializeCheckpoints();
             sceneLoader.LoadStartScene();
         }
     }

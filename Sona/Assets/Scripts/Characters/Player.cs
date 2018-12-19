@@ -90,6 +90,10 @@ public abstract class Player : MonoBehaviour {
             performAnimations();
         }
         checkPowerDuration();
+
+        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName)){
+            print("Bella");
+        }
     }
 
     private void checkPower(){

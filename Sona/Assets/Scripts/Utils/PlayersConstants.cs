@@ -22,9 +22,9 @@ namespace ApplicationConstants
         public static float jackPowerDuration = 10f;
         public static float charliePowerDuration = 5f;
         public static float hannahPowerDuration = 5f;
-        public static float jackRechargeSpeed = 1.5f;
-        public static float charlieRechargeSpeed = 1.5f;
-        public static float hannahRechargeSpeed = 1.5f;
+        public static float jackRechargeSpeed = 2f;
+        public static float charlieRechargeSpeed = 2f;
+        public static float hannahRechargeSpeed = 2f;
 
         public static string powerButtonName = "PowerButton";
         public static string changeCharacterButton = "ChangeCharacterButton";

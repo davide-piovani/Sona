@@ -40,7 +40,8 @@ public class CheckpointController : MonoBehaviour {
         InitializeCheckpoints();
     }
 
-    private void InitializeCheckpoints(){
+    public void InitializeCheckpoints(){
+        playerCheckpoints = new List<PlayerCheckpoint>();
         Player[] players = FindObjectsOfType<Player>();
         foreach(Player player in players){
             PlayerCheckpoint checkpoint = new PlayerCheckpoint();

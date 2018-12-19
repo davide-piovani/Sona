@@ -7,6 +7,8 @@ public class CheckpointDavide : MonoBehaviour {
 
     private CheckpointController controller;
     [SerializeField] Quaternion rotation;
+    [SerializeField] Material reachedColor;
+    [SerializeField] Renderer light;
 
     private void Start(){
         controller = FindObjectOfType<CheckpointController>();
@@ -17,6 +19,7 @@ public class CheckpointDavide : MonoBehaviour {
             print("Checkpoint raggiunto");
             Player player = other.gameObject.GetComponent<Player>();
             controller.NewCheckpointReached(player, transform.position, rotation);
+            light.material = reachedColor;
         }
     }
 

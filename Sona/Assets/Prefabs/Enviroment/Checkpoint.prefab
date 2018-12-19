@@ -202,6 +202,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotation: {x: 0, y: 0, z: 0, w: 0}
+  reachedColor: {fileID: 2100000, guid: e344f18cfa2df4211ab40bf28bc334af, type: 2}
+  light: {fileID: 23771975821888622}
 --- !u!114 &114665540939169676
 MonoBehaviour:
   m_ObjectHideFlags: 1
