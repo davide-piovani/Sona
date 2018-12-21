@@ -23,6 +23,11 @@ public abstract class Player : MonoBehaviour {
     //private ActiveCharacterController controller;
     private GameController gameController;
 
+    //Player inputs
+    Vector3 direction;
+    private bool power;
+    private bool walks;
+    private bool jumps;
 
     //Animations
     //public bool isGrounded;
@@ -34,6 +39,7 @@ public abstract class Player : MonoBehaviour {
     Animator anim;
     CapsuleCollider col_size;
     NavMeshAgent agent;
+    private GameObject avatar;
 
     public bool isPowerActive() { return powerActive; }
     public Camera GetCharacterCamera() { return characterCamera; }
@@ -52,6 +58,7 @@ public abstract class Player : MonoBehaviour {
 
 	if (FindObjectOfType<CheckpointController>()){
         FindObjectOfType<CheckpointController>().RestorePlayerCheckpoint(this);}
+        resetInputs();
     }
 
     private void LoadComponents() {
@@ -62,6 +69,8 @@ public abstract class Player : MonoBehaviour {
         anim = GetComponent<Animator>();
         col_size = GetComponent<CapsuleCollider>();
         agent = GetComponent<NavMeshAgent>();
+
+        avatar = GetComponent<Transform>().GetChild(0).gameObject;
     }
 
     private void LoadPowerInfo() {
@@ -83,21 +92,25 @@ public abstract class Player : MonoBehaviour {
 
     protected abstract void LoadPowerSettings();
 
+
     private void Update () {
-        if (active) {
+        /*if (active) {
             checkChangePlayer();
             checkPower();
             performAnimations();
-        }
+        }*/
+        checkInputs();
+        checkPower();
+        performAnimations();
         checkPowerDuration();
 
-        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName)){
+        /*if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName)){
             print("Bella");
-        }
+        }*/
     }
 
     private void checkPower(){
-        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName)) {
+        if (power) {
             PowerToggle(!powerActive);
         }
     }
@@ -139,11 +152,10 @@ public abstract class Player : MonoBehaviour {
     }
 
     private void performAnimations(){
-        var z = CrossPlatformInputManager.GetAxis("Vertical");
-        var y = CrossPlatformInputManager.GetAxis("Horizontal");
-
+        float angle;
 
         /*if (isGrounded){
+
             if (CrossPlatformInputManager.GetButtonDown(GameConstants.jumpButton)){
                 rb.AddForce(0, jumpHeight, 0);
                 anim.SetTrigger("isJumping");
@@ -161,18 +173,19 @@ public abstract class Player : MonoBehaviour {
         }*/
 
 
-        if (Input.GetKey(KeyCode.LeftShift)){
+        if (walks){
             //Walking
             speed = w_speed;
-            if (Math.Abs(z) > Mathf.Epsilon) {
+            if (direction.magnitude > Mathf.Epsilon) {
                 setAnimBools(Mode.walking);
             } else {
                 setAnimBools(Mode.idle);
             }
         } else {
             //Running
-            speed = (z < 0) ? w_speed : r_speed;
-            if (Math.Abs(z) > Mathf.Epsilon){
+            speed = r_speed;
+            //speed = (z < 0) ? w_speed : r_speed;
+            if (direction.magnitude > Mathf.Epsilon){
                 setAnimBools(Mode.running);
                 //anim.SetBool("backward", z < 0);
             } else {
@@ -182,17 +195,29 @@ public abstract class Player : MonoBehaviour {
 
         Transform tr = gameObject.GetComponent<Transform>();
         RaycastHit data;
-        Vector3 movement = new Vector3 (0, 0, z*speed*Time.deltaTime);
-        if (Physics.Raycast (tr.position + col_size.center, Mathf.Sign(z) * tr.forward, 
+        direction.Normalize();
+        Vector3 movement = direction * speed * TimeController.GetDelTaTime();
+        if (Physics.Raycast (tr.position + col_size.center, movement, 
         out data, radius + movement.magnitude, layerMask)){
-    	    float x_collision = (data.point[0] - tr.position[0] - radius * Mathf.Sign(z) * tr.forward[0]);
-            float z_collision = (data.point[2] - tr.position[2] - radius * Mathf.Sign(z) * tr.forward[2]);
+    	    float x_collision = (data.point[0] - tr.position[0] - radius * direction[0]);
+            float z_collision = (data.point[2] - tr.position[2] - radius * direction[2]);
     	    movement = new Vector3 (x_collision, 0, z_collision);
-            tr.position = transform.position + movement;
-    	} else {
-            transform.Translate(movement);
     	}
-        transform.Rotate(0, y*rotSpeed*Time.deltaTime, 0);
+        tr.position = transform.position + movement;
+
+        if (direction.magnitude > Mathf.Epsilon){
+            //Rotate the image to get the correct animation
+            angle = Vector3.SignedAngle (tr.forward, direction, Vector3.up);
+            avatar.transform.rotation = Quaternion.Euler (-90, angle, 0);
+        }
+        if (!(tr.rotation == Quaternion.identity)){
+	    Transform camTr = characterCamera.GetComponent<Transform>();
+            angle = tr.rotation.eulerAngles.y;
+            tr.rotation = Quaternion.identity;
+            camTr.rotation = Quaternion.Euler(camTr.rotation.eulerAngles.x, angle,0);
+            avatar.transform.rotation = Quaternion.Euler(-90, 0, angle);
+        }
+        resetInputs();
     }
 
     private void setAnimBools(Mode mode){
@@ -216,4 +241,56 @@ public abstract class Player : MonoBehaviour {
         anim.SetBool("isWalking", walking);
         anim.SetBool("isRunning", running);
     }
+
+    //checks the inputs of the user, if activated
+    private void checkInputs (){
+        float h_axis;
+        float v_axis;
+        Vector3 forward;
+        Vector3 right;
+
+
+        if (active){
+            h_axis = CrossPlatformInputManager.GetAxis ("Horizontal");
+            v_axis = CrossPlatformInputManager.GetAxis ("Vertical");
+            forward = characterCamera.GetComponent<Transform>().forward;
+            right = characterCamera.GetComponent<Transform>().right;
+
+            forward.y = 0;
+            forward.Normalize ();
+
+            right.y = 0;
+            right.Normalize ();
+
+            this.direction = forward * v_axis + right * h_axis;
+            this.jumps = CrossPlatformInputManager.GetButtonDown(PlayersConstants.jumpButton);
+
+//------------------Add walk button to crossPlatformInputManager
+        this.walks = Input.GetKey(KeyCode.LeftShift);
+//--------------------------------------------------
+
+            this.power = CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName);
+        }
+    }
+
+    //reset inputs once the Update is done
+    private void resetInputs (){
+        this.direction = new Vector3 (0,0,0);
+        this.jumps = false;
+        this.walks = false;
+        this.power = false;
+    }
+
+    //used to force input by script, the value will not be resetted until the following
+    //Update. The character must not be taking input from the user
+    public void setInputs (Vector3 direction, bool jump, bool walks, bool power){
+        if (!active){
+            this.direction = direction;
+            this.jumps = jump;
+            this.walks = walks;
+            this.power = power;
+        }
+    }
+
+
 }

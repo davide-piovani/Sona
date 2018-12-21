@@ -18,7 +18,12 @@ public class CameraController : MonoBehaviour {
 	private bool toThird = false;
 	private int layerMask;
 
+        //inputs
+        private float v_rotation;
+        private float h_rotation;
+
 	private float c_dist = 0f;
+        private bool active = true;
 	
 	public GameObject player;
 
@@ -35,8 +40,6 @@ public class CameraController : MonoBehaviour {
 		dist = base_dist;
         layerMask = 1 << 11 | 1 << 8 | 1 << 10;
 
-		//c_dist = compute_dist ();
-        //print(c_dist);
 	}
 
 	void Awake () {
@@ -50,91 +53,114 @@ public class CameraController : MonoBehaviour {
 
 
 	void LateUpdate () {
-		Vector3 mov;
-		Quaternion new_rotation;
-		RaycastHit hit;
-		
-		float rho; //angle between the x axis and the projection of the vector on the horizontal
-		float phi; //angle between the vertical and the vector;
-		float h;
-		float x = 0;
-		float y = 0;
-		float z = -1;
+            Vector3 mov;
+            Quaternion new_rotation;
+            RaycastHit hit;
+            
+            float rho; //angle between the x axis and the projection of the vector on the horizontal
+            float phi; //angle between the vertical and the vector;
+            float h;
+            float x = 0;
+            float y = 0;
+            float z = -1;
 
-		if (CrossPlatformInputManager.GetButton(CameraConstants.CameraUp)){
-			new_rotation = Quaternion.AngleAxis (-rot_speed, Vector3.right);
-			tr.rotation = tr.rotation * new_rotation;
-			if (tr.rotation.eulerAngles.x < 315 && tr.rotation.eulerAngles.x > 270){
-				tr.rotation = Quaternion.Euler(
-					315,
-					tr.rotation.eulerAngles.y,
-					0
-				);
-			}
-			
-			
-		} else if (CrossPlatformInputManager.GetButton(CameraConstants.CameraDown)){
-			new_rotation = Quaternion.AngleAxis (rot_speed, Vector3.right);
-			tr.rotation = tr.rotation * new_rotation;
-			if (tr.rotation.eulerAngles.x > 45 && tr.rotation.eulerAngles.x < 90){
-				tr.rotation = Quaternion.Euler(
-					45,
-					tr.rotation.eulerAngles.y,
-					0
-				);
-			}
-		}
+            CheckInputs();
 
-		if (CrossPlatformInputManager.GetButton(CameraConstants.CameraRight)){
-			new_rotation = Quaternion.AngleAxis (rot_speed, Vector3.up);
-			tr.rotation = new_rotation * tr.rotation;
-		} else if (CrossPlatformInputManager.GetButton(CameraConstants.CameraLeft)){
-			new_rotation = Quaternion.AngleAxis (-rot_speed, Vector3.up);
-			tr.rotation = new_rotation * tr.rotation;
-		} else if (System.Math.Abs(CrossPlatformInputManager.GetAxis("Vertical")) > 0.0001f)
-        {
-            //puts the camera behind the player when moving
-            new_rotation = Quaternion.Euler(30, player.transform.rotation.eulerAngles[1], 0);
-			tr.rotation = Quaternion.RotateTowards (tr.rotation, new_rotation, rot_speed);
-		}
-		
-		if (toFirst){
-			ToFirstPerson();
-		}
-		
-		if (toThird){
-			ToThirdPerson();
-		}
+            if (Mathf.Abs(v_rotation) > Mathf.Epsilon){
+                new_rotation = Quaternion.AngleAxis (v_rotation, Vector3.right);
+                tr.rotation = tr.rotation * new_rotation;
+                if (tr.rotation.eulerAngles.x < 315 && tr.rotation.eulerAngles.x > 270){
+                    tr.rotation = Quaternion.Euler(315, tr.rotation.eulerAngles.y, 0);
+                } else if (tr.rotation.eulerAngles.x > 45 && tr.rotation.eulerAngles.x < 90){
+                    tr.rotation = Quaternion.Euler(45, tr.rotation.eulerAngles.y, 0);
+                }
+            }
+            if (Mathf.Abs (h_rotation) > Mathf.Epsilon){
+                new_rotation = Quaternion.AngleAxis (h_rotation, Vector3.up);
+                tr.rotation = new_rotation * tr.rotation;
+            }
+                
 
-		if (dist > 0){
-			//compute camera position
-			rho = tr.rotation.eulerAngles.y;
-			phi = tr.rotation.eulerAngles.x;
+            if (toFirst){
+                ToFirstPerson();
+            }
+		
+            if (toThird){
+                ToThirdPerson();
+            }
+
+            if (dist > 0){
+                //compute camera position
+                rho = tr.rotation.eulerAngles.y;
+                phi = tr.rotation.eulerAngles.x;
 	
-			//compute offset with respect to x and z
-			h = dist * Mathf.Cos (phi * Mathf.Deg2Rad);
-			z = -h * Mathf.Cos (rho * Mathf.Deg2Rad);
+                //compute offset with respect to x and z
+                h = dist * Mathf.Cos (phi * Mathf.Deg2Rad);
+                z = -h * Mathf.Cos (rho * Mathf.Deg2Rad);
 
-			x = -h * Mathf.Sin (rho * Mathf.Deg2Rad);
+                x = -h * Mathf.Sin (rho * Mathf.Deg2Rad);
 
-			//compute offset with respect to y
-			y = base_dist * Mathf.Sin(phi * Mathf.Deg2Rad);
+                //compute offset with respect to y
+                y = base_dist * Mathf.Sin(phi * Mathf.Deg2Rad);
 	
-			mov = new Vector3 (x,y,z);
+                mov = new Vector3 (x,y,z);
 
-            Debug.DrawRay(player.transform.position, mov * dist, Color.green);
-            bool doesHit=Physics.Raycast(player.transform.position, mov, out hit, dist + c_dist, layerMask);
-            //print(doesHit);
-            if (doesHit){
-				mov = mov * ((hit.distance - c_dist)/dist);
-			}
+                Debug.DrawRay(player.transform.position, mov * dist, Color.green);
+                bool doesHit=Physics.Raycast(player.transform.position, mov, out hit, dist + c_dist, layerMask);
+                //print(doesHit);
+                if (doesHit){
+                    mov = mov * ((hit.distance - c_dist)/dist);
+                    }
 
-			tr.position = player.transform.position + mov; 
-		}
-		else{
-			tr.position = player.transform.position;
-		}
+                    tr.position = player.transform.position + mov; 
+                } else {
+                    tr.position = player.transform.position;
+                }
+            resetInputs();
 	}
+
+        private void CheckInputs () {
+            if (active){
+                if (CrossPlatformInputManager.GetButton(CameraConstants.CameraUp)){
+                    v_rotation = v_rotation + rot_speed;
+                }
+                if (CrossPlatformInputManager.GetButton(CameraConstants.CameraDown)){
+                    v_rotation = v_rotation - rot_speed;
+                }
+                if (CrossPlatformInputManager.GetButton(CameraConstants.CameraLeft)){
+                    h_rotation = h_rotation - rot_speed;
+                }
+                if (CrossPlatformInputManager.GetButton(CameraConstants.CameraRight)){
+                    h_rotation = h_rotation + rot_speed;
+                }
+            }
+        }
+
+        public void SetPlayer (GameObject player){
+            this.player = player;
+        }
+
+        public void SetInputs (float v_rotation, float h_rotation){
+            if (!active){
+                this.h_rotation = h_rotation;
+                this.v_rotation = v_rotation;
+            }
+        }
+
+        public void Activate () {
+            this.active = true;
+            resetInputs();
+        }
+
+        public void Deactivate () {
+            this.active = false;
+            resetInputs();
+        }
+
+        private void resetInputs (){
+            h_rotation = 0;
+            v_rotation = 0;
+        }
 
 	//reduces the distance from the player to move the camera towards a first person one
 	private void ToFirstPerson (){
