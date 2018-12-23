@@ -4,11 +4,47 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: book
+    100004: book001
+    100006: book002
+    100008: book003
+    100010: book004
+    100012: book008
+    100014: book009
     400000: //RootNode
+    400002: book
+    400004: book001
+    400006: book002
+    400008: book003
+    400010: book004
+    400012: book008
+    400014: book009
     2100000: Material.010
+    2100002: Material.001
     2300000: //RootNode
+    2300002: book
+    2300004: book001
+    2300006: book002
+    2300008: book003
+    2300010: book004
+    2300012: book008
+    2300014: book009
     3300000: //RootNode
+    3300002: book
+    3300004: book001
+    3300006: book002
+    3300008: book003
+    3300010: book004
+    3300012: book008
+    3300014: book009
     4300000: Cube.001
+    4300002: book009
+    4300004: book008
+    4300006: book004
+    4300008: book003
+    4300010: book002
+    4300012: book001
+    4300014: book
   externalObjects: {}
   materials:
     importMaterials: 1
