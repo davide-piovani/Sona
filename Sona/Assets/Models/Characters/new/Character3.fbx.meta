@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 705e0389fa0e5e343bfc71b0288db061
+guid: 30355c89a4e164f4cbed228a8b2b656f
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -11,8 +11,8 @@ ModelImporter:
     100010: Bone.002_end
     100012: braccio.L
     100014: braccio.R
-    100016: //RootNode
-    100018: Character3
+    100016: Character3
+    100018: //RootNode
     100020: Circle
     100022: coscia.L
     100024: coscia.R
