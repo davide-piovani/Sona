@@ -17,7 +17,7 @@ public abstract class Player : MonoBehaviour {
     protected int layerMask;
     float radius;
 
-    public bool active = false;
+    public bool active = true;
     public bool protectToChangeCharacter = false;
     protected bool powerActive = false;
     //private ActiveCharacterController controller;
