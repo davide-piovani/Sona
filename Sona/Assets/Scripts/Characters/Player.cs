@@ -292,5 +292,17 @@ public abstract class Player : MonoBehaviour {
         }
     }
 
+    
+    public void Activate (){
+        this.active = true;
+        characterCamera.enabled = true;
+        resetInputs();
+    }
 
+    public void Deactivate (){
+        this.active = false;
+        characterCamera.enabled = false;
+        resetInputs();
+    }
+ 
 }
