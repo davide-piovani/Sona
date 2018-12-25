@@ -3,6 +3,21 @@ using UnityEngine;
 
 namespace ApplicationConstants
 {
+    public class GameConstants {
+        public static string gameExtension = ".sona";
+        public static string storagePath = Application.persistentDataPath;
+        public static string gameSlotPath = storagePath + "/gameSlot";
+
+        public static float alertWidth = 1120f;
+        public static float alertHeight = 460f;
+
+        public static string cancelString = "Cancel";
+        public static string okString = "Proceed";
+
+        public static string voidSlotName = "---";
+        public static string createNewSlotAlertMessage = "Create a new game on this slot?";
+        public static string loadSlotAlertMessage = "Are you sure you want to load this slot?";
+    }
 
     public class CameraConstants{
         //Camera Controller
@@ -48,23 +63,32 @@ namespace ApplicationConstants
     }
 
     public class MenuConstants {
-        public static Color selectedButtonColor = Color.white;
-        public static Color unselectedButtonColor = Color.blue;
+        public static Color selectedButtonColor = new Color(61f / 255f, 108f / 255f, 1f, 1f);
+        public static Color unselectedButtonColor = new Color(1f, 1f, 1f, 1f);
 
         public static bool[][] menuActiveButtons = {
-            new bool[] {true, true, true, true, true},
-            new bool[] {true, true, true, false, true}
+            new bool[] {true, true, true, true, false},     //Main menu
+            new bool[] {true, true, true, false, true},     //New Game
+            new bool[] {true, true, true, false, true},     //Load Game
+            new bool[] {true, true, true, false, true}      //Select Level
         };
 
         public static string[][] menuButtonsText = {
-            new string[] {"New Game", "Load Game", "Select Level", "Settings", "Prototypes"},
-            new string[] {"Jack Level", "Charlie Level", "Hannah Level", "", "Back"}
+            new string[] {"New Game", "Load Game", "Select Level", "Settings", ""},     //Main menu
+            new string[] {GameConstants.voidSlotName, GameConstants.voidSlotName, GameConstants.voidSlotName, GameConstants.voidSlotName, "Back"},       //New Game
+            new string[] {GameConstants.voidSlotName, GameConstants.voidSlotName, GameConstants.voidSlotName, GameConstants.voidSlotName, "Back"},       //Load Game
+            new string[] { "First Level", "Intermediate Level", "Final Level", "", "Back"},     //Select level
         };
     }
 
     public class SceneNames {
 
-	public static string menu = "0. Main menù";
+	    public static string menu = "0. Main menù";
+
+        public static string level1 = "1. First Level";
+        public static string level2 = "2. Intermediate Level";
+        public static string level3 = "3. Final Level";
+
         public static string prototype1 = "Jack Level";
         public static string prototype2 = "Charlie level";
         public static string prototype3 = "Hannah Level";

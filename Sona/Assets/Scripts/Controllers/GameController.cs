@@ -7,15 +7,22 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 
     public Transform LoadingBar;
-    private float fullWidth;
     [SerializeField] float powerLevelIndicator;
     [SerializeField] Player[] scenePlayers;
+
+    [Header("Audioclips")]
+    [SerializeField] AudioClip backgroundMusic;
+
+    private float fullWidth;
+    private AudioController audioController;
 
     // Use this for initialization
     void Start () {
         //RectTransform powerLevelIndicatorContainer = (UnityEngine.RectTransform) powerLevelIndicator.parent;
 
         //fullWidth = powerLevelIndicatorContainer.rect.width;
+        audioController = AudioController.instance;
+        PlayBackgroundMusic();
 	}
 
     private void Update() {
@@ -60,4 +67,8 @@ public class GameController : MonoBehaviour {
     }
 
     public Player[] GetScenePlayers() { return scenePlayers; }
+
+    private void PlayBackgroundMusic(){
+        audioController.PlayBackgroundMusic(backgroundMusic);
+    }
 }
