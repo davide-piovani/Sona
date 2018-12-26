@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Prototypes/Jack Level.unity
-    guid: 2e97e519c745d9f409d3bd8c52556e2d
+    path: "Assets/Scenes/0. Main men\xF9.unity"
+    guid: 028a85d8ed00a4b35a539954f53b642f
+  - enabled: 1
+    path: Assets/Scenes/1. First Level.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/2. Intermediate Level.unity
+    guid: a98a26448f7124de8965a063c806c43d
+  - enabled: 1
+    path: Assets/Scenes/3. Final Level.unity
+    guid: 79cdfa8b3e143475a85ce6085451e026
   m_configObjects: {}

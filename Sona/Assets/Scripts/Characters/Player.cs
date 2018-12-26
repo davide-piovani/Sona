@@ -19,7 +19,7 @@ public abstract class Player : MonoBehaviour {
 
     public bool active = true;
     public bool protectToChangeCharacter = false;
-    protected bool powerActive = false;
+    public bool powerActive = false;
     //private ActiveCharacterController controller;
     private GameController gameController;
 
@@ -77,6 +77,7 @@ public abstract class Player : MonoBehaviour {
         LoadPowerSettings();
         powerTimeLeft = powerDuration;
         gameController.UpdatePowerLevelIndicator(powerTimeLeft / powerDuration);
+        //gameController.UpdatePowerLevelIndicator(this);
         PowerToggle(false);
     }
 
@@ -118,6 +119,7 @@ public abstract class Player : MonoBehaviour {
     protected abstract void PowerToggle(bool isActive);
 
     private void checkPowerDuration(){
+        
         if (powerActive) {
             powerTimeLeft -= Time.deltaTime;
 
@@ -129,6 +131,8 @@ public abstract class Player : MonoBehaviour {
                 powerTimeLeft = powerDuration;
             }
         }
+        
+        //gameController.UpdatePowerLevelIndicator(this);  //powerTimeLeft , powerDuration, powerActive);
         gameController.UpdatePowerLevelIndicator(powerTimeLeft / powerDuration);
         //print("Power time left: " + powerTimeLeft.ToString());
     }
@@ -281,7 +285,8 @@ public abstract class Player : MonoBehaviour {
         this.power = false;
     }
 
-    //used to force input by script, the value will not be resetted until the following
+
+    //used to force input by script, the value will not be resetted until the following
     //Update. The character must not be taking input from the user
     public void setInputs (Vector3 direction, bool jump, bool walks, bool power){
         if (!active){
