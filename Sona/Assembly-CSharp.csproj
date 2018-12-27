@@ -66,6 +66,8 @@
     <Compile Include="Assets\Scripts\Characters\Jack.cs" />
     <Compile Include="Assets\Scripts\Characters\Player.cs" />
     <Compile Include="Assets\Scripts\Controllers\ActiveCharacterController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\AlertController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\AudioController.cs" />
     <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
     <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
     <Compile Include="Assets\Scripts\Controllers\GuardController.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Charlie Level Controllers\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Charlie Level Controllers\Platform.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Charlie Level Controllers\Trap.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\PlatformController.cs" />
     <Compile Include="Assets\Scripts\Controllers\MenuController.cs" />
     <Compile Include="Assets\Scripts\Controllers\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\Controllers\TimeController.cs" />
@@ -140,8 +143,12 @@
     <Compile Include="Assets\Scripts\NPC\NewGuard.cs" />
     <Compile Include="Assets\Scripts\NPC\NewGuardGroup.cs" />
     <Compile Include="Assets\Scripts\Utils\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Utils\InputListener.cs" />
     <Compile Include="Assets\Scripts\Utils\Interactable.cs" />
+    <Compile Include="Assets\Scripts\Utils\Persistent Data\GameSlot.cs" />
+    <Compile Include="Assets\Scripts\Utils\Persistent Data\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\Utils\PlayersConstants.cs" />
+    <Compile Include="Assets\Scripts\Utils\SceneType.cs" />
     <Compile Include="Assets\Third packages\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
     <Compile Include="Assets\Third packages\CrossPlatformInput\Scripts\ButtonHandler.cs" />
     <Compile Include="Assets\Third packages\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
@@ -160,9 +167,6 @@
     <Compile Include="Assets\Trash\CameraControllerProvvisoria.cs" />
     <Compile Include="Assets\Trash\CheckpointController.cs" />
     <Compile Include="Assets\Trash\CheckpointDavide.cs" />
-    <Compile Include="Assets\Trash\Player(Jack)\PlayerControllerJack.cs" />
-    <Compile Include="Assets\Trash\Player(Jack)\PlayerMovementJack.cs" />
-    <Compile Include="Assets\Trash\Player(Jack)\TemporaryCamera.cs" />
     <Compile Include="Assets\Trash\PlayerController.cs" />
     <Compile Include="Assets\Trash\PlayerManager.cs" />
     <Compile Include="Assets\Trash\PlayerMotor.cs" />
