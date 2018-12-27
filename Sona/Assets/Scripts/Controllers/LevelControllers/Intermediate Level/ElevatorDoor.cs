@@ -25,16 +25,16 @@ public class ElevatorDoor : MonoBehaviour {
         sliding = true;
     }
 
-    public bool isSliding() {
+    public bool IsSliding() {
         return sliding;
     }
 
-    public bool isOpen()
+    public bool IsOpen()
     {
         return open;
     }
 
-    public bool isClose()
+    public bool IsClose()
     {
         return close;
     }

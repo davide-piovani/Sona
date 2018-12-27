@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformController : MonoBehaviour {
+public class ElevatorController : MonoBehaviour {
 
     public ElevatorDoor bottomDoor;
     public ElevatorDoor topDoor;
@@ -70,12 +70,12 @@ public class PlatformController : MonoBehaviour {
         }
         else if (state == 1) {
 
-            if (platform.isTop())
+            if (platform.IsEnd())
             {
                 platform.MovePlatform();
                 state = 2;
             }
-            else if (platform.isBottom())
+            else if (platform.IsStart())
             {
                 bottomDoor.SlideDoor();
                 state = 3;
@@ -86,7 +86,7 @@ public class PlatformController : MonoBehaviour {
         else if (state == 2)
         {
 
-            if (platform.isBottom()){
+            if (platform.IsStart()){
                 bottomDoor.SlideDoor();
                 state = 3;
             }
@@ -95,11 +95,11 @@ public class PlatformController : MonoBehaviour {
         else if (state == 3)
         {
 
-            if (!bottomDisplayActive & !platform.isPlayerOnPlatform() & (player.transform.position - bottomDisplay.transform.position).magnitude > minDistToCloseDoor) {
+            if (!bottomDisplayActive & !platform.IsPlayerOnPlatform() & (player.transform.position - bottomDisplay.transform.position).magnitude > minDistToCloseDoor) {
                 bottomDoor.SlideDoor();
                 state = 4;
             }
-            else if (Input.GetKeyDown(KeyCode.B) & platform.isPlayerOnPlatform() & bottomDoor.isOpen()) {
+            else if (Input.GetKeyDown(KeyCode.B) & platform.IsPlayerOnPlatform() & bottomDoor.IsOpen()) {
                 bottomDoor.SlideDoor();
                 state = 5;
             }
@@ -108,7 +108,7 @@ public class PlatformController : MonoBehaviour {
         }
         else if (state == 4)
         {
-            if (bottomDoor.isClose()){
+            if (bottomDoor.IsClose()){
                 platform.ActiveDeActivePlatform(false);
                 state = 0;
             }
@@ -116,7 +116,7 @@ public class PlatformController : MonoBehaviour {
         else if (state == 5)
         {
 
-            if (bottomDoor.isClose()) {
+            if (bottomDoor.IsClose()) {
                 platform.MovePlatform();
                 state = 6;
             }
@@ -125,7 +125,7 @@ public class PlatformController : MonoBehaviour {
         else if (state == 6)
         {
 
-            if (platform.isTop()) {
+            if (platform.IsEnd()) {
                 topDoor.SlideDoor();
                 state = 7;
             }
@@ -134,12 +134,12 @@ public class PlatformController : MonoBehaviour {
         else if (state == 7)
         {
 
-            if (!topDisplayActive & !platform.isPlayerOnPlatform() & (player.transform.position - topDisplay.transform.position).magnitude > minDistToCloseDoor)
+            if (!topDisplayActive & !platform.IsPlayerOnPlatform() & (player.transform.position - topDisplay.transform.position).magnitude > minDistToCloseDoor)
             {
                 topDoor.SlideDoor();
                 state = 9;
             }
-            else if (Input.GetKeyDown(KeyCode.B) & platform.isPlayerOnPlatform() & topDoor.isOpen())
+            else if (Input.GetKeyDown(KeyCode.B) & platform.IsPlayerOnPlatform() & topDoor.IsOpen())
             {
                 topDoor.SlideDoor();
                 state = 8;
@@ -150,7 +150,7 @@ public class PlatformController : MonoBehaviour {
         else if (state == 8)
         {
 
-            if (topDoor.isClose()) {
+            if (topDoor.IsClose()) {
                 platform.MovePlatform();
                 state = 2;
             }
@@ -159,7 +159,7 @@ public class PlatformController : MonoBehaviour {
         else if (state == 9)
         {
 
-            if (topDoor.isClose())
+            if (topDoor.IsClose())
             {
                 platform.ActiveDeActivePlatform(false);
                 state = 0;
@@ -169,12 +169,12 @@ public class PlatformController : MonoBehaviour {
         else if (state == 10)
         {
 
-            if (platform.isBottom())
+            if (platform.IsStart())
             {
                 platform.MovePlatform();
                 state = 6;
             }
-            else if (platform.isTop())
+            else if (platform.IsEnd())
             {
                 topDoor.SlideDoor();
                 state = 7;
