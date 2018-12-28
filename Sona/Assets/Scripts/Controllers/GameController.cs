@@ -18,9 +18,6 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        //RectTransform powerLevelIndicatorContainer = (UnityEngine.RectTransform) powerLevelIndicator.parent;
-
-        //fullWidth = powerLevelIndicatorContainer.rect.width;
         audioController = AudioController.instance;
         PlayBackgroundMusic();
 	}
@@ -31,38 +28,8 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    //public void UpdatePowerLevelIndicator(Player player)
     public void UpdatePowerLevelIndicator(float level)
     {
-        /*
-        if (player.powerActive)
-        {
-            player.powerTimeLeft -= Time.deltaTime;
-
-            if (player.powerTimeLeft <= 0) player.PowerToggle(false);
-        }
-        else
-        {
-            if (player.powerTimeLeft < player.powerDuration)
-            {
-                player.powerTimeLeft += Time.deltaTime * player.rechargeSpeed;
-            }
-            else
-            {
-                player.powerTimeLeft = player.powerDuration;
-            }
-        }
-        
-        if (powerLevelIndicator < 100)
-        {
-            powerLevelIndicator += level;
-        }
-        else
-        {
-            powerLevelIndicator -= level;
-        }
-        */
-        //powerLevelIndicator =  player.powerTimeLeft / player.powerDuration;
         LoadingBar.GetComponent<Image>().fillAmount = level;
     }
 
