@@ -4,22 +4,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 using ApplicationConstants;
+using System;
 
 public class GameController : InputListener {
 
     [SerializeField] Transform LoadingBar;
-    [SerializeField] Player[] scenePlayers;
     [SerializeField] AudioClip backgroundMusic;
+    [SerializeField] PlayerType startingPlayer;
 
     [Header("Input Listeners")]
     [SerializeField] InputListener pauseInterface;
-    [SerializeField] InputListener activePlayer;
+    private Player activePlayer;
 
     private BackgroundAudioController audioController;
+    private ActiveCharacterController characterController;
 
     // Use this for initialization
     void Start () {
         audioController = BackgroundAudioController.instance;
+        characterController = FindObjectOfType<ActiveCharacterController>();
+
+        activePlayer = characterController.ActivePlayerOfType(startingPlayer);
         ActiveInput();
         PlayBackgroundMusic();
     }
@@ -28,7 +33,12 @@ public class GameController : InputListener {
         if (IsInputActive()){
             if (activePlayer != null && !activePlayer.IsInputActive()) activePlayer.ActiveInput();
             if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.pauseButton)) PauseGame();
+            if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton)) ChangeCharacter();
         }
+    }
+
+    private void ChangeCharacter(){
+        activePlayer = characterController.GiveControlToNextPlayer();
     }
 
     private void PauseGame(){
@@ -41,9 +51,11 @@ public class GameController : InputListener {
         LoadingBar.GetComponent<Image>().fillAmount = level;
     }
 
-    public Player[] GetScenePlayers() { return scenePlayers; }
+    public Player[] GetScenePlayers() { return characterController.GetScenePlayers(); }
 
     private void PlayBackgroundMusic(){
         audioController.PlayBackgroundMusic(backgroundMusic);
     }
+
+    public Player GetActivePlayer() { return activePlayer; }
 }

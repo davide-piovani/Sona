@@ -147,13 +147,13 @@
     <Compile Include="Assets\Scripts\NPC\Decision\PatrolDecision.cs" />
     <Compile Include="Assets\Scripts\NPC\Decision\ScanDecision.cs" />
     <Compile Include="Assets\Scripts\NPC\Guard.cs" />
-    <Compile Include="Assets\Scripts\NPC\GuardGruoup.cs" />
+    <Compile Include="Assets\Scripts\NPC\GuardGroup.cs" />
     <Compile Include="Assets\Scripts\NPC\GuardMovement.cs" />
     <Compile Include="Assets\Scripts\NPC\GuardState.cs" />
     <Compile Include="Assets\Scripts\NPC\GuardStates\AllertState.cs" />
+    <Compile Include="Assets\Scripts\NPC\GuardStates\ChaseState.cs" />
     <Compile Include="Assets\Scripts\NPC\GuardStates\InvestigateState.cs" />
-    <Compile Include="Assets\Scripts\NPC\GuardStates\RelaxState.cs" />
-    <Compile Include="Assets\Scripts\NPC\GuardStates\SleepState.cs" />
+    <Compile Include="Assets\Scripts\NPC\GuardStates\PatrolState.cs" />
     <Compile Include="Assets\Scripts\NPC\NewGuard.cs" />
     <Compile Include="Assets\Scripts\NPC\NewGuardGroup.cs" />
     <Compile Include="Assets\Scripts\Utils\ApplicationConstant.cs" />
@@ -163,6 +163,7 @@
     <Compile Include="Assets\Scripts\Utils\NewEnumeration.cs" />
     <Compile Include="Assets\Scripts\Utils\Persistent Data\GameSlot.cs" />
     <Compile Include="Assets\Scripts\Utils\Persistent Data\SaveSystem.cs" />
+    <Compile Include="Assets\Scripts\Utils\PlayerType.cs" />
     <Compile Include="Assets\Scripts\Utils\SceneType.cs" />
     <Compile Include="Assets\Third packages\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
     <Compile Include="Assets\Third packages\CrossPlatformInput\Scripts\ButtonHandler.cs" />
