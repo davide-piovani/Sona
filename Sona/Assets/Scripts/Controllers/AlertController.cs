@@ -4,7 +4,7 @@ using ApplicationConstants;
 using UnityStandardAssets.CrossPlatformInput;
 using System;
 
-public class AlertController : MonoBehaviour {
+public class AlertController : InputListener {
 
     [SerializeField] TextMeshProUGUI messageLabel;
     [SerializeField] TextMeshProUGUI contentLabel;
@@ -14,8 +14,6 @@ public class AlertController : MonoBehaviour {
     private int currentButton;
     private Action<string> callback;
     private bool buttonChanged = false;
-
-    private InputListener inputListener;
 
     private void Start(){
         currentButton = 0;
@@ -40,11 +38,6 @@ public class AlertController : MonoBehaviour {
         rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, GameConstants.alertWidth);
         rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, GameConstants.alertHeight);
         rectTransform.localScale = new Vector3(1f, 1f, 1f);
-    }
-
-    public void SetInputListener(InputListener listener){
-        inputListener = listener;
-        listener.checkForInput = false;
     }
 
     // Update is called once per frame
@@ -86,9 +79,8 @@ public class AlertController : MonoBehaviour {
 
     private void checkEnterButton(){
         if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.enterButton)){
-            if (currentButton == 1) callback("boh");
-            print(gameObject.name);
-            inputListener.checkForInput = true;
+            if (currentButton == 1) callback("");
+            RestoreOldListener();
             Destroy(gameObject);
         }
     }

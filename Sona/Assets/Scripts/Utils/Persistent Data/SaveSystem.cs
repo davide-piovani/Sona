@@ -10,8 +10,8 @@ public static class SaveSystem {
     private static FileStream stream;
 
 
-    public static void SaveGameSlot(GameSlot slot, int slotNumber) {
-        path = GameConstants.gameSlotPath + slotNumber + GameConstants.gameExtension;
+    public static void SaveGameSlot(GameSlot slot) {
+        path = GameConstants.gameSlotPath + slot.number + GameConstants.gameExtension;
 
         stream = new FileStream(path, FileMode.Create);
 
