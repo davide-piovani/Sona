@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4504717717831296}
   - component: {fileID: 108952009768234276}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point Light (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 33908768672415748}
   - component: {fileID: 23015615752652024}
   - component: {fileID: 64353510188003732}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Roof light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4351064977553688}
   - component: {fileID: 108284362905744648}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point Light (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4174139112634150}
   - component: {fileID: 108090986696323214}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point Light (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4893968458513618}
   - component: {fileID: 108796137478072172}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point Light (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4585138757844840}
   - component: {fileID: 108807164497015312}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point Light (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 33349252009229964}
   - component: {fileID: 23867660711222900}
   - component: {fileID: 65086489892687964}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4220325346859648}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Realtime lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4204209024146738}
   - component: {fileID: 108703000052758000}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4660401322469336}
   - component: {fileID: 108281761566706652}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point Light (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4123261823592296}
   - component: {fileID: 108337219119583790}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point Light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4847654862805110}
   - component: {fileID: 108634602638349064}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

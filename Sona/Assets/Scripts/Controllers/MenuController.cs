@@ -4,15 +4,14 @@ using ApplicationConstants;
 using UnityStandardAssets.CrossPlatformInput;
 using System;
 
-public class MenuController : InputListener {
+public class MenuController : MenuMovementController {
 
-    [SerializeField] TextMeshProUGUI[] buttons;
     [SerializeField] GameObject alertObject;
     [SerializeField] AudioClip backgroundMusic;
+    [SerializeField] GameObject menu;
+    [SerializeField] SettingsController settingsController;
 
-    int currentButton = 0;
     int currentMenu = 0;
-    bool buttonChanged = false;
     SceneLoader sceneLoader;
     Canvas canvas;
 
@@ -22,14 +21,16 @@ public class MenuController : InputListener {
         sceneLoader = FindObjectOfType<SceneLoader>();
         canvas = FindObjectOfType<Canvas>();
         LoadMenu(MenuType.mainMenu);
+        ActiveInput();
+        InitializeMenu();
         PlayMenuMusic();
     }
 
     // Update is called once per frame
     void Update () {
-        if (checkForInput) {
-            checkButtonChanged();
-            checkEnterButton();
+        if (IsInputActive()) {
+            CheckVerticalInput();
+            CheckEnterButton();
         }
     }
 
@@ -42,22 +43,12 @@ public class MenuController : InputListener {
             buttons[i].enabled = activeButtons[i];
             buttons[i].text = buttonText[i];
         }
-        SelectButton(0);
+        SelectButton(0, true);
+        for (int i = 1; i < buttons.Length; i++) SelectButton(i, false);
         currentMenu = menuIndex;
     }
 
-    private void checkButtonChanged(){
-        float vertical = CrossPlatformInputManager.GetAxis("Vertical");
-
-        if (!buttonChanged){
-            if (vertical > 0) PreviousButton();
-            if (vertical < 0) NextButton();
-        } else {
-            if (Mathf.Abs(vertical) <= Mathf.Epsilon) buttonChanged = false;
-        }
-    }
-
-    private void checkEnterButton(){
+    private void CheckEnterButton(){
         if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.enterButton)){
             switch (currentMenu){
                 case 0:
@@ -76,42 +67,8 @@ public class MenuController : InputListener {
         }
     }
 
-    private void PreviousButton(){
-        int i = currentButton;
-
-        if (i != 0) {
-            while (i != 0) { if (SelectButton(--i)) return; }
-        }
-        i = buttons.Length - 1;
-
-        while (!SelectButton(i)) i--;
-    }
-
-    private void NextButton(){
-        int i = currentButton;
-
-        if (i != buttons.Length-1){
-            while (i != buttons.Length - 1) { if (SelectButton(++i)) return; }
-        }
-        i = 0;
-
-        while (!SelectButton(i)) i++;
-    }
-
-    private bool SelectButton(int index){
-        if (index >= 0 && index < buttons.Length){
-            if (!buttons[index].enabled) return false;
-            buttons[currentButton].color = MenuConstants.unselectedButtonColor;
-            buttons[index].color = MenuConstants.selectedButtonColor;
-            currentButton = index;
-            buttonChanged = true;
-            return true;
-        }
-        return false;
-    }
-
     private void PlayMenuMusic(){
-        AudioController controller = FindObjectOfType<AudioController>();
+        BackgroundAudioController controller = FindObjectOfType<BackgroundAudioController>();
         if (controller) controller.PlayBackgroundMusic(backgroundMusic);
     }
 
@@ -192,7 +149,13 @@ public class MenuController : InputListener {
     }
 
     private void Settings(){
-        print("Settings");
+        ShowMenu(false);
+        settingsController.gameObject.SetActive(true);
+        settingsController.SetAsUniqueInputListener(this);
+    }
+
+    public void ShowMenu(bool visible){
+        menu.SetActive(visible);
     }
 
     private void CreateNewSlot(int slotNumber) {
@@ -234,7 +197,7 @@ public class MenuController : InputListener {
 
         alertController.SetAllert(message, content, cancel, ok, callback);
         alertController.SetDimensions(canvas);
-        alertController.SetInputListener(this);
+        alertController.SetAsUniqueInputListener(this);
     }
 
 
@@ -242,7 +205,7 @@ public class MenuController : InputListener {
     //---------------------------------   CALLBACK   ---------------------------------
 
     public void CreateSlot(string useless){
-        SaveSystem.SaveGameSlot(currentSlot, currentSlot.number);
+        SaveSystem.SaveGameSlot(currentSlot);
         sceneLoader.LoadScene(SceneType.Level_1);
     }
 

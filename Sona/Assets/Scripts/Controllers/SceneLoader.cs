@@ -4,6 +4,8 @@ using ApplicationConstants;
 
 public class SceneLoader : MonoBehaviour {
 
+    public GameSlot gameSlot;
+
     private void Awake(){
         var sceneLoaders = FindObjectsOfType<SceneLoader>();
         if (sceneLoaders.Length > 1) {
