@@ -1,68 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
+using ApplicationConstants;
 
-public class GameController : MonoBehaviour {
+public class GameController : InputListener {
 
-    public Transform LoadingBar;
-    [SerializeField] float powerLevelIndicator;
+    [SerializeField] Transform LoadingBar;
     [SerializeField] Player[] scenePlayers;
-
-    [Header("Audioclips")]
     [SerializeField] AudioClip backgroundMusic;
 
-    private float fullWidth;
-    private AudioController audioController;
+    [Header("Input Listeners")]
+    [SerializeField] InputListener pauseInterface;
+    [SerializeField] InputListener activePlayer;
+
+    private BackgroundAudioController audioController;
 
     // Use this for initialization
     void Start () {
-        //RectTransform powerLevelIndicatorContainer = (UnityEngine.RectTransform) powerLevelIndicator.parent;
-
-        //fullWidth = powerLevelIndicatorContainer.rect.width;
-        audioController = AudioController.instance;
+        audioController = BackgroundAudioController.instance;
+        ActiveInput();
         PlayBackgroundMusic();
-	}
+    }
 
     private void Update() {
-        if (Input.GetKey(KeyCode.Escape)){
-            FindObjectOfType<SceneLoader>().LoadStartScene();
+        if (IsInputActive()){
+            if (activePlayer != null && !activePlayer.IsInputActive()) activePlayer.ActiveInput();
+            if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.pauseButton)) PauseGame();
         }
     }
 
-    //public void UpdatePowerLevelIndicator(Player player)
-    public void UpdatePowerLevelIndicator(float level)
-    {
-        /*
-        if (player.powerActive)
-        {
-            player.powerTimeLeft -= Time.deltaTime;
+    private void PauseGame(){
+        pauseInterface.gameObject.SetActive(true);
+        if (activePlayer != null) activePlayer.DisableInput();
+        pauseInterface.SetAsUniqueInputListener(this);
+    }
 
-            if (player.powerTimeLeft <= 0) player.PowerToggle(false);
-        }
-        else
-        {
-            if (player.powerTimeLeft < player.powerDuration)
-            {
-                player.powerTimeLeft += Time.deltaTime * player.rechargeSpeed;
-            }
-            else
-            {
-                player.powerTimeLeft = player.powerDuration;
-            }
-        }
-        
-        if (powerLevelIndicator < 100)
-        {
-            powerLevelIndicator += level;
-        }
-        else
-        {
-            powerLevelIndicator -= level;
-        }
-        */
-        //powerLevelIndicator =  player.powerTimeLeft / player.powerDuration;
+    public void UpdatePowerLevelIndicator(float level) {
         LoadingBar.GetComponent<Image>().fillAmount = level;
     }
 

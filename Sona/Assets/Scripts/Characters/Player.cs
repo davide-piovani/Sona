@@ -4,7 +4,7 @@ using UnityStandardAssets.CrossPlatformInput;
 using System;
 using UnityEngine.AI;
 
-public abstract class Player : MonoBehaviour {
+public abstract class Player : InputListener {
 
     [SerializeField] Camera characterCamera;
 
@@ -100,14 +100,15 @@ public abstract class Player : MonoBehaviour {
             checkPower();
             performAnimations();
         }*/
-        checkInputs();
-        checkPower();
-        performAnimations();
-        checkPowerDuration();
 
-        /*if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName)){
-            print("Bella");
-        }*/
+        if (IsInputActive())
+        {
+            checkInputs();
+            performAnimations();
+        }
+
+        checkPower();
+        checkPowerDuration();
     }
 
     private void checkPower(){
@@ -157,25 +158,6 @@ public abstract class Player : MonoBehaviour {
 
     private void performAnimations(){
         float angle;
-
-        /*if (isGrounded){
-
-            if (CrossPlatformInputManager.GetButtonDown(GameConstants.jumpButton)){
-                rb.AddForce(0, jumpHeight, 0);
-                anim.SetTrigger("isJumping");
-                isGrounded = false;
-            }
-        } else {
-            if (rb.velocity.y > 0) {
-                anim.SetInteger("jumpMode", 0);
-            } else if (rb.velocity.y < 0) {
-                anim.SetInteger("jumpMode", 2);
-            } else {
-                anim.SetInteger("jumpMode", 2);
-                isGrounded = true;
-            }
-        }*/
-
 
         if (walks){
             //Walking
