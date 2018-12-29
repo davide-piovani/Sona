@@ -4,35 +4,22 @@ using UnityEngine;
 
 public class CameraPlatform : MonoBehaviour {
 
-    public GameObject _player;
-    public GameObject display;
-    public float minDist;
-    Camera platformCamera;
-    Camera playerCamera;
-    PlatformMovement platform;
-    PlatformCameraMovement _platformCameraScript;
+    public DisplayActivator _display;
 
+    Camera _platformCamera;
+    PlatformMovement _platformMovement;
+    PlatformCameraMovement _platformCameraScript;
     int state = 0;
     bool moving = false;
-    bool active = false;
-
+    
     void Start () {
-        playerCamera = _player.GetComponentInChildren<Camera>();
-        platformCamera = GetComponentInChildren<Camera>();
-        _platformCameraScript = platformCamera.GetComponentInChildren<PlatformCameraMovement>();
-        platformCamera.gameObject.SetActive(false);
-        platform = GetComponentInChildren<PlatformMovement>();
+        _platformCamera = GetComponentInChildren<Camera>();
+        _platformCameraScript = _platformCamera.GetComponentInChildren<PlatformCameraMovement>();
+        _platformCamera.enabled = false;
+        _platformMovement = GetComponentInChildren<PlatformMovement>();
 	}
 	
 	void Update () {
-
-        if ((_player.transform.position - display.transform.position).magnitude <= minDist)
-        {
-            active = true;
-        }
-        else {
-            active = false;
-        }
 
         ChangeState();
     }
@@ -41,10 +28,10 @@ public class CameraPlatform : MonoBehaviour {
 
         if (state == 0)
         {
-            if (Input.GetKeyDown(KeyCode.B) & active)
+            if (Input.GetKeyDown(KeyCode.B) & _display.IsActive())
             {
                 PlayerScriptsActive(false);
-                platformCamera.gameObject.SetActive(true);
+                _platformCamera.enabled = true;
                 _platformCameraScript.MoveCamera();
                 state = 1;
             }
@@ -54,11 +41,11 @@ public class CameraPlatform : MonoBehaviour {
             Invoke("MoveAnimation", 0.5f);
             state = 2;
         }
-        else if (state == 2 & platform.IsMoving())
+        else if (state == 2 & _platformMovement.IsMoving())
         {
             state = 3;
         }
-        else if (state == 3 & !platform.IsMoving()) {
+        else if (state == 3 & !_platformMovement.IsMoving()) {
             Invoke("EndAnimation", 0.5f);
             state = 0;
         }
@@ -67,24 +54,25 @@ public class CameraPlatform : MonoBehaviour {
     }
 
     void MoveAnimation() {
-        platform.ActiveDeActivePlatform(true);
-        platform.MovePlatform();
+        _platformMovement.ActiveDeActivePlatform(true);
+        _platformMovement.MovePlatform();
         moving = true;
     }
 
     void EndAnimation() {
-        platform.ActiveDeActivePlatform(false);
-        platformCamera.gameObject.SetActive(false);
+        _platformMovement.ActiveDeActivePlatform(false);
+        _platformCamera.enabled = false;
         PlayerScriptsActive(true);
         _platformCameraScript.ResetCamera();
     }
 
     void PlayerScriptsActive(bool cond) {
+        GameObject _player = _display.GetPlayer();
         MonoBehaviour[] _playerScripts = _player.GetComponents<MonoBehaviour>();
         foreach (MonoBehaviour s in _playerScripts) {
             s.enabled = cond;
         }
-        playerCamera.gameObject.SetActive(cond);
+        _player.GetComponentInChildren<Camera>().enabled = cond;
     }
 
 }

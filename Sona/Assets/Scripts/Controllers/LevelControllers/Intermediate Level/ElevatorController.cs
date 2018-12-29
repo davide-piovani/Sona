@@ -6,44 +6,33 @@ public class ElevatorController : MonoBehaviour {
 
     public ElevatorDoor bottomDoor;
     public ElevatorDoor topDoor;
-    public GameObject bottomDisplay;
-    public GameObject topDisplay;
-    public GameObject player;
-    public float minDist;
-    public float minDistToCloseDoor;
-    PlatformMovement platform;
-    bool bottomDisplayActive = false;
-    bool topDisplayActive = false;
+    public DisplayActivator _bottomDisplay;
+    public DisplayActivator _topDisplay;
 
+    PlatformMovement platform;
+    bool playerClose = false;
     int state = 0;
-    
+
     void Start () {
         platform = GetComponentInChildren<PlatformMovement>();
-	}
+    }
 	
 	void Update () {
-
-
-        if ((player.transform.position - bottomDisplay.transform.position).magnitude <= minDist)
-        {
-            bottomDisplayActive = true;
-        }
-        else {
-            bottomDisplayActive = false;
-        }
-
-        if ((player.transform.position - topDisplay.transform.position).magnitude <= minDist)
-        {
-            topDisplayActive = true;
-        }
-        else
-        {
-            topDisplayActive = false;
-        }
-
         ChangeState();
-        
+    }
 
+    void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Player")) {
+            playerClose = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerClose = false;
+        }
     }
 
     void ChangeState() {
@@ -54,12 +43,12 @@ public class ElevatorController : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.B))
             {
 
-                if (bottomDisplayActive)
+                if (_bottomDisplay.IsActive())
                 {
                     platform.ActiveDeActivePlatform(true);
                     state = 1;
                 }
-                else if (topDisplayActive)
+                else if (_topDisplay.IsActive())
                 {
                     platform.ActiveDeActivePlatform(true);
                     state = 10;
@@ -95,7 +84,7 @@ public class ElevatorController : MonoBehaviour {
         else if (state == 3)
         {
 
-            if (!bottomDisplayActive & !platform.IsPlayerOnPlatform() & (player.transform.position - bottomDisplay.transform.position).magnitude > minDistToCloseDoor) {
+            if (!_bottomDisplay.IsActive() & !platform.IsPlayerOnPlatform() & !playerClose) {
                 bottomDoor.SlideDoor();
                 state = 4;
             }
@@ -134,7 +123,7 @@ public class ElevatorController : MonoBehaviour {
         else if (state == 7)
         {
 
-            if (!topDisplayActive & !platform.IsPlayerOnPlatform() & (player.transform.position - topDisplay.transform.position).magnitude > minDistToCloseDoor)
+            if (!_topDisplay.IsActive() & !platform.IsPlayerOnPlatform() & !playerClose)
             {
                 topDoor.SlideDoor();
                 state = 9;

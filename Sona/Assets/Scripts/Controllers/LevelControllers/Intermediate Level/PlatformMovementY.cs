@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlatformMovementY : MonoBehaviour, PlatformMovement {
 
@@ -20,7 +21,7 @@ public class PlatformMovementY : MonoBehaviour, PlatformMovement {
     Vector3 endPosition;
 
     GameObject player;
-
+    
     void Start()
     {
         initialPosition = transform.localPosition;

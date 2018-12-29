@@ -5,15 +5,12 @@ using UnityEngine;
 
 public class PlatformDoor : MonoBehaviour {
 
-    public GameObject _player;
-    public GameObject display;
+    public DisplayActivator _display;
     public float eulerX;
     public float eulerY;
     public float eulerZ;
-    public float minDist;
     public float rotationSpeed;
 
-    bool active = false;
     bool open = false;
     bool close = true;
     bool opening = false;
@@ -28,15 +25,7 @@ public class PlatformDoor : MonoBehaviour {
 	
 	void Update () {
 
-        if ((_player.transform.position - display.transform.position).magnitude <= minDist)
-        {
-            active = true;
-        }
-        else {
-            active = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.B) & active & (open | close)) {
+        if (Input.GetKeyDown(KeyCode.B) & _display.IsActive() & (open | close)) {
             if (open)
             {
                 open = false;
