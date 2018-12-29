@@ -651,14 +651,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1995036997062020}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 88.73606, y: 85.15805, z: 86.33455}
   m_Children:
   - {fileID: 4820303628026576}
   m_Father: {fileID: 4260981757052364}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!4 &4245287147160152
 Transform:
   m_ObjectHideFlags: 1
@@ -693,8 +693,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1118640999553850}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 52.53, y: 0.39, z: -4.48}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -20.1, y: 0.844, z: 4.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4149689392564352}
@@ -703,7 +703,7 @@ Transform:
   - {fileID: 4678645628670668}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &4304577380241910
 Transform:
   m_ObjectHideFlags: 1
@@ -1181,7 +1181,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1712034828786760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e0d5ed058b62499a9ee387502910e2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 808c24f4302da4eeb8131ba41828b950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1118640999553850}
@@ -1198,9 +1198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterCamera: {fileID: 20110873593790682}
   active: 1
-  protectToChangeCharacter: 0
-  isGrounded: 0
-  jumpHeight: 200
+  powerActive: 0
   bodyMaterial: {fileID: 2100000, guid: 2eace4eb5fb4a4c7aa3dc28f4180722c, type: 2}
   hairMaterial: {fileID: 2100000, guid: 3e851ff0f01dd416383f862550738f5f, type: 2}
   transparentBodyMaterial: {fileID: 2100000, guid: 2402a5ae8735d4ef3af696ecd23cd543,

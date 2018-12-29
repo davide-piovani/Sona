@@ -799,16 +799,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1534292280594596}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -22.9, y: 0.73, z: 3.4}
+  m_LocalScale: {x: 1.2328801, y: 1.2328801, z: 1.2328801}
   m_Children:
   - {fileID: 4654229334101442}
   - {fileID: 4067946243624718}
   - {fileID: 4611351635885258}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &4639900400528196
 Transform:
   m_ObjectHideFlags: 1
@@ -829,14 +829,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1812343086206710}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 64.33589, y: 64.33589, z: 63.335888}
   m_Children:
   - {fileID: 4193353518431674}
   m_Father: {fileID: 4627932679265344}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!4 &4665000866220228
 Transform:
   m_ObjectHideFlags: 1
@@ -1093,10 +1093,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1020286109851064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e0d5ed058b62499a9ee387502910e2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 808c24f4302da4eeb8131ba41828b950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1812343086206710}
+  player: {fileID: 1534292280594596}
 --- !u!114 &114436276105983484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1110,9 +1110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterCamera: {fileID: 20988583582645514}
   active: 1
-  protectToChangeCharacter: 0
-  isGrounded: 0
-  jumpHeight: 200
+  powerActive: 0
 --- !u!136 &136631945468454624
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -9,25 +9,25 @@ public class GuardController : MonoBehaviour {
     //public GuardState currentState;
     //GuardState remainState;
 
-    public float lookRadius;
+    [HideInInspector] public float lookRadius;
     float distance;
 
     Decision decision;
 
     Animator anim;
     GameObject allarm;
-    GuardGruoup guardsGroup;
+    GuardGroup guardsGroup;
 
     public Action currentAction;
     Action lastAction;
 
-    public PlayerManager GameManager;
+    private PlayerManager GameManager;       //Da sostituire con GameController
 
     //Variables for line of sight
-    public float heightMultiplier;
-    public float viewDistance = 10f;
-    public float searchingTurnSpeed = 0.2f;
-    public float catchingRadius = 10f;
+    [HideInInspector] public float heightMultiplier;
+    [HideInInspector] public float viewDistance = 10f;
+    private float searchingTurnSpeed = 0.2f;
+    private float catchingRadius = 10f;
 
     //public int waypointNumber;
 
@@ -35,25 +35,27 @@ public class GuardController : MonoBehaviour {
 
     //path variables
     public Transform[] waypoints;
-    public GameObject firstWaypoint;
-    public GameObject secondWaypoint;
+
+    //First e second da rimuovere: gestire tutto tramite waypoints
+    private GameObject firstWaypoint;
+    private GameObject secondWaypoint;
     Transform patrolDestination;
 
-    public bool changedStateLately;
+    [HideInInspector] public bool changedStateLately;
 
     //variables for investigation
     private Vector3 investigateSpot;
     //private float frame = 0;
     //TODO: use timer to make guards patrol if they don't find the player
-    public float investigateWait = 150f;
+    private float investigateWait = 150f;
     //private float curTime;
 
     //Action[] actionsPossible;
 
-    public float stateTimeElapsed;
+    private float stateTimeElapsed;
 
-    public Transform target;
-    public NavMeshAgent agent;
+    [HideInInspector] public Transform target;
+    [HideInInspector] public NavMeshAgent agent;
 
     // Use this for initialization
     void Start()
@@ -61,6 +63,7 @@ public class GuardController : MonoBehaviour {
         anim = GetComponent<Animator>();
         SetupWaypoints();
         changedStateLately = false;
+        agent = GetComponent<NavMeshAgent>();
 
         //setActions();
         //frame = 0;
@@ -72,7 +75,7 @@ public class GuardController : MonoBehaviour {
         //waiteInvestigationTime = true;
         heightMultiplier = 1.36f;
         lookRadius = 15;
-        GuardGruoup guardGroup = GetComponentInParent<GuardGruoup>();
+        GuardGroup guardGroup = GetComponentInParent<GuardGroup>();
         //setInitialState(guardGroup);
 
     }
@@ -83,7 +86,7 @@ public class GuardController : MonoBehaviour {
     {
         if (currentAction == null)
         {
-            currentAction = setInitialState(GetComponentInParent<GuardGruoup>());
+            currentAction = setInitialState(GetComponentInParent<GuardGroup>());
         }
         //currentAction = DecisionMakingProcess();
         //NextDecision = currentAction.getDecisoner();
@@ -100,7 +103,7 @@ public class GuardController : MonoBehaviour {
         currentAction.Act(this);
     }
 
-    Action setInitialState(GuardGruoup guardGroup)
+    Action setInitialState(GuardGroup guardGroup)
     {
         Action initialAction = guardGroup.initialState;
         //Debug.Log("Initial action: " + initialAction.name);
