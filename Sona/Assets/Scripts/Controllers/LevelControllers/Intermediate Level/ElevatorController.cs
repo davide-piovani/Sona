@@ -8,6 +8,7 @@ public class ElevatorController : MonoBehaviour {
     public ElevatorDoor topDoor;
     public DisplayActivator _bottomDisplay;
     public DisplayActivator _topDisplay;
+    public InteractiveTextScript _platformText;
 
     PlatformMovement platform;
     bool playerClose = false;
@@ -45,11 +46,15 @@ public class ElevatorController : MonoBehaviour {
 
                 if (_bottomDisplay.IsActive())
                 {
+                    _topDisplay.Necessary(false); /*forse da cambiare*/
+                    _bottomDisplay.Necessary(false); /*forse da cambiare*/
                     platform.ActiveDeActivePlatform(true);
                     state = 1;
                 }
                 else if (_topDisplay.IsActive())
                 {
+                    _topDisplay.Necessary(false); /*forse da cambiare*/
+                    _bottomDisplay.Necessary(false); /*forse da cambiare*/
                     platform.ActiveDeActivePlatform(true);
                     state = 10;
                 }
@@ -84,11 +89,20 @@ public class ElevatorController : MonoBehaviour {
         else if (state == 3)
         {
 
+            if (platform.IsPlayerOnPlatform())
+            {
+                _platformText.ShowText(); /* forse da cambiare */
+            }
+            else {
+                _platformText.HideText(); /* forse da cambiare */
+            }
+
             if (!_bottomDisplay.IsActive() & !platform.IsPlayerOnPlatform() & !playerClose) {
                 bottomDoor.SlideDoor();
                 state = 4;
             }
             else if (Input.GetKeyDown(KeyCode.B) & platform.IsPlayerOnPlatform() & bottomDoor.IsOpen()) {
+                _platformText.HideText(); /* forse da cambiare */
                 bottomDoor.SlideDoor();
                 state = 5;
             }
@@ -98,6 +112,8 @@ public class ElevatorController : MonoBehaviour {
         else if (state == 4)
         {
             if (bottomDoor.IsClose()){
+                _topDisplay.Necessary(true); /*forse da cambiare*/
+                _bottomDisplay.Necessary(true); /*forse da cambiare*/
                 platform.ActiveDeActivePlatform(false);
                 state = 0;
             }
@@ -123,6 +139,15 @@ public class ElevatorController : MonoBehaviour {
         else if (state == 7)
         {
 
+            if (platform.IsPlayerOnPlatform())
+            {
+                _platformText.ShowText(); /* forse da cambiare */
+            }
+            else
+            {
+                _platformText.HideText(); /* forse da cambiare */
+            }
+
             if (!_topDisplay.IsActive() & !platform.IsPlayerOnPlatform() & !playerClose)
             {
                 topDoor.SlideDoor();
@@ -130,6 +155,7 @@ public class ElevatorController : MonoBehaviour {
             }
             else if (Input.GetKeyDown(KeyCode.B) & platform.IsPlayerOnPlatform() & topDoor.IsOpen())
             {
+                _platformText.HideText(); /* forse da cambiare */
                 topDoor.SlideDoor();
                 state = 8;
             }
@@ -150,6 +176,8 @@ public class ElevatorController : MonoBehaviour {
 
             if (topDoor.IsClose())
             {
+                _topDisplay.Necessary(true); /*forse da cambiare*/
+                _bottomDisplay.Necessary(true); /*forse da cambiare*/
                 platform.ActiveDeActivePlatform(false);
                 state = 0;
             }
