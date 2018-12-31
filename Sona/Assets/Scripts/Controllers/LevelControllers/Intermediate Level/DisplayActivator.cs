@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class DisplayActivator : MonoBehaviour {
 
+    //public float radius;
+    //GameController _gameController;
     InteractiveTextScript _text;
     GameObject _player;
     bool active = false;
@@ -12,11 +14,13 @@ public class DisplayActivator : MonoBehaviour {
 
     void Start()
     {
+        //_gameController = GetComponentInParent<GameController>();
         _text = GetComponentInChildren<InteractiveTextScript>();
     }
 
     void Update()
     {
+        //Control();
         if (active & necessary)
         {
             _text.ShowText();
@@ -38,6 +42,8 @@ public class DisplayActivator : MonoBehaviour {
         return _player;
     }
 
+
+    /* da cancellare una volta sistemato il game controller */
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") & other.gameObject.GetComponentInChildren<Camera>().enabled == true /*player is active*/) {
@@ -67,5 +73,25 @@ public class DisplayActivator : MonoBehaviour {
             _player = null;
         }
     }
+    /* fino a qua*/
+
+
+    /* e sostituisci con questo */
+    /*void Control(){
+        float distance = Vector3.Distance(gameController.returnActivePlayer, transform.position);
+        if (distance <= radius)
+        {
+            active = true;
+        }
+        else {
+            active = false;
+        }
+    }
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, radius);
+    }*/
+ 
 
 }
