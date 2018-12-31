@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using ApplicationConstants;
 using UnityStandardAssets.CrossPlatformInput;
 using System;
@@ -117,6 +118,7 @@ public abstract class Player : InputListener {
     }
 
     protected abstract void PowerToggle(bool isActive);
+    public abstract Sprite GetCharacterPortrait();
 
     private void checkPowerDuration(){
         
