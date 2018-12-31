@@ -14,13 +14,17 @@ public class PlatformMovementY : MonoBehaviour, PlatformMovement {
     bool move = false;
     bool end = false;
     bool start = true;
-    bool playerOnPlatform = false;
-    float offset;
+    int playersOnPlatform = 0;
 
     Vector3 initialPosition;
     Vector3 endPosition;
 
-    GameObject player;
+    GameObject jack;
+    GameObject hannah;
+    GameObject charlie;
+    float jackOffset;
+    float hannahOffset;
+    float charlieOffset;
     
     void Start()
     {
@@ -43,30 +47,26 @@ public class PlatformMovementY : MonoBehaviour, PlatformMovement {
 
             if (isMoving)
             {
-                Move(goOn, player);
+                Move(goOn);
             }
         }
     }
 
-    void Move(bool cond, GameObject player)
+    void Move(bool cond)
     {
 
         if (cond & transform.localPosition != endPosition)
         {
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, endPosition, speed * TimeController.GetDelTaTime());
-            if (playerOnPlatform) {
-                float x = player.transform.position.x;
-                float z = player.transform.position.z;
-                player.transform.position = new Vector3(x, transform.position.y + offset, z);
+            if (playersOnPlatform > 0) {
+                MovePlayers();
             }
             start = false;
         }
         else if (cond & transform.localPosition == endPosition)
         {
-            if (playerOnPlatform) {
-                float x = player.transform.position.x;
-                float z = player.transform.position.z;
-                player.transform.position = new Vector3(x, transform.position.y + offset, z);
+            if (playersOnPlatform  > 0) {
+                MovePlayers();
             }
             isMoving = false;
             end = true;
@@ -74,19 +74,15 @@ public class PlatformMovementY : MonoBehaviour, PlatformMovement {
         else if (!cond & transform.localPosition != initialPosition)
         {
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, initialPosition, speed * TimeController.GetDelTaTime()); ;
-            if (playerOnPlatform) {
-                float x = player.transform.position.x;
-                float z = player.transform.position.z;
-                player.transform.position = new Vector3(x, transform.position.y + offset, z);
+            if (playersOnPlatform > 0) {
+                MovePlayers();
             }
             end = false;
         }
         else if (!cond & transform.localPosition == initialPosition)
         {
-            if (playerOnPlatform) {
-                float x = player.transform.position.x;
-                float z = player.transform.position.z;
-                player.transform.position = new Vector3(x, transform.position.y + offset, z);
+            if (playersOnPlatform > 0) {
+                MovePlayers();
             }
             isMoving = false;
             start = true;
@@ -99,14 +95,55 @@ public class PlatformMovementY : MonoBehaviour, PlatformMovement {
         goOn = !goOn;
     }
 
+    void MovePlayer(GameObject player, float offset) {
+        float x = player.transform.position.x;
+        float z = player.transform.position.z;
+        player.transform.position = new Vector3(x, transform.position.y + offset, z);
+    }
+
+    void MovePlayers() {
+        if (jack != null) {
+            MovePlayer(jack, jackOffset);
+        }
+        if (hannah != null)
+        {
+            MovePlayer(hannah, hannahOffset);
+        }
+        if (charlie != null)
+        {
+            MovePlayer(charlie, charlieOffset);
+        }
+    }
 
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            player = collision.gameObject;
-            playerOnPlatform = true;
-            offset = player.transform.position.y - transform.localPosition.y;
+            playersOnPlatform++;
+
+            if (collision.gameObject.name.Equals("Jack"))
+            {
+                
+                jack = collision.gameObject;
+                jack.GetComponent<NavMeshAgent>().enabled = false;
+                jackOffset = jack.transform.position.y - transform.localPosition.y;
+                
+
+            }
+            else if (collision.gameObject.name.Equals("Hannah"))
+            {
+                hannah = collision.gameObject;
+                hannah.GetComponent<NavMeshAgent>().enabled = false;
+                hannahOffset = hannah.transform.position.y - transform.localPosition.y;
+            }
+            else if (collision.gameObject.name.Equals("Charlie"))
+            {
+                charlie = collision.gameObject;
+                charlie.GetComponent<NavMeshAgent>().enabled = false;
+                charlieOffset = charlie.transform.position.y - transform.localPosition.y;
+            }
+            else { }
+
         }
     }
 
@@ -114,8 +151,29 @@ public class PlatformMovementY : MonoBehaviour, PlatformMovement {
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            player = null;
-            playerOnPlatform = false;
+            playersOnPlatform--;
+
+            if (collision.gameObject.name.Equals("Jack"))
+            {
+                jack.GetComponent<NavMeshAgent>().enabled = true;
+                jack = null;
+                jackOffset = 0;
+
+            }
+            else if (collision.gameObject.name.Equals("Hannah"))
+            {
+                hannah.GetComponent<NavMeshAgent>().enabled = true;
+                hannah = null;
+                hannahOffset = 0;
+            }
+            else if (collision.gameObject.name.Equals("Charlie"))
+            {
+                charlie.GetComponent<NavMeshAgent>().enabled = true;
+                charlie = null;
+                charlieOffset = 0;
+            }
+            else { }
+            
         }
     }
 
@@ -149,9 +207,8 @@ public class PlatformMovementY : MonoBehaviour, PlatformMovement {
         return start;
     }
 
-    public bool IsPlayerOnPlatform()
-    {
-        return playerOnPlatform;
+    public int PlayersOnPlatform() {
+        return playersOnPlatform;
     }
 
 }

@@ -96,7 +96,7 @@ public class NewGuard : MonoBehaviour {
 
     private bool characterInvisible(Player player){
         Hannah hannah = player.GetComponent<Hannah>();
-        return (hannah && hannah.enabled && hannah.isPowerActive());
+        return (hannah && hannah.enabled && hannah.IsPowerActive());
     }
 
     private bool PlayerIsInSightAngle(Player player){

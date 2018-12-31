@@ -17,38 +17,34 @@ public abstract class Player : InputListener {
     protected int layerMask;
     float radius;
 
+    protected PlayerType type;
     public bool active = true;
-    public bool protectToChangeCharacter = false;
     public bool powerActive = false;
-    //private ActiveCharacterController controller;
     private GameController gameController;
 
     //Player inputs
     Vector3 direction;
-    private bool power;
     private bool walks;
-    private bool jumps;
 
     //Animations
     //public bool isGrounded;
     protected float r_speed = PlayersConstants.runningSpeed;
     private float w_speed = 2f;
-    private float rotSpeed = 95f;
-    //public float jumpHeight = 200f;
+
     Rigidbody rb;
     Animator anim;
     CapsuleCollider col_size;
     NavMeshAgent agent;
     private GameObject avatar;
 
-    public bool isPowerActive() { return powerActive; }
+    public bool IsPowerActive() { return powerActive; }
     public Camera GetCharacterCamera() { return characterCamera; }
 
     protected void Start(){
         LoadComponents();
 
-        //isGrounded = true;
         LoadPowerInfo();
+        SetType();
 
         ManageLayers();
 
@@ -56,13 +52,11 @@ public abstract class Player : InputListener {
         anim.speed = 1f;
 
 
-	if (FindObjectOfType<CheckpointController>()){
-        FindObjectOfType<CheckpointController>().RestorePlayerCheckpoint(this);}
+	    //if (FindObjectOfType<CheckpointController>()){ FindObjectOfType<CheckpointController>().RestorePlayerCheckpoint(this);}
         resetInputs();
     }
 
     private void LoadComponents() {
-        //controller = FindObjectOfType<ActiveCharacterController>();
         gameController = FindObjectOfType<GameController>();
 
         rb = GetComponent<Rigidbody>();
@@ -77,8 +71,18 @@ public abstract class Player : InputListener {
         LoadPowerSettings();
         powerTimeLeft = powerDuration;
         gameController.UpdatePowerLevelIndicator(powerTimeLeft / powerDuration);
-        //gameController.UpdatePowerLevelIndicator(this);
         PowerToggle(false);
+    }
+
+    private void SetType(){
+        Hannah hannah = GetComponent<Hannah>();
+        if (hannah) type = PlayerType.Hannah;
+
+        Jack jack = GetComponent<Jack>();
+        if (jack) type = PlayerType.Jack;
+
+        Charlie charlie = GetComponent<Charlie>();
+        if (charlie) type = PlayerType.Charlie;
     }
 
     private void ManageLayers(){
@@ -95,24 +99,19 @@ public abstract class Player : InputListener {
 
 
     private void Update () {
-        /*if (active) {
-            checkChangePlayer();
-            checkPower();
-            performAnimations();
-        }*/
 
-        if (IsInputActive())
-        {
+        if (IsInputActive()){
             checkInputs();
             performAnimations();
+            checkPower();
         }
 
-        checkPower();
+
         checkPowerDuration();
     }
 
     private void checkPower(){
-        if (power) {
+        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName)) {
             PowerToggle(!powerActive);
         }
     }
@@ -249,22 +248,17 @@ public abstract class Player : InputListener {
             right.Normalize ();
 
             this.direction = forward * v_axis + right * h_axis;
-            this.jumps = CrossPlatformInputManager.GetButtonDown(PlayersConstants.jumpButton);
 
 //------------------Add walk button to crossPlatformInputManager
         this.walks = Input.GetKey(KeyCode.LeftShift);
 //--------------------------------------------------
-
-            this.power = CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName);
         }
     }
 
     //reset inputs once the Update is done
     private void resetInputs (){
         this.direction = new Vector3 (0,0,0);
-        this.jumps = false;
         this.walks = false;
-        this.power = false;
     }
 
 
@@ -273,9 +267,8 @@ public abstract class Player : InputListener {
     public void setInputs (Vector3 direction, bool jump, bool walks, bool power){
         if (!active){
             this.direction = direction;
-            this.jumps = jump;
             this.walks = walks;
-            this.power = power;
+            PowerToggle(power);
         }
     }
 
@@ -283,13 +276,24 @@ public abstract class Player : InputListener {
     public void Activate (){
         this.active = true;
         characterCamera.enabled = true;
+        characterCamera.gameObject.GetComponent<AudioListener>().enabled = true;
         resetInputs();
+        ActiveInput();
     }
 
     public void Deactivate (){
         this.active = false;
         characterCamera.enabled = false;
+        characterCamera.gameObject.GetComponent<AudioListener>().enabled = false;
         resetInputs();
+        DisableInput();
     }
- 
+
+    public bool IsVisible() {
+        if (type == PlayerType.Hannah) return !IsPowerActive();
+        return true;
+    }
+
+    public PlayerType GetPlayerType() { return type; }
+
 }

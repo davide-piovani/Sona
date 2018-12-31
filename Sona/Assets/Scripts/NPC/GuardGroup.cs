@@ -2,14 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GuardGruoup : MonoBehaviour {
+public class GuardGroup : MonoBehaviour {
 
     GuardController[] guards;
     public GameObject allarm;
-    public GameObject player;
-    public InitialGuardState initialGuardGroupState;
+    private GameObject player;
+    private InitialGuardState initialGuardGroupState;        //Da rimuovere
     GuardState state, currentState;
     [HideInInspector] public Action initialState;
+
+
+    /*
+        Prendi il giocatore attivo da GameController
+    */
+
 
     /**
      * This enum is used to set the initial state for guard group
@@ -152,5 +158,6 @@ public class GuardGruoup : MonoBehaviour {
             guards[i].setAction(new LookingForSomeone());
         }
     }
+      
 
 }
