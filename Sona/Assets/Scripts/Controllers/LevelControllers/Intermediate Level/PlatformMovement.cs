@@ -10,6 +10,7 @@ public interface PlatformMovement {
     bool IsMoving();
     bool IsEnd();
     bool IsStart();
-    bool IsPlayerOnPlatform();
+    //bool ArePlayersOnPlatform();
+    int PlayersOnPlatform();
 
 }
