@@ -1,12 +1,12 @@
 ﻿
 using UnityEngine;
 
-public class Guard : Interactable {
+public class Guard : MonoBehaviour {
 
-    public override void Interact()
+
+    public void Interact()
     {
         Debug.Log("Intercted with player ");
-       // base.Interact();
     }
 
 

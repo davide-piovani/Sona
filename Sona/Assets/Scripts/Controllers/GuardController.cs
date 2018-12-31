@@ -6,9 +6,6 @@ using UnityEngine.AI;
 
 public class GuardController : MonoBehaviour {
 
-    //public GuardState currentState;
-    //GuardState remainState;
-
     [HideInInspector] public float lookRadius;
     float distance;
 
@@ -19,421 +16,104 @@ public class GuardController : MonoBehaviour {
     GuardGroup guardsGroup;
 
     public Action currentAction;
-    Action lastAction;
+    //Action lastAction;
 
-    private PlayerManager GameManager;       //Da sostituire con GameController
+    [HideInInspector] public bool descentOrder;
+    private GameController gameController;       //Da sostituire con GameController
 
     //Variables for line of sight
     [HideInInspector] public float heightMultiplier;
-    [HideInInspector] public float viewDistance = 10f;
+    [HideInInspector] public float viewDistance = 20f;
     private float searchingTurnSpeed = 0.2f;
-    private float catchingRadius = 10f;
+    [HideInInspector] public float catchingRadius;
 
-    //public int waypointNumber;
-
-    //private bool waiteInvestigationTime;
+    [HideInInspector] public SpriteRenderer lockSpright;
 
     //path variables
     public Transform[] waypoints;
 
     //First e second da rimuovere: gestire tutto tramite waypoints
-    private GameObject firstWaypoint;
-    private GameObject secondWaypoint;
+    //public GameObject firstWaypoint;
+    //public GameObject secondWaypoint;
     Transform patrolDestination;
 
     [HideInInspector] public bool changedStateLately;
 
     //variables for investigation
     private Vector3 investigateSpot;
-    //private float frame = 0;
-    //TODO: use timer to make guards patrol if they don't find the player
     private float investigateWait = 150f;
-    //private float curTime;
 
-    //Action[] actionsPossible;
 
     private float stateTimeElapsed;
-
+    [HideInInspector] public Transform allarmTransform;
     [HideInInspector] public Transform target;
+    [HideInInspector] public Transform lastTarget;
     [HideInInspector] public NavMeshAgent agent;
 
     // Use this for initialization
     void Start()
     {
-        anim = GetComponent<Animator>();
-        SetupWaypoints();
+        anim = GetComponentInChildren<Animator>();
         changedStateLately = false;
         agent = GetComponent<NavMeshAgent>();
-
-        //setActions();
-        //frame = 0;
-        //currentState = new InvestigateState();
-        //Debug.Log(currentState.name);
-        //SetInitialState(currentState);
-        target = PlayerManager.instance.player.transform;
+        lockSpright = GetComponentInChildren<SpriteRenderer>();
+        lockSpright.enabled = false;
+        gameController = FindObjectOfType<GameController>(); 
         agent = GetComponent<NavMeshAgent>();
-        //waiteInvestigationTime = true;
         heightMultiplier = 1.36f;
-        lookRadius = 15;
+        lookRadius = 13f;
+        catchingRadius = 10f;
         GuardGroup guardGroup = GetComponentInParent<GuardGroup>();
-        //setInitialState(guardGroup);
+        if (guardGroup.allarm != null)
+        {
+            allarmTransform = guardGroup.allarm.transform;
+        }
 
     }
-
 
     // Update is called once per frame
     void Update()
     {
+        this.target = gameController.GetActivePlayer().transform;
         if (currentAction == null)
         {
             currentAction = setInitialState(GetComponentInParent<GuardGroup>());
         }
-        //currentAction = DecisionMakingProcess();
-        //NextDecision = currentAction.getDecisoner();
-        /*
-        if (!changedStateLately)
-        {
-            lastAction = currentAction;
-        }
-        if (lastAction.GetType() == currentAction.GetType())
-        {
-            changedStateLately = false;
-        }
-        */
         currentAction.Act(this);
     }
 
     Action setInitialState(GuardGroup guardGroup)
     {
         Action initialAction = guardGroup.initialState;
-        //Debug.Log("Initial action: " + initialAction.name);
         return initialAction;
+    }
+
+    public bool HannaIsVisible()
+    {
+        if (!gameController.GetActivePlayer().IsVisible())
+        {
+            return false;
+        }
+        return true;
     }
 
     public Transform GetPlayerPosition()
     {
-        return PlayerManager.instance.player.transform;
+        return gameController.GetActivePlayer().transform;
     }
-
-    /*
-    void setActions()
-    {
-        actionsPossible[0] = new Patrolling();
-        actionsPossible[1] = new LookingForSomeone();
-        actionsPossible[2] = new Chase();
-        actionsPossible[3] = new Relax();
-        actionsPossible[4] = new Sleep();
-    }
-    */
 
     public void setAction(Action action)
     {
         currentAction = action;
     }
 
-    /*
-    public void TransitionToState(GuardState nextState)
-    {
-        if (nextState != remainState)
-        {
-            currentState = nextState;
-            OnExitState();
-        }
-    }
-    */
-
-    private void OnExitState()
-    {
-        stateTimeElapsed = 0;
-    }
-
-    /**
-     * This method is used to take a decision about the next action
-    
-    Action DecisionMakingProcess()
-    {
-        Action nextAction = null;
-        Decision decision;
-
-        if (currentAction.GetType() == typeof(Patrolling)) { }
-        {
-            decision = new PatrolDecision();
-        }
-        if (currentAction.GetType() == typeof(Chase)) { }
-        {
-            decision = new ScanDecision();
-        }
-        if (currentAction.GetType() == typeof(LookingForSomeone)) { }
-        {
-            decision = new LookDecision();
-        }
-        //TODO relax e sleep action
-        nextAction = decision.Decide(this);
-        return nextAction;
-
-    }
-    */
-    /**
-     * This method will setup waypoints
-     */
-    private void SetupWaypoints()
-    {
-        waypoints = new Transform[2];
-        if (firstWaypoint == null)
-        {
-            waypoints[0] = this.transform;
-        } 
-        else
-        {
-            waypoints[0] = firstWaypoint.transform;
-        }
-        if (secondWaypoint == null )
-        {
-            waypoints[1] = this.transform;
-        }
-        else {
-            waypoints[1] = secondWaypoint.transform;
-        }
-
-    }
-
-    /**
-     * Those methods are used to do something based on guard state
-     * Patrolling method
-     
-    public void Patrolling()
-    {
-        patrolDestination = FindDestination();
-        MoveTo(patrolDestination);
-        changedStateLately = true;
-    }
-    
-    public void LookingForSomeone()
-    {
-        if (frame <= 10)
-        {
-            //setAnimBools(Mode.idle);
-            //agent.Stop();
-            //agent.speed = 0;
-            target = Investigate();
-            Debug.Log("frame number: " + frame);
-            frame++;
-        }
-        else
-        {
-            frame = 0;
-            waiteInvestigationTime = true;
-        }
-
-        /*
-        if (investigateWait > 0)
-        {
-            investigateWait -= Time.deltaTime;
-        }
-        else
-        {
-            investigateWait = 5f;
-        }
-        
-    }
-
-    public void Sleep()
-    {
-
-    }
-
-    public void Relax()
-    {
-
-    }
-*/
-    /**
-     * Find the min distance among waypoints
-     
-    Transform FindDestination()
-    {
-        Transform destination;
-        //get closer waypoint only when i change state to investigate
-        if (!changedStateLately)
-        {
-            destination = CloserWaypoint();
-            changedStateLately = true;
-            return destination;
-        }
-        else
-        {
-            Transform finalDestination = null;
-            //I scan waypoints array in order to find index of my destination
-            for (int i=0; i<waypoints.Length; i++ )
-            {
-                destination = waypoints[i];
-                //if I dind that destination fit waypoint array element at i index then I save the index
-                if (destination.Equals(patrolDestination))
-                {
-                    finalDestination = calcolateNextWaypoint(destination, i);
-                }
-            }
-            if (finalDestination == null)
-                Debug.Log("OMG!! Erroreeeeeee");
-            return finalDestination;
-        }
-    }
-    
-
-    private Transform calcolateNextWaypoint(Transform destination, int i)
-    {
-        Transform finalDestination;
-        if (distanceToWaypoint(destination) > 2f)
-            finalDestination = destination;
-        else
-        {
-            finalDestination = StopAndWait(i);
-        }
-        Debug.Log("Destinazione finale: " + finalDestination.name);
-        return finalDestination;
-    }
-    */
-    /**
-    * @return   true: if destination is not the final element of waypoint array
-    *           false: if destination is the final element of waypoint array
-    */
-    /*
-    private bool CalculateWaypoint(int i)
-    {
-        if (i + 1 == waypoints.Length)
-            return false;
-        else
-            return true;
-    }
-
-    private Transform ArrayIndexOrder(int i)
-    {
-        Transform destinationWaypoint;
-        if (CalculateWaypoint(i))
-            destinationWaypoint= waypoints[i + 1].transform;
-        else
-            destinationWaypoint = waypoints[i - 1].transform;
-        return destinationWaypoint;
-    }
-    
-    private Transform StopAndWait(int i)
-    {
-        Transform finalDestination;
-        if (curTime == 0)
-            curTime = Time.time; // Pause over the Waypoint
-        while ((Time.time - curTime) < investigateWait)
-        {
-            finalDestination = Investigate();
-        }
-        curTime = 0;
-        finalDestination = ArrayIndexOrder(i);
-        FaceTarget(finalDestination);
-        return finalDestination;
-    }
-    */
-    /**
-     * This method calculates the distance between a gameObject and the waypoint
-     
-    private float distanceToWaypoint (Transform gameObjectTransform)
-    {
-
-        float dist = Vector3.Distance(gameObjectTransform.position, transform.position);
-        return dist;
-    }
-*/
-    /**
-     * This method is used to get the closer waypoint
-     
-    Transform CloserWaypoint()
-    {
-        Transform destination = null;
-        float closestDistanceSqr = Mathf.Infinity;
-        Vector3 currentPos = transform.position;
-        foreach (Transform waypointsDistance in waypoints)
-        {
-            Vector3 directionToTarget = waypointsDistance.position - currentPos;
-            float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if (dSqrToTarget < closestDistanceSqr)
-            {
-                closestDistanceSqr = dSqrToTarget;
-                destination = waypointsDistance;
-            }
-        }
-        return destination;
-    }
-    */
-    /**
-     * This method is used by guards to find the player
-     
-    Transform Investigate()
-    {
-        //timer = Time.deltaTime;
-        RaycastHit hit;
-        //visual rappresentation of this ray
-        Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, transform.forward * viewDistance, Color.green);
-        Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, (transform.forward + transform.right).normalized * viewDistance, Color.green);
-        Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, (transform.forward - transform.right).normalized * viewDistance, Color.green);
-        //Look for player in the three directions 
-        if (Physics.Raycast (transform.position + Vector3.up * heightMultiplier, transform.forward, out hit, viewDistance))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                target = hit.collider.gameObject.transform;
-            }
-        }
-        if (Physics.Raycast(transform.position + Vector3.up * heightMultiplier, (transform.forward + transform.right).normalized, out hit, viewDistance))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                target = hit.collider.gameObject.transform;
-            }
-        }
-        if (Physics.Raycast(transform.position + Vector3.up * heightMultiplier, (transform.forward - transform.right).normalized, out hit, viewDistance))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                target = hit.collider.gameObject.transform;
-            }
-        }
-        if (target != null)
-        {
-
-
-            Debug.Log("Target is: " + target.name);
-            agent.SetDestination(target.position);
-            EventManager.GuardSpottedPlayer();
-            transform.LookAt(investigateSpot);
-            distance = DetectPlayer();
-            waiteInvestigationTime = true;
-            if (distance < 0)
-            {
-                target = StopFollow(target);
-            }
-        }
-        return target;
-    }
-    */
-    /**
-     * This method is used to change guard state
-     
-    public void ChangeState(GuardState newState)
-    {
-        //state = newState;
-        //lookRadius = state.GetRadius();
-        Debug.Log(lookRadius);
-    }
-    */
-
-
-
     /**
     * This method is called if player hides
     */
     public void StopFollow(Transform target)
     {
-        Debug.Log("Stop follow");
         agent.SetDestination(target.position);
-        target = null;
+        changedStateLately = false;
     }
 
     /**
@@ -441,17 +121,54 @@ public class GuardController : MonoBehaviour {
      */
     public void MoveTo(Transform transform)
     {
-        setAnimBools(Mode.walking);
-        agent = GetComponent<NavMeshAgent>();
+        setAnimBools(Mode.running);
         agent.SetDestination(transform.position);
     }
 
     /**
-     * This method is used 
-     * @return  distance positive if a guard detect the player
-     *          distance negative if player is not detected
-     */
-    float DetectPlayer()
+    * This method is used by guards to find the player
+    */
+    public bool Investigate()
+    {
+        //Transform target = null;
+        //timer = Time.deltaTime;
+        RaycastHit hit;
+        //visual rappresentation of this ray
+        Debug.DrawRay(this.transform.position + Vector3.up * heightMultiplier, this.transform.forward * viewDistance, Color.green);
+        Debug.DrawRay(this.transform.position + Vector3.up * heightMultiplier, (this.transform.forward + transform.right).normalized * this.viewDistance, Color.green);
+        Debug.DrawRay(this.transform.position + Vector3.up * heightMultiplier, (this.transform.forward - transform.right).normalized * this.viewDistance, Color.green);
+        //Look for player in the three directions 
+        if (Physics.Raycast(this.transform.position + Vector3.up * heightMultiplier, this.transform.forward, out hit, this.viewDistance))
+        {
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                return true;
+            }
+        }
+        if (Physics.Raycast(this.transform.position + Vector3.up * heightMultiplier, (this.transform.forward + this.transform.right).normalized, out hit, this.viewDistance))
+        {
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                return true;
+            }
+        }
+        if (Physics.Raycast(this.transform.position + Vector3.up * heightMultiplier, (this.transform.forward - this.transform.right).normalized, out hit, this.viewDistance))
+        {
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+    * This method is used 
+    * @return  distance positive if a guard detect the player
+    *          distance negative if player is not detected  
+    */
+    public float DetectPlayer()
     {
         float distance = Vector3.Distance(target.position, transform.position);
 
@@ -459,7 +176,6 @@ public class GuardController : MonoBehaviour {
         {
             return distance;
         }
-        Debug.Log("Distance from player: " + distance);
         return -1;
     }
 
@@ -488,21 +204,30 @@ public class GuardController : MonoBehaviour {
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, catchingRadius);
     }
 
-    /**
-     * 
-    
-    public bool CheckIfCountDownElapsed(float duration)
-    {
-        stateTimeElapsed += Time.deltaTime;
-        return (stateTimeElapsed >= duration);
-    }
- */ 
     //TODO: METTERE NELLE GUARDIE
     /**
      * Animation methods
      */
+
+    public void Walk()
+    {
+        setAnimBools(Mode.walking);
+    }
+
+    public void Run()
+    {
+        setAnimBools(Mode.running);
+    }
+
+    public void Idle()
+    {
+        setAnimBools(Mode.idle);
+    }
+
     enum Mode
     {
         idle,
