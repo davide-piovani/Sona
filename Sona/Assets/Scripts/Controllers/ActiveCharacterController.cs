@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ActiveCharacterController : MonoBehaviour {
     [SerializeField] Player[] players;
-    private int current;
+    private int current = 0;
     private bool[] on;
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
         on = new bool[players.Length];
 
-        for (int i = 1; i < players.Length; i++){
+        for (int i = 0; i < players.Length; i++){
             players[i].Deactivate();
             on[i] = true;
         }
@@ -23,7 +23,7 @@ public class ActiveCharacterController : MonoBehaviour {
         players[current].Deactivate();
         current = index;
         players[index].Activate();
-        on[index] = true;
+        //on[index] = true;
     }
 
     public Player[] GetScenePlayers() { return players; }
@@ -45,8 +45,10 @@ public class ActiveCharacterController : MonoBehaviour {
         int currentIndex = current;
         for(int i = 0; i < players.Length; i++){
             currentIndex = (currentIndex + 1) % players.Length;
+            print (currentIndex + ", " + on[currentIndex]);
             if (on[currentIndex]) return currentIndex;
         }
+        print ("-1");
         return (-1);
     }
 
@@ -59,12 +61,19 @@ public class ActiveCharacterController : MonoBehaviour {
     }
 
     //Disables the player whose index had been given, if the player is the currently active one, it switch to the next on player
-    public int Disable (int index){
+    /*public int Disable (int index){
         on [index] = false;
         if (index == current){
             return(NextPlayerIndex());
         }
         return (current);
+    }*/
+    public Player Disable (int index){
+        on [index] = false;
+        if (index == current){
+            return(GiveControlToNextPlayer());
+        }
+        return (players[current]);
     }
 
     //Disables all players. Doesn't change the index of the last active player
@@ -77,7 +86,10 @@ public class ActiveCharacterController : MonoBehaviour {
     }
 
     //Disables the currently active player. Performs the player switch
-    public int DisableCurrent (){
+    /*public int DisableCurrent (){
+        return (Disable(current));
+    }*/
+    public Player DisableCurrent (){
         return (Disable(current));
     }
 
