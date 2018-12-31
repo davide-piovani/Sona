@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class DisplayActivator : MonoBehaviour {
 
-    //public float radius;
-    //GameController _gameController;
+    public float radius = 2f;
+
+    GameController _gameController;
     InteractiveTextScript _text;
     GameObject _player;
     bool active = false;
@@ -14,13 +15,13 @@ public class DisplayActivator : MonoBehaviour {
 
     void Start()
     {
-        //_gameController = GetComponentInParent<GameController>();
+        _gameController = FindObjectOfType<GameController>();
         _text = GetComponentInChildren<InteractiveTextScript>();
     }
 
     void Update()
     {
-        //Control();
+        Control();
         if (active & necessary)
         {
             _text.ShowText();
@@ -39,46 +40,11 @@ public class DisplayActivator : MonoBehaviour {
     }
 
     public GameObject GetPlayer() {
-        return _player;
+        return _gameController.GetActivePlayer().gameObject;
     }
 
-
-    /* da cancellare una volta sistemato il game controller */
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player") & other.gameObject.GetComponentInChildren<Camera>().enabled == true /*player is active*/) {
-            active = true;
-            _player = other.gameObject;
-        }
-    }
-
-    void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player")) {
-
-            if (other.gameObject.GetComponentInChildren<Camera>().enabled == false /*player is not active*/) {
-                active = false;
-            }
-            else {
-                active = true;
-            }
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            active = false;
-            _player = null;
-        }
-    }
-    /* fino a qua*/
-
-
-    /* e sostituisci con questo */
-    /*void Control(){
-        float distance = Vector3.Distance(gameController.returnActivePlayer, transform.position);
+    void Control(){
+        float distance = Vector3.Distance(_gameController.GetActivePlayer().transform.position, transform.position);
         if (distance <= radius)
         {
             active = true;
@@ -91,7 +57,7 @@ public class DisplayActivator : MonoBehaviour {
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, radius);
-    }*/
+    }
  
 
 }
