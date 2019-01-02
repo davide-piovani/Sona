@@ -27,6 +27,7 @@ public class Chase : Action
         EventManager.GuardSpottedPlayer();
         controller.lastTarget = controller.target;
         controller.MoveTo(controller.target);
+        controller.GuardCatchPlayer();
         //Debug.Log("I'm moving to: " + controller.target.name);
     }
 

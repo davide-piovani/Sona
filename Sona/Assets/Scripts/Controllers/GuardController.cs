@@ -124,7 +124,14 @@ public class GuardController : MonoBehaviour {
         setAnimBools(Mode.running);
         agent.SetDestination(transform.position);
     }
-
+    
+    public void GuardCatchPlayer()
+    {
+        if (DetectPlayer() < 3f)
+        {
+            FindObjectOfType<SceneLoader>().ReloadCurrentScene();
+        }
+    }
     /**
     * This method is used by guards to find the player
     */

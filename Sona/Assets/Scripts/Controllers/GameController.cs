@@ -37,7 +37,6 @@ public class GameController : InputListener {
             if (activePlayer != null && !activePlayer.IsInputActive())
             {
                 activePlayer.ActiveInput();
-                //characterPortrait = characterController.GetComponentInChildren<Image>();
             }
             if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.pauseButton)) PauseGame();
             if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton)) ChangeCharacter();
