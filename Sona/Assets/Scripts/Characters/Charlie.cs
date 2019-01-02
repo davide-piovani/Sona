@@ -1,7 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using ApplicationConstants;
 
 public class Charlie : Player {
+
+    public Sprite characterPortrait;
+
+    public override Sprite GetCharacterPortrait()
+    {
+        return characterPortrait;
+    }
 
     protected override void LoadPowerSettings(){
         powerDuration = PlayersConstants.charliePowerDuration;

@@ -15,7 +15,8 @@ public class GameController : InputListener {
     [Header("Input Listeners")]
     [SerializeField] InputListener pauseInterface;
     private Player activePlayer;
-
+    private GameObject powerBar;
+    private Image characterPortrait;
     private BackgroundAudioController audioController;
     private ActiveCharacterController characterController;
 
@@ -25,13 +26,18 @@ public class GameController : InputListener {
         characterController = FindObjectOfType<ActiveCharacterController>();
 
         activePlayer = characterController.ActivePlayerOfType(startingPlayer);
+
+        powerBar = GameObject.Find("PowerBar");
         ActiveInput();
         PlayBackgroundMusic();
     }
 
     private void Update() {
         if (IsInputActive()){
-            if (activePlayer != null && !activePlayer.IsInputActive()) activePlayer.ActiveInput();
+            if (activePlayer != null && !activePlayer.IsInputActive())
+            {
+                activePlayer.ActiveInput();
+            }
             if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.pauseButton)) PauseGame();
             if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton)) ChangeCharacter();
         }

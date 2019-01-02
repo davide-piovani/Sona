@@ -7,10 +7,11 @@ public class GuardGroup : MonoBehaviour {
     GuardController[] guards;
     public GameObject allarm;
     private GameObject player;
-    private InitialGuardState initialGuardGroupState;        //Da rimuovere
+    public InitialGuardState initialGuardGroupState;
     GuardState state, currentState;
     [HideInInspector] public Action initialState;
 
+    private GameController gameController;       //Da sostituire con GameController
 
     /*
         Prendi il giocatore attivo da GameController
@@ -23,7 +24,7 @@ public class GuardGroup : MonoBehaviour {
     public enum InitialGuardState
     {
         sleep,
-        investigate,
+        patrol,
         allert,
         relax
     }
@@ -34,6 +35,8 @@ public class GuardGroup : MonoBehaviour {
     void Start() {
         guards = GetComponentsInChildren<GuardController>();
         initialState = setState(initialGuardGroupState);
+
+        gameController = FindObjectOfType<GameController>();
     }
 
 
@@ -44,20 +47,14 @@ public class GuardGroup : MonoBehaviour {
     {
         EventManager.AllarmIsActivatedMethods += MoveToAllarm;
         EventManager.GuardIsCallingMethods += CallOtherGuards;
-        //EventManager.StopFollowPlayerMethods += StopFollowPlayer;
-        //EventManager.ChangeStateMethods += ChangeStateGuards;
-        //EventManager.ChangeInInvestigationStateMethods += ChangeAllertState;
-        //EventManager.ChangeInPatrollingStateMethods += ChangeInvestigationState;
+
     }
 
     void OnDisable()
     {
         EventManager.AllarmIsActivatedMethods -= MoveToAllarm;
         EventManager.GuardIsCallingMethods -= CallOtherGuards;
-        //EventManager.StopFollowPlayerMethods -= StopFollowPlayer;
-        //EventManager.ChangeStateMethods -= ChangeStateGuards;
-        //EventManager.ChangeInInvestigationStateMethods -= ChangeAllertState;
-        //EventManager.ChangeInPatrollingStateMethods -= ChangeInvestigationState;
+
     }
 
     /**
@@ -66,12 +63,11 @@ public class GuardGroup : MonoBehaviour {
     public Action setState(InitialGuardState state)
     {
         Action currentAction = null;
-        int i;
         switch (state)
         {
             case InitialGuardState.sleep:
                 {
-                    currentAction = new Sleep();
+                    //currentAction = new Sleep();
                     break;
                 }
             case InitialGuardState.allert:
@@ -79,53 +75,25 @@ public class GuardGroup : MonoBehaviour {
                     currentAction = new LookingForSomeone();
                     break;
                 }
-            case InitialGuardState.investigate:
+            case InitialGuardState.patrol:
                 {
                     currentAction = new Patrolling();
                     break;
                 }
             case InitialGuardState.relax:
                 {
-                    currentAction = new Relax();
+                    //currentAction = new Relax();
                     break;
                 }
         }
         if (currentAction == null)
         {
-            Debug.Log("Azione iniziale è null!! ");
+            //Debug.Log("Azione iniziale è null!! ");
         }
         return currentAction;
     }
 
 
-
-    void ChangeAction(int i)
-    {
-        //currentState = new AllertState();
-        //ChangeStateGuards(currentState);
-
-    }
-    /*
-    void ChangeInvestigationState()
-    {
-        for (int i = 0; i < guards.Length; i++)
-        {
-            guards[i].Patrolling();
-            Debug.Log("Guards changed state in: " + state.name);
-        }
-        //currentState = new InvestigateState();
-        //ChangeStateGuards(currentState);
-    }
-    
-    void ChangeStateGuards(GuardState state)
-    {
-        for (int i = 0; i < guards.Length; i++)
-        {
-            guards[i].ChangeState(state);
-            Debug.Log("Guards changed state in: " + state.name);
-        }
-    }
-    */
     /**
      * Those methods are used to make guards go to a point/ to the allarm linked with the group and to call other guards in case of someone spotted the player
      */
@@ -135,18 +103,23 @@ public class GuardGroup : MonoBehaviour {
         {
             //guards[i].MoveTo(transform);
             guards[i].target = transform;
-            guards[i].setAction(new Chase());
+            //guards[i].setAction(new MovingSomewhere());
         }
     }
 
     void MoveToAllarm()
     {
-        GoTo(allarm.transform);
+        for (int i = 0; i < guards.Length; i++)
+        {
+            //guards[i].MoveTo(transform);
+            //guards[i].target = transform;
+            guards[i].setAction(new MovingSomewhere());
+        }
     }
 
     public void CallOtherGuards()
     {
-        GoTo(player.transform);
+        GoTo(gameController.GetActivePlayer().transform);
     }
 
     public void StopFollowPlayer()

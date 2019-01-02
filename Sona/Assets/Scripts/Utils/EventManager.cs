@@ -16,19 +16,19 @@ public class EventManager : MonoBehaviour {
 
     public static void AllarmRinging()
     {
-        Debug.Log("The allarm is ringing!");
+        //Debug.Log("The allarm is ringing!");
         AllarmIsActivatedMethods();
     }
 
     public static void GuardSpottedPlayer()
     {
-        Debug.Log("A guard spotted you! Go away, you fool!");
+        //Debug.Log("A guard spotted you! Go away, you fool!");
         GuardIsCallingMethods();
     }
 
     public static void ChangeStateGuards()
     {
-        Debug.Log("Guards are changing state");
+        //Debug.Log("Guards are changing state");
         AllarmIsActivatedMethods();
     }
 }

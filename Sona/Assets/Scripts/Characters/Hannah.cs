@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using ApplicationConstants;
 
 public class Hannah : Player {
@@ -15,6 +16,13 @@ public class Hannah : Player {
     [Header("Renderers")]
     [SerializeField] Renderer bodyRenderer;
     [SerializeField] Renderer hairRenderer;
+
+    public Sprite characterPortrait;
+
+    public override Sprite GetCharacterPortrait()
+    {
+        return characterPortrait;
+    }
 
     protected override void LoadPowerSettings(){
         powerDuration = PlayersConstants.hannahPowerDuration;
