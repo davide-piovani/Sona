@@ -9,10 +9,12 @@ public class CameraPlatform : MonoBehaviour {
     Camera _platformCamera;
     PlatformMovement _platformMovement;
     PlatformCameraMovement _platformCameraScript;
+    GameController _gameController;
     int state = 0;
     bool moving = false;
     
     void Start () {
+        _gameController = FindObjectOfType<GameController>();
         _platformCamera = GetComponentInChildren<Camera>();
         _platformCameraScript = _platformCamera.GetComponentInChildren<PlatformCameraMovement>();
         _platformCamera.enabled = false;
@@ -30,7 +32,9 @@ public class CameraPlatform : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.B) & _display.IsActive())
             {
+                _gameController.enabled = false; /*prova per vedere se funziona*/
                 PlayerScriptsActive(false);
+                _display.Necessary(false);
                 _platformCamera.enabled = true;
                 _platformCameraScript.MoveCamera();
                 state = 1;
@@ -55,6 +59,7 @@ public class CameraPlatform : MonoBehaviour {
 
     void MoveAnimation() {
         _platformMovement.ActiveDeActivePlatform(true);
+        _platformMovement.CalculateOffsets();
         _platformMovement.MovePlatform();
         moving = true;
     }
@@ -64,6 +69,8 @@ public class CameraPlatform : MonoBehaviour {
         _platformCamera.enabled = false;
         PlayerScriptsActive(true);
         _platformCameraScript.ResetCamera();
+        _display.Necessary(true);
+        _gameController.enabled = true; /*prova per vedere se funziona*/
     }
 
     void PlayerScriptsActive(bool cond) {

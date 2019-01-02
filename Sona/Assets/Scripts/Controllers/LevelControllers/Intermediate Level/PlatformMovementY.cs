@@ -187,6 +187,8 @@ public class PlatformMovementY : MonoBehaviour, PlatformMovement {
         move = true;
     }
 
+    public void CalculateOffsets() { }
+
     public bool IsActive()
     {
         return active;
