@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CombinationDoorController : MonoBehaviour {
+public class CombinationDoorController : MonoBehaviour, LockedDoor {
 
     public DisplayActivator _displaySensor;
     public Text _combinationString;
     public GameObject _displayPad;
     ElevatorDoor _door;
     public string _combinationValue = "7894";
+
+    bool keyUsed = false;
+    bool keyOwned = false;
+    string keyOwner = "";
     int state = 0;
     
     void Start()
@@ -30,17 +34,34 @@ public class CombinationDoorController : MonoBehaviour {
         {
             _displaySensor.Necessary(false);
 
-            if (_door.IsClose())
+            if (!keyUsed)
             {
-                _displayPad.SetActive(true);
-                PlayerScriptsActive(false);
-                state = 1;
+                if (!keyOwned | !_displaySensor.GetPlayer().name.Equals(keyOwner))
+                {
+                    if (_door.IsClose())
+                    {
+                        _displayPad.SetActive(true);
+                        PlayerScriptsActive(false);
+                        state = 1;
+                    }
+                    else if (_door.IsOpen())
+                    {
+                        _door.SlideDoor();
+                        state = 2;
+                    }
+                }
+                else {
+                    keyUsed = true;
+                    _door.SlideDoor();
+                    state = 2;
+                }
             }
-            else if (_door.IsOpen())
+            else
             {
                 _door.SlideDoor();
                 state = 2;
             }
+
         }
         else if (state == 1)
         {
@@ -84,5 +105,26 @@ public class CombinationDoorController : MonoBehaviour {
             s.enabled = cond;
         }
 
+    }
+
+    public void KeyTaken(string name)
+    {
+        keyOwned = true;
+        keyOwner = name;
+    }
+
+    public bool isKeyOwned()
+    {
+        return keyOwned;
+    }
+
+    public bool isKeyUsed()
+    {
+        return keyUsed;
+    }
+
+    public string KeyOwner()
+    {
+        return keyOwner;
     }
 }

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class KeyScript : MonoBehaviour {
 
-    DisplayActivator _display;
-    public KeyDoorController keyDoorController;
+    public GameObject _door;
 
+    DisplayActivator _display;
+    LockedDoor keyDoorController;
+    
     void Start() {
         _display = GetComponent<DisplayActivator>();
+        keyDoorController = _door.GetComponentInChildren<LockedDoor>();
     }
 
     void Update() {
