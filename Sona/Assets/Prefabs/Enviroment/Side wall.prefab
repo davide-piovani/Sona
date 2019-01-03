@@ -22,12 +22,12 @@ GameObject:
   - component: {fileID: 33729257725618768}
   - component: {fileID: 23347788657760364}
   - component: {fileID: 65379961672456638}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Side wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4720201886810366
 Transform:
@@ -37,7 +37,7 @@ Transform:
   m_GameObject: {fileID: 1334917353421546}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -2.78, y: 3.07, z: -13.05}
-  m_LocalScale: {x: 275, y: 130, z: 100}
+  m_LocalScale: {x: 275, y: 129.99994, z: 99.99997}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0

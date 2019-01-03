@@ -10,8 +10,10 @@ public class ActiveCharacterController : MonoBehaviour {
     // Use this for initialization
     void Awake () {
         on = new bool[players.Length];
+    }
 
-        for (int i = 0; i < players.Length; i++){
+    private void Start(){
+        for (int i = 1; i < players.Length; i++){
             players[i].Deactivate();
             on[i] = true;
         }
@@ -21,9 +23,9 @@ public class ActiveCharacterController : MonoBehaviour {
 
     private void ActivePlayer(int index){
         players[current].Deactivate();
+        on[index] = true;
         current = index;
         players[index].Activate();
-        //on[index] = true;
     }
 
     public Player[] GetScenePlayers() { return players; }
@@ -45,10 +47,10 @@ public class ActiveCharacterController : MonoBehaviour {
         int currentIndex = current;
         for(int i = 0; i < players.Length; i++){
             currentIndex = (currentIndex + 1) % players.Length;
-            print (currentIndex + ", " + on[currentIndex]);
+            //print (currentIndex + ", " + on[currentIndex]);
             if (on[currentIndex]) return currentIndex;
         }
-        print ("-1");
+        //print ("-1");
         return (-1);
     }
 

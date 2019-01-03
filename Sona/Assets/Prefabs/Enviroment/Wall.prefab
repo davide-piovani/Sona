@@ -22,12 +22,12 @@ GameObject:
   - component: {fileID: 33825357998085676}
   - component: {fileID: 23072670815195748}
   - component: {fileID: 65298073288944418}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4419407559996134
 Transform:
@@ -36,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1109190059692780}
   m_LocalRotation: {x: -0.49991274, y: 0.50008726, z: 0.49991274, w: 0.50008726}
-  m_LocalPosition: {x: 5.8, y: 4.7624, z: -0.1815}
-  m_LocalScale: {x: 1.840977, y: 0.26353, z: 2.712477}
+  m_LocalPosition: {x: 22.75, y: 3.11, z: 18.223}
+  m_LocalScale: {x: 9.737137, y: 0.2635301, z: 6.6187377}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
