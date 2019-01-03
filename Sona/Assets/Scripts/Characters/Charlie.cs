@@ -4,17 +4,10 @@ using ApplicationConstants;
 
 public class Charlie : Player {
 
-    public Sprite characterPortrait;
-
-    public override Sprite GetCharacterPortrait()
-    {
-        return characterPortrait;
-    }
-
     protected override void LoadPowerSettings(){
         powerDuration = PlayersConstants.charliePowerDuration;
         rechargeSpeed = PlayersConstants.charlieRechargeSpeed;
-        r_speed = 2f;
+        //r_speed = 2f;
     }
 
     protected override void PowerToggle(bool isActive){

@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour {
 	private float c_dist = 0f;
         private bool active = true;
 	
-	public GameObject player;
+	private Player player;
 
 	// Use this for initialization
 	void Start () {
@@ -34,7 +34,8 @@ public class CameraController : MonoBehaviour {
 
 		cam.nearClipPlane = 0.01f;
 		c_dist = 0.3f;
-		
+
+        player = GetComponentInParent<Player>();
 		offset = player.transform.position - tr.position;
 		base_dist = offset.magnitude;
 		dist = base_dist;
@@ -136,9 +137,9 @@ public class CameraController : MonoBehaviour {
             }
         }
 
-        public void SetPlayer (GameObject player){
+        /*public void SetPlayer (GameObject player){
             this.player = player;
-        }
+        }*/
 
         public void SetInputs (float v_rotation, float h_rotation){
             if (!active){

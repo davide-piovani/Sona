@@ -17,13 +17,6 @@ public class Hannah : Player {
     [SerializeField] Renderer bodyRenderer;
     [SerializeField] Renderer hairRenderer;
 
-    public Sprite characterPortrait;
-
-    public override Sprite GetCharacterPortrait()
-    {
-        return characterPortrait;
-    }
-
     protected override void LoadPowerSettings(){
         powerDuration = PlayersConstants.hannahPowerDuration;
         rechargeSpeed = PlayersConstants.hannahRechargeSpeed;
