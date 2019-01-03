@@ -8,15 +8,19 @@ using System;
 
 public class GameController : InputListener {
 
-    [SerializeField] Transform LoadingBar;
+    [Header("General level info")]
     [SerializeField] AudioClip backgroundMusic;
     [SerializeField] PlayerType startingPlayer;
 
+    [Header("UI")]
+    [SerializeField] Image powerBar;
+    [SerializeField] Image characterIcon;
+
     [Header("Input Listeners")]
     [SerializeField] InputListener pauseInterface;
+
     private Player activePlayer;
-    private GameObject powerBar;
-    private Image characterPortrait;
+
     private BackgroundAudioController audioController;
     private ActiveCharacterController characterController;
 
@@ -26,18 +30,15 @@ public class GameController : InputListener {
         characterController = FindObjectOfType<ActiveCharacterController>();
 
         activePlayer = characterController.ActivePlayerOfType(startingPlayer);
+        characterIcon.sprite = activePlayer.GetCharacterPortrait();
 
-        powerBar = GameObject.Find("PowerBar");
         ActiveInput();
         PlayBackgroundMusic();
     }
 
     private void Update() {
         if (IsInputActive()){
-            if (activePlayer != null && !activePlayer.IsInputActive())
-            {
-                activePlayer.ActiveInput();
-            }
+            if (activePlayer != null && !activePlayer.IsInputActive()) activePlayer.ActiveInput();
             if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.pauseButton)) PauseGame();
             if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton)) ChangeCharacter();
         }
@@ -45,6 +46,7 @@ public class GameController : InputListener {
 
     private void ChangeCharacter(){
         activePlayer = characterController.GiveControlToNextPlayer();
+        characterIcon.sprite = activePlayer.GetCharacterPortrait();
     }
 
     private void PauseGame(){
@@ -54,7 +56,7 @@ public class GameController : InputListener {
     }
 
     public void UpdatePowerLevelIndicator(float level) {
-        LoadingBar.GetComponent<Image>().fillAmount = level;
+        powerBar.fillAmount = level;
     }
 
     public Player[] GetScenePlayers() { return characterController.GetScenePlayers(); }

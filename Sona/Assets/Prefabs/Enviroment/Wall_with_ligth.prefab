@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33710155757103932}
   - component: {fileID: 23659716602546118}
   - component: {fileID: 65816349903594908}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Wall_with_ligth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ Transform:
   m_GameObject: {fileID: 1856574649669950}
   m_LocalRotation: {x: -0.49991274, y: 0.50008726, z: 0.49991274, w: 0.50008726}
   m_LocalPosition: {x: 5.53, y: 2.949, z: -7.052}
-  m_LocalScale: {x: 606.97485, y: 319.63498, z: 193.19595}
+  m_LocalScale: {x: 606.97485, y: 319.63492, z: 193.19595}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
