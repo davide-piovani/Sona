@@ -36,13 +36,13 @@ public class Interactable : MonoBehaviour {
 
     public void Update()
     {
-        float distance = Vector3.Distance(player.position, interactionTransform.position);
-        if (isFocus && !hasInteracted)
+        float distance = Vector3.Distance(playerObject.GetComponent<Transform>().position, interactionTransform.position);
+        if (Input.GetKeyDown ("b") && !hasInteracted)
         {
             if (distance <= radius)
             {
-                Interact();
                 hasInteracted = true;
+                Interact();
             }
         }
 
@@ -89,7 +89,7 @@ public class Interactable : MonoBehaviour {
     /**
      * This method is used to show the text and to position it on the player.
      */ 
-    void ShowTooltip()
+    protected virtual void ShowTooltip()
     {
         var CamPos = Camera.main.transform.position + Camera.main.transform.forward;
         text.enabled = true;
@@ -100,8 +100,12 @@ public class Interactable : MonoBehaviour {
     /**
     * This method is used to hide the text
     */
-    void HideTooltip()
+    protected virtual void HideTooltip()
     {
         text.enabled = false;
+    }
+
+    protected void resetInteraction (){
+        hasInteracted = false;
     }
 }

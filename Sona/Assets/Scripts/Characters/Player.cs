@@ -92,7 +92,7 @@ public abstract class Player : InputListener {
             radius = col_size.radius * (GetComponent<Transform>()).localScale[2];
         }
         //layerMask = ~(1 << 2 | 1 << 9);
-        layerMask = 1 << 8 | 1 << 10 | 1 << 11;
+        layerMask = 1 << 8 | 1 << 10 | 1 << 11 | 1 << 13;
     }
 
     protected abstract void LoadPowerSettings();
@@ -181,11 +181,16 @@ public abstract class Player : InputListener {
         Transform tr = gameObject.GetComponent<Transform>();
         RaycastHit data;
         direction.Normalize();
-        Vector3 movement = direction * speed * TimeController.GetDelTaTime();
+        Vector3 movement;
+        if (type == PlayerType.Jack){
+            movement = direction * speed * Time.deltaTime;
+        } else {
+            movement = direction * speed * TimeController.GetDelTaTime();
+        }
         if (Physics.Raycast (tr.position + col_size.center, movement, 
         out data, radius + movement.magnitude, layerMask)){
-    	    float x_collision = (data.point[0] - tr.position[0] - radius * direction[0]);
-            float z_collision = (data.point[2] - tr.position[2] - radius * direction[2]);
+    	    float x_collision = (data.point[0] - tr.position[0] - radius * Mathf.Abs(direction[0]));
+            float z_collision = (data.point[2] - tr.position[2] - radius * Mathf.Abs(direction[2]));
     	    movement = new Vector3 (x_collision, 0, z_collision);
     	}
         tr.position = transform.position + movement;
@@ -196,6 +201,7 @@ public abstract class Player : InputListener {
             avatar.transform.rotation = Quaternion.Euler (-90, angle, 0);
         }
         if (!(tr.rotation == Quaternion.identity)){
+            print ("Adjusting");
 	    Transform camTr = characterCamera.GetComponent<Transform>();
             angle = tr.rotation.eulerAngles.y;
             tr.rotation = Quaternion.identity;
@@ -287,6 +293,9 @@ public abstract class Player : InputListener {
         characterCamera.gameObject.GetComponent<AudioListener>().enabled = false;
         resetInputs();
         DisableInput();
+        if (anim != null){
+            setAnimBools (Mode.idle);
+        }
     }
 
     public bool IsVisible() {
