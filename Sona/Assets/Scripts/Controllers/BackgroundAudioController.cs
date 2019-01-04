@@ -11,12 +11,9 @@ public class BackgroundAudioController : MonoBehaviour {
         if (instance != null && instance != this) Destroy(gameObject);
         else {
             instance = this;
+            audioSource = GetComponent<AudioSource>();
             DontDestroyOnLoad(gameObject);
         }
-    }
-
-    private void Start(){
-        audioSource = GetComponent<AudioSource>(); 
     }
 
     public void PlayBackgroundMusic(AudioClip clip){

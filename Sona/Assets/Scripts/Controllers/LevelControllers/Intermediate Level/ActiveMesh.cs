@@ -5,26 +5,40 @@ using UnityEngine.AI;
 
 public class ActiveMesh : MonoBehaviour {
 
-    public GameObject _player;
-    NavMeshAgent _navMesh;
+    public float radius = 2f;
+    GameController _gameController;
 
-    void Start() {
-        _navMesh = _player.GetComponent<NavMeshAgent>();
-    }
-
-    void OnTriggerEnter(Collider other)
+    void Start()
     {
-        if (other.CompareTag("Player")) {
-            other.GetComponent<NavMeshAgent>().enabled = false;
+        _gameController = FindObjectOfType<GameController>();
+    }
+
+    void Update()
+    {
+        Control();
+    }
+
+    void Control()
+    {
+        float distance = Vector3.Distance(_gameController.GetActivePlayer().gameObject.transform.position, transform.position);
+
+        if (distance <= radius * 1.5) {
+            if (distance <= radius)
+            {
+                _gameController.GetActivePlayer().gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            }
+            else
+            {
+                _gameController.GetActivePlayer().gameObject.GetComponent<NavMeshAgent>().enabled = true;
+            }
         }
     }
 
-    void OnTriggerExit(Collider other) {
-
-        if (other.CompareTag("Player"))
-        {
-            other.GetComponent<NavMeshAgent>().enabled = true;
-        }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
+
 
 }

@@ -4,7 +4,7 @@ using ApplicationConstants;
 
 public class SceneLoader : MonoBehaviour {
 
-    public GameSlot gameSlot;
+    [HideInInspector] public GameSlot gameSlot;
 
     private void Awake(){
         var sceneLoaders = FindObjectsOfType<SceneLoader>();

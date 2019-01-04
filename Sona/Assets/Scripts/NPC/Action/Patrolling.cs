@@ -9,18 +9,20 @@ public class Patrolling : Action
 
     public override void Act(GuardController controller)
     {
+
+        controller.lockSpright.enabled = false;
         Patrol(controller);
     }
 
     private void Patrol(GuardController controller)
     {
+        controller.Walk();
         bool wayPointsReady = waypointsReady(controller);
         if (wayPointsReady)
         {
             patrolDestination = FindDestination(controller);
             controller.MoveTo(patrolDestination);
         }
-
         controller.agent.isStopped = false;
         
         Decision decision = new PatrolDecision();
@@ -48,14 +50,13 @@ public class Patrolling : Action
     Transform FindDestination(GuardController controller)
     {
         Transform destination;
-        Debug.Log("variable: " + controller.changedStateLately);
+        //Debug.Log("variable: " + controller.changedStateLately);
         //get closer waypoint only when i change state to investigate
         if (!controller.changedStateLately)
         {
             destination = CloserWaypoint(controller);
             controller.changedStateLately = true;
-            Debug.Log("variable: " + controller.changedStateLately);
-            //Debug.Log("Moving to: " + destination.name);
+            //Debug.Log("variable: " + controller.changedStateLately);
             return destination;
         }
         else
@@ -64,6 +65,7 @@ public class Patrolling : Action
             //I scan waypoints array in order to find index of my destination
             for (int i = 0; i < controller.waypoints.Length; i++)
             {
+                //Debug.Log("Array Lenght: " + controller.waypoints.Length);
                 destination = controller.waypoints[i];
                 //if I dind that destination fit waypoint array element at i index then I save the index
                 if (destination.Equals(patrolDestination))
@@ -73,10 +75,10 @@ public class Patrolling : Action
             }
             if (finalDestination == null)
             {
-                Debug.Log("finalDestination è null OMG! Had to reset it!");
+                //Debug.Log("finalDestination è null OMG! Had to reset it!");
                 finalDestination = CloserWaypoint(controller);
             }
-            Debug.Log("Moving to: " + finalDestination.name);
+            //Debug.Log("Moving to: " + finalDestination.name);
             return finalDestination;
 
         }
@@ -107,18 +109,24 @@ public class Patrolling : Action
     private bool CalculateWaypoint(int i, GuardController controller)
     {
         if (i + 1 == controller.waypoints.Length)
-            return false;
-        else
             return true;
+        if (i - 1 < 0)
+            return false;
+        return controller.descentOrder;
     }
 
     private Transform ArrayIndexOrder(int i, GuardController controller)
     {
         Transform destinationWaypoint;
-        if (CalculateWaypoint(i, controller))
+        controller.descentOrder = CalculateWaypoint(i, controller);
+        if (!controller.descentOrder)
+        {
             destinationWaypoint = controller.waypoints[i + 1].transform;
+        }
         else
+        {
             destinationWaypoint = controller.waypoints[i - 1].transform;
+        }
         return destinationWaypoint;
     }
 
@@ -127,7 +135,6 @@ public class Patrolling : Action
  */
     private float distanceToWaypoint(Transform gameObjectTransform, GuardController controller)
     {
-
         float dist = Vector3.Distance(gameObjectTransform.position, controller.transform.position);
         return dist;
     }
@@ -150,16 +157,13 @@ public class Patrolling : Action
                 destination = waypointsDistance;
             }
         }
+        /*
         if (destination == null)
         {
             Debug.Log("Destination è null OMG!");
         }
+        */
         return destination;
-    }
-
-    public override bool ActionComplete(GuardController controller)
-    {
-        return true;
     }
 
 }

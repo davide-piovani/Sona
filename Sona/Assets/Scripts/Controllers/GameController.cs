@@ -8,12 +8,17 @@ using System;
 
 public class GameController : InputListener {
 
-    [SerializeField] Transform LoadingBar;
+    [Header("General level info")]
     [SerializeField] AudioClip backgroundMusic;
     [SerializeField] PlayerType startingPlayer;
 
+    [Header("UI")]
+    [SerializeField] Image powerBar;
+    [SerializeField] Image characterIcon;
+
     [Header("Input Listeners")]
     [SerializeField] InputListener pauseInterface;
+
     private Player activePlayer;
 
     private BackgroundAudioController audioController;
@@ -25,6 +30,8 @@ public class GameController : InputListener {
         characterController = FindObjectOfType<ActiveCharacterController>();
 
         activePlayer = characterController.ActivePlayerOfType(startingPlayer);
+        characterIcon.sprite = activePlayer.GetCharacterPortrait();
+
         ActiveInput();
         PlayBackgroundMusic();
     }
@@ -39,6 +46,7 @@ public class GameController : InputListener {
 
     private void ChangeCharacter(){
         activePlayer = characterController.GiveControlToNextPlayer();
+        characterIcon.sprite = activePlayer.GetCharacterPortrait();
     }
 
     private void PauseGame(){
@@ -48,7 +56,7 @@ public class GameController : InputListener {
     }
 
     public void UpdatePowerLevelIndicator(float level) {
-        LoadingBar.GetComponent<Image>().fillAmount = level;
+        powerBar.fillAmount = level;
     }
 
     public Player[] GetScenePlayers() { return characterController.GetScenePlayers(); }

@@ -11,12 +11,10 @@ public class Interactable : MonoBehaviour {
     bool isFocus = false;
     bool hasInteracted = false;
 
-    public GameObject playerObject;
+    GameController gameManager;
     TextMeshPro text;
 
-    Transform player;
-
-    public Transform interactionTransform;
+    public GameObject player;
 
     /**
      * virtual method
@@ -29,15 +27,18 @@ public class Interactable : MonoBehaviour {
 
     public void Start ()
     {
+        //gameManager = FindObjectOfType<GameController>();
         text = GetComponentInChildren<TextMeshPro>();
-        player = playerObject.transform;
     }
 
 
     public void Update()
     {
-        float distance = Vector3.Distance(playerObject.GetComponent<Transform>().position, interactionTransform.position);
-        if (Input.GetKeyDown ("b") && !hasInteracted)
+        //float distance = Vector3.Distance(gameManager.GetActivePlayer().transform.position, this.transform.position);
+        float distance = Vector3.Distance(player.transform.position, this.transform.position);
+
+        if (Input.GetButtonDown("Interact Button") && !hasInteracted)
+
         {
             if (distance <= radius)
             {
@@ -45,22 +46,24 @@ public class Interactable : MonoBehaviour {
                 Interact();
             }
         }
-
+        //show text if player is close to the item and item haven't interacted yet 
         if (distance <= radius)
         {
             ShowTooltip();
         }
+        
         else
         {
             HideTooltip();
         }
+        
     }
 
     //focus method
     public void OnFocused(Transform playerTransform)
     {
         isFocus = true;
-        player = playerTransform;
+        //player = playerTransform;
         hasInteracted = false;
     }
 
@@ -69,14 +72,8 @@ public class Interactable : MonoBehaviour {
      */
     private void OnDrawGizmosSelected()
     {
-
-        if (interactionTransform == null)
-        {
-            interactionTransform = transform;
-        }
-
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(interactionTransform.position, radius);
+        Gizmos.DrawWireSphere(this.transform.position, radius);
     }
 
     //defocus method

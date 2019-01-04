@@ -4,26 +4,31 @@ using UnityEngine;
 
 public class ActiveCharacterController : MonoBehaviour {
     [SerializeField] Player[] players;
-    private int current = 0;
+    private int current = -1;
+    public int startingPlayer;
+
+    //this array states if the player with the same index is allowed to be selected
     private bool[] on;
 
     // Use this for initialization
     void Awake () {
         on = new bool[players.Length];
-
         for (int i = 0; i < players.Length; i++){
-            players[i].Deactivate();
             on[i] = true;
         }
+    }
 
-        ActivePlayer(0);
+    private void Start(){
+        for (int i = 0; i < players.Length; i++){
+            players[i].Deactivate();
+        }
+        ActivePlayer(startingPlayer);
     }
 
     private void ActivePlayer(int index){
         players[current].Deactivate();
         current = index;
         players[index].Activate();
-        //on[index] = true;
     }
 
     public Player[] GetScenePlayers() { return players; }
@@ -40,6 +45,28 @@ public class ActiveCharacterController : MonoBehaviour {
         return players[current];
     }
 
+    //Returns the currently active player if it exists, else it returns null
+    public Player GetCurrentlyActive (){
+        if (current != -1){
+            if (on[current]){
+                return(players[current]);
+            }
+        }
+        return null;
+    }
+
+    //Allows to set the starting player. Returns it
+    public Player SetStartingPlayer(PlayerType type) {
+        for(int i = 0; i < players.Length; i++) {
+            if (players[i].GetPlayerType() == type){
+                startingPlayer = i;
+                current = i;
+                return players[i];
+            }
+        }
+        return null;
+    }
+
     //Activate the next on player. Returns player index on success, -1 if no player is on
     private int NextPlayerIndex(){
         int currentIndex = current;
@@ -48,26 +75,23 @@ public class ActiveCharacterController : MonoBehaviour {
             print (currentIndex + ", " + on[currentIndex]);
             if (on[currentIndex]) return currentIndex;
         }
-        print ("-1");
+        current = -1;
+        //print ("-1");
         return (-1);
     }
 
     public Player GiveControlToNextPlayer(){
         int playerIndex = NextPlayerIndex();
-        if (playerIndex < 0) return null;
+        if (playerIndex < 0) {
+            //print ("no player found");
+            return null;
+        }
 
         ActivePlayer(playerIndex);
         return players[current];
     }
 
     //Disables the player whose index had been given, if the player is the currently active one, it switch to the next on player
-    /*public int Disable (int index){
-        on [index] = false;
-        if (index == current){
-            return(NextPlayerIndex());
-        }
-        return (current);
-    }*/
     public Player Disable (int index){
         on [index] = false;
         if (index == current){
@@ -86,9 +110,6 @@ public class ActiveCharacterController : MonoBehaviour {
     }
 
     //Disables the currently active player. Performs the player switch
-    /*public int DisableCurrent (){
-        return (Disable(current));
-    }*/
     public Player DisableCurrent (){
         return (Disable(current));
     }
@@ -108,9 +129,11 @@ public class ActiveCharacterController : MonoBehaviour {
 
     //Enables and activates the last active player.
     public int EnableCurrent (){
+        if (current == -1){
+            current = 0;
+        }
         on[current] = true;
         players[current].Activate();
         return(current);
     }
-	
 }

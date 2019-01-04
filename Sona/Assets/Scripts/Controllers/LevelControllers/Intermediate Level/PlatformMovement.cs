@@ -6,11 +6,11 @@ public interface PlatformMovement {
 
     void ActiveDeActivePlatform(bool cond);
     void MovePlatform();
+    void CalculateOffsets();
     bool IsActive();
     bool IsMoving();
     bool IsEnd();
     bool IsStart();
-    //bool ArePlayersOnPlatform();
     int PlayersOnPlatform();
 
 }

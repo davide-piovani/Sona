@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using ApplicationConstants;
 
 public class Charlie : Player {
@@ -6,7 +7,7 @@ public class Charlie : Player {
     protected override void LoadPowerSettings(){
         powerDuration = PlayersConstants.charliePowerDuration;
         rechargeSpeed = PlayersConstants.charlieRechargeSpeed;
-        r_speed = 2f;
+        //r_speed = 2f;
     }
 
     protected override void PowerToggle(bool isActive){

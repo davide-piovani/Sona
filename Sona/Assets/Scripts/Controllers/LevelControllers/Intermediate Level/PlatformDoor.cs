@@ -26,6 +26,7 @@ public class PlatformDoor : MonoBehaviour {
 	void Update () {
 
         if (Input.GetKeyDown(KeyCode.B) & _display.IsActive() & (open | close)) {
+            _display.Necessary(false);
             if (open)
             {
                 open = false;
@@ -46,6 +47,7 @@ public class PlatformDoor : MonoBehaviour {
                     transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
                 }
                 else {
+                    _display.Necessary(true);
                     open = true;
                 }
             }
@@ -57,6 +59,7 @@ public class PlatformDoor : MonoBehaviour {
                 }
                 else
                 {
+                    _display.Necessary(true);
                     close = true;
                 }
             }
