@@ -37,7 +37,7 @@ public class Interactable : MonoBehaviour {
         //float distance = Vector3.Distance(gameManager.GetActivePlayer().transform.position, this.transform.position);
         float distance = Vector3.Distance(player.transform.position, this.transform.position);
 
-        if (Input.GetButtonDown("Interact Button") && !hasInteracted)
+        if (Input.GetButtonDown("InteractButton") && !hasInteracted)
 
         {
             if (distance <= radius)
