@@ -50,6 +50,7 @@ namespace ApplicationConstants {
         public static string enterButton = "EnterButton";
         public static string jumpButton = "Jump";
         public static string pauseButton = "PauseButton";
+        public static string interactButton = "InteractButton";
 
         public static string killingObjectTag = "KillingObject";
 
