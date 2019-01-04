@@ -25,6 +25,9 @@ public class GameController : InputListener {
     private ActiveCharacterController characterController;
     private GameSlot gameSlot;
 
+    bool pauseActive = true;
+    bool changePlayerActive = true;
+
     // Use this for initialization
     void Start () {
         audioController = BackgroundAudioController.instance;
@@ -45,8 +48,8 @@ public class GameController : InputListener {
     private void Update() {
         if (IsInputActive()){
             if (activePlayer != null && !activePlayer.IsInputActive()) activePlayer.ActiveInput();
-            if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.pauseButton)) PauseGame();
-            if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton)) ChangeCharacter();
+            if (pauseActive & CrossPlatformInputManager.GetButtonDown(PlayersConstants.pauseButton)) PauseGame();
+            if (changePlayerActive & CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton)) ChangeCharacter();
         }
     }
 
@@ -76,5 +79,13 @@ public class GameController : InputListener {
 
     public float GetEffectsVolume(){
         return gameSlot.effectsVolume;
+    }
+
+    public void PauseActive(bool cond) {
+        pauseActive = cond;
+    }
+
+    public void ChangePlayerActive(bool cond) {
+        changePlayerActive = cond;
     }
 }
