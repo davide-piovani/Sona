@@ -26,7 +26,7 @@ public class ActiveCharacterController : MonoBehaviour {
     }
 
     private void ActivePlayer(int index){
-        players[current].Deactivate();
+        if (current != -1) players[current].Deactivate();
         current = index;
         players[index].Activate();
     }

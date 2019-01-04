@@ -260,15 +260,11 @@ public abstract class Player : InputListener {
         direction = forward * v_axis + right * h_axis;
     }
 
-
-
-
-    
     
     public void Activate (){
         //this.active = true;
         characterCamera.enabled = true;
-        //characterCamera.gameObject.GetComponent<AudioListener>().enabled = true;
+        characterCamera.gameObject.GetComponent<AudioListener>().enabled = true;
         //ResetInputs();
         ActiveInput();
     }
@@ -276,7 +272,7 @@ public abstract class Player : InputListener {
     public void Deactivate (){
         //this.active = false;
         characterCamera.enabled = false;
-        //characterCamera.gameObject.GetComponent<AudioListener>().enabled = false;
+        characterCamera.gameObject.GetComponent<AudioListener>().enabled = false;
         //SetAnimBools(Mode.idle);
         //ResetInputs();
         DisableInput();
