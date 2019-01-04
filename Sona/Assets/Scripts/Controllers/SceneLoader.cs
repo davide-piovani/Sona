@@ -4,7 +4,7 @@ using ApplicationConstants;
 
 public class SceneLoader : MonoBehaviour {
 
-    [HideInInspector] public GameSlot gameSlot;
+    private GameSlot gameSlot;
 
     private void Awake(){
         var sceneLoaders = FindObjectsOfType<SceneLoader>();
@@ -12,8 +12,12 @@ public class SceneLoader : MonoBehaviour {
             Destroy(gameObject);
         } else {
             DontDestroyOnLoad(this.gameObject);
+            gameSlot = SaveSystem.LoadGameSlot(0);
         }
     }
+
+    public GameSlot GetGameSlot() { return gameSlot; }
+    public void SetGameSlot(GameSlot slot) { gameSlot = slot; }
 
     public void LoadNextScene(){
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;

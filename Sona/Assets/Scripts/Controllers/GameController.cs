@@ -23,17 +23,23 @@ public class GameController : InputListener {
 
     private BackgroundAudioController audioController;
     private ActiveCharacterController characterController;
+    private GameSlot gameSlot;
 
     // Use this for initialization
     void Start () {
         audioController = BackgroundAudioController.instance;
         characterController = FindObjectOfType<ActiveCharacterController>();
+        LoadGameSlot();
 
         activePlayer = characterController.ActivePlayerOfType(startingPlayer);
         characterIcon.sprite = activePlayer.GetCharacterPortrait();
 
         ActiveInput();
         PlayBackgroundMusic();
+    }
+
+    private void LoadGameSlot() { 
+        gameSlot = FindObjectOfType<SceneLoader>().GetGameSlot();
     }
 
     private void Update() {
@@ -62,8 +68,13 @@ public class GameController : InputListener {
     public Player[] GetScenePlayers() { return characterController.GetScenePlayers(); }
 
     private void PlayBackgroundMusic(){
+        audioController.SetVolume(gameSlot.musicVolume);
         audioController.PlayBackgroundMusic(backgroundMusic);
     }
 
     public Player GetActivePlayer() { return activePlayer; }
+
+    public float GetEffectsVolume(){
+        return gameSlot.effectsVolume;
+    }
 }
