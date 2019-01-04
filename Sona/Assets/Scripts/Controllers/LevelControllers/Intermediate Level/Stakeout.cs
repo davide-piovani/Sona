@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityStandardAssets.CrossPlatformInput;
+using ApplicationConstants;
 
 public class Stakeout : MonoBehaviour {
 
@@ -68,7 +70,7 @@ public class Stakeout : MonoBehaviour {
 
         if (state == 0)
         {
-            if (Input.GetKey(KeyCode.C) & _display.IsActive())
+            if (CrossPlatformInputManager.GetButton(PlayersConstants.interactButton) /*Input.GetKey(KeyCode.C)*/ & _display.IsActive())
             {
                 _gameController.PauseActive(false); /*prova per vedere se funziona*/
                 _gameController.ChangePlayerActive(false); /*prova per vedere se funziona*/
@@ -81,7 +83,7 @@ public class Stakeout : MonoBehaviour {
         }
         else if (state == 1)
         {
-            if (!Input.GetKey(KeyCode.C)) {
+            if (!CrossPlatformInputManager.GetButton(PlayersConstants.interactButton)/*Input.GetKey(KeyCode.C)*/) {
                 MovePlayerAwayFromWall();
                 _cameraMovement.MoveCameraBack();
                 state = 2;

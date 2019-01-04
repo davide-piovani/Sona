@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using ApplicationConstants;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class CameraPlatform : MonoBehaviour {
 
@@ -30,7 +32,7 @@ public class CameraPlatform : MonoBehaviour {
 
         if (state == 0)
         {
-            if (Input.GetKeyDown(KeyCode.B) & _display.IsActive())
+            if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/ & _display.IsActive())
             {
                 _gameController.PauseActive(false); /*prova per vedere se funziona*/
                 _gameController.ChangePlayerActive(false); /*prova per vedere se funziona*/

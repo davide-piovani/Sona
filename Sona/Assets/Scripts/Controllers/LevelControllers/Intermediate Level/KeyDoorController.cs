@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using ApplicationConstants;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class KeyDoorController : MonoBehaviour, LockedDoor {
 
@@ -47,7 +49,7 @@ public class KeyDoorController : MonoBehaviour, LockedDoor {
             active = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.B) & _display.IsActive() & active & (open | close))
+        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/ & _display.IsActive() & active & (open | close))
         {
             keyUsed = true;
             _display.Necessary(false);

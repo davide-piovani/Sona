@@ -1,7 +1,9 @@
-﻿using System;
+﻿using ApplicationConstants;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlatformDoor : MonoBehaviour {
 
@@ -25,7 +27,7 @@ public class PlatformDoor : MonoBehaviour {
 	
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.B) & _display.IsActive() & (open | close)) {
+        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/ & _display.IsActive() & (open | close)) {
             _display.Necessary(false);
             if (open)
             {

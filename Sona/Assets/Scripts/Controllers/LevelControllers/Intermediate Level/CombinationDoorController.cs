@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using ApplicationConstants;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class CombinationDoorController : MonoBehaviour, LockedDoor {
 
@@ -32,7 +34,7 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
 
     void ChangeState() {
 
-        if (state == 0 & Input.GetKeyDown(KeyCode.B) & _displaySensor.IsActive())
+        if (state == 0 & CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/ & _displaySensor.IsActive())
         {
             _displaySensor.Necessary(false);
 
@@ -69,7 +71,7 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
         }
         else if (state == 1)
         {
-            if (Input.GetKeyDown(KeyCode.B))
+            if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/)
             {
                 _combinationString.text = "";
                 _gameController.PauseActive(true); /*prova per vedere se funziona*/
