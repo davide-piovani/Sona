@@ -43,12 +43,14 @@ public abstract class Player : InputListener {
     public bool IsPowerActive() { return powerActive; }
     public Camera GetCharacterCamera() { return characterCamera; }
 
-    protected void Start(){
+    private void Awake (){
         LoadComponents();
 
         LoadPowerInfo();
         SetType();
+    }
 
+    protected void Start(){
         ManageLayers();
 
         //anim.speed = GameConstants.animationsSpeed;
@@ -71,7 +73,7 @@ public abstract class Player : InputListener {
         agent = GetComponent<NavMeshAgent>();
         audioSource = GetComponent<AudioSource>();
 
-        //avatar = transform.GetChild(0).gameObject;
+        avatar = transform.GetChild(0).gameObject;
     }
 
     //Load the duration of the power for this specific player and its recharge time
@@ -93,12 +95,19 @@ public abstract class Player : InputListener {
     }
 
     private void ManageLayers(){
+        float radius;
+
+        if (GetComponent<Transform>().localScale[0] > GetComponent<Transform>().localScale[2]) {
+            radius = GetComponent<CapsuleCollider>().radius * (GetComponent<Transform>()).localScale[0];
+        } else {
+            radius = GetComponent<CapsuleCollider>().radius * (GetComponent<Transform>()).localScale[2];
+        }
+
+        layerMask = 1 << 8 | 1 << 10 | 1 << 11 | 1 << 13;
         float localScale = (transform.localScale[0] > transform.localScale[2]) ? 
             (transform.localScale[0]) : (transform.localScale[2]);
 
         playerColliderRadius = playerCollider.radius * localScale;
-
-        layerMask = 1 << 8 | 1 << 10 | 1 << 11;
     }
 
     private void Update () {
@@ -153,8 +162,10 @@ public abstract class Player : InputListener {
 
         if (!WillHitSomething(movement)) {
             transform.position += movement;
+
             PlayFootStep(movement.magnitude > Mathf.Epsilon);
         }
+
 
         //ResetInputs();
     }
@@ -178,42 +189,6 @@ public abstract class Player : InputListener {
         }
     }
 
-    /*private void PerformAnimations()
-    {
-        float angle;
-
-        GetPlayerDirection();
-        SetSpeedAndAnimation();
-
-        Transform tr = gameObject.transform;
-        RaycastHit data;
-        direction.Normalize();
-        Vector3 movement = direction * speed * TimeController.GetDelTaTime();
-        if (Physics.Raycast(tr.position + col_size.center, movement,
-        out data, radius + movement.magnitude, layerMask))
-        {
-            float x_collision = (data.point[0] - tr.position[0] - radius * direction[0]);
-            float z_collision = (data.point[2] - tr.position[2] - radius * direction[2]);
-            movement = new Vector3(x_collision, 0, z_collision);
-        }
-        tr.position = transform.position + movement;
-
-        if (direction.magnitude > Mathf.Epsilon)
-        {
-            //Rotate the image to get the correct animation
-            angle = Vector3.SignedAngle(tr.forward, direction, Vector3.up);
-            avatar.transform.rotation = Quaternion.Euler(-90, angle, 0);
-        }
-        if (!(tr.rotation == Quaternion.identity))
-        {
-            Transform camTr = characterCamera.GetComponent<Transform>();
-            angle = tr.rotation.eulerAngles.y;
-            tr.rotation = Quaternion.identity;
-            camTr.rotation = Quaternion.Euler(camTr.rotation.eulerAngles.x, angle, 0);
-            avatar.transform.rotation = Quaternion.Euler(-90, 0, angle);
-        }
-        ResetInputs();
-    }*/
 
     private void ManagePlayerSpeedRotationAndAnimation(){
         if (direction.magnitude > Mathf.Epsilon){
@@ -267,8 +242,123 @@ public abstract class Player : InputListener {
         anim.SetBool("isRunning", running);
     }
 
+    
+
+    private void GetPlayerDirection(){
+        float h_axis = CrossPlatformInputManager.GetAxis("Horizontal");
+        float v_axis = CrossPlatformInputManager.GetAxis("Vertical");
+
+        Vector3 forward = characterCamera.transform.forward;
+        Vector3 right = characterCamera.transform.right;
+
+        forward.y = 0;
+        right.y = 0;
+
+        forward.Normalize();
+        right.Normalize();
+
+        direction = forward * v_axis + right * h_axis;
+    }
+
+    
+    public void Activate (){
+        //this.active = true;
+        characterCamera.enabled = true;
+        characterCamera.gameObject.GetComponent<AudioListener>().enabled = true;
+        //ResetInputs();
+        ActiveInput();
+    }
+
+    public void Deactivate (){
+        //this.active = false;
+        characterCamera.enabled = false;
+        characterCamera.gameObject.GetComponent<AudioListener>().enabled = false;
+        //SetAnimBools(Mode.idle);
+        //ResetInputs();
+        DisableInput();
+        if (anim != null){
+            SetAnimBools (Mode.idle);
+        }
+    }
+
+    public bool IsVisible() {
+        if (type == PlayerType.Hannah) return !IsPowerActive();
+        return true;
+    }
+
+    public PlayerType GetPlayerType() { return type; }
+
+    public void SetDestination(Vector3 destination) { agent.SetDestination(destination); }
+}
+
+
+//////////////////////////////////////////
+// HERE ARE ALL THE DISCARDED FUNCTIONS //
+/////////////////////////////////////////
+/*
+    private void PerformAnimations()
+    {
+        float angle;
+
+        GetPlayerDirection();
+        SetSpeedAndAnimation();
+
+        Transform tr = gameObject.transform;
+        RaycastHit data;
+        direction.Normalize();
+
+        Vector3 movement;
+        if (type == PlayerType.Jack){
+            movement = direction * speed * Time.deltaTime;
+        } else {
+            movement = direction * speed * TimeController.GetDelTaTime();
+        }
+        if (Physics.Raycast (tr.position + GetComponent<CapsuleCollider>().center, movement, 
+        out data, radius + movement.magnitude, layerMask)){
+    	    float x_collision = (data.point[0] - tr.position[0] - radius * Mathf.Abs(direction[0]));
+            float z_collision = (data.point[2] - tr.position[2] - radius * Mathf.Abs(direction[2]));
+    	    movement = new Vector3 (x_collision, 0, z_collision);
+    	}
+
+        tr.position = transform.position + movement;
+
+        if (direction.magnitude > Mathf.Epsilon)
+        {
+            //Rotate the image to get the correct animation
+            angle = Vector3.SignedAngle(tr.forward, direction, Vector3.up);
+            avatar.transform.rotation = Quaternion.Euler(-90, angle, 0);
+        }
+
+        if (!(tr.rotation == Quaternion.identity)){
+            print ("Adjusting");
+	    Transform camTr = characterCamera.GetComponent<Transform>();
+            angle = tr.rotation.eulerAngles.y;
+            tr.rotation = Quaternion.identity;
+            camTr.rotation = Quaternion.Euler(camTr.rotation.eulerAngles.x, angle, 0);
+            avatar.transform.rotation = Quaternion.Euler(-90, 0, angle);
+        }
+        ResetInputs();
+    }
+
+
+    //used to force input by script, the value will not be resetted until the following
+    //Update. The character must not be taking input from the user
+    public void SetInputs (Vector3 direction, bool jump, bool walks, bool power){
+        if (!active){
+            this.direction = direction;
+            this.walks = walks;
+            PowerToggle(power);
+        }
+    }
+
+    //reset inputs once the Update is done
+    private void ResetInputs (){
+        this.direction = new Vector3 (0,0,0);
+        this.walks = false;
+    }
+
     //checks the inputs of the user, if activated
-    /*private void CheckInputs (){
+    private void CheckInputs (){
         float h_axis;
         float v_axis;
         Vector3 forward;
@@ -293,64 +383,5 @@ public abstract class Player : InputListener {
         this.walks = Input.GetKey(KeyCode.LeftShift);
 //--------------------------------------------------
         }
-    }*/
-
-    private void GetPlayerDirection(){
-        float h_axis = CrossPlatformInputManager.GetAxis("Horizontal");
-        float v_axis = CrossPlatformInputManager.GetAxis("Vertical");
-
-        Vector3 forward = characterCamera.transform.forward;
-        Vector3 right = characterCamera.transform.right;
-
-        forward.y = 0;
-        right.y = 0;
-
-        forward.Normalize();
-        right.Normalize();
-
-        direction = forward * v_axis + right * h_axis;
     }
-
-    //reset inputs once the Update is done
-    /*private void ResetInputs (){
-        this.direction = new Vector3 (0,0,0);
-        this.walks = false;
-    }*/
-
-
-    //used to force input by script, the value will not be resetted until the following
-    //Update. The character must not be taking input from the user
-    /*public void SetInputs (Vector3 direction, bool jump, bool walks, bool power){
-        if (!active){
-            this.direction = direction;
-            this.walks = walks;
-            PowerToggle(power);
-        }
-    }*/
-    
-    public void Activate (){
-        //this.active = true;
-        characterCamera.enabled = true;
-        characterCamera.gameObject.GetComponent<AudioListener>().enabled = true;
-        //ResetInputs();
-        ActiveInput();
-    }
-
-    public void Deactivate (){
-        //this.active = false;
-        characterCamera.enabled = false;
-        characterCamera.gameObject.GetComponent<AudioListener>().enabled = false;
-        SetAnimBools(Mode.idle);
-        //ResetInputs();
-        DisableInput();
-    }
-
-    public bool IsVisible() {
-        if (type == PlayerType.Hannah) return !IsPowerActive();
-        return true;
-    }
-
-    public PlayerType GetPlayerType() { return type; }
-
-    public void SetDestination(Vector3 destination) { agent.SetDestination(destination); }
-}
+*/
