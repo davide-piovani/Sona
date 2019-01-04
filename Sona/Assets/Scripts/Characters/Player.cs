@@ -37,6 +37,7 @@ public abstract class Player : InputListener {
     private Animator anim;
     private CapsuleCollider playerCollider;
     private NavMeshAgent agent;
+    private AudioSource audioSource;
     [SerializeField] GameObject avatar;
 
     public bool IsPowerActive() { return powerActive; }
@@ -70,6 +71,7 @@ public abstract class Player : InputListener {
         anim = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
         agent = GetComponent<NavMeshAgent>();
+        audioSource = GetComponent<AudioSource>();
 
         avatar = transform.GetChild(0).gameObject;
     }
@@ -160,9 +162,10 @@ public abstract class Player : InputListener {
 
         if (!WillHitSomething(movement)) {
             transform.position += movement;
-            print("PLAYER: Movement locked");
+
+            PlayFootStep(movement.magnitude > Mathf.Epsilon);
         }
-       
+
 
         //ResetInputs();
     }
@@ -172,6 +175,19 @@ public abstract class Player : InputListener {
              playerColliderRadius + movement.magnitude, layerMask);
     }
 
+    private void PlayFootStep(bool moving) {
+        if (moving){
+            if (!audioSource.isPlaying){
+                audioSource.clip = AudioEffects.instance.footstep;
+                audioSource.volume = gameController.GetEffectsVolume();
+                audioSource.loop = true;
+                audioSource.Play();
+            }
+        } else {
+            audioSource.loop = false;
+            audioSource.Stop();
+        }
+    }
 
 
     private void ManagePlayerSpeedRotationAndAnimation(){

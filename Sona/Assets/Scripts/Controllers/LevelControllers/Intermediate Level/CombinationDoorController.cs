@@ -9,6 +9,7 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
     public Text _combinationString;
     public GameObject _displayPad;
     ElevatorDoor _door;
+    GameController _gameController;
     public string _combinationValue = "7894";
 
     bool keyUsed = false;
@@ -18,6 +19,7 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
     
     void Start()
     {
+        _gameController = FindObjectOfType<GameController>();
         _displayPad.SetActive(false);
         _door = GetComponent<ElevatorDoor>();
 
@@ -40,6 +42,8 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
                 {
                     if (_door.IsClose())
                     {
+                        _gameController.PauseActive(false); /*prova per vedere se funziona*/
+                        _gameController.ChangePlayerActive(false); /*prova per vedere se funziona*/
                         _displayPad.SetActive(true);
                         PlayerScriptsActive(false);
                         state = 1;
@@ -68,6 +72,8 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
             if (Input.GetKeyDown(KeyCode.B))
             {
                 _combinationString.text = "";
+                _gameController.PauseActive(true); /*prova per vedere se funziona*/
+                _gameController.ChangePlayerActive(true); /*prova per vedere se funziona*/
                 _displayPad.SetActive(false);
                 PlayerScriptsActive(true);
                 state = 2;
@@ -75,6 +81,8 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
             else if (_combinationString.text.Equals(_combinationValue))
             {
                 _combinationString.text = "";
+                _gameController.PauseActive(true); /*prova per vedere se funziona*/
+                _gameController.ChangePlayerActive(true); /*prova per vedere se funziona*/
                 _displayPad.SetActive(false);
                 PlayerScriptsActive(true);
                 _door.SlideDoor();

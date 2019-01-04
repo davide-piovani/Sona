@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Characters\Player.cs" />
     <Compile Include="Assets\Scripts\Controllers\ActiveCharacterController.cs" />
     <Compile Include="Assets\Scripts\Controllers\AlertController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\AudioEffects.cs" />
     <Compile Include="Assets\Scripts\Controllers\BackgroundAudioController.cs" />
     <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
     <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
@@ -86,16 +87,16 @@
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\ElevatorController.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\ElevatorDoor.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\InteractiveTextScript.cs" />
-    <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\KeyController.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\KeyDoorController.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\KeyScript.cs" />
-    <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\ObjectController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\LockedDoor.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\PlatformCameraMovement.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\PlatformDoor.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\PlatformMovement.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\PlatformMovementY.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\PlatformMovementZ.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\PudController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\ShowKey.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\SlideDoorController.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\Stakeout.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\StakeoutCam.cs" />

@@ -10,12 +10,15 @@ public class SettingsController : InputListener {
     private bool buttonChanged = false;
     private bool horizontalChanged = false;
 
+    private float newEffectsVolume;
+
     private AudioSource backgroundAudioSource;
     private GameSlot gameSlot;
 
     private void Start(){
         backgroundAudioSource = FindObjectOfType<BackgroundAudioController>().GetComponent<AudioSource>();
-        gameSlot = FindObjectOfType<SceneLoader>().gameSlot;
+        gameSlot = FindObjectOfType<SceneLoader>().GetGameSlot();
+        newEffectsVolume = gameSlot.effectsVolume;
 
         SelectButton(0, true);
         for (int i = 1; i < buttons.Length; i++) SelectButton(i, false);
@@ -64,6 +67,7 @@ public class SettingsController : InputListener {
         }
 
         if (slider && slider.type == SliderType.Music) backgroundAudioSource.volume = slider.GetSliderValue();
+        if (slider && slider.type == SliderType.Effects) newEffectsVolume = slider.GetSliderValue();
     }
 
     public void ChangeSelectedButton(bool nextButton){
@@ -104,6 +108,7 @@ public class SettingsController : InputListener {
 
     private void CheckEnterButton(){
         if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.enterButton)){
+            AudioEffects.PlaySound(AudioEffects.instance.menuButtonClicked);
             switch (selectedButton){
                 case 2:
                     ReturnBack();
@@ -139,6 +144,8 @@ public class SettingsController : InputListener {
 
     private void SaveData(){
         gameSlot.musicVolume = backgroundAudioSource.volume;
+        gameSlot.effectsVolume = newEffectsVolume;
+        gameSlot.Save();
         ReturnBack();
     }
 }

@@ -32,7 +32,8 @@ public class CameraPlatform : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.B) & _display.IsActive())
             {
-                _gameController.enabled = false; /*prova per vedere se funziona*/
+                _gameController.PauseActive(false); /*prova per vedere se funziona*/
+                _gameController.ChangePlayerActive(false); /*prova per vedere se funziona*/
                 PlayerScriptsActive(false);
                 _display.Necessary(false);
                 _platformCamera.enabled = true;
@@ -70,7 +71,8 @@ public class CameraPlatform : MonoBehaviour {
         PlayerScriptsActive(true);
         _platformCameraScript.ResetCamera();
         _display.Necessary(true);
-        _gameController.enabled = true; /*prova per vedere se funziona*/
+        _gameController.PauseActive(true); /*prova per vedere se funziona*/
+        _gameController.ChangePlayerActive(true); /*prova per vedere se funziona*/
     }
 
     void PlayerScriptsActive(bool cond) {

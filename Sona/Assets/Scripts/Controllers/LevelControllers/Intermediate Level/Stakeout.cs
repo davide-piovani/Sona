@@ -11,6 +11,7 @@ public class Stakeout : MonoBehaviour {
     public float speed1 = 2f;
     public float rotationSpeed = 50f;
 
+    GameController _gameController;
     Camera _camera;
     StakeoutCam _cameraMovement;
     Vector3 _playerTargetPosition;
@@ -25,6 +26,7 @@ public class Stakeout : MonoBehaviour {
 
     void Start()
     {
+        _gameController = FindObjectOfType<GameController>();
         _cameraMovement = GetComponentInChildren<StakeoutCam>();
         _camera = GetComponentInChildren<Camera>();
         _camera.enabled = false;
@@ -68,7 +70,8 @@ public class Stakeout : MonoBehaviour {
         {
             if (Input.GetKey(KeyCode.C) & _display.IsActive())
             {
-                //disabilitare cambio giocatore;
+                _gameController.PauseActive(false); /*prova per vedere se funziona*/
+                _gameController.ChangePlayerActive(false); /*prova per vedere se funziona*/
                 _display.Necessary(false);
                 InitialSettings();
                 MovePlayerTowardsWall();
@@ -87,6 +90,8 @@ public class Stakeout : MonoBehaviour {
         }
         else if (state == 2 & _cameraMovement.IsOnStartPos() & !playerInMovement)
         {
+            _gameController.PauseActive(true); /*prova per vedere se funziona*/
+            _gameController.ChangePlayerActive(true); /*prova per vedere se funziona*/
             PlayerScriptsActive(true);
             WallCamActive(false);
             _display.Necessary(true);

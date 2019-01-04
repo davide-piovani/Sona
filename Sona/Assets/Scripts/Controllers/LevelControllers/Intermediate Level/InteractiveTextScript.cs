@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InteractiveTextScript : MonoBehaviour {
 
-    public float textSize = 0.05f;
+    float textSize = 0.05f;
 
     TextMeshPro _text;
     GameController gameController;
@@ -27,7 +27,7 @@ public class InteractiveTextScript : MonoBehaviour {
         Transform cam = playerCam.transform;
         var TextPos = cam.position + cam.forward;
         _text.transform.position = TextPos;
-        _text.transform.localScale = new Vector3(textSize, 0.05f, 0.05f);/*Vector3.one * textSize;*/ /*0.025f*/;
+        _text.transform.localScale = Vector3.one * textSize;
         _text.transform.rotation = cam.rotation;
     }
 

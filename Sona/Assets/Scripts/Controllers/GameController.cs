@@ -23,11 +23,16 @@ public class GameController : InputListener {
 
     private BackgroundAudioController audioController;
     private ActiveCharacterController characterController;
+    private GameSlot gameSlot;
+
+    bool pauseActive = true;
+    bool changePlayerActive = true;
 
     // Use this for initialization
     void Start () {
         audioController = BackgroundAudioController.instance;
         characterController = FindObjectOfType<ActiveCharacterController>();
+        LoadGameSlot();
 
         activePlayer = characterController.ActivePlayerOfType(startingPlayer);
         characterIcon.sprite = activePlayer.GetCharacterPortrait();
@@ -36,11 +41,15 @@ public class GameController : InputListener {
         PlayBackgroundMusic();
     }
 
+    private void LoadGameSlot() { 
+        gameSlot = FindObjectOfType<SceneLoader>().GetGameSlot();
+    }
+
     private void Update() {
         if (IsInputActive()){
             if (activePlayer != null && !activePlayer.IsInputActive()) activePlayer.ActiveInput();
-            if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.pauseButton)) PauseGame();
-            if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton)) ChangeCharacter();
+            if (pauseActive & CrossPlatformInputManager.GetButtonDown(PlayersConstants.pauseButton)) PauseGame();
+            if (changePlayerActive & CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton)) ChangeCharacter();
         }
     }
 
@@ -62,8 +71,21 @@ public class GameController : InputListener {
     public Player[] GetScenePlayers() { return characterController.GetScenePlayers(); }
 
     private void PlayBackgroundMusic(){
+        audioController.SetVolume(gameSlot.musicVolume);
         audioController.PlayBackgroundMusic(backgroundMusic);
     }
 
     public Player GetActivePlayer() { return activePlayer; }
+
+    public float GetEffectsVolume(){
+        return gameSlot.effectsVolume;
+    }
+
+    public void PauseActive(bool cond) {
+        pauseActive = cond;
+    }
+
+    public void ChangePlayerActive(bool cond) {
+        changePlayerActive = cond;
+    }
 }
