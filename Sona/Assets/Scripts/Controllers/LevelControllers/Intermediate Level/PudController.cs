@@ -25,7 +25,8 @@ public class PudController : MonoBehaviour {
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("MORTOOOOOOOOOOO " + gameObject.name);
+            Debug.Log("Collision MORTOOOOOOOOOOO " + gameObject.name);
         }
     }
+
 }
