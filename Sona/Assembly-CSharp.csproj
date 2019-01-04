@@ -81,6 +81,9 @@
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Charlie Level Controllers\Platform.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Charlie Level Controllers\Trap.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\ActiveMesh.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\AllarmController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\AllarmedSquare.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\AllarmRow.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\CameraPlatform.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\CombinationDoorController.cs" />
     <Compile Include="Assets\Scripts\Controllers\LevelControllers\Intermediate Level\DisplayActivator.cs" />
