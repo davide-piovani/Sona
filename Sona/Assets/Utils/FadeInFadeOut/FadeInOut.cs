@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class FadeInOut : MonoBehaviour {
 
     public Image _img;
-    public TextMeshProUGUI _txt;
+    public Text _txt;
     Animator _imgAnimator;
     //Animator _txtAnimator;
     

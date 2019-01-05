@@ -8,6 +8,8 @@ public class ShowKey : MonoBehaviour {
     public GameObject _door1;
     public GameObject _door2;
     public GameObject _combinationDoor;
+    public Sprite _key;
+    public Sprite _electronicUnlocker;
 
     LockedDoor keyDoor1;
     LockedDoor keyDoor2;
@@ -29,17 +31,17 @@ public class ShowKey : MonoBehaviour {
 
         if (!keyDoor1.isKeyUsed() & keyDoor1.isKeyOwned() & _gameController.GetActivePlayer().gameObject.name.Equals(keyDoor1.KeyOwner()))
         {
-            //metti immagine chiave
+            _image.sprite = _key;
             _image.enabled = true;
         }
         else if (!keyDoor2.isKeyUsed() & keyDoor2.isKeyOwned() & _gameController.GetActivePlayer().gameObject.name.Equals(keyDoor2.KeyOwner()))
         {
-            //metti immagine chiave
+            _image.sprite = _key;
             _image.enabled = true;
         }
         else if (!passpartout.isKeyUsed() & passpartout.isKeyOwned() & _gameController.GetActivePlayer().gameObject.name.Equals(passpartout.KeyOwner()))
         {
-            //metti immagine passpartout
+            _image.sprite = _electronicUnlocker;
             _image.enabled = true;
         }
         else {

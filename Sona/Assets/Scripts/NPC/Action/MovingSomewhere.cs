@@ -6,6 +6,7 @@ public class MovingSomewhere : Action
 {
     public override void Act(GuardController controller)
     {
+        controller.agent.enabled = true;
         controller.Run();
         MoveToTarget(controller);
         Decision decision = new SearchDecision();
