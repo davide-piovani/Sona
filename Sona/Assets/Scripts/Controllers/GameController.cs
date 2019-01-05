@@ -137,15 +137,6 @@ public class GameController : InputListener {
 
     public void ReloadFromLastCheckpoint(){
         sceneLoader.ReloadCurrentScene();
-
-        /*GameSlot gameSlot = GetCurrentGameSlot();
-        if (gameSlot.shouldRestorePos){
-            Player[] players = GetScenePlayers();
-
-            foreach (Player player in players){
-                RestorePlayerPos(player, gameSlot);
-            }
-        }*/
     }
 
     public void RestartLevel(){
