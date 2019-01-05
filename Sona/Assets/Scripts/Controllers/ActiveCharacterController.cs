@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActiveCharacterController : MonoBehaviour {
     [SerializeField] Player[] players;
-    private int current = -1;
+    private int current = 0;
     public int startingPlayer;
 
     //this array states if the player with the same index is allowed to be selected

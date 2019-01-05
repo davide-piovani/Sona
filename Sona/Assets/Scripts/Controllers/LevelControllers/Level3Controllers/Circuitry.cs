@@ -1,0 +1,54 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+//using UnityEngine.Experimental.GlobalIllumination;
+
+public class Circuitry : Interactable {
+    public Level3Manager manager;
+    private GameObject hasComponent;
+    private bool component = false;
+    public bool shutDown = false;
+    private bool active = false;
+    
+
+    public override void Interact(){
+        if (!component && shutDown){
+            print ("placing component");
+            if (player == hasComponent){
+                hasComponent = null;
+                component = true;
+            }
+            resetInteraction();
+        } else if(shutDown) {
+            print ("repairing");
+            manager.repair();
+        } else {
+            resetInteraction();
+        }
+    }
+
+    public void SetRepairer (GameObject player){
+        hasComponent = player;
+    }
+
+    protected override void ShowTooltip (){
+        active = true;
+        if (shutDown && hasComponent != null){
+            if (player == hasComponent){
+                manager.ShowMessage("Place component", 0);
+            } else {
+                manager.ShowMessage("Not with component", 1);
+            }
+        } else if (component){
+                manager.ShowMessage("Repair", 0);
+        }
+    }
+
+    protected override void HideTooltip() {
+        if(active){
+            manager.EraseMessage();
+            active = false;
+        }
+    }
+	
+}
