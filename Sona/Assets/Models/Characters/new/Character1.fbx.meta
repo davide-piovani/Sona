@@ -84,6 +84,8 @@ ModelImporter:
     7400018: Character.001|Corsa1
     7400020: Character.001|Idle1
     7400022: Character.001|salto1
+    7400024: Lean.left.001
+    7400026: lean.right1
     9500000: //RootNode
     13700000: Circle
   externalObjects: {}

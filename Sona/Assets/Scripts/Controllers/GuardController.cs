@@ -127,9 +127,10 @@ public class GuardController : MonoBehaviour {
     
     public void GuardCatchPlayer()
     {
-        if (DetectPlayer() < 3f)
+        if (DetectPlayer() < 1.8f)
         {
-            FindObjectOfType<SceneLoader>().ReloadCurrentScene();
+            gameController.PlayerCatched();
+            //FindObjectOfType<SceneLoader>().ReloadCurrentScene();
         }
     }
     /**
