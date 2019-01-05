@@ -18,14 +18,12 @@ public class LookDecision : Decision
         Action nextAction;
         if ((controller.Investigate() || controller.DetectPlayer() < controller.catchingRadius) && controller.HannaIsVisible())
         {
-            //Debug.Log("I'm chasing!");
             nextAction = new Chase();
         }
         else
         {
-            //Debug.Log("Ramo else look Decision");
+            Debug.Log("Ramo else look Decision");
             nextAction = new LookingForSomeone();
-            //controller.changedStateLately = false;
         }
         return nextAction;
     }

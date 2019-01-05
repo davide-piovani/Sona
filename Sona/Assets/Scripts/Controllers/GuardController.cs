@@ -74,7 +74,7 @@ public class GuardController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        this.target = gameController.GetActivePlayer().transform;
+        target = gameController.GetActivePlayer().transform;
         if (currentAction == null)
         {
             currentAction = setInitialState(GetComponentInParent<GuardGroup>());
@@ -121,17 +121,18 @@ public class GuardController : MonoBehaviour {
      */
     public void MoveTo(Transform transform)
     {
+        agent.enabled = true;
         setAnimBools(Mode.running);
         agent.SetDestination(transform.position);
     }
     
     public void GuardCatchPlayer()
     {
-        if (DetectPlayer() < 1.8f)
+        if (DetectPlayer() < 1.8f && DetectPlayer() > 0)
         {
             gameController.PlayerCatched();
-            //FindObjectOfType<SceneLoader>().ReloadCurrentScene();
         }
+
     }
     /**
     * This method is used by guards to find the player
@@ -179,7 +180,6 @@ public class GuardController : MonoBehaviour {
     public float DetectPlayer()
     {
         float distance = Vector3.Distance(target.position, transform.position);
-
         if (distance <= lookRadius)
         {
             return distance;
