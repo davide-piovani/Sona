@@ -313,8 +313,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 4
-  playerObject: {fileID: 0}
-  interactionTransform: {fileID: 4078264808321212}
 --- !u!222 &222365824281591466
 CanvasRenderer:
   m_ObjectHideFlags: 1

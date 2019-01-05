@@ -7,14 +7,15 @@ public class Interactable : MonoBehaviour {
 
     //radius in which player can interact
     public float radius = 4f;
+    private float textSize = 0.05f;
 
     bool isFocus = false;
     bool hasInteracted = false;
 
-    GameController gameManager;
+    GameController gameController;
     TextMeshPro text;
 
-    public GameObject player;
+    [HideInInspector] public GameObject player;
 
     /**
      * virtual method
@@ -27,27 +28,27 @@ public class Interactable : MonoBehaviour {
 
     public void Start ()
     {
-        //gameManager = FindObjectOfType<GameController>();
+        gameController = FindObjectOfType<GameController>();
         text = GetComponentInChildren<TextMeshPro>();
     }
 
 
     public void Update()
     {
-        //float distance = Vector3.Distance(gameManager.GetActivePlayer().transform.position, this.transform.position);
-        float distance = Vector3.Distance(player.transform.position, this.transform.position);
+
 
         if (Input.GetButtonDown("InteractButton") && !hasInteracted)
 
         {
-            if (distance <= radius)
+            if (getDistanceFromPlayer() <= radius)
             {
                 hasInteracted = true;
+                Debug.Log("Interacted");
                 Interact();
             }
         }
         //show text if player is close to the item and item haven't interacted yet 
-        if (distance <= radius)
+        if (getDistanceFromPlayer() <= radius)
         {
             ShowTooltip();
         }
@@ -59,13 +60,19 @@ public class Interactable : MonoBehaviour {
         
     }
 
+    public float getDistanceFromPlayer()
+    {
+        float distance = Vector3.Distance(gameController.GetActivePlayer().transform.position, transform.position);
+        return distance;
+    }
+    
     //focus method
     public void OnFocused(Transform playerTransform)
     {
         isFocus = true;
-        //player = playerTransform;
         hasInteracted = false;
     }
+    
 
     /**
      * Draw interaction radius
@@ -73,25 +80,29 @@ public class Interactable : MonoBehaviour {
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(this.transform.position, radius);
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 
+    
     //defocus method
     internal void onDefocus()
     {
         isFocus = false;
         hasInteracted = false;
     }
+    
 
     /**
      * This method is used to show the text and to position it on the player.
      */ 
     protected virtual void ShowTooltip()
     {
-        var CamPos = Camera.main.transform.position + Camera.main.transform.forward;
         text.enabled = true;
+        var playerCam = gameController.GetActivePlayer().gameObject.GetComponentInChildren<Camera>();
+        var CamPos = playerCam.transform.position + playerCam.transform.forward;
         text.transform.position = CamPos;
-        text.transform.localScale = Vector3.one * 0.025f;
+        text.transform.localScale = Vector3.one * textSize;
+        text.transform.rotation = playerCam.transform.rotation;
     }
 
     /**
