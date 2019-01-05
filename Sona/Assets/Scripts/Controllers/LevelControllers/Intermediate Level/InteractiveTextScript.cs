@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class InteractiveTextScript : MonoBehaviour {
 
-    float textSize = 0.05f;
+    float textSize = 0.1f;
 
     TextMeshPro _text;
     GameController gameController;

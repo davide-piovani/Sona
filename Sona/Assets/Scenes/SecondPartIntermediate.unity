@@ -4747,19 +4747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcafc5bcb1ed2d144997e4289bb25a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
---- !u!135 &93420710
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 93420707}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
+  radius: 1.5
 --- !u!1 &98643458 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 623bf345e33ef4822b41ef98a561e074,
@@ -12396,22 +12384,22 @@ Prefab:
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_text
-      value: Press B to Move the Platform
+      value: Press B
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.characterCount
-      value: 28
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.spaceCount
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.wordCount
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 23573962738606812, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
@@ -12427,12 +12415,20 @@ Prefab:
         type: 2}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
     - target: {fileID: 23997394432048442, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
+    - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
+        type: 2}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114989885332196582, guid: 9cd40c735c26a1d48bc4e048e84b9dcb, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 9cd40c735c26a1d48bc4e048e84b9dcb, type: 2}
@@ -18653,7 +18649,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &345152088
 Transform:
   m_ObjectHideFlags: 0
@@ -19747,7 +19743,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 368576546}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pud3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20637,8 +20633,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 536.99994, y: -324.99228}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 510, y: -256}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &378790697
 MonoBehaviour:
@@ -20688,6 +20684,9 @@ MonoBehaviour:
   _door1: {fileID: 2063054221}
   _door2: {fileID: 689404948}
   _combinationDoor: {fileID: 1506759893}
+  _key: {fileID: 21300000, guid: 840968c559c70814abe8bd1fae2dbdf0, type: 3}
+  _electronicUnlocker: {fileID: 21300000, guid: ff2c6ae59280b4945a9a4f092423ebcf,
+    type: 3}
 --- !u!1 &379127153
 GameObject:
   m_ObjectHideFlags: 0
@@ -23731,7 +23730,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 425163482}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pud0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28095,10 +28094,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Press B to pick up the key
+  m_text: Press B
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
+  m_sharedMaterial: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -28163,10 +28163,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 503168231}
-    characterCount: 26
+    characterCount: 7
     spriteCount: 0
-    spaceCount: 6
-    wordCount: 7
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -28213,7 +28213,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  - {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30328,22 +30328,22 @@ Prefab:
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_text
-      value: Press B to Move the Platform
+      value: Press B
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.characterCount
-      value: 28
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.spaceCount
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.wordCount
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 23573962738606812, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
@@ -30359,12 +30359,20 @@ Prefab:
         type: 2}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
     - target: {fileID: 23997394432048442, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
+    - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
+        type: 2}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114989885332196582, guid: 9cd40c735c26a1d48bc4e048e84b9dcb, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 9cd40c735c26a1d48bc4e048e84b9dcb, type: 2}
@@ -30976,6 +30984,81 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 623bf345e33ef4822b41ef98a561e074, type: 3}
+--- !u!1 &546409876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 546409877}
+  - component: {fileID: 546409879}
+  - component: {fileID: 546409878}
+  m_Layer: 0
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &546409877
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 546409876}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1706059530}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1000, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &546409878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 546409876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 0c2592166c1a8a64abfb7d11fbbc1741, type: 3}
+    m_FontSize: 200
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 200
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: New Text
+--- !u!222 &546409879
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 546409876}
+  m_CullTransparentMesh: 0
 --- !u!1 &547675323
 GameObject:
   m_ObjectHideFlags: 0
@@ -34306,7 +34389,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 609057844}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pud1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38988,7 +39071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcafc5bcb1ed2d144997e4289bb25a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
+  radius: 1.2
 --- !u!1001 &689698374
 Prefab:
   m_ObjectHideFlags: 0
@@ -39443,92 +39526,6 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 695662552}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &697880480
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 697880481}
-  - component: {fileID: 697880484}
-  - component: {fileID: 697880483}
-  - component: {fileID: 697880482}
-  m_Layer: 0
-  m_Name: Key
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &697880481
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 697880480}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
-  m_Children:
-  - {fileID: 1636089126}
-  m_Father: {fileID: 1944639831}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &697880482
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 697880480}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &697880483
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 697880480}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &697880484
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 697880480}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &700910582
 Prefab:
@@ -48211,10 +48208,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Press B to open/close the door
+  m_text: Press B
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
+  m_sharedMaterial: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -48279,10 +48277,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 853900282}
-    characterCount: 30
+    characterCount: 7
     spriteCount: 0
-    spaceCount: 5
-    wordCount: 7
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -48329,7 +48327,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  - {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -49114,7 +49112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &869603021
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49228,11 +49226,11 @@ MonoBehaviour:
     lineCount: 2
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -50085,10 +50083,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Press B to open/close the door
+  m_text: Press B
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
+  m_sharedMaterial: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -50153,10 +50152,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 884067352}
-    characterCount: 30
+    characterCount: 7
     spriteCount: 0
-    spaceCount: 5
-    wordCount: 7
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -50203,7 +50202,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  - {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -51431,22 +51430,22 @@ Prefab:
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_text
-      value: Press B to Move the Platform
+      value: Press B
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.characterCount
-      value: 28
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.spaceCount
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.wordCount
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 23573962738606812, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
@@ -51462,12 +51461,20 @@ Prefab:
         type: 2}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
     - target: {fileID: 23997394432048442, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
+    - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
+        type: 2}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114989885332196582, guid: 9cd40c735c26a1d48bc4e048e84b9dcb, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 9cd40c735c26a1d48bc4e048e84b9dcb, type: 2}
@@ -51509,19 +51516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcafc5bcb1ed2d144997e4289bb25a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
---- !u!135 &903253505
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 903253502}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
+  radius: 1.5
 --- !u!1001 &906275048
 Prefab:
   m_ObjectHideFlags: 0
@@ -53522,22 +53517,22 @@ Prefab:
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_text
-      value: Press B to open the door
+      value: Press B
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.characterCount
-      value: 24
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.spaceCount
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.wordCount
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 23573962738606812, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
@@ -53553,12 +53548,20 @@ Prefab:
         type: 2}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
     - target: {fileID: 23997394432048442, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
+    - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
+        type: 2}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114989885332196582, guid: 9cd40c735c26a1d48bc4e048e84b9dcb, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 9cd40c735c26a1d48bc4e048e84b9dcb, type: 2}
@@ -64831,7 +64834,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e8a924f417ee4584988c0bf5cf8243cc, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8a924f417ee4584988c0bf5cf8243cc, type: 3}
@@ -65424,7 +65427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1148096431}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pud2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65594,10 +65597,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Press B to Move the elevator
+  m_text: Press B
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
+  m_sharedMaterial: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -65662,10 +65666,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1148336984}
-    characterCount: 28
+    characterCount: 7
     spriteCount: 0
-    spaceCount: 5
-    wordCount: 6
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -65712,7 +65716,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  - {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -69673,10 +69677,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Press B to open/close the door
+  m_text: Press B
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
+  m_sharedMaterial: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -69741,10 +69746,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1216994628}
-    characterCount: 30
+    characterCount: 7
     spriteCount: 0
-    spaceCount: 5
-    wordCount: 7
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -69791,7 +69796,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  - {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78628,7 +78633,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e8a924f417ee4584988c0bf5cf8243cc, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8a924f417ee4584988c0bf5cf8243cc, type: 3}
@@ -84537,7 +84542,7 @@ GameObject:
   - component: {fileID: 1482142118}
   - component: {fileID: 1482142122}
   m_Layer: 11
-  m_Name: AirTube
+  m_Name: AirTubeDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84569,7 +84574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcafc5bcb1ed2d144997e4289bb25a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
+  radius: 1.2
 --- !u!1 &1483354532 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 4b0ef4d56455a40a0ba0a5763cbe4bee,
@@ -86298,7 +86303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcafc5bcb1ed2d144997e4289bb25a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
+  radius: 1.2
 --- !u!1 &1507419311
 GameObject:
   m_ObjectHideFlags: 0
@@ -89630,22 +89635,22 @@ Prefab:
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_text
-      value: Press B to open the door
+      value: Press B
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.characterCount
-      value: 24
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.spaceCount
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.wordCount
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 23573962738606812, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
@@ -89661,12 +89666,20 @@ Prefab:
         type: 2}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
     - target: {fileID: 23997394432048442, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
+    - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
+        type: 2}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114989885332196582, guid: 9cd40c735c26a1d48bc4e048e84b9dcb, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 9cd40c735c26a1d48bc4e048e84b9dcb, type: 2}
@@ -91159,22 +91172,22 @@ Prefab:
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_text
-      value: Press B to Move the Platform
+      value: Press B
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.characterCount
-      value: 28
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.spaceCount
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.wordCount
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 23573962738606812, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
@@ -91190,12 +91203,20 @@ Prefab:
         type: 2}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
     - target: {fileID: 23997394432048442, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
+    - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
+        type: 2}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114989885332196582, guid: 9cd40c735c26a1d48bc4e048e84b9dcb, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 9cd40c735c26a1d48bc4e048e84b9dcb, type: 2}
@@ -91237,19 +91258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcafc5bcb1ed2d144997e4289bb25a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
---- !u!135 &1618377993
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1618377990}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
+  radius: 1.5
 --- !u!1 &1618551831
 GameObject:
   m_ObjectHideFlags: 0
@@ -92165,11 +92174,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1636089125}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 697880481}
-  m_RootOrder: 0
+  m_Father: {fileID: 1944639831}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!108 &1636089127
 Light:
@@ -94550,10 +94559,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Press B to open/close the door
+  m_text: Press B
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
+  m_sharedMaterial: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -94618,10 +94628,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1676475096}
-    characterCount: 30
+    characterCount: 7
     spriteCount: 0
-    spaceCount: 5
-    wordCount: 7
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -94668,7 +94678,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  - {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94835,19 +94845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcafc5bcb1ed2d144997e4289bb25a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
---- !u!135 &1680116563
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1680116560}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
+  radius: 1.2
 --- !u!1 &1680600971
 GameObject:
   m_ObjectHideFlags: 0
@@ -95865,6 +95863,7 @@ RectTransform:
   m_Children:
   - {fileID: 435451509}
   - {fileID: 869603021}
+  - {fileID: 546409877}
   m_Father: {fileID: 1324200856}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -95885,7 +95884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _img: {fileID: 435451511}
-  _txt: {fileID: 869603022}
+  _txt: {fileID: 546409878}
 --- !u!1001 &1706211760
 Prefab:
   m_ObjectHideFlags: 0
@@ -96267,7 +96266,7 @@ Prefab:
       objectReference: {fileID: 9100000, guid: f0fabf801e404054da57af080cb80213, type: 2}
     - target: {fileID: 100000, guid: e8a924f417ee4584988c0bf5cf8243cc, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8a924f417ee4584988c0bf5cf8243cc, type: 3}
@@ -102373,7 +102372,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1820260297}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4, y: 7.77, z: -4.39}
+  m_LocalPosition: {x: -4, y: 7.77, z: -3.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1680116561}
@@ -105219,8 +105218,9 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Hold B to Stakeout
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
+  m_sharedMaterial: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -105335,7 +105335,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  - {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109105,7 +109105,7 @@ Prefab:
       objectReference: {fileID: 9100000, guid: f0fabf801e404054da57af080cb80213, type: 2}
     - target: {fileID: 100000, guid: e8a924f417ee4584988c0bf5cf8243cc, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8a924f417ee4584988c0bf5cf8243cc, type: 3}
@@ -110531,7 +110531,8 @@ Transform:
   m_LocalPosition: {x: -25.7, y: 1, z: 31.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 697880481}
+  - {fileID: 1947603499}
+  - {fileID: 1636089126}
   - {fileID: 2057258215}
   m_Father: {fileID: 1460243661}
   m_RootOrder: 2
@@ -110723,6 +110724,65 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 4b0ef4d56455a40a0ba0a5763cbe4bee, type: 3}
+--- !u!1001 &1947603498
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1944639831}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 161e3b54253f41949a6d6c884b2f42a7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 161e3b54253f41949a6d6c884b2f42a7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 161e3b54253f41949a6d6c884b2f42a7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 161e3b54253f41949a6d6c884b2f42a7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 161e3b54253f41949a6d6c884b2f42a7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 161e3b54253f41949a6d6c884b2f42a7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 161e3b54253f41949a6d6c884b2f42a7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 161e3b54253f41949a6d6c884b2f42a7, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 161e3b54253f41949a6d6c884b2f42a7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2255fdd75ad5bc041ae1ba30a2360b54, type: 2}
+    - target: {fileID: 400000, guid: 161e3b54253f41949a6d6c884b2f42a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 161e3b54253f41949a6d6c884b2f42a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 161e3b54253f41949a6d6c884b2f42a7, type: 3}
+  m_IsPrefabAsset: 0
+--- !u!4 &1947603499 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 161e3b54253f41949a6d6c884b2f42a7,
+    type: 3}
+  m_PrefabInternal: {fileID: 1947603498}
 --- !u!1001 &1948200691
 Prefab:
   m_ObjectHideFlags: 0
@@ -111143,7 +111203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec07cd4384027a441bed70f30cf1fdae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2.5
+  radius: 2
 --- !u!1 &1955654716
 GameObject:
   m_ObjectHideFlags: 0
@@ -116115,8 +116175,9 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
+  m_sharedMaterial: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -116231,7 +116292,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -116938,10 +116999,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Press B to pick up the key
+  m_text: Press B
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
+  m_sharedMaterial: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -117006,10 +117068,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2046217158}
-    characterCount: 26
+    characterCount: 7
     spriteCount: 0
-    spaceCount: 6
-    wordCount: 7
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -117056,7 +117118,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  - {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -117592,7 +117654,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2056145911}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ToxicLiquid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117734,7 +117796,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1944639831}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -117772,10 +117834,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Press B to pick up the key
+  m_text: Press B
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
+  m_sharedMaterial: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -117840,10 +117903,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2057258217}
-    characterCount: 26
+    characterCount: 7
     spriteCount: 0
-    spaceCount: 6
-    wordCount: 7
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -117890,7 +117953,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  - {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -118188,7 +118251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcafc5bcb1ed2d144997e4289bb25a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
+  radius: 1.2
 --- !u!1 &2063167696
 GameObject:
   m_ObjectHideFlags: 0
@@ -119383,10 +119446,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Press B to open/close the door
+  m_text: Press B
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
+  m_sharedMaterial: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -119451,10 +119515,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2084659511}
-    characterCount: 30
+    characterCount: 7
     spriteCount: 0
-    spaceCount: 5
-    wordCount: 7
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -119501,7 +119565,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  - {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -120281,22 +120345,22 @@ Prefab:
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_text
-      value: Press B to Move the Platform
+      value: Press B
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.characterCount
-      value: 28
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.spaceCount
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.wordCount
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 23573962738606812, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
@@ -120312,12 +120376,20 @@ Prefab:
         type: 2}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
     - target: {fileID: 23997394432048442, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
+    - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
+        type: 2}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114989885332196582, guid: 9cd40c735c26a1d48bc4e048e84b9dcb, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 9cd40c735c26a1d48bc4e048e84b9dcb, type: 2}
@@ -120359,19 +120431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcafc5bcb1ed2d144997e4289bb25a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
---- !u!135 &2093960622
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2093960619}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
+  radius: 1.5
 --- !u!1 &2094222955 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: f579a4e24ee264f37bbbc20973a7b2cd,
@@ -120506,22 +120566,22 @@ Prefab:
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_text
-      value: Press B to Move the Platform
+      value: Press B
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.characterCount
-      value: 28
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.spaceCount
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_textInfo.wordCount
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 23573962738606812, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
@@ -120546,12 +120606,20 @@ Prefab:
         type: 2}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
     - target: {fileID: 23997394432048442, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 21371913302600268, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
+    - target: {fileID: 114409351292830406, guid: 9cd40c735c26a1d48bc4e048e84b9dcb,
+        type: 2}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f56f053aae4544c4985a25b04e234abb,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114989885332196582, guid: 9cd40c735c26a1d48bc4e048e84b9dcb, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 9cd40c735c26a1d48bc4e048e84b9dcb, type: 2}
@@ -120582,19 +120650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcafc5bcb1ed2d144997e4289bb25a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
---- !u!135 &2095093732
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2095093728}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
+  radius: 1.5
 --- !u!114 &2095093733
 MonoBehaviour:
   m_ObjectHideFlags: 0
