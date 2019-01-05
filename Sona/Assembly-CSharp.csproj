@@ -140,9 +140,6 @@
     <Compile Include="Assets\Scripts\Items\AlarmScripts\Part2\Row9Scheme.cs" />
     <Compile Include="Assets\Scripts\Items\AlarmScripts\Part2\RowInterfaceP2.cs" />
     <Compile Include="Assets\Scripts\Items\AlarmScripts\Part2\StopWord.cs" />
-    <Compile Include="Assets\Scripts\Items\Allarm.cs" />
-    <Compile Include="Assets\Scripts\Items\CamerasDisableButton.cs" />
-    <Compile Include="Assets\Scripts\Items\CellDoor.cs" />
     <Compile Include="Assets\Scripts\Items\Doors\CombinationDoor\CombinationDisplay.cs" />
     <Compile Include="Assets\Scripts\Items\Doors\CombinationDoor\CombinationScheme.cs" />
     <Compile Include="Assets\Scripts\Items\Doors\CombinationDoor\InsertCombination.cs" />
@@ -154,7 +151,11 @@
     <Compile Include="Assets\Scripts\Items\Doors\DistanceDoor\DistanceController.cs" />
     <Compile Include="Assets\Scripts\Items\Doors\OpenCloseManager.cs" />
     <Compile Include="Assets\Scripts\Items\Doors\OpenDoor.cs" />
-    <Compile Include="Assets\Scripts\Items\Goal.cs" />
+    <Compile Include="Assets\Scripts\Items\First Level Item\Allarm.cs" />
+    <Compile Include="Assets\Scripts\Items\First Level Item\CamerasDisableButton.cs" />
+    <Compile Include="Assets\Scripts\Items\First Level Item\CellDoor.cs" />
+    <Compile Include="Assets\Scripts\Items\First Level Item\Goal.cs" />
+    <Compile Include="Assets\Scripts\Items\First Level Item\Key.cs" />
     <Compile Include="Assets\Scripts\Items\Infrared\InfraRedController.cs" />
     <Compile Include="Assets\Scripts\Items\Infrared\InfraRedsActivator.cs" />
     <Compile Include="Assets\Scripts\Items\Infrared\InfraRedScript.cs" />
@@ -162,7 +163,6 @@
     <Compile Include="Assets\Scripts\Items\Infrared\Ray2Controller.cs" />
     <Compile Include="Assets\Scripts\Items\Infrared\Ray3Controller.cs" />
     <Compile Include="Assets\Scripts\Items\Infrared\RayController.cs" />
-    <Compile Include="Assets\Scripts\Items\Key.cs" />
     <Compile Include="Assets\Scripts\Items\Turbine\GrateScript.cs" />
     <Compile Include="Assets\Scripts\Items\Turbine\TurbineController.cs" />
     <Compile Include="Assets\Scripts\NPC\Action.cs" />

@@ -101,20 +101,20 @@ public class GuardGroup : MonoBehaviour {
     {
         for (int i = 0; i < guards.Length; i++)
         {
-            //guards[i].MoveTo(transform);
             guards[i].target = transform;
-            //guards[i].setAction(new MovingSomewhere());
         }
     }
 
     void MoveToAllarm()
     {
+        //GoTo(gameController.GetActivePlayer().transform);
+        
         for (int i = 0; i < guards.Length; i++)
         {
-            //guards[i].MoveTo(transform);
-            //guards[i].target = transform;
-            guards[i].setAction(new MovingSomewhere());
+            guards[i].setAction(new Chase());
+            Debug.Log("Set chase action");
         }
+        
     }
 
     public void CallOtherGuards()
@@ -126,7 +126,6 @@ public class GuardGroup : MonoBehaviour {
     {
         for (int i = 0; i < guards.Length; i++)
         {
-            //guards[i].MoveTo(transform);
             guards[i].StopFollow(guards[i].target);
             guards[i].setAction(new LookingForSomeone());
         }
