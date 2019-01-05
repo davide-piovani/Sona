@@ -32,12 +32,15 @@ public class PauseController : MenuMovementController {
                     Resume();
                     break;
                 case 1:
-                    RestartFromLastCheckpoint();
+                    RestartLevel();
                     break;
                 case 2:
                     ShowSettings();
                     break;
                 case 3:
+                    Save();
+                    break;
+                case 4:
                     ReturnToMainMenu();
                     break;
             }
@@ -49,8 +52,8 @@ public class PauseController : MenuMovementController {
         gameObject.SetActive(false);
     }
 
-    private void RestartFromLastCheckpoint(){
-        print("RestartFromLastCheckpoint to be implemented");
+    private void RestartLevel(){
+        FindObjectOfType<GameController>().RestartLevel();
     }
 
     private void ShowSettings(){
@@ -59,6 +62,10 @@ public class PauseController : MenuMovementController {
         }
         settingsController.gameObject.SetActive(true);
         settingsController.SetAsUniqueInputListener(this);
+    }
+
+    private void Save() {
+        FindObjectOfType<SceneLoader>().GetGameSlot().Save();
     }
 
     private void ReturnToMainMenu() {
