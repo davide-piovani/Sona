@@ -51,37 +51,51 @@ public class Patrolling : Action
     {
         Transform destination;
         //Debug.Log("variable: " + controller.changedStateLately);
-        //get closer waypoint only when i change state to investigate
-        if (!controller.changedStateLately)
-        {
-            destination = CloserWaypoint(controller);
-            controller.changedStateLately = true;
-            //Debug.Log("variable: " + controller.changedStateLately);
+        //if (controller.noWaypointSetted)
+        /*{
+            destination = controller.waypoints[0];
+            float distance = Vector3.Distance(controller.waypoints[0].position, controller.transform.position);
+            Debug.Log("Distance: " + distance);
+            if (distance < 1.5f)
+            {
+                controller.Idle();
+            }
             return destination;
-        }
-        else
-        {
-            Transform finalDestination = null;
-            //I scan waypoints array in order to find index of my destination
-            for (int i = 0; i < controller.waypoints.Length; i++)
+        }*/
+       // else
+       // {
+            //get closer waypoint only when i change state to investigate
+            if (!controller.changedStateLately)
             {
-                //Debug.Log("Array Lenght: " + controller.waypoints.Length);
-                destination = controller.waypoints[i];
-                //if I dind that destination fit waypoint array element at i index then I save the index
-                if (destination.Equals(patrolDestination))
+                destination = CloserWaypoint(controller);
+                controller.changedStateLately = true;
+                //Debug.Log("variable: " + controller.changedStateLately);
+                return destination;
+            }
+            else
+            {
+                Transform finalDestination = null;
+                //I scan waypoints array in order to find index of my destination
+                for (int i = 0; i < controller.waypoints.Length; i++)
                 {
-                    finalDestination = calcolateNextWaypoint(destination, i, controller);
+                    //Debug.Log("Array Lenght: " + controller.waypoints.Length);
+                    destination = controller.waypoints[i];
+                    //if I dind that destination fit waypoint array element at i index then I save the index
+                    if (destination.Equals(patrolDestination))
+                    {
+                        finalDestination = calcolateNextWaypoint(destination, i, controller);
+                    }
                 }
-            }
-            if (finalDestination == null)
-            {
-                //Debug.Log("finalDestination è null OMG! Had to reset it!");
-                finalDestination = CloserWaypoint(controller);
-            }
-            //Debug.Log("Moving to: " + finalDestination.name);
-            return finalDestination;
+                if (finalDestination == null)
+                {
+                    //Debug.Log("finalDestination è null OMG! Had to reset it!");
+                    finalDestination = CloserWaypoint(controller);
+                }
+                //Debug.Log("Moving to: " + finalDestination.name);
+                return finalDestination;
 
-        }
+            }
+        //}  
     }
 
     private Transform calcolateNextWaypoint(Transform destination, int i, GuardController controller)

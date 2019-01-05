@@ -10,13 +10,15 @@ public class CharacterPortrait : MonoBehaviour {
     private Image portrait;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         controller = FindObjectOfType<GameController>();
         portrait = gameObject.GetComponent<Image>();
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         portrait.sprite = controller.GetActivePlayer().GetCharacterPortrait();
     }
 }

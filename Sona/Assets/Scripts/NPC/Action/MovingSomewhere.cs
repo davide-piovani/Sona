@@ -15,7 +15,7 @@ public class MovingSomewhere : Action
 
     private void MoveToTarget(GuardController controller)
     {
-        //Debug.Log("MovingSomewhere - Move to: " + controller.allarmTransform);
+        Debug.Log("MovingSomewhere - Move to: " + controller.allarmTransform);
         controller.MoveTo(controller.allarmTransform);
         
     }

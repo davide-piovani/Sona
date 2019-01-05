@@ -4,13 +4,52 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Allarm : Interactable{
+public class Allarm : MonoBehaviour{
+
+    GameController gameController;
+    public float radius = 3f;
+    bool allarmActive;
+    Light light;
+
+    public void Start()
+    {
+        gameController = FindObjectOfType<GameController>();
+        light = GetComponentInChildren<Light>();
+        allarmActive = true;
+    }
+
+    public void Update()
+    {
+        float distance = Vector3.Distance(gameController.GetActivePlayer().transform.position, transform.position);
+        if (distance <= radius)
+        {
+            if (gameController.GetActivePlayer().IsVisible() & allarmActive)
+            {
+                AllarmIsRinging();
+            }
+        }
+    }
 
     //If player interact with the allarm it rings and call for guards
-    public override void Interact()
+    public void AllarmIsRinging()
     {
         Debug.Log("You pressed the allarm!");
         EventManager.AllarmRinging();
+    }
+
+    public void deactiveAllarm()
+    {
+        light.enabled = false;
+        allarmActive = false;
+    }
+
+    /**
+ * Draw interaction radius
+ */
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(this.transform.position, radius);
     }
 
 }
