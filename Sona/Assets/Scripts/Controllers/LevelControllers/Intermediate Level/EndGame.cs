@@ -2,43 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PudController : MonoBehaviour {
+public class EndGame : MonoBehaviour {
 
     SceneLoader _sceneLoader;
     FadeInOut _fadeInOut;
-    Animator _animatorController;
-    float deltaTime;
-    
-    void Start()
-    {
+
+    void Start () {
         _sceneLoader = FindObjectOfType<SceneLoader>();
         _fadeInOut = FindObjectOfType<FadeInOut>();
-        _animatorController = GetComponent<Animator>();
     }
 
-    void Update()
+    void OnTriggerEnter(Collider other)
     {
-
-        deltaTime = TimeController.GetDelTaTime();
-        _animatorController.SetFloat("speed", deltaTime);
-
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-
-        if (collision.gameObject.CompareTag("Player"))
-        {
+        if (other.CompareTag("Player")) {
             StartCoroutine(Restart());
         }
     }
 
-    IEnumerator Restart() {
+    IEnumerator Restart()
+    {
         _fadeInOut.FadeOut();
         yield return new WaitUntil(() => _fadeInOut.GetImage().color.a == 1);
-        _fadeInOut.ShowText("YOU'RE DEAD");
+        _fadeInOut.ShowText("LEVEL COMPLETED");
         yield return new WaitForSeconds(2);
         _sceneLoader.ReloadCurrentScene();
+        // da cambiare e mettere passa al livello successivo
     }
-
 }
