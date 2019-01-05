@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 public abstract class Player : InputListener {
 
-    private Camera characterCamera;
+    protected Camera characterCamera;
     [SerializeField] Sprite characterPortrait;
 
     private float speed = PlayersConstants.runningSpeed;
@@ -22,7 +22,7 @@ public abstract class Player : InputListener {
     protected PlayerType type;
     //public bool active = true;
     public bool powerActive = false;
-    private GameController gameController;
+    protected GameController gameController;
 
     //Player inputs
     Vector3 direction;
@@ -35,7 +35,7 @@ public abstract class Player : InputListener {
 
     //private Rigidbody rb;
     private Animator anim;
-    private CapsuleCollider playerCollider;
+    protected CapsuleCollider playerCollider;
     private NavMeshAgent agent;
     private AudioSource audioSource;
     [SerializeField] GameObject avatar;
@@ -192,7 +192,7 @@ public abstract class Player : InputListener {
 
     private void ManagePlayerSpeedRotationAndAnimation(){
         if (direction.magnitude > Mathf.Epsilon){
-            if (direction.magnitude > PlayersConstants.runningMinimumMagnitude) {
+            if (direction.magnitude > PlayersConstants.runningMinimumMagnitude && !(CrossPlatformInputManager.GetButton("WalkButton"))) {
                 speed = PlayersConstants.runningSpeed;
                 SetAnimBools(Mode.running);
             } else {
