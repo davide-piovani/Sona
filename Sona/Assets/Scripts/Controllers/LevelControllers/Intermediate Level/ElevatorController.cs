@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using ApplicationConstants;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class ElevatorController : MonoBehaviour {
 
@@ -42,7 +44,7 @@ public class ElevatorController : MonoBehaviour {
         if (state == 0)
         {
 
-            if (Input.GetKeyDown(KeyCode.B))
+            if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/)
             {
 
                 if (_bottomDisplay.IsActive())
@@ -93,7 +95,7 @@ public class ElevatorController : MonoBehaviour {
             if (platform.PlayersOnPlatform()==playersInElevator & playersInElevator!=0 & _elevatorSensor.IsActive())
             {
                 _platformText.ShowText();
-                if (Input.GetKeyDown(KeyCode.B) & bottomDoor.IsOpen()) {
+                if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/ & bottomDoor.IsOpen()) {
                     _platformText.HideText();
                     bottomDoor.SlideDoor();
                     state = 5;
@@ -142,7 +144,7 @@ public class ElevatorController : MonoBehaviour {
             if (platform.PlayersOnPlatform()==playersInElevator & playersInElevator!=0)
             {
                 _platformText.ShowText();
-                if (Input.GetKeyDown(KeyCode.B) & topDoor.IsOpen()) {
+                if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/ & topDoor.IsOpen()) {
                     _platformText.HideText();
                     topDoor.SlideDoor();
                     state = 8;

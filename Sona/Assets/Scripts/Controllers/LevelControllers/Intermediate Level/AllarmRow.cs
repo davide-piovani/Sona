@@ -63,4 +63,31 @@ public class AllarmRow : MonoBehaviour {
         }
         
     }
+
+    public void ResetSquares() {
+
+        for (int i = 0; i< 10; i++) {
+            _rowScheme[0, i] = false; 
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            _rowScheme[1, i] = true;
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            _rowScheme[2, i] = false;
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            _rowScheme[3, i] = true;
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            _rowScheme[4, i] = false;
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            _rowScheme[5, i] = true;
+        }
+    }
 }

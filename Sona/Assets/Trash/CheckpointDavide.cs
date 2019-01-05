@@ -5,21 +5,19 @@ using ApplicationConstants;
 
 public class CheckpointDavide : MonoBehaviour {
 
-    private CheckpointController controller;
-    [SerializeField] Quaternion rotation;
-    [SerializeField] Material reachedColor;
+    private GameController gameController;
+    [SerializeField] Material checkpointLightColorWhenReached;
     [SerializeField] Renderer checkpointLight;
 
     private void Start(){
-        controller = FindObjectOfType<CheckpointController>();
+        gameController = FindObjectOfType<GameController>();
     }
 
     private void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == PlayersConstants.playerTag){
             print("Checkpoint raggiunto");
-            Player player = other.gameObject.GetComponent<Player>();
-            controller.NewCheckpointReached(player, transform.position, rotation);
-            checkpointLight.material = reachedColor;
+            gameController.CheckpointReached();
+            checkpointLight.material = checkpointLightColorWhenReached;
         }
     }
 

@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class PudController : MonoBehaviour {
 
+    SceneLoader _sceneLoader;
+    FadeInOut _fadeInOut;
     Animator _animatorController;
     float deltaTime;
     
     void Start()
     {
+        _sceneLoader = FindObjectOfType<SceneLoader>();
+        _fadeInOut = FindObjectOfType<FadeInOut>();
         _animatorController = GetComponent<Animator>();
     }
 
@@ -25,7 +29,16 @@ public class PudController : MonoBehaviour {
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("MORTOOOOOOOOOOO " + gameObject.name);
+            StartCoroutine(Restart());
         }
     }
+
+    IEnumerator Restart() {
+        _fadeInOut.FadeOut();
+        yield return new WaitUntil(() => _fadeInOut.GetImage().color.a == 1);
+        _fadeInOut.ShowText("YOU'RE DEAD");
+        yield return new WaitForSeconds(2);
+        _sceneLoader.ReloadCurrentScene();
+    }
+
 }

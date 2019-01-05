@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityStandardAssets.CrossPlatformInput;
+using ApplicationConstants;
 
 public class Stakeout : MonoBehaviour {
 
@@ -23,6 +25,7 @@ public class Stakeout : MonoBehaviour {
     int state = 0;
     bool playerMoveTowardsWall = false;
     bool playerInMovement = false;
+    bool leanLeft = false;
 
     void Start()
     {
@@ -68,7 +71,7 @@ public class Stakeout : MonoBehaviour {
 
         if (state == 0)
         {
-            if (Input.GetKey(KeyCode.C) & _display.IsActive())
+            if (CrossPlatformInputManager.GetButton(PlayersConstants.interactButton) /*Input.GetKey(KeyCode.C)*/ & _display.IsActive())
             {
                 _gameController.PauseActive(false); /*prova per vedere se funziona*/
                 _gameController.ChangePlayerActive(false); /*prova per vedere se funziona*/
@@ -81,7 +84,9 @@ public class Stakeout : MonoBehaviour {
         }
         else if (state == 1)
         {
-            if (!Input.GetKey(KeyCode.C)) {
+
+            if (!CrossPlatformInputManager.GetButton(PlayersConstants.interactButton)/*Input.GetKey(KeyCode.C)*/) {
+                PlayerLean(false); /* ANIMATION */
                 MovePlayerAwayFromWall();
                 _cameraMovement.MoveCameraBack();
                 state = 2;
@@ -102,11 +107,13 @@ public class Stakeout : MonoBehaviour {
     }
 
     void InitialSettings() {
+        PlayerScriptsActive(false);
+        PlayerInIdle(); /* ANIMATION */
         SetInitialPositions();
         SetSensorToActive();
         SetCamPosAndRot();
-        PlayerScriptsActive(false);
         WallCamActive(true);
+        PlayerLean(true); /* ANIMATION */
     }
 
     void SetInitialPositions() {
@@ -114,6 +121,30 @@ public class Stakeout : MonoBehaviour {
         _initialPlayerRotation = _display.GetPlayer().GetComponentsInChildren<Transform>()[1].rotation;
         _initialPlayerCamPosition = _display.GetPlayer().gameObject.GetComponentInChildren<Camera>().transform.position;
         _initialPlayerCamRotation = _display.GetPlayer().gameObject.GetComponentInChildren<Camera>().transform.rotation;
+    }
+
+    void PlayerInIdle() {
+        if (_display.GetPlayer().GetComponent<Animator>().GetBool("isRunning"))
+        {
+            _display.GetPlayer().GetComponent<Animator>().SetBool("isRunning", false);
+        }
+        /*if (_display.GetPlayer().GetComponent<Animator>().GetBool("isWalking"))
+        {
+            _display.GetPlayer().GetComponent<Animator>().SetBool("isWalking", false);
+        }*/
+        if (!_display.GetPlayer().GetComponent<Animator>().GetBool("isIdle")) {
+            _display.GetPlayer().GetComponent<Animator>().SetBool("isIdle", true);
+        }
+    }
+
+    void PlayerLean(bool cond) {
+        _display.GetPlayer().GetComponent<Animator>().SetBool("isIdle", !cond);
+        if (leanLeft) {
+            _display.GetPlayer().GetComponent<Animator>().SetBool("isLeanLeft", cond);
+        }
+        else {
+            _display.GetPlayer().GetComponent<Animator>().SetBool("isLeanRight", cond);
+        }
     }
 
     void SetSensorToActive() {
@@ -130,10 +161,12 @@ public class Stakeout : MonoBehaviour {
 
         if (dist1 <= dist2)
         {
+            leanLeft = false;
             _playerTargetPosition = _sensor1.transform.position;
             _playerTargetRotation = _sensor1.transform.rotation;
         }
         else {
+            leanLeft = true;
             _playerTargetPosition = _sensor2.transform.position;
             _playerTargetRotation = _sensor2.transform.rotation;
         }

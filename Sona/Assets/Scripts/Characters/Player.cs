@@ -273,6 +273,7 @@ public abstract class Player : InputListener {
         //this.active = false;
         characterCamera.enabled = false;
         characterCamera.gameObject.GetComponent<AudioListener>().enabled = false;
+        audioSource.Stop();
         //SetAnimBools(Mode.idle);
         //ResetInputs();
         DisableInput();

@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using ApplicationConstants;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class InteractiveTextScript : MonoBehaviour {
 

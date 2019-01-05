@@ -10,7 +10,7 @@ public class SearchDecision : Decision
         //Debug.Log("Seatch decision tree");
         if ( (distanceFromLastPosition < 5f) && !controller.Investigate())
         {
-            //Debug.Log("Looking for someone");
+            Debug.Log("Looking for someone");
             controller.MoveTo(controller.allarmTransform);
             return new LookingForSomeone();
         }
@@ -18,12 +18,12 @@ public class SearchDecision : Decision
         {
             if (controller.Investigate())
             {
-                //Debug.Log("Chase tree decision");
+                Debug.Log("Chase tree decision");
                 return new Chase();
             }
             else
             {
-                //Debug.Log("MovingSomewhere");
+                Debug.Log("MovingSomewhere");
                 //Debug.Log("Distance: " + distanceFromLastPosition);
                 //Debug.Log("Investigate: " + controller.Investigate());
                 return new MovingSomewhere();

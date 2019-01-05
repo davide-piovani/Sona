@@ -83,6 +83,8 @@ ModelImporter:
     7400010: Character2|Corsa2
     7400012: Character2|Idle2
     7400014: Character2|salto2
+    7400016: Lean.left2
+    7400018: lean.right2
     9500000: //RootNode
     13700000: Circle
   externalObjects: {}

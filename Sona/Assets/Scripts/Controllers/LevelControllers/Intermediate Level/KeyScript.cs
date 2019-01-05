@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using ApplicationConstants;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class KeyScript : MonoBehaviour {
 
@@ -15,7 +17,7 @@ public class KeyScript : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.B) & _display.IsActive())
+        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/ & _display.IsActive())
         {
             keyDoorController.KeyTaken(_display.GetPlayer().name);
             gameObject.SetActive(false);

@@ -18,11 +18,17 @@ public class ActiveCharacterController : MonoBehaviour {
         }
     }
 
-    private void Start(){
+    public void DeactiveAll(){
         for (int i = 0; i < players.Length; i++){
             players[i].Deactivate();
         }
-        ActivePlayer(startingPlayer);
+    }
+
+    private void Start(){
+        /*for (int i = 0; i < players.Length; i++){
+            players[i].Deactivate();
+        }
+        ActivePlayer(startingPlayer);*/
     }
 
     private void ActivePlayer(int index){

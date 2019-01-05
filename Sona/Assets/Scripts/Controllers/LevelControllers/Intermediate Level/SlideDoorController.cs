@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using ApplicationConstants;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class SlideDoorController : MonoBehaviour {
 
@@ -15,7 +17,7 @@ public class SlideDoorController : MonoBehaviour {
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.B) & _display.IsActive() & !_door.IsSliding())
+        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/ & _display.IsActive() & !_door.IsSliding())
         {
             _door.SlideDoor();
         }
