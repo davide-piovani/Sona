@@ -9,6 +9,7 @@ public class Circuitry : Interactable {
     private bool component = false;
     public bool shutDown = false;
     private bool active = false;
+    private bool repaired = false;
     
 
     public override void Interact(){
@@ -21,6 +22,7 @@ public class Circuitry : Interactable {
             resetInteraction();
         } else if(shutDown) {
             print ("repairing");
+            repaired = true;
             manager.repair();
         } else {
             resetInteraction();
@@ -39,7 +41,7 @@ public class Circuitry : Interactable {
             } else {
                 manager.ShowMessage("Not with component", 1);
             }
-        } else if (component){
+        } else if (component && !repaired){
                 manager.ShowMessage("Repair", 0);
         }
     }

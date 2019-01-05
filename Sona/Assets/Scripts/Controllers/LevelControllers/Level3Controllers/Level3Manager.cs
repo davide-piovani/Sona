@@ -17,6 +17,7 @@ public class Level3Manager : MonoBehaviour {
     public Circuitry circ;
     public UIManager toScreen;
     private GameController controller;
+    private bool newMessage;
 
     // Use this for initialization
     void Start () {
@@ -38,6 +39,10 @@ public class Level3Manager : MonoBehaviour {
         for (i=0; i<switches.Length; i++){
             switches[i].manager = this;
         }
+        box.manager = this;
+        gen.manager = this;
+        circ.manager = this;
+
         box.GetComponent<Transform>().position = positions[UnityEngine.Random.Range(0,2)];
     }
 
@@ -56,6 +61,11 @@ public class Level3Manager : MonoBehaviour {
             }
         }
         
+        if (newMessage){
+            newMessage = false;
+        } else {
+            toScreen.EraseMessage();
+        }
     }
 
     public void ActivateTorch() {
@@ -105,6 +115,7 @@ public class Level3Manager : MonoBehaviour {
     //Show message on the center of the screen
     public void ShowMessage (String message, int priority){
         toScreen.ShowMessage (message, priority);
+        newMessage = true;
     }
 
     //Erase message from screen

@@ -20,7 +20,7 @@ public class DuctController : MonoBehaviour {
         //other = collision.collider;
         if (other.CompareTag(PlayersConstants.playerTag) && active){
             Player player = other.gameObject.GetComponent<Player>();
-            if (player.GetPlayerType() == PlayerType.Charlie){
+            if (player.GetPlayerType() == PlayerType.Charlie && player.IsInputActive()){
                 manager.ShowMessage("Crouch", 0);
                 //print("DUCT CONTROLLER: considering collision");
                 if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)){
@@ -36,7 +36,7 @@ public class DuctController : MonoBehaviour {
                     active = false;
                     }
                 }
-            } else {
+            } else if (player.IsInputActive()) {
                 manager.ShowMessage("Only Charlie can pass through here", 0);
             }
         }

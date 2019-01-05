@@ -37,6 +37,8 @@ public class Charlie : Player {
             print("CHARLIE: Begun movement");
         } else if (characterCamera.transform.position == (gameObject.transform.position + playerCollider.center)){
             ActiveInput();
+            SkinnedMeshRenderer renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+            renderer.enabled = false;
             playerCollider.height = c_height;
             gameObject.transform.position = gameObject.transform.position - new Vector3(0, 0.55f, 0);
             print("CHARLIE: End movement");
@@ -47,6 +49,8 @@ public class Charlie : Player {
 
     public bool Stand (){
         CameraController camera = GetComponentInChildren<CameraController>();
+        SkinnedMeshRenderer renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        renderer.enabled = true;
         playerCollider.height = n_heigth;
         camera.MoveToThird();
         gameController.ChangePlayerActive(true);
