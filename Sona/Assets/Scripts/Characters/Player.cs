@@ -40,6 +40,8 @@ public abstract class Player : InputListener {
     private AudioSource audioSource;
     [SerializeField] GameObject avatar;
 
+    private Vector3 dest;
+
     public bool IsPowerActive() { return powerActive; }
     public Camera GetCharacterCamera() { return characterCamera; }
 
@@ -103,7 +105,7 @@ public abstract class Player : InputListener {
             radius = GetComponent<CapsuleCollider>().radius * (GetComponent<Transform>()).localScale[2];
         }
 
-        layerMask = 1 << 8 | 1 << 10 | 1 << 11 | 1 << 13;
+        layerMask = 1 << 8 | 1 << 10 | 1 << 11 | 1 << 13 | 1 << 14;
         float localScale = (transform.localScale[0] > transform.localScale[2]) ? 
             (transform.localScale[0]) : (transform.localScale[2]);
 
@@ -116,7 +118,9 @@ public abstract class Player : InputListener {
             GetPlayerDirection();
             MoveCharacter();
             ManagePower();
-        }
+        } /*else {
+
+        }*/
 
         CheckPowerDuration();
     }
