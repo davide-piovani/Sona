@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using TMPro;
 
 public class Door : Interactable {
@@ -11,6 +12,7 @@ public class Door : Interactable {
     private Vector3 rotation = new Vector3 (0,90,0);
     public Level3Manager manager;
     private bool active = false;
+    private NavMeshSurface surface;
 
     public override void Interact(){
             print ("interacting");
@@ -20,6 +22,7 @@ public class Door : Interactable {
                 gameObject.layer = 13;
                 open = true;
                 manager.EraseMessage();
+                //surface.BuildNavMesh();
             } else {
                 resetInteraction();
             }
@@ -40,6 +43,7 @@ public class Door : Interactable {
         open = false;
         print ("fixed point: " + fixedPoint);*/
         radius = 2;
+        surface = FindObjectOfType<NavMeshSurface>();
     }
 
     public void SetManager (Level3Manager manager){
