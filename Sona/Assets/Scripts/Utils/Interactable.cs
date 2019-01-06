@@ -14,6 +14,7 @@ public class Interactable : MonoBehaviour {
 
     GameController gameController;
     TextMeshPro text;
+    DialogHelper dialogHelper;
 
     [HideInInspector] public GameObject player;
 
@@ -30,12 +31,12 @@ public class Interactable : MonoBehaviour {
     {
         gameController = FindObjectOfType<GameController>();
         text = GetComponentInChildren<TextMeshPro>();
+        dialogHelper = FindObjectOfType<DialogHelper>();
     }
 
 
     public void Update()
     {
-
 
         if (Input.GetButtonDown("InteractButton") && !hasInteracted)
 
@@ -48,7 +49,7 @@ public class Interactable : MonoBehaviour {
             }
         }
         //show text if player is close to the item and item haven't interacted yet 
-        if (getDistanceFromPlayer() <= radius)
+        if (getDistanceFromPlayer() <= radius && !hasInteracted && !dialogHelper.dialogHelperIsActive())
         {
             ShowTooltip();
         }
