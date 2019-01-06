@@ -6,3 +6,8 @@ Sona/Temp/*
 *.cache
 Sona/.vs/*
 Sona/Library/*
+Sona/Library/ScriptAssemblies/Assembly-CSharp.dll
+Sona/Library/ScriptAssemblies/Assembly-CSharp.dll.mdb
+Sona/Library/assetDatabase3
+Sona/Library/expandedItems
+Sona/obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
