@@ -36,7 +36,7 @@ public class ScanDecision : Decision
             else
             {
                 controller.FaceTarget(controller.GetPlayerPosition());
-                if (controller.Investigate() || controller.DetectPlayer() < controller.catchingRadius)
+                if ((controller.Investigate() || controller.DetectPlayer() < controller.catchingRadius) && controller.HannaIsVisible())
                 {
                     return new Chase();
                 }

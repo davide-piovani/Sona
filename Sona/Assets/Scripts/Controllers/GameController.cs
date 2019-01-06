@@ -165,4 +165,10 @@ public class GameController : InputListener {
         ReloadFromLastCheckpoint();
     }
 
+
+    /*private void Follow() {
+        Player[] allPlayers;
+
+        allPlayers = characterController.GetScenePlayer();
+    }*/
 }

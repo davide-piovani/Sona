@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 using ApplicationConstants;
 
 public class Charlie : Player {
@@ -38,9 +39,11 @@ public class Charlie : Player {
         } else if (characterCamera.transform.position == (gameObject.transform.position + playerCollider.center)){
             ActiveInput();
             SkinnedMeshRenderer renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+            GetComponent<NavMeshAgent>().enabled = false;
             renderer.enabled = false;
             playerCollider.height = c_height;
-            gameObject.transform.position = gameObject.transform.position - new Vector3(0, 0.55f, 0);
+            gameObject.transform.position = gameObject.transform.position - new Vector3 (0,0.55f,0);
+            print("CHARLIE: EndPosition: " + gameObject.transform.position);
             print("CHARLIE: End movement");
             return (true);
         }
@@ -48,13 +51,18 @@ public class Charlie : Player {
     }
 
     public bool Stand (){
-        CameraController camera = GetComponentInChildren<CameraController>();
-        SkinnedMeshRenderer renderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        renderer.enabled = true;
-        playerCollider.height = n_heigth;
-        camera.MoveToThird();
-        gameController.ChangePlayerActive(true);
-        crouching = false;
+        //Vector3 startRay = gameObject.transform.position + new Vector3(0, 0.5f, 0);
+        //Debug.DrawRay(startRay, Vector3.down, Color.white, Mathf.Infinity);
+        //if(!Physics.Raycast(startRay, Vector3.down, Mathf.Infinity, 1<<15)){
+            CameraController camera = GetComponentInChildren<CameraController>();
+            SkinnedMeshRenderer renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+            renderer.enabled = true;
+            playerCollider.height = n_heigth;
+            GetComponent<NavMeshAgent>().enabled = true;
+            camera.MoveToThird();
+            gameController.ChangePlayerActive(true);
+            crouching = false;
+        //}
         return true;
     }
 }
