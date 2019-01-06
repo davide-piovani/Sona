@@ -18,42 +18,31 @@ public class CellDoor : Interactable
     Quaternion initialRotation;
     Quaternion targetRotation;
     Collider collider;
+    DialogHelper dialogHelper;
 
 
     new void Start()
     {
-        collider = GetComponent<Collider>();
+
         base.Start();
         initialRotation = transform.rotation;
+        dialogHelper = FindObjectOfType<DialogHelper>();
+        collider = GetComponent<Collider>();
         Vector3 dir = new Vector3(eulerX, eulerY, eulerZ);
         targetRotation = Quaternion.Euler(transform.rotation.eulerAngles + dir);
         key = FindObjectOfType<Key>();
         radius = 2f;
     }
 
+    
     new void Update()
     {
         base.Update();
-        if (Input.GetKeyDown(KeyCode.B) & key.getKeyTaken() & (open | close) & getDistanceFromPlayer() < 2)
-        {
-            if (open)
-            {
-                open = false;
-                opening = false;
-            }
-            else
-            {
-                close = false;
-                opening = true;
-            }
-        }
-
         if (!open & !close)
         {
 
             if (opening)
             {
-
                 if (transform.rotation != targetRotation)
                 {
                     transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
@@ -77,7 +66,27 @@ public class CellDoor : Interactable
                 }
             }
         }
+    }
+    
 
+    public override void Interact()
+    {
+
+        if (key.getKeyTaken() & (open | close) & getDistanceFromPlayer() < 2)
+        {
+            if (open)
+            {
+                open = false;
+                opening = false;
+            }
+            else
+            {
+                close = false;
+                opening = true;
+                dialogHelper.TutorialDoorOpenPointReached();
+            }
+        }
+        resetInteraction();
 
     }
 }
