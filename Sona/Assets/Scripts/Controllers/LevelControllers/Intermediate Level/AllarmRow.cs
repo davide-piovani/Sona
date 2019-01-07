@@ -57,6 +57,9 @@ public class AllarmRow : MonoBehaviour {
                 _squares[j].gameObject.GetComponent<Renderer>().material = _safe;
             }
             else {
+                print("j: " + j + " name: " + gameObject.name);
+                if (_squares[j] == null) print("square null");
+                else print("non null");
                 _squares[j].Safe(false);
                 _squares[j].gameObject.GetComponent<Renderer>().material = _allarmed;
             }

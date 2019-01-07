@@ -6,9 +6,9 @@ public class Torch : MonoBehaviour {
 
     public GameObject cam;
 
-    private Light light;
+    private Light torchLight;
     private Animator anim;
-    private Renderer renderer;
+    private Renderer torchRenderer;
     private float base_intensity;
     private Vector3 w_position;
     private Vector3 i_position;
@@ -21,36 +21,36 @@ public class Torch : MonoBehaviour {
 
         tr = GetComponent<Transform>();
         parent = tr.parent;
-        light = GetComponentInChildren<Light>();
-        renderer = GetComponent<Renderer>();
+        torchLight = GetComponentInChildren<Light>();
+        torchRenderer = GetComponent<Renderer>();
         main = parent.parent;
         anim = main.gameObject.GetComponent<Animator> ();
 
         w_position = new Vector3 (0.00153f, -0.00114f, 0.00025f);
         i_position = new Vector3 (0.00218f, -0.00083f, -0.00063f);
 
-        if (light == null || anim == null || renderer == null){
+        if (torchLight == null || anim == null || torchRenderer == null){
             print ("Missing fundamental component");
             Destroy (gameObject);
         }
-        base_intensity = light.intensity;	
+        base_intensity = torchLight.intensity;	
     }
 	
     // Update is called once per frame
     void Update () {
         if (anim.GetBool ("isWalking")){
             tr.localPosition = w_position;
-            light.intensity = base_intensity;
-            renderer.enabled = true;
+            torchLight.intensity = base_intensity;
+            torchRenderer.enabled = true;
             //RotateLight();
         } else if (anim.GetBool("isIdle")){
             tr.localPosition = i_position;
-            light.intensity = base_intensity;
-            renderer.enabled = true;
+            torchLight.intensity = base_intensity;
+            torchRenderer.enabled = true;
             //RotateLight();
         } else {
-            light.intensity = 0f;
-            renderer.enabled = false;
+            torchLight.intensity = 0f;
+            torchRenderer.enabled = false;
         }
     }
 

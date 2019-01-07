@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour {
     private bool active = true;
 	
     private Player player;
-    private CapsuleCollider collider;
+    private CapsuleCollider cameraCollider;
 
     // Use this for initialization
     void Start () {
@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour {
         c_dist = 0.3f;
 
         player = GetComponentInParent<Player>();
-        collider = GetComponentInParent<CapsuleCollider>();
+        cameraCollider = GetComponentInParent<CapsuleCollider>();
         //offset = player.transform.position - tr.position;
         //base_dist = offset.magnitude;
         base_dist = 3;
@@ -72,7 +72,7 @@ public class CameraController : MonoBehaviour {
 
         CheckInputs();
 
-        target = player.transform.position + collider.center;
+        target = player.transform.position + cameraCollider.center;
         if (Mathf.Abs(v_rotation) > Mathf.Epsilon){
             new_rotation = Quaternion.AngleAxis (v_rotation, Vector3.right);
             tr.rotation = tr.rotation * new_rotation;

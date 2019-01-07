@@ -11,7 +11,7 @@ public class EventManager : MonoBehaviour {
     public static event GuardIsCalling GuardIsCallingMethods;
 
     public delegate void ChangeState();
-    public static event ChangeState ChangeStateMethods;
+    //public static event ChangeState ChangeStateMethods;
 
 
     public static void AllarmRinging()

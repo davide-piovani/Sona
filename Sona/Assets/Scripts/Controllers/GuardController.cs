@@ -28,7 +28,7 @@ public class GuardController : MonoBehaviour {
     //Variables for line of sight
     [HideInInspector] public float heightMultiplier;
     [HideInInspector] public float viewDistance = 20f;
-    private float searchingTurnSpeed = 0.2f;
+    //private float searchingTurnSpeed = 0.2f;
     [HideInInspector] public float catchingRadius;
 
     [HideInInspector] public SpriteRenderer lockSpright;
@@ -45,7 +45,7 @@ public class GuardController : MonoBehaviour {
 
     //variables for investigation
     private Vector3 investigateSpot;
-    private float investigateWait = 150f;
+    //private float investigateWait = 150f;
 
 
     private float stateTimeElapsed;

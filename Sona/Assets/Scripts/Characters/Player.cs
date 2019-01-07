@@ -97,13 +97,13 @@ public abstract class Player : InputListener {
     }
 
     private void ManageLayers(){
-        float radius;
+        /*float radius;
 
         if (GetComponent<Transform>().localScale[0] > GetComponent<Transform>().localScale[2]) {
             radius = GetComponent<CapsuleCollider>().radius * (GetComponent<Transform>()).localScale[0];
         } else {
             radius = GetComponent<CapsuleCollider>().radius * (GetComponent<Transform>()).localScale[2];
-        }
+        }*/
 
         layerMask = 1 << 8 | 1 << 10 | 1 << 11 | 1 << 13 | 1 << 14;
         float localScale = (transform.localScale[0] > transform.localScale[2]) ? 

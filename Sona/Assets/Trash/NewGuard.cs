@@ -3,7 +3,7 @@ using UnityEngine;
 using ApplicationConstants;
 
 public class NewGuard : MonoBehaviour {
-    GuardState state;
+    //GuardState state;
 
     [SerializeField] float viewDistance = 15f;
     float viewAngle = GuardConstants.guardVisionAngle;
@@ -143,7 +143,7 @@ public class NewGuard : MonoBehaviour {
      * This method is used to change guard state
      */
     public void ChangeState(GuardState newState){
-        state = newState;
+        //state = newState;
         viewDistance = newState.GetRadius();
     }
 }
