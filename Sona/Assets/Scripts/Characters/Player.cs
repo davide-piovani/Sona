@@ -38,7 +38,7 @@ public abstract class Player : InputListener {
     protected CapsuleCollider playerCollider;
     private NavMeshAgent agent;
     private AudioSource audioSource;
-    [SerializeField] GameObject avatar;
+    private GameObject avatar;
 
     private Vector3 dest;
 
@@ -266,20 +266,17 @@ public abstract class Player : InputListener {
 
     
     public void Activate (){
-        //this.active = true;
-        characterCamera.enabled = true;
+        characterCamera.GetComponent<CameraController>().Activate();
+        //characterCamera.enabled = true;
         characterCamera.gameObject.GetComponent<AudioListener>().enabled = true;
-        //ResetInputs();
         ActiveInput();
     }
 
     public void Deactivate (){
-        //this.active = false;
-        characterCamera.enabled = false;
+        characterCamera.GetComponent<CameraController>().Deactivate();
+        //characterCamera.enabled = false;
         characterCamera.gameObject.GetComponent<AudioListener>().enabled = false;
         audioSource.Stop();
-        //SetAnimBools(Mode.idle);
-        //ResetInputs();
         DisableInput();
         if (anim != null){
             SetAnimBools (Mode.idle);

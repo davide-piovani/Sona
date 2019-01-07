@@ -59,12 +59,16 @@ namespace ApplicationConstants {
     }
 
     public class GuardConstants {
-        public static float guardWalkingSpeed = 1f;
-        public static float guardRunningSpeed = 2.2f;
+        public static float guardWalkingSpeed = 10f;
+        public static float guardRunningSpeed = 40f;
+
+        public static float guardLookRadius = 15f;
+        public static float guardCatchingRadius = 4f;
+
         public static float guardVisionAngle = 85f;
         public static float playerCatchedMaxDistance = 1.4f;
 
-        public static int[] guardSightCollisionLayers = {9, 11};
+        public static int[] guardSightCollisionLayers = {9, 10, 11};
 
         public static string guardTag = "Guard";
     }

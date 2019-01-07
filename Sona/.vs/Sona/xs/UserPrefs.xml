@@ -1,10 +1,14 @@
 ﻿<Properties StartupConfiguration="{F070CAF0-2AF1-6984-1F52-380ADDB611DD}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Controllers/GameController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Controllers/CameraController.cs">
     <Files>
-      <File FileName="Assets/Scripts/Controllers/GameController.cs" Line="178" Column="52" />
-      <File FileName="Assets/Scripts/Utils/Interactable.cs" Line="95" Column="8" />
-      <File FileName="Assets/AlarmLight.cs" Line="13" Column="32" />
-      <File FileName="Assets/Scripts/Utils/ApplicationConstant.cs" Line="12" Column="52" />
+      <File FileName="Assets/Scripts/Utils/ApplicationConstant.cs" Line="61" Column="34" />
+      <File FileName="Assets/Scripts/Controllers/GuardController.cs" Line="161" Column="55" />
+      <File FileName="Assets/Scripts/NPC/Action/LookingForSomeone.cs" Line="26" Column="34" />
+      <File FileName="Assets/Scripts/NPC/Decision/ScanDecision.cs" Line="37" Column="14" />
+      <File FileName="Assets/Scripts/NPC/Action/Patrolling.cs" Line="151" Column="37" />
+      <File FileName="Assets/Scripts/NPC/Action/Chase.cs" Line="32" Column="78" />
+      <File FileName="Assets/Scripts/NPC/Decision/LookDecision.cs" Line="28" Column="40" />
+      <File FileName="Assets/Scripts/Controllers/CameraController.cs" Line="147" Column="13" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

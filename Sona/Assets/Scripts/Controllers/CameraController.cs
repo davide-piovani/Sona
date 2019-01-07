@@ -6,7 +6,7 @@ using ApplicationConstants;
 
 public class CameraController : MonoBehaviour {
 
-    private const float rot_speed = 2.5f;
+    private const float rot_speed = 3.5f;
     //private const float narrow = 2.5f;
     private const float speed = 2f;
 
@@ -40,8 +40,8 @@ public class CameraController : MonoBehaviour {
         collider = GetComponentInParent<CapsuleCollider>();
         //offset = player.transform.position - tr.position;
         //base_dist = offset.magnitude;
-        base_dist = 2;
-        tr.rotation = Quaternion.Euler(15, 0, 0);
+        base_dist = 3;
+        tr.localRotation = Quaternion.Euler(15, 0, 0);
         dist = base_dist;
         layerMask = 1 << 11 | 1 << 8 | 1 << 10 | 1 << 14;
 
@@ -126,20 +126,29 @@ public class CameraController : MonoBehaviour {
     }
 
     private void CheckInputs () {
+        float h = 0;
+        float v = 0;
+
         if (active){
             if (CrossPlatformInputManager.GetButton(CameraConstants.CameraUp)){
-                v_rotation = v_rotation + rot_speed;
+                v = 1;
             }
             if (CrossPlatformInputManager.GetButton(CameraConstants.CameraDown)){
-                v_rotation = v_rotation - rot_speed;
+                v = -1;
             }
             if (CrossPlatformInputManager.GetButton(CameraConstants.CameraLeft)){
-                h_rotation = h_rotation - rot_speed;
+                h = -1;
             }
             if (CrossPlatformInputManager.GetButton(CameraConstants.CameraRight)){
-                h_rotation = h_rotation + rot_speed;
+                h = 1;
             }
+
+            h += CrossPlatformInputManager.GetAxis("Mouse X");
+            v += CrossPlatformInputManager.GetAxis("Mouse Y");
         }
+
+        h_rotation = h * rot_speed;
+        v_rotation = v * rot_speed;
     }
 
     /*public void SetPlayer (GameObject player){
@@ -153,13 +162,15 @@ public class CameraController : MonoBehaviour {
         }
     }
 
-    public void OnEnable () {
+    public void Activate () {
         this.active = true;
+        GetComponent<Camera>().enabled = true;
         resetInputs();
     }
 
-    public void OnDisable () {
+    public void Deactivate () {
         this.active = false;
+        GetComponent<Camera>().enabled = false;
         resetInputs();
     }
 
