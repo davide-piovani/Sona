@@ -68,7 +68,7 @@ public class Stakeout : MonoBehaviour {
 
     void ChangeState()
     {
-
+        print("state: " + state);
         if (state == 0)
         {
             if (CrossPlatformInputManager.GetButton(PlayersConstants.interactButton) & _display.IsActive())
@@ -99,7 +99,8 @@ public class Stakeout : MonoBehaviour {
             }
 
         }
-        else if (state == 3 & _cameraMovement.IsOnStartPos() & !playerInMovement)
+        else if (state == 3)
+        //else if (state == 3 & _cameraMovement.IsOnStartPos() & !playerInMovement)
         {
             _gameController.PauseActive(true); /*prova per vedere se funziona*/
             _gameController.ChangePlayerActive(true); /*prova per vedere se funziona*/
@@ -197,7 +198,8 @@ public class Stakeout : MonoBehaviour {
         {
             s.enabled = cond;
         }
-        _player.GetComponent<NavMeshAgent>().enabled = cond;
+
+        //_player.GetComponent<NavMeshAgent>().enabled = cond;
         _player.GetComponent<Rigidbody>().useGravity = cond;
         _player.GetComponent<Collider>().enabled = cond;
         _player.GetComponentInChildren<Camera>().enabled = cond;

@@ -15,14 +15,29 @@ public class GameSlot {
     public bool shouldRestorePos;
     public PlayerType activePlayer;
 
-    public Vector3 JackPos;
-    public Quaternion JackRotation;
+    public float JackPosX;
+    public float JackPosY;
+    public float JackPosZ;
+    public float JackRotX;
+    public float JackRotY;
+    public float JackRotZ;
+    public float JackRotW;
 
-    public Vector3 HannahPos;
-    public Quaternion HannahRotation;
+    public float HannahPosX;
+    public float HannahPosY;
+    public float HannahPosZ;
+    public float HannahRotX;
+    public float HannahRotY;
+    public float HannahRotZ;
+    public float HannahRotW;
 
-    public Vector3 CharliePos;
-    public Quaternion CharlieRotation;
+    public float CharliePosX;
+    public float CharliePosY;
+    public float CharliePosZ;
+    public float CharlieRotX;
+    public float CharlieRotY;
+    public float CharlieRotZ;
+    public float CharlieRotW;
 
     public float musicVolume;
     public float effectsVolume;
