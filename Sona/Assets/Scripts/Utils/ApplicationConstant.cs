@@ -9,6 +9,7 @@ namespace ApplicationConstants {
 
         public static float alertWidth = 1120f;
         public static float alertHeight = 460f;
+        public static float alarmSwitchTime = 0.4f;
 
         public static string cancelString = "Cancel";
         public static string okString = "Proceed";
