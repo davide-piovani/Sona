@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using ApplicationConstants;
 
-public class CameraController : MonoBehaviour {
+public class CameraController : InputListener {
 
     private const float rot_speed = 3.5f;
     //private const float narrow = 2.5f;
@@ -23,10 +23,10 @@ public class CameraController : MonoBehaviour {
     private float h_rotation;
 
     private float c_dist = 0f;
-    private bool active = true;
+    //private bool active = true;
 	
     private Player player;
-    private CapsuleCollider collider;
+    private CapsuleCollider cameraCollider;
 
     // Use this for initialization
     void Start () {
@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour {
         c_dist = 0.3f;
 
         player = GetComponentInParent<Player>();
-        collider = GetComponentInParent<CapsuleCollider>();
+        cameraCollider = GetComponentInParent<CapsuleCollider>();
         //offset = player.transform.position - tr.position;
         //base_dist = offset.magnitude;
         base_dist = 3;
@@ -72,7 +72,7 @@ public class CameraController : MonoBehaviour {
 
         CheckInputs();
 
-        target = player.transform.position + collider.center;
+        target = player.transform.position + cameraCollider.center;
         if (Mathf.Abs(v_rotation) > Mathf.Epsilon){
             new_rotation = Quaternion.AngleAxis (v_rotation, Vector3.right);
             tr.rotation = tr.rotation * new_rotation;
@@ -129,7 +129,7 @@ public class CameraController : MonoBehaviour {
         float h = 0;
         float v = 0;
 
-        if (active){
+        if (IsInputActive()){
             if (CrossPlatformInputManager.GetButton(CameraConstants.CameraUp)){
                 v = 1;
             }
@@ -145,8 +145,8 @@ public class CameraController : MonoBehaviour {
 
             h += CrossPlatformInputManager.GetAxis("Mouse X");
             v += CrossPlatformInputManager.GetAxis("Mouse Y");
-        }
 
+        }
         h_rotation = h * rot_speed;
         v_rotation = v * rot_speed;
     }
@@ -155,21 +155,22 @@ public class CameraController : MonoBehaviour {
         this.player = player;
     }*/
 
-    public void SetInputs (float v_rotation, float h_rotation){
+    /*public void SetInputs (float v_rotation, float h_rotation){
         if (!active){
             this.h_rotation = h_rotation;
             this.v_rotation = v_rotation;
         }
-    }
+    }*/
 
     public void Activate () {
-        this.active = true;
+
+        ActiveInput();
         GetComponent<Camera>().enabled = true;
         resetInputs();
     }
 
     public void Deactivate () {
-        this.active = false;
+        DisableInput();
         GetComponent<Camera>().enabled = false;
         resetInputs();
     }

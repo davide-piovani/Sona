@@ -15,7 +15,7 @@ public class ComponentBox : Interactable {
 
     protected override void ShowTooltip (){
         active = true;
-            manager.ShowMessage("b: Collect", 0);
+        manager.ShowMessage("Collect", 0);
     }
 
     protected override void HideTooltip() {

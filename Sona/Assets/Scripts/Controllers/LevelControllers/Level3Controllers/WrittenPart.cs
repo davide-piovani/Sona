@@ -47,9 +47,11 @@ public class WrittenPart : MonoBehaviour {
     }
 
     public String GetDocContent () {
+        String lines;
         if(j<contents.Length){
+            lines = contents[j];
             j++;
-            return (contents[j]);
+            return (lines);
         } else {
             return null;
         }

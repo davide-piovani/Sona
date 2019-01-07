@@ -9,7 +9,7 @@ public class Interactable : MonoBehaviour {
     public float radius = 4f;
     private float textSize = 0.05f;
 
-    bool isFocus = false;
+    //bool isFocus = false;
     bool hasInteracted = false;
 
     GameController gameController;
@@ -37,6 +37,7 @@ public class Interactable : MonoBehaviour {
 
     public void Update()
     {
+        bool tutorialActive = false;
 
         if (Input.GetButtonDown("InteractButton") && !hasInteracted)
 
@@ -48,8 +49,11 @@ public class Interactable : MonoBehaviour {
                 Interact();
             }
         }
-        //show text if player is close to the item and item haven't interacted yet 
-        if (getDistanceFromPlayer() <= radius && !hasInteracted && !dialogHelper.dialogHelperIsActive())
+        //show text if player is close to the item and item haven't interacted yet and tutorial is not active
+        if (dialogHelper != null){
+            tutorialActive = dialogHelper.dialogHelperIsActive();
+        }
+        if (getDistanceFromPlayer() <= radius && !hasInteracted && !tutorialActive)
         {
             ShowTooltip();
         }
@@ -70,7 +74,7 @@ public class Interactable : MonoBehaviour {
     //focus method
     public void OnFocused(Transform playerTransform)
     {
-        isFocus = true;
+        //isFocus = true;
         hasInteracted = false;
     }
     
@@ -88,7 +92,7 @@ public class Interactable : MonoBehaviour {
     //defocus method
     internal void onDefocus()
     {
-        isFocus = false;
+        //isFocus = false;
         hasInteracted = false;
     }
     

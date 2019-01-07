@@ -21,7 +21,7 @@ public class DuctController : MonoBehaviour {
         if (other.CompareTag(PlayersConstants.playerTag) && active){
             Player player = other.gameObject.GetComponent<Player>();
             if (player.GetPlayerType() == PlayerType.Charlie && player.IsInputActive()){
-                manager.ShowMessage("Crouch", 0);
+                manager.ShowMessage("b: crouch", 0);
                 //print("DUCT CONTROLLER: considering collision");
                 if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)){
                     manager.EraseMessage();

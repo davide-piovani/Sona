@@ -12,7 +12,7 @@ public class AllarmController : MonoBehaviour {
     public int endShot = 5;
     float interval;
     int shot = 0;
-    bool active = false;
+    //bool active = false;
     bool enemyDetect = false;
     bool allarmActive = false;
     AllarmRow[] _rows;

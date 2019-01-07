@@ -8,10 +8,10 @@ public class DialogHelper : MonoBehaviour {
 
     public TextMeshProUGUI[] texts;
     public TextMeshProUGUI text;
-    GameController gameController;
+    //GameController gameController;
     public Image background;
     public GameObject point1;
-    CellDoor cellDoor;
+    //CellDoor cellDoor;
     public float waitTimeText = 6f;
     FadeInOut fade;
 
@@ -21,10 +21,10 @@ public class DialogHelper : MonoBehaviour {
     // Use this for initialization
     void Start () {
         fade = FindObjectOfType<FadeInOut>();
-        gameController = FindObjectOfType<GameController>();
+        //gameController = FindObjectOfType<GameController>();
         dialogHelperActive = false;
         i = 0;
-        cellDoor = FindObjectOfType<CellDoor>();
+        //cellDoor = FindObjectOfType<CellDoor>();
         StartCoroutine(InitialTutorial());
     }
 

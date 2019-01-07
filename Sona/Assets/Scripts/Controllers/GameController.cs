@@ -66,7 +66,10 @@ public class GameController : InputListener {
 
     private void Update() {
         if (IsInputActive()){
-            if (activePlayer != null && !activePlayer.IsInputActive()) activePlayer.ActiveInput();
+            if (activePlayer != null && !activePlayer.IsInputActive()){
+                activePlayer.ActiveInput();
+                activePlayer.GetComponentInChildren<CameraController>().ActiveInput();
+            }
             if (pauseActive & CrossPlatformInputManager.GetButtonDown(PlayersConstants.pauseButton)) PauseGame();
             if (changePlayerActive & CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton)) ChangeCharacter();
         }
@@ -80,8 +83,12 @@ public class GameController : InputListener {
     }
 
     private void PauseGame(){
+        //print ("Start pause");
         pauseInterface.gameObject.SetActive(true);
-        if (activePlayer != null) activePlayer.DisableInput();
+        if (activePlayer != null) {
+            activePlayer.DisableInput();
+            activePlayer.gameObject.GetComponentInChildren<CameraController>().DisableInput();
+        }
         pauseInterface.SetAsUniqueInputListener(this);
     }
 

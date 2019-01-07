@@ -8,8 +8,8 @@ using ApplicationConstants;
 public class AutomatedDoor : MonoBehaviour {
     private Vector3 speed;
 
-    private bool opening = false;
-    private int id = 0;
+    //private bool opening = false;
+    //private int id = 0;
     //private Switch[2] switches;
     public bool[] triggers = new bool [2];
     private float dist;
