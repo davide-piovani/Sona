@@ -16,7 +16,7 @@ public class Level3Manager : MonoBehaviour {
     public GeneralSwitch gen;
     public Circuitry circ;
     public UIManager toScreen;
-    public SceneLoader loader;
+    //public SceneLoader loader;
     public WrittenPart lines;
     public Torch t;
     public Document doc;
@@ -28,6 +28,12 @@ public class Level3Manager : MonoBehaviour {
     private bool newMessage;
     private int state = 0;
     private bool waiting = false;
+
+
+    /*void Awake () {
+        CreateLevelSlot();
+    }*/
+
 
     // Use this for initialization
     void Start () {
@@ -218,9 +224,32 @@ public class Level3Manager : MonoBehaviour {
         }
     }
 
+    /*private void CreateLevelSlot () {
+        SceneLoader[] loaders = FindObjectsOfType<SceneLoader>();
+        GameSlot slot = new GameSlot(0);
+        int i;
+
+        slot.JackPos = new Vector3 (-4.66f, -0.96f, -9.88f);
+        slot.JackRotation = Quaternion.Euler(0,0,0);
+
+        slot.HannahPos = new Vector3 (-5.63f, -0.19f, -10.83f);
+        slot.HannahRotation = Quaternion.Euler(0,0,0);
+
+        slot.CharliePos = new Vector3 (-4.24f, -0.925f, -11.01f);
+        slot.CharlieRotation = Quaternion.Euler (0, 0, 0);
+   
+        if (slot == null){
+            print("LEVEL MANAGER: failed slot creation");
+        }
+
+        for(i=0; i<loaders.Length; i++){
+            loaders[i].SetGameSlot(slot);
+        }
+    }*/
+
     public void EndLevel(){
         //Back to menu
-        loader.LoadScene(SceneNames.menu);
+        FindObjectOfType<SceneLoader>().LoadScene(SceneNames.menu);
     }
 
     public void Next () {

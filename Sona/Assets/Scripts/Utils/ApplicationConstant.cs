@@ -102,7 +102,7 @@ namespace ApplicationConstants {
 
         public static string level1 = "1. First Level";
         public static string level2 = "2. Intermediate Level";
-        public static string level3 = "3. Final Level";
+        public static string level3 = "3. FinalLevel";
 
         public static string prototype1 = "Jack Level";
         public static string prototype2 = "Charlie level";
