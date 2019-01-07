@@ -66,7 +66,10 @@ public class GameController : InputListener {
 
     private void Update() {
         if (IsInputActive()){
-            if (activePlayer != null && !activePlayer.IsInputActive()) activePlayer.ActiveInput();
+            if (activePlayer != null && !activePlayer.IsInputActive()){
+                activePlayer.ActiveInput();
+                activePlayer.GetComponentInChildren<CameraController>().ActiveInput();
+            }
             if (pauseActive & CrossPlatformInputManager.GetButtonDown(PlayersConstants.pauseButton)) PauseGame();
             if (changePlayerActive & CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton)) ChangeCharacter();
         }
