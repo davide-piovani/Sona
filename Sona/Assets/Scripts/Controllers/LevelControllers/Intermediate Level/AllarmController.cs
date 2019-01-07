@@ -118,7 +118,7 @@ public class AllarmController : MonoBehaviour {
 
     IEnumerator Restart()
     {
-        _fadeInOut.FadeOut();
+        _fadeInOut.FadeOut(1);
         yield return new WaitUntil(() => _fadeInOut.GetImage().color.a == 1);
         _fadeInOut.ShowText("CAPTURED");
         yield return new WaitForSeconds(2);

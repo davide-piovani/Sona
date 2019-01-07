@@ -7,17 +7,20 @@ using TMPro;
 public class DialogHelper : MonoBehaviour {
 
     public TextMeshProUGUI[] texts;
+    public TextMeshProUGUI text;
     GameController gameController;
     public Image background;
     public GameObject point1;
     CellDoor cellDoor;
     public float waitTimeText = 6f;
+    FadeInOut fade;
 
     bool dialogHelperActive;
     int i;
 
     // Use this for initialization
     void Start () {
+        fade = FindObjectOfType<FadeInOut>();
         gameController = FindObjectOfType<GameController>();
         dialogHelperActive = false;
         i = 0;
@@ -27,16 +30,18 @@ public class DialogHelper : MonoBehaviour {
 
     private void showTutorialText()
     {
-        background.enabled = true;
+        //background.enabled = true;
         for (int j = 0; j <= i; j++)
         {
             if (j != i)
             {
-                texts[j].enabled = false;
+                text.text = "";
+                //texts[j].enabled = false;
             }
             else
             {
-                texts[j].enabled = true;
+                text.text = texts[j].text;
+                //texts[j].enabled = true;
             }
         }
     } 
@@ -45,6 +50,9 @@ public class DialogHelper : MonoBehaviour {
     {
         dialogHelperActive = true;
         i = 0;
+        yield return new WaitForSeconds(2);
+        fade.FadeOut(1);
+        yield return new WaitUntil(() => fade.GetImage().color.a == 1);
         showTutorialText();
         yield return new WaitForSeconds(waitTimeText);
         i++;
@@ -55,7 +63,8 @@ public class DialogHelper : MonoBehaviour {
         yield return new WaitForSeconds(waitTimeText);
         dialogHelperActive = false;
         deactiveAllTexts();
-
+        text.text = "";
+        fade.FadeIn(1);
     }
 
     IEnumerator PointReached()
@@ -87,7 +96,7 @@ public class DialogHelper : MonoBehaviour {
         {
             texts[j].enabled = false;
         }
-        background.enabled = false;
+        //background.enabled = false;
     }
 
     public bool dialogHelperIsActive()

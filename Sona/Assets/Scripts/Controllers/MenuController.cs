@@ -50,7 +50,7 @@ public class MenuController : MenuMovementController {
 
     private void CheckEnterButton(){
         if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.enterButton)){
-            AudioEffects.PlaySound(AudioEffects.instance.menuButtonClicked);
+            //AudioEffects.PlaySound(AudioEffects.instance.menuButtonClicked);
             switch (currentMenu){
                 case 0:
                     MainMenuController();

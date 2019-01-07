@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AllarmedSquare : MonoBehaviour {
 
@@ -38,14 +39,38 @@ public class AllarmedSquare : MonoBehaviour {
     }
 
     void BlockEnemy(GameObject player) {
-        //mettere in Idle il giocatore
-        //disattivarne il movimento
-        //se ha potere attivo disattivarlo
-        /*MonoBehaviour[] _playerScripts = player.GetComponents<MonoBehaviour>();
+        if (player.name.Equals("Jack") & player.GetComponent<Player>().IsPowerActive()) {
+            player.GetComponent<Player>().powerActive = false;
+            TimeController.changeTime(false);
+        }
+        PlayerScriptsActive(player, false);
+        PlayerInIdle(player);
+    }
+
+    void PlayerInIdle(GameObject player)
+    {
+        if (player.GetComponent<Animator>().GetBool("isRunning"))
+        {
+            player.GetComponent<Animator>().SetBool("isRunning", false);
+        }
+        if (player.GetComponent<Animator>().GetBool("isWalking"))
+        {
+            player.GetComponent<Animator>().SetBool("isWalking", false);
+        }
+        if (!player.GetComponent<Animator>().GetBool("isIdle"))
+        {
+            player.GetComponent<Animator>().SetBool("isIdle", true);
+        }
+    }
+
+    void PlayerScriptsActive(GameObject _player, bool cond)
+    {
+        MonoBehaviour[] _playerScripts = _player.GetComponents<MonoBehaviour>();
         foreach (MonoBehaviour s in _playerScripts)
         {
-            s.enabled = false;
-        }*/
+            s.enabled = cond;
+        }
+        
     }
 
 }
