@@ -135,16 +135,31 @@ public class GameController : InputListener {
     private void SavePlayerPos(Player player, GameSlot gameSlot){
         switch (player.GetPlayerType()){
             case PlayerType.Jack:
-                gameSlot.JackPos = player.transform.position;
-                gameSlot.JackRotation = player.transform.rotation;
+                gameSlot.JackPosX = player.transform.position.x;
+                gameSlot.JackPosY = player.transform.position.y;
+                gameSlot.JackPosZ = player.transform.position.z;
+                gameSlot.JackRotX = player.transform.rotation.x;
+                gameSlot.JackRotY = player.transform.rotation.y;
+                gameSlot.JackRotZ = player.transform.rotation.z;
+                gameSlot.JackRotW = player.transform.rotation.w;
                 break;
             case PlayerType.Hannah:
-                gameSlot.HannahPos = player.transform.position;
-                gameSlot.HannahRotation = player.transform.rotation;
+                gameSlot.HannahPosX = player.transform.position.x;
+                gameSlot.HannahPosY = player.transform.position.y;
+                gameSlot.HannahPosZ = player.transform.position.z;
+                gameSlot.HannahRotX = player.transform.rotation.x;
+                gameSlot.HannahRotY = player.transform.rotation.y;
+                gameSlot.HannahRotZ = player.transform.rotation.z;
+                gameSlot.HannahRotW = player.transform.rotation.w;
                 break;
             case PlayerType.Charlie:
-                gameSlot.CharliePos = player.transform.position;
-                gameSlot.CharlieRotation = player.transform.rotation;
+                gameSlot.CharliePosX = player.transform.position.x;
+                gameSlot.CharliePosY = player.transform.position.y;
+                gameSlot.CharliePosZ = player.transform.position.z;
+                gameSlot.CharlieRotX = player.transform.rotation.x;
+                gameSlot.CharlieRotY = player.transform.rotation.y;
+                gameSlot.CharlieRotZ = player.transform.rotation.z;
+                gameSlot.CharlieRotW = player.transform.rotation.w;
                 break;
         }
     }
@@ -161,16 +176,16 @@ public class GameController : InputListener {
     private void RestorePlayerPos(Player player, GameSlot gameSlot){
         switch (player.GetPlayerType()){
             case PlayerType.Jack:
-                player.transform.position = gameSlot.JackPos;
-                player.transform.rotation = gameSlot.JackRotation;
+                player.transform.position = new Vector3(gameSlot.JackPosX, gameSlot.JackPosY, gameSlot.JackPosZ);
+                player.transform.rotation = new Quaternion(gameSlot.JackRotX, gameSlot.JackRotY, gameSlot.JackRotZ, gameSlot.JackRotW);
                 break;
             case PlayerType.Hannah:
-                player.transform.position = gameSlot.HannahPos;
-                player.transform.rotation = gameSlot.HannahRotation;
+                player.transform.position = new Vector3(gameSlot.HannahPosX, gameSlot.HannahPosY, gameSlot.HannahPosZ);
+                player.transform.rotation = new Quaternion(gameSlot.HannahRotX, gameSlot.HannahRotY, gameSlot.HannahRotZ, gameSlot.HannahRotW);
                 break;
             case PlayerType.Charlie:
-                player.transform.position = gameSlot.CharliePos;
-                player.transform.rotation = gameSlot.CharlieRotation;
+                player.transform.position = new Vector3(gameSlot.CharliePosX, gameSlot.CharliePosY, gameSlot.CharliePosZ);
+                player.transform.rotation = new Quaternion(gameSlot.CharlieRotX, gameSlot.CharlieRotY, gameSlot.CharlieRotZ, gameSlot.CharlieRotW);
                 break;
         }
     }
