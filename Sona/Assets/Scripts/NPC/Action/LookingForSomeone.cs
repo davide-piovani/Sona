@@ -13,6 +13,15 @@ public class LookingForSomeone : Action {
         controller.agent.isStopped = true;
         controller.lockSpright.enabled = false;
         Decision decision = new ScanDecision();
+        /*
+        float distance = Vector3.Distance(controller.transform.position, controller.getInitialPosition());
+        
+        if (distance > 2f || distance < 0)
+        {
+            controller.agent.SetDestination(controller.getInitialPosition());
+        }
+        */
+
         controller.setAction(decision.Decide(controller));
     }
 

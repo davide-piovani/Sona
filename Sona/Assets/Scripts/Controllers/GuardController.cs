@@ -15,6 +15,7 @@ public class GuardController : MonoBehaviour {
     GameObject allarm;
     GuardGroup guardsGroup;
 
+    Vector3 initialPosition;
     public Action currentAction;
     //Action lastAction;
 
@@ -68,6 +69,7 @@ public class GuardController : MonoBehaviour {
         {
             allarmTransform = guardGroup.allarm.transform;
         }
+        initialPosition = transform.position;
 
     }
 
@@ -190,10 +192,12 @@ public class GuardController : MonoBehaviour {
     /**
      * This method is used when a guard reachs the player. Player was catch and the game ends
      */
-    void EndGame()
+    public Vector3 getInitialPosition()
     {
-        Debug.Log("Guard reach the player, you lose!");
+        return initialPosition;
     }
+
+
 
     /**
      * This method is used in order to make guard to face player

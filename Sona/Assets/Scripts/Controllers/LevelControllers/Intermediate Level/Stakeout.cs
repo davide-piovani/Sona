@@ -71,29 +71,35 @@ public class Stakeout : MonoBehaviour {
 
         if (state == 0)
         {
-            if (CrossPlatformInputManager.GetButton(PlayersConstants.interactButton) /*Input.GetKey(KeyCode.C)*/ & _display.IsActive())
+            if (CrossPlatformInputManager.GetButton(PlayersConstants.interactButton) & _display.IsActive())
             {
                 _gameController.PauseActive(false); /*prova per vedere se funziona*/
                 _gameController.ChangePlayerActive(false); /*prova per vedere se funziona*/
                 _display.Necessary(false);
                 InitialSettings();
-                MovePlayerTowardsWall();
-                _cameraMovement.MoveCameraOn();
+                //MovePlayerTowardsWall();
+                //_cameraMovement.MoveCameraOn();
                 state = 1;
             }
         }
-        else if (state == 1)
+        else if (state == 1 & CrossPlatformInputManager.GetButton(PlayersConstants.interactButton) & _display.GetPlayer().GetComponent<Animator>().GetBool("isIdle")) {
+            PlayerLean(true); /* ANIMATION */
+            MovePlayerTowardsWall();
+            _cameraMovement.MoveCameraOn();
+            state = 2;
+        }
+        else if (state == 2)
         {
 
             if (!CrossPlatformInputManager.GetButton(PlayersConstants.interactButton)/*Input.GetKey(KeyCode.C)*/) {
                 PlayerLean(false); /* ANIMATION */
                 MovePlayerAwayFromWall();
                 _cameraMovement.MoveCameraBack();
-                state = 2;
+                state = 3;
             }
-            
+
         }
-        else if (state == 2 & _cameraMovement.IsOnStartPos() & !playerInMovement)
+        else if (state == 3 & _cameraMovement.IsOnStartPos() & !playerInMovement)
         {
             _gameController.PauseActive(true); /*prova per vedere se funziona*/
             _gameController.ChangePlayerActive(true); /*prova per vedere se funziona*/
@@ -113,7 +119,7 @@ public class Stakeout : MonoBehaviour {
         SetSensorToActive();
         SetCamPosAndRot();
         WallCamActive(true);
-        PlayerLean(true); /* ANIMATION */
+        //PlayerLean(true); /* ANIMATION */
     }
 
     void SetInitialPositions() {
@@ -128,10 +134,10 @@ public class Stakeout : MonoBehaviour {
         {
             _display.GetPlayer().GetComponent<Animator>().SetBool("isRunning", false);
         }
-        /*if (_display.GetPlayer().GetComponent<Animator>().GetBool("isWalking"))
+        if (_display.GetPlayer().GetComponent<Animator>().GetBool("isWalking"))
         {
             _display.GetPlayer().GetComponent<Animator>().SetBool("isWalking", false);
-        }*/
+        }
         if (!_display.GetPlayer().GetComponent<Animator>().GetBool("isIdle")) {
             _display.GetPlayer().GetComponent<Animator>().SetBool("isIdle", true);
         }

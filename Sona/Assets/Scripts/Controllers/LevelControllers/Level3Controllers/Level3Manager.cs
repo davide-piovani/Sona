@@ -16,12 +16,29 @@ public class Level3Manager : MonoBehaviour {
     public GeneralSwitch gen;
     public Circuitry circ;
     public UIManager toScreen;
+    public SceneLoader loader;
+    public WrittenPart lines;
+    public Torch t;
+    public Document doc;
+    //public AudioListener outSound;
     private GameController controller;
+
+    //used for internal functions
     private bool newMessage;
+    private int state = 0;
+    private bool waiting = false;
 
     // Use this for initialization
     void Start () {
+        InitObjects();
+        
+
+        box.GetComponent<Transform>().position = positions[UnityEngine.Random.Range(0,2)];
+    }
+
+    private void InitObjects() {
         int i;
+        //outSound = FindObjectOfType<GlobalAudioListener>().GetComponent<AudioListener>();
         lights = FindObjectsOfType<RoomLight>();
         controller = FindObjectOfType<GameController>();
         Door[] doors = FindObjectsOfType<Door>();
@@ -29,9 +46,7 @@ public class Level3Manager : MonoBehaviour {
         int_obj = new Interactable[doors.Length + switches.Length];
         System.Array.Copy(doors, int_obj, doors.Length);
         System.Array.Copy(switches, 0, int_obj, doors.Length, switches.Length);
-        for (i=0; i<lights.Length; i++){
-            lights[i].ShutDown();
-        }
+        
         for (i=0; i< doors.Length; i++){
             doors[i].SetManager(this);
         }
@@ -42,30 +57,73 @@ public class Level3Manager : MonoBehaviour {
         box.manager = this;
         gen.manager = this;
         circ.manager = this;
-
-        box.GetComponent<Transform>().position = positions[UnityEngine.Random.Range(0,2)];
+        doc.manager = this;
     }
 
     void Update () {
-        int i;
-        if (!(controller.GetActivePlayer() == currentPlayer)){
-            currentPlayer = controller.GetActivePlayer();
-            for (i=0; i<int_obj.Length; i++){
-                int_obj[i].player = currentPlayer.gameObject;
-            }
-            box.player = currentPlayer.gameObject;
-            gen.player = currentPlayer.gameObject;
-            circ.player = currentPlayer.gameObject;
-            if (currentPlayer == null){
-                print ("LEVEL MANAGER: Couldn't get player");
-            }
-        }
+        if (!waiting){
+            switch (state){
+                case 0:
+                    print("LEVEL MANAGER: State 0");
+                    controller.DisableInput();
+                    SetPlayer();
+                    currentPlayer.DisableInput();
+                    ShowDialogueLine();
+                    state++;
+                    break;
+                case 1:
+                    print("LEVEL MANAGER: State 1");
+                    for (int i=0; i<lights.Length; i++){
+                        lights[i].ShutDown();
+                    }
+                    state++;
+                    break;
+                case 2:
+                    print("LEVEL MANAGER: State 2");
+                    ShowDialogueLine();
+                    if (state == 3){
+                        currentPlayer.ActiveInput();
+                        controller.ActiveInput();
+                        ActivateTorch();
+                    }
+                    break;
+                case 3:
+                    //print("LEVEL MANAGER: State 3");
+                    if (!(controller.GetActivePlayer() == currentPlayer)){
+                        SetPlayer();
+                    }
         
-        if (newMessage){
-            newMessage = false;
-        } else {
-            toScreen.EraseMessage();
+                    if (newMessage){
+                        newMessage = false;
+                    } else {
+                        toScreen.EraseMessage();
+                    }
+                    break;
+                case 4:
+                    print("LEVEL MANAGER: State 4");
+                    controller.DisableInput();
+                    SetPlayer();
+                    currentPlayer.DisableInput();
+                    ShowDocument();
+                    break;
+                case 5:
+                    print("LEVEL MANAGER: State 5");
+                    EndLevel();
+                    break;
+            }
         }
+    }
+
+    private void SetPlayer(){
+        int i;
+        currentPlayer = controller.GetActivePlayer();
+        for (i=0; i<int_obj.Length; i++){
+            int_obj[i].player = currentPlayer.gameObject;
+        }
+        box.player = currentPlayer.gameObject;
+        gen.player = currentPlayer.gameObject;
+        circ.player = currentPlayer.gameObject;
+        doc.player = currentPlayer.gameObject;
     }
 
     public void ActivateTorch() {
@@ -73,19 +131,20 @@ public class Level3Manager : MonoBehaviour {
         for (int i=0; i<players.Length; i++){
             if (players[i].GetPlayerType() == PlayerType.Hannah){
                 players[i].GetComponent<Animator>().SetBool("hasTorch", true);
+                t.gameObject.SetActive(true);
                 return;
             }
         }
     }
 
     public void RetrieveComponent(GameObject retriever){
-        print("LEVEL MANAGER: called for retrieve component");
+        //print("LEVEL MANAGER: called for retrieve component");
         Destroy (box.gameObject);
         circ.SetRepairer(currentPlayer.gameObject);
     }
 
     public void ShutDown (){
-        print("LEVEL MANAGER: called for shut down");
+        //print("LEVEL MANAGER: called for shut down");
         for(int i = 0; i < lights.Length; i++){
             lights[i].emergency = false;
             lights[i].ShutDown();
@@ -94,7 +153,7 @@ public class Level3Manager : MonoBehaviour {
     }
 
     public void RestorePower (){
-        print("LEVEL MANAGER: called for restore power");
+        //print("LEVEL MANAGER: called for restore power");
         Switch s;
         for(int i = 0; i < lights.Length; i++){
             lights[i].Restore();
@@ -121,6 +180,43 @@ public class Level3Manager : MonoBehaviour {
     //Erase message from screen
     public void EraseMessage (){
         toScreen.EraseMessage();
+    }
+
+    public void ShowDoc(){
+        state = 4;
+    }
+
+     private void ShowDialogueLine(){
+        String name = lines.GetName();
+        String line = lines.GetDialContent();
+
+        if (name != null && line != null){
+            toScreen.ShowDial(name, line);
+            waiting = true;
+        } else {
+            state++;
+        }
+    }
+
+    private void ShowDocument() {
+        String title = lines.GetTitle();
+        String content = lines.GetDocContent();
+
+        if (title != null && content != null){
+            toScreen.ShowDocument(title, content);
+            waiting = true;
+        } else {
+            state++;
+        }
+    }
+
+    public void EndLevel(){
+        //Back to menu
+        loader.LoadScene(SceneNames.menu);
+    }
+
+    public void Next () {
+        waiting = false;
     }
 
 }

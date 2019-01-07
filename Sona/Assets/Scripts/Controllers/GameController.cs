@@ -188,4 +188,10 @@ public class GameController : InputListener {
         }
     }
 
+
+    /*private void Follow() {
+        Player[] allPlayers;
+
+        allPlayers = characterController.GetScenePlayer();
+    }*/
 }

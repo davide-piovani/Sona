@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour {
         base_dist = 2;
         tr.rotation = Quaternion.Euler(15, 0, 0);
         dist = base_dist;
-        layerMask = 1 << 11 | 1 << 8 | 1 << 10;
+        layerMask = 1 << 11 | 1 << 8 | 1 << 10 | 1 << 14;
 
     }
 
