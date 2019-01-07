@@ -37,6 +37,7 @@ public class Interactable : MonoBehaviour {
 
     public void Update()
     {
+        bool tutorialActive = false;
 
         if (Input.GetButtonDown("InteractButton") && !hasInteracted)
 
@@ -48,8 +49,11 @@ public class Interactable : MonoBehaviour {
                 Interact();
             }
         }
-        //show text if player is close to the item and item haven't interacted yet 
-        if (getDistanceFromPlayer() <= radius && !hasInteracted && !dialogHelper.dialogHelperIsActive())
+        //show text if player is close to the item and item haven't interacted yet and tutorial is not active
+        if (dialogHelper != null){
+            tutorialActive = dialogHelper.dialogHelperIsActive();
+        }
+        if (getDistanceFromPlayer() <= radius && !hasInteracted && !tutorialActive)
         {
             ShowTooltip();
         }

@@ -74,7 +74,10 @@ public class GameController : InputListener {
 
     private void PauseGame(){
         pauseInterface.gameObject.SetActive(true);
-        if (activePlayer != null) activePlayer.DisableInput();
+        if (activePlayer != null) {
+            activePlayer.DisableInput();
+            activePlayer.gameObject.GetComponent<CameraController>().DisableInput();
+        }
         pauseInterface.SetAsUniqueInputListener(this);
     }
 

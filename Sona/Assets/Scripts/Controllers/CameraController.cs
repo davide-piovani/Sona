@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using ApplicationConstants;
 
-public class CameraController : MonoBehaviour {
+public class CameraController : InputListener {
 
     private const float rot_speed = 2.5f;
     //private const float narrow = 2.5f;
@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour {
     private float h_rotation;
 
     private float c_dist = 0f;
-    private bool active = true;
+    //private bool active = true;
 	
     private Player player;
     private CapsuleCollider collider;
@@ -40,8 +40,8 @@ public class CameraController : MonoBehaviour {
         collider = GetComponentInParent<CapsuleCollider>();
         //offset = player.transform.position - tr.position;
         //base_dist = offset.magnitude;
-        base_dist = 2;
-        tr.rotation = Quaternion.Euler(15, 0, 0);
+        base_dist = 3;
+        tr.localRotation = Quaternion.Euler(15, 0, 0);
         dist = base_dist;
         layerMask = 1 << 11 | 1 << 8 | 1 << 10 | 1 << 14;
 
@@ -126,40 +126,51 @@ public class CameraController : MonoBehaviour {
     }
 
     private void CheckInputs () {
-        if (active){
+        float h = 0;
+        float v = 0;
+        if (IsInputActive()){
             if (CrossPlatformInputManager.GetButton(CameraConstants.CameraUp)){
-                v_rotation = v_rotation + rot_speed;
-            }
-            if (CrossPlatformInputManager.GetButton(CameraConstants.CameraDown)){
-                v_rotation = v_rotation - rot_speed;
+                //v_rotation = v_rotation + rot_speed;
+                v = 1;
+            } else if (CrossPlatformInputManager.GetButton(CameraConstants.CameraDown)){
+                //v_rotation = v_rotation - rot_speed;
+                v = -1;
             }
             if (CrossPlatformInputManager.GetButton(CameraConstants.CameraLeft)){
-                h_rotation = h_rotation - rot_speed;
+                //h_rotation = h_rotation - rot_speed;
+                h = -1;
+            } else if (CrossPlatformInputManager.GetButton(CameraConstants.CameraRight)){
+                //h_rotation = h_rotation + rot_speed;
+                h = 1;
             }
-            if (CrossPlatformInputManager.GetButton(CameraConstants.CameraRight)){
-                h_rotation = h_rotation + rot_speed;
-            }
+
+            h = h + CrossPlatformInputManager.GetAxis("Mouse X");
+            v = v + CrossPlatformInputManager.GetAxis("Mouse Y");
         }
+        h_rotation = h * rot_speed;
+        v_rotation = v * rot_speed;
     }
 
     /*public void SetPlayer (GameObject player){
         this.player = player;
     }*/
 
-    public void SetInputs (float v_rotation, float h_rotation){
+    /*public void SetInputs (float v_rotation, float h_rotation){
         if (!active){
             this.h_rotation = h_rotation;
             this.v_rotation = v_rotation;
         }
-    }
+    }*/
 
-    public void OnEnable () {
-        this.active = true;
+    public void Activate () {
+        ActiveInput();
+        GetComponent<Camera>().enabled = true;
         resetInputs();
     }
 
-    public void OnDisable () {
-        this.active = false;
+    public void Deactivate () {
+        DisableInput();
+        GetComponent<Camera>().enabled = false;
         resetInputs();
     }
 
