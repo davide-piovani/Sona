@@ -16,6 +16,7 @@ public class GeneralSwitch : Interactable {
             power = false;
         } else if (repaired) {
             manager.RestorePower();
+            power = true;
         } else {
             resetInteraction();
         }
@@ -28,7 +29,9 @@ public class GeneralSwitch : Interactable {
     protected override void ShowTooltip (){
         active = true;
         if (power){
-            manager.ShowMessage("Press b to turn off the power", 0);
+            manager.ShowMessage("Turn off the power", 0);
+        } else if (repaired && !power){
+            manager.ShowMessage("Restore power", 0);
         }
     }
 

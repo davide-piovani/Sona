@@ -10,6 +10,10 @@ public class Message : MonoBehaviour {
 
     public void Awake(){
         onScreen = GetComponent<Text>();
+        if (onScreen == null) {
+            print ("MESSAGE: Falied finding textbox");
+            return;
+        }
         onScreen.text = "";
     }
 

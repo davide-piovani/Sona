@@ -20,6 +20,7 @@ public class Level3Manager : MonoBehaviour {
     public WrittenPart lines;
     public Torch t;
     public Document doc;
+    public Camera freeCam;
     //public AudioListener outSound;
     private GameController controller;
 
@@ -65,9 +66,12 @@ public class Level3Manager : MonoBehaviour {
             switch (state){
                 case 0:
                     print("LEVEL MANAGER: State 0");
+                    freeCam.gameObject.transform.position = new Vector3 (-4.87f, 1.84f, -12.47f);
+                    freeCam.gameObject.transform.rotation = Quaternion.Euler(30,0,0);
                     controller.DisableInput();
                     SetPlayer();
-                    currentPlayer.DisableInput();
+                    currentPlayer.Deactivate();
+                    freeCam.enabled = true;
                     ShowDialogueLine();
                     state++;
                     break;
@@ -82,7 +86,8 @@ public class Level3Manager : MonoBehaviour {
                     print("LEVEL MANAGER: State 2");
                     ShowDialogueLine();
                     if (state == 3){
-                        currentPlayer.ActiveInput();
+                        freeCam.enabled = false;
+                        currentPlayer.Activate();
                         controller.ActiveInput();
                         ActivateTorch();
                     }
@@ -101,9 +106,12 @@ public class Level3Manager : MonoBehaviour {
                     break;
                 case 4:
                     print("LEVEL MANAGER: State 4");
+                    freeCam.enabled = true;
+                    freeCam.gameObject.transform.position = new Vector3 (-14.1f, 1.84f, 22.5f);
+                    freeCam.gameObject.transform.rotation = Quaternion.Euler(30,0,0);
                     controller.DisableInput();
                     SetPlayer();
-                    currentPlayer.DisableInput();
+                    currentPlayer.Deactivate();
                     ShowDocument();
                     break;
                 case 5:
@@ -173,8 +181,8 @@ public class Level3Manager : MonoBehaviour {
 
     //Show message on the center of the screen
     public void ShowMessage (String message, int priority){
-        toScreen.ShowMessage (message, priority);
         newMessage = true;
+        toScreen.ShowMessage (message, priority);
     }
 
     //Erase message from screen
