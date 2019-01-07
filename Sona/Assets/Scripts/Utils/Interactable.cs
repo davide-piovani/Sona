@@ -9,7 +9,7 @@ public class Interactable : MonoBehaviour {
     public float radius = 4f;
     private float textSize = 0.05f;
 
-    bool isFocus = false;
+    //bool isFocus = false;
     bool hasInteracted = false;
 
     GameController gameController;
@@ -74,7 +74,7 @@ public class Interactable : MonoBehaviour {
     //focus method
     public void OnFocused(Transform playerTransform)
     {
-        isFocus = true;
+        //isFocus = true;
         hasInteracted = false;
     }
     
@@ -92,7 +92,7 @@ public class Interactable : MonoBehaviour {
     //defocus method
     internal void onDefocus()
     {
-        isFocus = false;
+        //isFocus = false;
         hasInteracted = false;
     }
     

@@ -38,7 +38,7 @@ public abstract class Player : InputListener {
     protected CapsuleCollider playerCollider;
     private NavMeshAgent agent;
     private AudioSource audioSource;
-    [SerializeField] GameObject avatar;
+    private GameObject avatar;
 
     private Vector3 dest;
 
@@ -97,13 +97,13 @@ public abstract class Player : InputListener {
     }
 
     private void ManageLayers(){
-        float radius;
+        /*float radius;
 
         if (GetComponent<Transform>().localScale[0] > GetComponent<Transform>().localScale[2]) {
             radius = GetComponent<CapsuleCollider>().radius * (GetComponent<Transform>()).localScale[0];
         } else {
             radius = GetComponent<CapsuleCollider>().radius * (GetComponent<Transform>()).localScale[2];
-        }
+        }*/
 
         layerMask = 1 << 8 | 1 << 10 | 1 << 11 | 1 << 13 | 1 << 14;
         float localScale = (transform.localScale[0] > transform.localScale[2]) ? 
@@ -266,20 +266,17 @@ public abstract class Player : InputListener {
 
     
     public void Activate (){
-        //this.active = true;
-        characterCamera.enabled = true;
+        characterCamera.GetComponent<CameraController>().Activate();
+        //characterCamera.enabled = true;
         characterCamera.gameObject.GetComponent<AudioListener>().enabled = true;
-        //ResetInputs();
         ActiveInput();
     }
 
     public void Deactivate (){
-        //this.active = false;
-        characterCamera.enabled = false;
+        characterCamera.GetComponent<CameraController>().Deactivate();
+        //characterCamera.enabled = false;
         characterCamera.gameObject.GetComponent<AudioListener>().enabled = false;
         audioSource.Stop();
-        //SetAnimBools(Mode.idle);
-        //ResetInputs();
         DisableInput();
         if (anim != null){
             SetAnimBools (Mode.idle);

@@ -19,6 +19,10 @@ public class GameController : InputListener {
     [Header("Input Listeners")]
     [SerializeField] InputListener pauseInterface;
 
+    private AlarmLight[] alarms;
+    private bool alarmActive = false;
+    private float alarmTime = 0;
+
     private Player activePlayer;
     private SceneLoader sceneLoader;
 
@@ -33,6 +37,7 @@ public class GameController : InputListener {
         audioController = BackgroundAudioController.instance;
         characterController = FindObjectOfType<ActiveCharacterController>();
         sceneLoader = FindObjectOfType<SceneLoader>();
+        alarms = FindObjectsOfType<AlarmLight>();
 
         characterController.DeactiveAll();
         activePlayer = characterController.ActivePlayerOfType(startingPlayer);
@@ -65,6 +70,8 @@ public class GameController : InputListener {
             if (pauseActive & CrossPlatformInputManager.GetButtonDown(PlayersConstants.pauseButton)) PauseGame();
             if (changePlayerActive & CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton)) ChangeCharacter();
         }
+        if (alarmActive) ManageAlarms();
+        if (Input.GetKeyDown(KeyCode.Y)) SetAlarm(!alarmActive);
     }
 
     private void ChangeCharacter(){
@@ -73,10 +80,11 @@ public class GameController : InputListener {
     }
 
     private void PauseGame(){
+        //print ("Start pause");
         pauseInterface.gameObject.SetActive(true);
         if (activePlayer != null) {
             activePlayer.DisableInput();
-            activePlayer.gameObject.GetComponent<CameraController>().DisableInput();
+            activePlayer.gameObject.GetComponentInChildren<CameraController>().DisableInput();
         }
         pauseInterface.SetAsUniqueInputListener(this);
     }
@@ -166,6 +174,22 @@ public class GameController : InputListener {
 
     public void PlayerCatched(){
         ReloadFromLastCheckpoint();
+    }
+
+    public void SetAlarm(bool active) { alarmActive = active; }
+
+    private void ManageAlarms() {
+        alarmTime += TimeController.GetDelTaTime();
+        if (alarmTime >= GameConstants.alarmSwitchTime){
+            alarmTime = 0;
+            ToggleAlarmLights();
+        }
+    }
+
+    private void ToggleAlarmLights(){
+        foreach(AlarmLight alarm in alarms){
+            alarm.ToggleLights();
+        }
     }
 
 

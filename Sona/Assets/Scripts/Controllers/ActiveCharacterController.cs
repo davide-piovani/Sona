@@ -5,7 +5,7 @@ using UnityEngine;
 public class ActiveCharacterController : MonoBehaviour {
     [SerializeField] Player[] players;
     private int current = 0;
-    public int startingPlayer;
+    //public int startingPlayer;
 
     //this array states if the player with the same index is allowed to be selected
     private bool[] on;
@@ -65,7 +65,7 @@ public class ActiveCharacterController : MonoBehaviour {
     public Player SetStartingPlayer(PlayerType type) {
         for(int i = 0; i < players.Length; i++) {
             if (players[i].GetPlayerType() == type){
-                startingPlayer = i;
+                //startingPlayer = i;
                 current = i;
                 return players[i];
             }

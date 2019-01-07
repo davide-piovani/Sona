@@ -16,8 +16,14 @@ public class FadeInOut : MonoBehaviour {
         _txt.text = "";
 	}
 
-    public void FadeOut() {
+    public void FadeOut(float speed) {
+        _imgAnimator.SetFloat("speed", speed);
         _imgAnimator.SetBool("isFadeOut", true);
+    }
+
+    public void FadeIn(float speed) {
+        _imgAnimator.SetFloat("speed", speed);
+        _imgAnimator.SetBool("isFadeOut", false);
     }
 
     public void ShowText(string text) {

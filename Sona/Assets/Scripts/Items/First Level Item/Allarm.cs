@@ -9,12 +9,12 @@ public class Allarm : MonoBehaviour{
     GameController gameController;
     public float radius = 3f;
     bool allarmActive;
-    Light light;
+    Light alarmLight;
 
     public void Start()
     {
         gameController = FindObjectOfType<GameController>();
-        light = GetComponentInChildren<Light>();
+        alarmLight = GetComponentInChildren<Light>();
         allarmActive = true;
     }
 
@@ -40,7 +40,7 @@ public class Allarm : MonoBehaviour{
 
     public void deactiveAllarm()
     {
-        light.enabled = false;
+        alarmLight.enabled = false;
         allarmActive = false;
     }
 

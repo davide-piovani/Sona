@@ -4,39 +4,39 @@ using UnityEngine;
 
 public class LightController : MonoBehaviour {
 
-    private Light light;
+    private Light componentLight;
 
     // Use this for initialization
     void Awake () {
-        light = GetComponentInChildren<Light>();
-        if (light == null){
+        componentLight = GetComponentInChildren<Light>();
+        if (componentLight == null){
             print ("no light found");
         }
     }
 	
     public void ToEmergency (){
-        if (light == null){
+        if (componentLight == null){
             //print (">>>>>>No light here");
             return;
         }
-        light.intensity = 0.4f;
-        light.color = Color.red;
+        componentLight.intensity = 0.4f;
+        componentLight.color = Color.red;
     }
 
     public void TurnOff (){
-        if (light == null){
+        if (componentLight == null){
             print (">>>>>>No light here");
             return;
         }
-        light.intensity = 0f;
+        componentLight.intensity = 0f;
     }
 
     public void Restore (){
-        if (light == null){
+        if (componentLight == null){
             //print (">>>>>>No light here");
             return;
         }
-        light.intensity = 1f;
-        light.color = Color.white;
+        componentLight.intensity = 1f;
+        componentLight.color = Color.white;
     }
 }

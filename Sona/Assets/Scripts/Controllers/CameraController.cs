@@ -6,7 +6,7 @@ using ApplicationConstants;
 
 public class CameraController : InputListener {
 
-    private const float rot_speed = 2.5f;
+    private const float rot_speed = 3.5f;
     //private const float narrow = 2.5f;
     private const float speed = 2f;
 
@@ -26,7 +26,7 @@ public class CameraController : InputListener {
     //private bool active = true;
 	
     private Player player;
-    private CapsuleCollider collider;
+    private CapsuleCollider cameraCollider;
 
     // Use this for initialization
     void Start () {
@@ -37,7 +37,7 @@ public class CameraController : InputListener {
         c_dist = 0.3f;
 
         player = GetComponentInParent<Player>();
-        collider = GetComponentInParent<CapsuleCollider>();
+        cameraCollider = GetComponentInParent<CapsuleCollider>();
         //offset = player.transform.position - tr.position;
         //base_dist = offset.magnitude;
         base_dist = 3;
@@ -72,7 +72,7 @@ public class CameraController : InputListener {
 
         CheckInputs();
 
-        target = player.transform.position + collider.center;
+        target = player.transform.position + cameraCollider.center;
         if (Mathf.Abs(v_rotation) > Mathf.Epsilon){
             new_rotation = Quaternion.AngleAxis (v_rotation, Vector3.right);
             tr.rotation = tr.rotation * new_rotation;
@@ -128,24 +128,24 @@ public class CameraController : InputListener {
     private void CheckInputs () {
         float h = 0;
         float v = 0;
+
         if (IsInputActive()){
             if (CrossPlatformInputManager.GetButton(CameraConstants.CameraUp)){
-                //v_rotation = v_rotation + rot_speed;
                 v = 1;
-            } else if (CrossPlatformInputManager.GetButton(CameraConstants.CameraDown)){
-                //v_rotation = v_rotation - rot_speed;
+            }
+            if (CrossPlatformInputManager.GetButton(CameraConstants.CameraDown)){
                 v = -1;
             }
             if (CrossPlatformInputManager.GetButton(CameraConstants.CameraLeft)){
-                //h_rotation = h_rotation - rot_speed;
                 h = -1;
-            } else if (CrossPlatformInputManager.GetButton(CameraConstants.CameraRight)){
-                //h_rotation = h_rotation + rot_speed;
+            }
+            if (CrossPlatformInputManager.GetButton(CameraConstants.CameraRight)){
                 h = 1;
             }
 
-            h = h + CrossPlatformInputManager.GetAxis("Mouse X");
-            v = v + CrossPlatformInputManager.GetAxis("Mouse Y");
+            h += CrossPlatformInputManager.GetAxis("Mouse X");
+            v += CrossPlatformInputManager.GetAxis("Mouse Y");
+
         }
         h_rotation = h * rot_speed;
         v_rotation = v * rot_speed;
@@ -163,6 +163,7 @@ public class CameraController : InputListener {
     }*/
 
     public void Activate () {
+
         ActiveInput();
         GetComponent<Camera>().enabled = true;
         resetInputs();

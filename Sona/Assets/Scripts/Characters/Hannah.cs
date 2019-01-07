@@ -24,7 +24,7 @@ public class Hannah : Player {
 
     protected override void PowerToggle(bool isActive) {
         powerActive = isActive;
-        print("Visible: " + !isActive);
+        //print("Visible: " + !isActive);
 
         bodyRenderer.material = isActive ? transparentBodyMaterial : bodyMaterial;
         hairRenderer.material = isActive ? transparentHairMaterial : hairMaterial;

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using ApplicationConstants;
 
 public class GuardController : MonoBehaviour {
 
@@ -15,9 +16,11 @@ public class GuardController : MonoBehaviour {
     GameObject allarm;
     GuardGroup guardsGroup;
 
-    Vector3 initialPosition;
+    [HideInInspector] public Transform initialPosition;
     public Action currentAction;
     //Action lastAction;
+    [HideInInspector] public bool actionCompleted = true;
+    [HideInInspector] public Vector3 lastPlayerPos;
 
     [HideInInspector] public bool descentOrder;
     private GameController gameController;       //Da sostituire con GameController
@@ -25,7 +28,7 @@ public class GuardController : MonoBehaviour {
     //Variables for line of sight
     [HideInInspector] public float heightMultiplier;
     [HideInInspector] public float viewDistance = 20f;
-    private float searchingTurnSpeed = 0.2f;
+    //private float searchingTurnSpeed = 0.2f;
     [HideInInspector] public float catchingRadius;
 
     [HideInInspector] public SpriteRenderer lockSpright;
@@ -42,7 +45,7 @@ public class GuardController : MonoBehaviour {
 
     //variables for investigation
     private Vector3 investigateSpot;
-    private float investigateWait = 150f;
+    //private float investigateWait = 150f;
 
 
     private float stateTimeElapsed;
@@ -62,21 +65,42 @@ public class GuardController : MonoBehaviour {
         gameController = FindObjectOfType<GameController>(); 
         agent = GetComponent<NavMeshAgent>();
         heightMultiplier = 1.36f;
-        lookRadius = 13f;
-        catchingRadius = 10f;
+        lookRadius = GuardConstants.guardLookRadius;
+        viewDistance = lookRadius;
+        catchingRadius = GuardConstants.guardCatchingRadius;
         GuardGroup guardGroup = GetComponentInParent<GuardGroup>();
         if (guardGroup.allarm != null)
         {
             allarmTransform = guardGroup.allarm.transform;
         }
-        initialPosition = transform.position;
+        SetGuardSpot();
+        //initialPosition = transform.position;
+        //initialDirection = transform.rotation;
+    }
 
+    private void SetGuardSpot(){
+        GameObject obj = new GameObject();
+        obj.name = gameObject.name + " StartingPos";
+        obj.transform.parent = transform.parent;
+        obj.transform.position = transform.position;
+        obj.transform.rotation = transform.rotation;
+        initialPosition = obj.transform;
+    }
+
+    public void SetLastTarget(){
+        GameObject obj = GameObject.Find(gameObject.name + " lastTargetPos");
+        if (!obj){
+            obj = new GameObject();
+            obj.name = gameObject.name + " lastTargetPos";
+            obj.transform.parent = transform.parent;
+        }
+        if (actionCompleted) obj.transform.position = target.position;
+        lastTarget = obj.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        target = gameController.GetActivePlayer().transform;
         if (currentAction == null)
         {
             currentAction = setInitialState(GetComponentInParent<GuardGroup>());
@@ -92,11 +116,7 @@ public class GuardController : MonoBehaviour {
 
     public bool HannaIsVisible()
     {
-        if (!gameController.GetActivePlayer().IsVisible())
-        {
-            return false;
-        }
-        return true;
+        return gameController.GetActivePlayer().IsVisible();
     }
 
     public Transform GetPlayerPosition()
@@ -124,7 +144,7 @@ public class GuardController : MonoBehaviour {
     public void MoveTo(Transform transform)
     {
         agent.enabled = true;
-        setAnimBools(Mode.running);
+        //setAnimBools(Mode.running);
         agent.SetDestination(transform.position);
     }
     
@@ -136,6 +156,11 @@ public class GuardController : MonoBehaviour {
         }
 
     }
+
+    public void RestoreInitialRotation(){
+        transform.rotation = initialPosition.rotation;
+    }
+
     /**
     * This method is used by guards to find the player
     */
@@ -143,34 +168,48 @@ public class GuardController : MonoBehaviour {
     {
         //Transform target = null;
         //timer = Time.deltaTime;
-        RaycastHit hit;
+        //RaycastHit hit;
         //visual rappresentation of this ray
-        Debug.DrawRay(this.transform.position + Vector3.up * heightMultiplier, this.transform.forward * viewDistance, Color.green);
-        Debug.DrawRay(this.transform.position + Vector3.up * heightMultiplier, (this.transform.forward + transform.right).normalized * this.viewDistance, Color.green);
-        Debug.DrawRay(this.transform.position + Vector3.up * heightMultiplier, (this.transform.forward - transform.right).normalized * this.viewDistance, Color.green);
+        //Debug.DrawRay(this.transform.position + Vector3.up * heightMultiplier, this.transform.forward * viewDistance, Color.green);
+        //Debug.DrawRay(this.transform.position + Vector3.up * heightMultiplier, (this.transform.forward + transform.right).normalized * this.viewDistance, Color.green);
+        //Debug.DrawRay(this.transform.position + Vector3.up * heightMultiplier, (this.transform.forward - transform.right).normalized * this.viewDistance, Color.green);
+
         //Look for player in the three directions 
-        if (Physics.Raycast(this.transform.position + Vector3.up * heightMultiplier, this.transform.forward, out hit, this.viewDistance))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                return true;
+        Vector3 startPos = transform.position + new Vector3(0, 1.5f, 0);
+        Vector3 targetPos = target.transform.position + new Vector3(0, 0.5f, 0);
+        Debug.DrawRay(startPos, targetPos - startPos, Color.green);
+
+        bool playerDetected = false;
+        float distanceToPlayer = Vector3.Distance(targetPos, startPos);
+        RaycastHit[] hits = Physics.RaycastAll(startPos, targetPos - startPos, distanceToPlayer);
+        int collisions = 0;
+        foreach (RaycastHit hit in hits){
+            Player player = hit.collider.gameObject.GetComponent<Player>();
+            if (player){
+                if (!PlayerIsInSightAngle(player)) return false;
+                playerDetected = true;
             }
+            if (isInGuardSightCollisionLayers(hit.collider.gameObject.layer)) collisions++;
         }
-        if (Physics.Raycast(this.transform.position + Vector3.up * heightMultiplier, (this.transform.forward + this.transform.right).normalized, out hit, this.viewDistance))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                return true;
-            }
-        }
-        if (Physics.Raycast(this.transform.position + Vector3.up * heightMultiplier, (this.transform.forward - this.transform.right).normalized, out hit, this.viewDistance))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                return true;
-            }
+        return (collisions == 1 && playerDetected);
+
+    }
+
+    private bool isInGuardSightCollisionLayers(int layer){
+        foreach (int guardSightLayer in GuardConstants.guardSightCollisionLayers){
+            if (layer == guardSightLayer) return true;
         }
         return false;
+    }
+
+    private bool PlayerIsInSightAngle(Player player){
+        return (CalculateAngle(player) <= GuardConstants.guardVisionAngle);
+    }
+
+    private float CalculateAngle(Player player)
+    {
+        Vector3 directionToPlayer = player.transform.position - transform.position;
+        return Vector3.Angle(directionToPlayer, transform.forward);
     }
 
 
@@ -181,7 +220,8 @@ public class GuardController : MonoBehaviour {
     */
     public float DetectPlayer()
     {
-        float distance = Vector3.Distance(target.position, transform.position);
+        target = gameController.GetActivePlayer().transform;
+        distance = Vector3.Distance(target.position, transform.position);
         if (distance <= lookRadius)
         {
             return distance;
@@ -194,7 +234,7 @@ public class GuardController : MonoBehaviour {
      */
     public Vector3 getInitialPosition()
     {
-        return initialPosition;
+        return initialPosition.position;
     }
 
 
@@ -228,11 +268,15 @@ public class GuardController : MonoBehaviour {
     public void Walk()
     {
         setAnimBools(Mode.walking);
+        agent.speed = GuardConstants.guardWalkingSpeed * TimeController.GetDelTaTime();
+        anim.speed = 10 * TimeController.GetDelTaTime();
     }
 
     public void Run()
     {
         setAnimBools(Mode.running);
+        agent.speed = GuardConstants.guardRunningSpeed * TimeController.GetDelTaTime();
+        anim.speed = 10 * TimeController.GetDelTaTime();
     }
 
     public void Idle()
@@ -265,7 +309,7 @@ public class GuardController : MonoBehaviour {
                 running = true;
                 break;
         }
-
+        
         anim.SetBool("isIdle", idle);
         anim.SetBool("isWalking", walking);
         anim.SetBool("isRunning", running);

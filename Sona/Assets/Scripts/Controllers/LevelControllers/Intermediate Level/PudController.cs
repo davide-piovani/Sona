@@ -34,7 +34,7 @@ public class PudController : MonoBehaviour {
     }
 
     IEnumerator Restart() {
-        _fadeInOut.FadeOut();
+        _fadeInOut.FadeOut(5);
         yield return new WaitUntil(() => _fadeInOut.GetImage().color.a == 1);
         _fadeInOut.ShowText("YOU'RE DEAD");
         yield return new WaitForSeconds(2);

@@ -12,7 +12,7 @@ public class AllarmController : MonoBehaviour {
     public int endShot = 5;
     float interval;
     int shot = 0;
-    bool active = false;
+    //bool active = false;
     bool enemyDetect = false;
     bool allarmActive = false;
     AllarmRow[] _rows;
@@ -118,7 +118,7 @@ public class AllarmController : MonoBehaviour {
 
     IEnumerator Restart()
     {
-        _fadeInOut.FadeOut();
+        _fadeInOut.FadeOut(1);
         yield return new WaitUntil(() => _fadeInOut.GetImage().color.a == 1);
         _fadeInOut.ShowText("CAPTURED");
         yield return new WaitForSeconds(2);

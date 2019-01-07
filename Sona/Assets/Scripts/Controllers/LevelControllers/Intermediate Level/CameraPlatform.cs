@@ -13,7 +13,7 @@ public class CameraPlatform : MonoBehaviour {
     PlatformCameraMovement _platformCameraScript;
     GameController _gameController;
     int state = 0;
-    bool moving = false;
+    //bool moving = false;
     
     void Start () {
         _gameController = FindObjectOfType<GameController>();
@@ -64,7 +64,7 @@ public class CameraPlatform : MonoBehaviour {
         _platformMovement.ActiveDeActivePlatform(true);
         _platformMovement.CalculateOffsets();
         _platformMovement.MovePlatform();
-        moving = true;
+        //moving = true;
     }
 
     void EndAnimation() {

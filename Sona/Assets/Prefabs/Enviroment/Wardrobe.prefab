@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33224307437839476}
   - component: {fileID: 23396634315793628}
   - component: {fileID: 65392116898773232}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Wardrobe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
