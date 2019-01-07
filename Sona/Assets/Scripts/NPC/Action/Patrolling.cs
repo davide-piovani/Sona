@@ -101,7 +101,8 @@ public class Patrolling : Action
     private Transform calcolateNextWaypoint(Transform destination, int i, GuardController controller)
     {
         Transform finalDestination;
-        if (distanceToWaypoint(destination, controller) > 2f)
+        if (distanceToWaypoint(destination, controller) > 1f)
+        //if (DestinationReached(controller.agent))
             finalDestination = destination;
         else
         {
@@ -179,5 +180,4 @@ public class Patrolling : Action
         */
         return destination;
     }
-
 }

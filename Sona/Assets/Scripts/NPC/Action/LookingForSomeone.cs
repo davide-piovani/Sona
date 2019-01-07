@@ -9,18 +9,23 @@ public class LookingForSomeone : Action {
      */
     public override void Act(GuardController controller)
     {
-        controller.Idle();
-        controller.agent.isStopped = true;
+        controller.agent.isStopped = false;
         controller.lockSpright.enabled = false;
         Decision decision = new ScanDecision();
-        /*
+
         float distance = Vector3.Distance(controller.transform.position, controller.getInitialPosition());
-        
-        if (distance > 2f || distance < 0)
+
+        if (distance > 1f)
         {
+            controller.Walk();
             controller.agent.SetDestination(controller.getInitialPosition());
         }
-        */
+        else
+        {
+            controller.Idle();
+            controller.RestoreInitialRotation();
+        }
+
 
         controller.setAction(decision.Decide(controller));
     }

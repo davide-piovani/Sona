@@ -19,11 +19,31 @@ public class LookDecision : Decision
         if ((controller.Investigate() || controller.DetectPlayer() < controller.catchingRadius) && controller.HannaIsVisible())
         {
             nextAction = new Chase();
+            controller.actionCompleted = true;
         }
         else
         {
-            Debug.Log("Ramo else look Decision");
-            nextAction = new LookingForSomeone();
+            //if (!controller.actionCompleted) nextAction = new Chase();
+            //else 
+            controller.SetLastTarget();
+
+            float distance = Vector3.Distance(controller.transform.position, controller.lastTarget.position);
+            Debug.Log("Distance: " + distance);
+
+            if (distance > 1f)
+            {
+                controller.actionCompleted = false;
+                nextAction = new Chase();
+                //controller.agent.SetDestination(controller.lastTarget.position);
+            }
+            else
+            {
+                Debug.Log("Looking for someone");
+                controller.actionCompleted = true;
+                nextAction = new LookingForSomeone();
+            }
+
+
         }
         return nextAction;
     }

@@ -14,9 +14,9 @@ public class Chase : Action
         controller.agent.isStopped = false;
         controller.lockSpright.enabled = true;
         controller.Run();
-        ChaseTarget(controller);
         Decision decision = new LookDecision();
         controller.setAction(decision.Decide(controller));
+        ChaseTarget(controller);
     }
 
     /**
@@ -24,9 +24,20 @@ public class Chase : Action
      */
     private void ChaseTarget(GuardController controller)
     {
-        EventManager.GuardSpottedPlayer();
-        controller.lastTarget = controller.target;
-        controller.MoveTo(controller.target);
+        //EventManager.GuardSpottedPlayer();
+        //controller.lastTarget = controller.target;
+        if (!controller.actionCompleted)
+        {
+            Debug.Log("Chasing last pos: " + controller.lastTarget.position);
+            Debug.Log("INITIAL POS: " + controller.initialPosition.position);
+            controller.MoveTo(controller.lastTarget);
+        }
+        else
+        {
+            Debug.Log("Chasing player");
+            controller.MoveTo(controller.target);
+        }
+
         controller.GuardCatchPlayer();
         //Debug.Log("I'm moving to: " + controller.target.name);
     }
