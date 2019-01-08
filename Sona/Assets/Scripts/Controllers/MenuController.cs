@@ -207,10 +207,12 @@ public class MenuController : MenuMovementController {
 
     public void CreateSlot(string useless){
         SaveSystem.SaveGameSlot(currentSlot);
+        sceneLoader.SetGameSlot(currentSlot);
         sceneLoader.LoadScene(SceneType.Level_1);
     }
 
     public void LoadSlot(string useless){
+        sceneLoader.SetGameSlot(currentSlot);
         sceneLoader.LoadScene(currentSlot.sceneNumber);
     }
 

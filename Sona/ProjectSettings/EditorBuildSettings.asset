@@ -12,9 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/1. First Level.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/2. Intermediate Level.unity
-    guid: a98a26448f7124de8965a063c806c43d
+    path: Assets/Scenes/FirstIntermediatePart.unity
+    guid: cc289b4974bc3514fb7c9aeae5a3821a
   - enabled: 1
-    path: Assets/Scenes/3. Final Level.unity
-    guid: 79cdfa8b3e143475a85ce6085451e026
+    path: Assets/Scenes/SecondPartIntermediate.unity
+    guid: 990b67561a143a740bf5131ce083d810
+  - enabled: 1
+    path: Assets/Scenes/3. FinalLevel.unity
+    guid: abc76b846192a4c4095dbf2cf42e6ed3
   m_configObjects: {}

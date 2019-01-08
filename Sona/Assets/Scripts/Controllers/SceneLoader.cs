@@ -21,7 +21,7 @@ public class SceneLoader : MonoBehaviour {
 
     public void LoadNextScene(){
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        gameSlot.shouldRestorePos = false;
+        if (gameSlot != null) gameSlot.shouldRestorePos = false;
         if (currentSceneIndex == SceneManager.sceneCount-1) {
             LoadStartScene();
         } else {
@@ -34,17 +34,17 @@ public class SceneLoader : MonoBehaviour {
     }
 
     public void LoadStartScene(){
-        gameSlot.shouldRestorePos = false;
+        if (gameSlot != null) gameSlot.shouldRestorePos = false;
         SceneManager.LoadScene(0);
     }
 
     public void LoadScene(int scene){
-        gameSlot.shouldRestorePos = false;
+        if (gameSlot != null) gameSlot.shouldRestorePos = false;
         SceneManager.LoadScene(scene);
     }
 
     public void LoadScene(string scene){
-        gameSlot.shouldRestorePos = false;
+        if (gameSlot != null) gameSlot.shouldRestorePos = false;
         SceneManager.LoadScene(scene);
     }
 
