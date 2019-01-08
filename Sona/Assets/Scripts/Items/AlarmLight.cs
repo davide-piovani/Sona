@@ -15,4 +15,10 @@ public class AlarmLight : MonoBehaviour {
             alarmLight.enabled = !alarmLight.enabled;
         }
     }
+
+    public void ChangeState(bool active){
+        foreach (Light alarmLight in alarmLights){
+            alarmLight.enabled = active;
+        }
+    }
 }

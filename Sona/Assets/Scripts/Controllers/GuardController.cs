@@ -33,6 +33,8 @@ public class GuardController : MonoBehaviour {
 
     [HideInInspector] public SpriteRenderer lockSpright;
 
+    public bool followingAlarm = false;
+
     //path variables
     public Transform[] waypoints;
 

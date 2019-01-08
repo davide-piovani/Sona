@@ -128,7 +128,6 @@ GameObject:
   - component: {fileID: 54259619654557522}
   - component: {fileID: 136206930384642134}
   - component: {fileID: 114405142915532092}
-  - component: {fileID: 208827128093292228}
   m_Layer: 9
   m_Name: Jack
   m_TagString: Player
@@ -1096,9 +1095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e241f146e3bc7424cba1d8598a82eb68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterCamera: {fileID: 20271422035295346}
   characterPortrait: {fileID: 21300000, guid: 67d807d89b3e66f44b8b7d3c89d33874, type: 3}
-  active: 1
   powerActive: 0
 --- !u!114 &114708481306715832
 MonoBehaviour:
@@ -1195,18 +1192,3 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.00003553822, y: 0.0007507438, z: 0.00086531555}
     m_Extent: {x: 0.0035605142, y: 0.008969185, z: 0.0060124644}
   m_DirtyAABB: 0
---- !u!208 &208827128093292228
-NavMeshObstacle:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1175855531903890}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5

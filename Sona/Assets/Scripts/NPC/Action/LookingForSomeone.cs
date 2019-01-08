@@ -13,17 +13,19 @@ public class LookingForSomeone : Action {
         controller.lockSpright.enabled = false;
         Decision decision = new ScanDecision();
 
-        float distance = Vector3.Distance(controller.transform.position, controller.getInitialPosition());
+        if (!controller.followingAlarm){
+            float distance = Vector3.Distance(controller.transform.position, controller.getInitialPosition());
 
-        if (distance > 1f)
-        {
-            controller.Walk();
-            controller.agent.SetDestination(controller.getInitialPosition());
-        }
-        else
-        {
-            controller.Idle();
-            controller.RestoreInitialRotation();
+            if (distance > 1f)
+            {
+                controller.Walk();
+                controller.agent.SetDestination(controller.getInitialPosition());
+            }
+            else
+            {
+                controller.Idle();
+                controller.RestoreInitialRotation();
+            }
         }
 
 

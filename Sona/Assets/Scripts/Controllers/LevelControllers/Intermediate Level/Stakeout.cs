@@ -68,7 +68,6 @@ public class Stakeout : MonoBehaviour {
 
     void ChangeState()
     {
-        print("state: " + state);
         if (state == 0)
         {
             if (CrossPlatformInputManager.GetButton(PlayersConstants.interactButton) & _display.IsActive())

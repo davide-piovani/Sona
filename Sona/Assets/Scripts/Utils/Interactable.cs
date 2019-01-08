@@ -12,7 +12,7 @@ public class Interactable : MonoBehaviour {
     //bool isFocus = false;
     bool hasInteracted = false;
 
-    GameController gameController;
+    protected GameController gameController;
     TextMeshPro text;
     //DialogHelper dialogHelper;
 

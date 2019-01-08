@@ -188,7 +188,6 @@ GameObject:
   - component: {fileID: 54102320876493122}
   - component: {fileID: 136727063994559466}
   - component: {fileID: 114056806031254758}
-  - component: {fileID: 208148506755829516}
   m_Layer: 9
   m_Name: Hannah
   m_TagString: Player
@@ -1184,8 +1183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 828263a15dbcf4aa2a9c0f8b2eb3dd76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterCamera: {fileID: 20927311313680076}
-  active: 1
+  characterPortrait: {fileID: 0}
   powerActive: 0
   bodyMaterial: {fileID: 2100000, guid: 2eace4eb5fb4a4c7aa3dc28f4180722c, type: 2}
   hairMaterial: {fileID: 2100000, guid: 3e851ff0f01dd416383f862550738f5f, type: 2}
@@ -1195,7 +1193,6 @@ MonoBehaviour:
     type: 2}
   bodyRenderer: {fileID: 137603795994045764}
   hairRenderer: {fileID: 137812129793792038}
-  characterPortrait: {fileID: 0}
 --- !u!114 &114413332954560548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1362,18 +1359,3 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00010199449, y: 0.006652377, z: -0.0008745013}
     m_Extent: {x: 0.0026723088, y: 0.0027583153, z: 0.0020718034}
   m_DirtyAABB: 0
---- !u!208 &208148506755829516
-NavMeshObstacle:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1268233685946044}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.2, y: 0.745, z: 0.275}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.08, z: 0}
-  m_TimeToStationary: 0.5

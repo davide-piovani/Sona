@@ -19,6 +19,7 @@ public class GameController : InputListener {
     [Header("Input Listeners")]
     [SerializeField] InputListener pauseInterface;
 
+    private Light[] sceneLights;
     private AlarmLight[] alarms;
     private bool alarmActive = false;
     private float alarmTime = 0;
@@ -32,11 +33,14 @@ public class GameController : InputListener {
     bool pauseActive = true;
     bool changePlayerActive = true;
 
+    public bool lastDoorOpen = false;
+
     // Use this for initialization
     void Start () {
         audioController = BackgroundAudioController.instance;
         characterController = FindObjectOfType<ActiveCharacterController>();
         sceneLoader = FindObjectOfType<SceneLoader>();
+        sceneLights = FindObjectsOfType<Light>();
         alarms = FindObjectsOfType<AlarmLight>();
 
         characterController.DeactiveAll();
@@ -74,7 +78,6 @@ public class GameController : InputListener {
             if (changePlayerActive & CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton)) ChangeCharacter();
         }
         if (alarmActive) ManageAlarms();
-        if (Input.GetKeyDown(KeyCode.Y)) SetAlarm(!alarmActive);
     }
 
     private void ChangeCharacter(){
@@ -195,6 +198,11 @@ public class GameController : InputListener {
     }
 
     public void SetAlarm(bool active) { alarmActive = active; }
+    public void ChangeAlarmState(bool active){
+        foreach(AlarmLight alarm in alarms){
+            alarm.ChangeState(active);
+        }
+    }
 
     private void ManageAlarms() {
         alarmTime += TimeController.GetDelTaTime();
@@ -210,6 +218,11 @@ public class GameController : InputListener {
         }
     }
 
+    public void ToggleSceneLights(bool active){
+        foreach(Light sceneLight in sceneLights){
+            sceneLight.enabled = active;
+        }
+    }
 
     /*private void Follow() {
         Player[] allPlayers;
