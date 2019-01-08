@@ -7,13 +7,14 @@ using UnityEngine.UI;
 public class FadeInOut : MonoBehaviour {
 
     public Image _img;
-    public Text _txt;
+    //public Text _txt;
     Animator _imgAnimator;
     //Animator _txtAnimator;
+    public TextMeshProUGUI text;
     
     void Start () {
         _imgAnimator = _img.gameObject.GetComponent<Animator>();
-        _txt.text = "";
+        text.text = "";
 	}
 
     public void FadeOut(float speed) {
@@ -26,8 +27,9 @@ public class FadeInOut : MonoBehaviour {
         _imgAnimator.SetBool("isFadeOut", false);
     }
 
-    public void ShowText(string text) {
-        _txt.text = text;
+    public void ShowText(string tutorialText) {
+        text.enabled = true;
+        text.text = tutorialText;
     }
 
     public Image GetImage() {

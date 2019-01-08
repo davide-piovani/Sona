@@ -38,6 +38,11 @@ public class Allarm : MonoBehaviour{
         EventManager.AllarmRinging();
     }
 
+    public bool getAllarmActivate()
+    {
+        return allarmActive;
+    }
+
     public void deactiveAllarm()
     {
         alarmLight.enabled = false;

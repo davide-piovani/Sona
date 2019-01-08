@@ -11,6 +11,7 @@ public class TutorialPoint : MonoBehaviour
 
     private void Start()
     {
+        
         dialogHelper = FindObjectOfType<DialogHelper>();
         gameController = FindObjectOfType<GameController>();
         pointReached = false;
