@@ -64,6 +64,7 @@
     <Compile Include="Assets\AlarmActivator.cs" />
     <Compile Include="Assets\EndLevelScript.cs" />
     <Compile Include="Assets\LastDoorOpener.cs" />
+    <Compile Include="Assets\LastDoorScript.cs" />
     <Compile Include="Assets\Scripts\Characters\Charlie.cs" />
     <Compile Include="Assets\Scripts\Characters\Hannah.cs" />
     <Compile Include="Assets\Scripts\Characters\Jack.cs" />

@@ -8,6 +8,7 @@ public class Tutorial4 : MonoBehaviour
     //radius in which player can interact
     public float radius = 3f;
     private float textSize = 0.05f;
+    private Allarm allarm;
 
     //bool isFocus = false;
     bool hasInteracted4;
@@ -24,12 +25,13 @@ public class Tutorial4 : MonoBehaviour
         text = GetComponentInChildren<TextMeshPro>();
         hasInteracted4 = false;
         cellDoor = FindObjectOfType<CellDoor>();
+        allarm = FindObjectOfType<Allarm>();
     }
 
 
     public void Update()
     {
-        if (getDistanceFromPlayer() <= radius && cellDoor.getDoorOpen())
+        if (getDistanceFromPlayer() <= radius && cellDoor.getDoorOpen() && allarm.getAllarmActivate())
         {
             ShowTooltip();
         }

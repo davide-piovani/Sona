@@ -123,8 +123,10 @@ public class MenuController : MenuMovementController {
         switch (currentButton){
             case 0:
             case 1:
-            case 2:
                 sceneLoader.LoadScene(currentButton + 1);
+                break;
+            case 2:
+                sceneLoader.LoadScene(4);
                 break;
             case 4:
                 LoadMenu(MenuType.mainMenu);

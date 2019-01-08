@@ -40,7 +40,7 @@ public class CameraController : InputListener {
         cameraCollider = GetComponentInParent<CapsuleCollider>();
         //offset = player.transform.position - tr.position;
         //base_dist = offset.magnitude;
-        base_dist = 3;
+        base_dist = 4;
         tr.localRotation = Quaternion.Euler(15, 0, 0);
         dist = base_dist;
         layerMask = 1 << 11 | 1 << 8 | 1 << 10 | 1 << 14;
@@ -144,7 +144,8 @@ public class CameraController : InputListener {
             }
 
             h += CrossPlatformInputManager.GetAxis("Mouse X");
-            v += CrossPlatformInputManager.GetAxis("Mouse Y");
+            v -= CrossPlatformInputManager.GetAxis("Mouse Y");
+
 
         }
         h_rotation = h * rot_speed;

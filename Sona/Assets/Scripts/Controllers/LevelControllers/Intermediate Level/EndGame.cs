@@ -22,10 +22,10 @@ public class EndGame : MonoBehaviour {
     IEnumerator Restart()
     {
         _fadeInOut.FadeOut(1);
-        yield return new WaitUntil(() => _fadeInOut.GetImage().color.a == 1);
+        yield return new WaitUntil(() => _fadeInOut.GetImage().color.a > 0.99);
         _fadeInOut.ShowText("LEVEL COMPLETED");
         yield return new WaitForSeconds(2);
-        _sceneLoader.ReloadCurrentScene();
+        FindObjectOfType<GameController>().RestartLevel();
         // da cambiare e mettere passa al livello successivo
     }
 }

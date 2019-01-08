@@ -39,7 +39,7 @@ public class Circuitry : Interactable {
             manager.ShowMessage ("Component needed", 0);
 
         } else if (!component && !(hasComponent == null)){
-            if(shutDown){
+            if(!shutDown){
                 manager.SendMessage("Turn off the power first");
             } else {
                 if (player == hasComponent){

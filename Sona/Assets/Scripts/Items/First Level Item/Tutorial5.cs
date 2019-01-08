@@ -44,7 +44,7 @@ public class Tutorial5 : MonoBehaviour
             }
             if (i==3)
             {
-                //gameController.
+                FindObjectOfType<SceneLoader>().LoadNextScene();
             }
         }
 

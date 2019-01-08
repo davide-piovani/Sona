@@ -21422,7 +21422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 357875d61cbe82c4b9e3a9ae0920c3d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endAnim: {fileID: 2070586438}
 --- !u!4 &1064874070
 Transform:
   m_ObjectHideFlags: 0
@@ -21958,7 +21957,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1093017874
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32500,7 +32499,7 @@ Prefab:
     - target: {fileID: 13700000, guid: 30355c89a4e164f4cbed228a8b2b656f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e1d25d13c0fbb3f4e99179ec32a0f2f5, type: 2}
+      objectReference: {fileID: 2100000, guid: 40afb1b71964a447e825eb9ee735ab75, type: 2}
     - target: {fileID: 9500000, guid: 30355c89a4e164f4cbed228a8b2b656f, type: 3}
       propertyPath: m_Controller
       value: 
@@ -36229,6 +36228,7 @@ MonoBehaviour:
   powerBar: {fileID: 767940768}
   characterIcon: {fileID: 546652227}
   pauseInterface: {fileID: 1918706951}
+  lastDoorOpen: 0
 --- !u!4 &1814985761
 Transform:
   m_ObjectHideFlags: 0
@@ -41912,7 +41912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _img: {fileID: 104359776}
-  _txt: {fileID: 1262499190}
+  text: {fileID: 0}
 --- !u!1 &2078826669
 GameObject:
   m_ObjectHideFlags: 0

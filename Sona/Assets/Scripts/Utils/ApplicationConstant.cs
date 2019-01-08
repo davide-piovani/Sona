@@ -39,11 +39,11 @@ namespace ApplicationConstants {
         public static float walkingSpeed = 1f;
         public static float animationsSpeed = 0.5f;
 
-        public static float jackPowerDuration = 10f;
-        public static float charliePowerDuration = 5f;
-        public static float hannahPowerDuration = 5f;
-        public static float jackRechargeSpeed = 2f;
-        public static float charlieRechargeSpeed = 2f;
+        public static float jackPowerDuration = 35f;
+        public static float charliePowerDuration = 15f;
+        public static float hannahPowerDuration = 6f;
+        public static float jackRechargeSpeed = 15f;
+        public static float charlieRechargeSpeed = 10f;
         public static float hannahRechargeSpeed = 2f;
 
         public static string powerButtonName = "PowerButton";

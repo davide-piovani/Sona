@@ -35,10 +35,10 @@ public class PudController : MonoBehaviour {
 
     IEnumerator Restart() {
         _fadeInOut.FadeOut(5);
-        yield return new WaitUntil(() => _fadeInOut.GetImage().color.a == 1);
+        yield return new WaitUntil(() => _fadeInOut.GetImage().color.a > 0.99);
         _fadeInOut.ShowText("YOU'RE DEAD");
-        yield return new WaitForSeconds(2);
-        _sceneLoader.ReloadCurrentScene();
+        yield return new WaitForSeconds(0.5f);
+        FindObjectOfType<GameController>().RestartLevel();
     }
 
 }

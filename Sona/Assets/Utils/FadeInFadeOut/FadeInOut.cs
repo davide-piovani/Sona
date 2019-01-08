@@ -10,7 +10,7 @@ public class FadeInOut : MonoBehaviour {
     //public Text _txt;
     Animator _imgAnimator;
     //Animator _txtAnimator;
-    public TextMeshProUGUI text;
+    public Text text;
     
     void Start () {
         _imgAnimator = _img.gameObject.GetComponent<Animator>();
