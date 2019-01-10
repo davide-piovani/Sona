@@ -6,7 +6,7 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class KeyDoorController : MonoBehaviour, LockedDoor {
 
-    public DisplayActivator _display;
+    public InteractController _interact;
     public float eulerX;
     public float eulerY;
     public float eulerZ;
@@ -34,14 +34,14 @@ public class KeyDoorController : MonoBehaviour, LockedDoor {
     {
         if (!keyUsed)
         {
-            if (!keyOwned | !_display.GetPlayer().name.Equals(keyOwner))
+            if (!keyOwned | !_interact.GetPlayer().name.Equals(keyOwner))
             {
-                _display.Necessary(false);
+                _interact.Necessary(false);
                 active = false;
             }
             else
             {
-                _display.Necessary(true);
+                _interact.Necessary(true);
                 active = true;
             }
         }
@@ -49,10 +49,10 @@ public class KeyDoorController : MonoBehaviour, LockedDoor {
             active = true;
         }
 
-        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/ & _display.IsActive() & active & (open | close))
+        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton) & _interact.IsActive() & active & (open | close))
         {
             keyUsed = true;
-            _display.Necessary(false);
+            _interact.Necessary(false);
             if (open)
             {
                 open = false;
@@ -77,7 +77,7 @@ public class KeyDoorController : MonoBehaviour, LockedDoor {
                 }
                 else
                 {
-                    _display.Necessary(true);
+                    _interact.Necessary(true);
                     open = true;
                 }
             }
@@ -89,7 +89,7 @@ public class KeyDoorController : MonoBehaviour, LockedDoor {
                 }
                 else
                 {
-                    _display.Necessary(true);
+                    _interact.Necessary(true);
                     close = true;
                 }
             }

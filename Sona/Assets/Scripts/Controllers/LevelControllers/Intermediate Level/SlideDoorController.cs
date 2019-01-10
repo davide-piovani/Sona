@@ -6,7 +6,7 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class SlideDoorController : MonoBehaviour {
 
-    public DisplayActivator _display;
+    public InteractController _interact;
     ElevatorDoor _door;
 
     void Start()
@@ -17,7 +17,7 @@ public class SlideDoorController : MonoBehaviour {
     void Update()
     {
 
-        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/ & _display.IsActive() & !_door.IsSliding())
+        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton) & _interact.IsActive() & !_door.IsSliding())
         {
             _door.SlideDoor();
         }

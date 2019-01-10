@@ -9,6 +9,8 @@ public abstract class Player : InputListener {
 
     protected Camera characterCamera;
     [SerializeField] Sprite characterPortrait;
+    public GameObject _icon;
+    public ParticleSystem _particle;
 
     private float speed = PlayersConstants.runningSpeed;
 
@@ -128,6 +130,22 @@ public abstract class Player : InputListener {
     private void ManagePower(){
         if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName)) {
             PowerToggle(!powerActive);
+            ManageBarAndPArticles(powerActive);
+
+        }
+    }
+
+    private void ManageBarAndPArticles(bool cond) {
+        gameController.GetPowerBarImage().GetComponent<PowerActiveBar>().SetBarActive(cond);
+        if (cond)
+        {
+            _particle.Play();
+            gameController.GetCharacterIconParticle().Play();
+        }
+        else
+        {
+            _particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            gameController.GetCharacterIconParticle().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
     }
 
@@ -139,7 +157,10 @@ public abstract class Player : InputListener {
         if (powerActive) {
             powerTimeLeft -= Time.deltaTime;
 
-            if (powerTimeLeft <= 0) PowerToggle(false);
+            if (powerTimeLeft <= 0) {
+                PowerToggle(false);
+                ManageBarAndPArticles(false);
+            }
         } else {
             if (powerTimeLeft < powerDuration) {
                 powerTimeLeft += Time.deltaTime * rechargeSpeed;
@@ -269,6 +290,7 @@ public abstract class Player : InputListener {
         characterCamera.GetComponent<CameraController>().Activate();
         //characterCamera.enabled = true;
         characterCamera.gameObject.GetComponent<AudioListener>().enabled = true;
+        //GetComponent<Rigidbody>().isKinematic = false;
         ActiveInput();
     }
 
@@ -281,6 +303,7 @@ public abstract class Player : InputListener {
         if (anim != null){
             SetAnimBools (Mode.idle);
         }
+        //GetComponent<Rigidbody>().isKinematic = true;
     }
 
     public bool IsVisible() {

@@ -8,17 +8,17 @@ public class ElevatorController : MonoBehaviour {
 
     public ElevatorDoor bottomDoor;
     public ElevatorDoor topDoor;
-    public DisplayActivator _bottomDisplay;
-    public DisplayActivator _topDisplay;
-    public DisplayActivator _elevatorSensor;
-    public InteractiveTextScript _platformText;
-
+    public InteractController _bottomDisplay;
+    public InteractController _topDisplay;
+    public InteractController _elevatorSensor;
+    
     PlatformMovement platform;
     int playersInElevator = 0;
     int state = 0;
 
     void Start () {
         platform = GetComponentInChildren<PlatformMovement>();
+        _elevatorSensor.ForceDeActive();
     }
 	
 	void Update () {
@@ -44,13 +44,15 @@ public class ElevatorController : MonoBehaviour {
         if (state == 0)
         {
 
-            if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/)
+            if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton))
             {
 
                 if (_bottomDisplay.IsActive())
                 {
                     _topDisplay.Necessary(false);
                     _bottomDisplay.Necessary(false);
+                    _bottomDisplay.ForceDeActive(); /* PROVA */
+                    _topDisplay.ForceDeActive(); /* PROVA */
                     platform.ActiveDeActivePlatform(true);
                     state = 1;
                 }
@@ -58,6 +60,8 @@ public class ElevatorController : MonoBehaviour {
                 {
                     _topDisplay.Necessary(false);
                     _bottomDisplay.Necessary(false);
+                    _bottomDisplay.ForceDeActive(); /* PROVA */
+                    _topDisplay.ForceDeActive(); /* PROVA */
                     platform.ActiveDeActivePlatform(true);
                     state = 10;
                 }
@@ -91,18 +95,18 @@ public class ElevatorController : MonoBehaviour {
         }
         else if (state == 3)
         {
-
-            if (platform.PlayersOnPlatform()==playersInElevator & playersInElevator!=0 & _elevatorSensor.IsActive())
+            Debug.Log(_elevatorSensor.IsActive());
+            if (platform.PlayersOnPlatform()==playersInElevator & playersInElevator!=0)
             {
-                _platformText.ShowText();
-                if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/ & bottomDoor.IsOpen()) {
-                    _platformText.HideText();
+                _elevatorSensor.ReActive(); /* PROVA */
+                if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton) & bottomDoor.IsOpen()) {
+                    _elevatorSensor.ForceDeActive(); /* PROVA */
                     bottomDoor.SlideDoor();
                     state = 5;
                 }
             }
             else {
-                _platformText.HideText();
+                _elevatorSensor.ForceDeActive(); /* PROVA */
             }
 
             if (!_bottomDisplay.IsActive() & platform.PlayersOnPlatform()==playersInElevator & playersInElevator==0) {
@@ -116,6 +120,8 @@ public class ElevatorController : MonoBehaviour {
             if (bottomDoor.IsClose()){
                 _topDisplay.Necessary(true);
                 _bottomDisplay.Necessary(true);
+                _bottomDisplay.ReActive(); /* PROVA */
+                _topDisplay.ReActive(); /* PROVA */
                 platform.ActiveDeActivePlatform(false);
                 state = 0;
             }
@@ -143,16 +149,16 @@ public class ElevatorController : MonoBehaviour {
 
             if (platform.PlayersOnPlatform()==playersInElevator & playersInElevator!=0)
             {
-                _platformText.ShowText();
-                if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/ & topDoor.IsOpen()) {
-                    _platformText.HideText();
+                _elevatorSensor.ReActive();
+                if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton) & topDoor.IsOpen()) {
+                    _elevatorSensor.ForceDeActive();
                     topDoor.SlideDoor();
                     state = 8;
                 }
             }
             else
             {
-                _platformText.HideText();
+                _elevatorSensor.ForceDeActive();
             }
 
             if (!_topDisplay.IsActive() & platform.PlayersOnPlatform()==playersInElevator & playersInElevator==0) {
@@ -178,6 +184,8 @@ public class ElevatorController : MonoBehaviour {
             {
                 _topDisplay.Necessary(true);
                 _bottomDisplay.Necessary(true);
+                _bottomDisplay.ReActive(); /* PROVA */
+                _topDisplay.ReActive(); /* PROVA */
                 platform.ActiveDeActivePlatform(false);
                 state = 0;
             }

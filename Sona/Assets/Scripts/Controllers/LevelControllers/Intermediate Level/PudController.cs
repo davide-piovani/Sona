@@ -6,21 +6,21 @@ public class PudController : MonoBehaviour {
 
     SceneLoader _sceneLoader;
     FadeInOut _fadeInOut;
-    Animator _animatorController;
+    //Animator _animatorController;
     float deltaTime;
     
     void Start()
     {
         _sceneLoader = FindObjectOfType<SceneLoader>();
         _fadeInOut = FindObjectOfType<FadeInOut>();
-        _animatorController = GetComponent<Animator>();
+        //_animatorController = GetComponent<Animator>();
     }
 
     void Update()
     {
 
         deltaTime = TimeController.GetDelTaTime();
-        _animatorController.SetFloat("speed", deltaTime);
+        //_animatorController.SetFloat("speed", deltaTime);
 
     }
 
@@ -38,7 +38,9 @@ public class PudController : MonoBehaviour {
         yield return new WaitUntil(() => _fadeInOut.GetImage().color.a > 0.99);
         _fadeInOut.ShowText("YOU'RE DEAD");
         yield return new WaitForSeconds(0.5f);
-        FindObjectOfType<GameController>().RestartLevel();
+        _sceneLoader.ReloadCurrentScene();
+        //FindObjectOfType<GameController>().RestartLevel();
+        //FindObjectOfType<GameController>().ReloadFromLastCheckpoint();
     }
 
 }

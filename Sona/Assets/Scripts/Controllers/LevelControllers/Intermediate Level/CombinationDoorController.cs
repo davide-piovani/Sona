@@ -7,7 +7,7 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class CombinationDoorController : MonoBehaviour, LockedDoor {
 
-    public DisplayActivator _displaySensor;
+    public InteractController _interactSensor;
     public Text _combinationString;
     public GameObject _displayPad;
     ElevatorDoor _door;
@@ -34,13 +34,13 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
 
     void ChangeState() {
 
-        if (state == 0 & CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/ & _displaySensor.IsActive())
+        if (state == 0 & CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton) & _interactSensor.IsActive())
         {
-            _displaySensor.Necessary(false);
+            _interactSensor.Necessary(false);
 
             if (!keyUsed)
             {
-                if (!keyOwned | !_displaySensor.GetPlayer().name.Equals(keyOwner))
+                if (!keyOwned | !_interactSensor.GetPlayer().name.Equals(keyOwner))
                 {
                     if (_door.IsClose())
                     {
@@ -71,7 +71,7 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
         }
         else if (state == 1)
         {
-            if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/)
+            if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton))
             {
                 _combinationString.text = "";
                 _gameController.PauseActive(true); /*prova per vedere se funziona*/
@@ -98,7 +98,7 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
         else if (state == 2)
         {
             if (_door.IsOpen() | _door.IsClose()) {
-                _displaySensor.Necessary(true);
+                _interactSensor.Necessary(true);
                 state = 0;
             }
         }
@@ -108,7 +108,7 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
 
     void PlayerScriptsActive(bool cond)
     {
-        GameObject _player = _displaySensor.GetPlayer();
+        GameObject _player = _interactSensor.GetPlayer();
         MonoBehaviour[] _playerScripts = _player.GetComponents<MonoBehaviour>();
         foreach (MonoBehaviour s in _playerScripts)
         {

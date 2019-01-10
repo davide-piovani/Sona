@@ -8,18 +8,20 @@ public class KeyScript : MonoBehaviour {
 
     public GameObject _door;
 
-    DisplayActivator _display;
+    InteractController _interact;
     LockedDoor keyDoorController;
     
     void Start() {
-        _display = GetComponent<DisplayActivator>();
+        _interact = GetComponent<InteractController>();
         keyDoorController = _door.GetComponentInChildren<LockedDoor>();
     }
 
     void Update() {
-        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/ & _display.IsActive())
+        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton) & _interact.IsActive())
         {
-            keyDoorController.KeyTaken(_display.GetPlayer().name);
+            keyDoorController.KeyTaken(_interact.GetPlayer().name);
+            _interact.Necessary(false);
+            _interact.ForceDeActive();
             gameObject.SetActive(false);
         }
     }

@@ -25,7 +25,8 @@ public class EndGame : MonoBehaviour {
         yield return new WaitUntil(() => _fadeInOut.GetImage().color.a > 0.99);
         _fadeInOut.ShowText("LEVEL COMPLETED");
         yield return new WaitForSeconds(2);
-        FindObjectOfType<GameController>().RestartLevel();
+        _sceneLoader.ReloadCurrentScene();
+        //FindObjectOfType<GameController>().RestartLevel();
         // da cambiare e mettere passa al livello successivo
     }
 }

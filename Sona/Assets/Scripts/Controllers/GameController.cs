@@ -37,6 +37,7 @@ public class GameController : InputListener {
 
     // Use this for initialization
     void Start () {
+        characterIcon.GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         audioController = BackgroundAudioController.instance;
         characterController = FindObjectOfType<ActiveCharacterController>();
         sceneLoader = FindObjectOfType<SceneLoader>();
@@ -94,6 +95,9 @@ public class GameController : InputListener {
         }
         pauseInterface.SetAsUniqueInputListener(this);
     }
+
+    public Image GetPowerBarImage() { return powerBar;  }
+    public ParticleSystem GetCharacterIconParticle() { return characterIcon.GetComponentInChildren<ParticleSystem>(); }
 
     public void UpdatePowerLevelIndicator(float level) {
         powerBar.fillAmount = level;
