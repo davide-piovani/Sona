@@ -10,7 +10,7 @@ public class Door : Interactable {
     private bool open;
     private Vector3 fixedPoint;
     private Vector3 rotation = new Vector3 (0,90,0);
-    public Level3Manager manager;
+    private Level3Manager manager;
     private bool active = false;
     //private NavMeshSurface surface;
 

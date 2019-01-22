@@ -300,6 +300,10 @@ public abstract class Player : InputListener {
         characterCamera.gameObject.GetComponent<AudioListener>().enabled = false;
         audioSource.Stop();
         DisableInput();
+        if (powerActive) {
+            PowerToggle(false);
+            ManageBarAndPArticles(false);
+        }
         if (anim != null){
             SetAnimBools (Mode.idle);
         }

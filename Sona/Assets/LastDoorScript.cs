@@ -16,7 +16,7 @@ public class LastDoorScript : MonoBehaviour {
         targetRotation = Quaternion.Euler(transform.rotation.eulerAngles + dir);
     }
 
-    public DisplayActivator _display;
+    //public DisplayActivator _display;
     public float eulerX;
     public float eulerY;
     public float eulerZ;
@@ -31,9 +31,9 @@ public class LastDoorScript : MonoBehaviour {
     void Update()
     {
 
-        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)/*Input.GetKeyDown(KeyCode.B)*/ & _display.IsActive() & (open | close) & gameController.lastDoorOpen)
+        /*if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton) & _display.IsActive() & (open | close) & gameController.lastDoorOpen)
         {
-            _display.Necessary(false);
+            //_display.Necessary(false);
             if (open)
             {
                 open = false;
@@ -58,7 +58,7 @@ public class LastDoorScript : MonoBehaviour {
                 }
                 else
                 {
-                    _display.Necessary(true);
+                    //_display.Necessary(true);
                     open = true;
                 }
             }
@@ -70,11 +70,11 @@ public class LastDoorScript : MonoBehaviour {
                 }
                 else
                 {
-                    _display.Necessary(true);
+                    //_display.Necessary(true);
                     close = true;
                 }
             }
-        }
+        }*/
 
 
     }

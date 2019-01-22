@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using ApplicationConstants;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.UI;
 
 public class Level3Manager : MonoBehaviour {
 
@@ -29,22 +30,25 @@ public class Level3Manager : MonoBehaviour {
     private bool newMessage;
     private int state = 0;
     private bool waiting = false;
+    private bool active = false;
+    private FadeInOut _fade;
 
     // Use this for initialization
     void Start () {
         InitObjects();
-        
-
         box.GetComponent<Transform>().position = positions[UnityEngine.Random.Range(0,2)];
+        StartCoroutine(StartDialogue());
     }
 
     private void InitObjects() {
         int i;
         //outSound = FindObjectOfType<GlobalAudioListener>().GetComponent<AudioListener>();
+        _fade = FindObjectOfType<FadeInOut>();
         lights = FindObjectsOfType<RoomLight>();
         controller = FindObjectOfType<GameController>();
         Door[] doors = FindObjectsOfType<Door>();
         Switch[] switches = FindObjectsOfType <Switch>();
+        toScreen.DialogueWindowActive(false);
         int_obj = new Interactable[doors.Length + switches.Length];
         System.Array.Copy(doors, int_obj, doors.Length);
         System.Array.Copy(switches, 0, int_obj, doors.Length, switches.Length);
@@ -63,62 +67,82 @@ public class Level3Manager : MonoBehaviour {
     }
 
     void Update () {
-        if (!waiting){
-            switch (state){
-                case 0:
-                    print("LEVEL MANAGER: State 0");
-                    freeCam.gameObject.transform.position = new Vector3 (-4.87f, 1.84f, -12.47f);
-                    freeCam.gameObject.transform.rotation = Quaternion.Euler(30,0,0);
-                    controller.DisableInput();
-                    SetPlayer();
-                    currentPlayer.Deactivate();
-                    freeCam.enabled = true;
-                    ShowDialogueLine();
-                    state++;
-                    break;
-                case 1:
-                    print("LEVEL MANAGER: State 1");
-                    for (int i=0; i<lights.Length; i++){
-                        lights[i].ShutDown();
-                    }
-                    state++;
-                    break;
-                case 2:
-                    print("LEVEL MANAGER: State 2");
-                    ShowDialogueLine();
-                    if (state == 3){
-                        freeCam.enabled = false;
-                        currentPlayer.Activate();
-                        controller.ActiveInput();
-                        ActivateTorch();
-                    }
-                    break;
-                case 3:
-                    //print("LEVEL MANAGER: State 3");
-                    if (!(controller.GetActivePlayer() == currentPlayer)){
+        if (active)
+        {
+            if (!waiting)
+            {
+                switch (state)
+                {
+                    case 0:
+                        print("LEVEL MANAGER: State 0");
+                        freeCam.gameObject.transform.position = new Vector3(-4.87f, 1.84f, -12.47f);
+                        freeCam.gameObject.transform.rotation = Quaternion.Euler(30, 0, 0);
+                        controller.DisableInput();
                         SetPlayer();
-                    }
-        
-                    if (newMessage){
-                        newMessage = false;
-                    } else {
-                        toScreen.EraseMessage();
-                    }
-                    break;
-                case 4:
-                    print("LEVEL MANAGER: State 4");
-                    freeCam.enabled = true;
-                    freeCam.gameObject.transform.position = new Vector3 (-14.1f, 1.84f, 22.5f);
-                    freeCam.gameObject.transform.rotation = Quaternion.Euler(30,0,0);
-                    controller.DisableInput();
-                    SetPlayer();
-                    currentPlayer.Deactivate();
-                    ShowDocument();
-                    break;
-                case 5:
-                    print("LEVEL MANAGER: State 5");
-                    EndLevel();
-                    break;
+                        toScreen.PowerBarActive(false); /* TRY */
+                        currentPlayer.Deactivate();
+                        freeCam.enabled = true;
+                        ShowDialogueLine();
+                        state++;
+                        break;
+                    case 1:
+                        print("LEVEL MANAGER: State 1");
+                        for (int i = 0; i < lights.Length; i++)
+                        {
+                            lights[i].ShutDown();
+                        }
+                        state++;
+                        break;
+                    case 2:
+                        print("LEVEL MANAGER: State 2");
+                        ShowDialogueLine();
+                        if (state == 3)
+                        {
+                            freeCam.enabled = false;
+                            toScreen.PowerBarActive(true); /* TRY */
+                            currentPlayer.Activate();
+                            controller.ActiveInput();
+                            ActivateTorch();
+                        }
+                        break;
+                    case 3:
+                        //print("LEVEL MANAGER: State 3");
+                        if (!(controller.GetActivePlayer() == currentPlayer))
+                        {
+                            SetPlayer();
+                        }
+
+                        if (newMessage)
+                        {
+                            newMessage = false;
+                        }
+                        else
+                        {
+                            toScreen.EraseMessage();
+                        }
+                        break;
+                    case 4:
+                        print("LEVEL MANAGER: State 4");
+                        freeCam.enabled = true;
+                        freeCam.gameObject.transform.position = new Vector3(-14.1f, 1.84f, 22.5f);
+                        freeCam.gameObject.transform.rotation = Quaternion.Euler(30, 0, 0);
+                        controller.DisableInput();
+                        SetPlayer();
+                        currentPlayer.Deactivate();
+                        ShowDocument();
+                        break;
+                    case 5:
+                        print("LEVEL MANAGER: State 5");
+                        EndLevel();
+                        break;
+                }
+            }
+            else
+            {
+                if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.enterButton))
+                {
+                    toScreen.NextDial();
+                }
             }
         }
     }
@@ -229,9 +253,13 @@ public class Level3Manager : MonoBehaviour {
 
     public void Next () {
         waiting = false;
-
     }
 
-    
+    IEnumerator StartDialogue() {
+        yield return new WaitUntil(() => _fade.GetImage().color.a > 0.99);
+        yield return new WaitForSeconds(2);
+        active = true;
+        toScreen.DialogueWindowActive(true);
+    }
 
 }

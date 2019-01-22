@@ -95,7 +95,8 @@ public class InteractController : MonoBehaviour {
     }
 
     void Control(){
-        Vector3 pos = new Vector3(transform.position.x, _gameController.GetActivePlayer().transform.position.y, transform.position.z);
+        //Vector3 pos = new Vector3(transform.position.x, _gameController.GetActivePlayer().transform.position.y, transform.position.z);
+        Vector3 pos = transform.position;
         float distance = Vector3.Distance(_gameController.GetActivePlayer().transform.position, pos);
         if (distance <= radius)
         {

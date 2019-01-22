@@ -10,6 +10,12 @@ public class UIManager : MonoBehaviour {
     public Message outMessage;
     public DialogueManager dial;
     public DocManager doc;
+    public Image powerBarCircle;
+    public Image powerBarIcon;
+
+    public void DialogueWindowActive(bool cond) {
+        dial.gameObject.SetActive(cond);
+    }
 
     public void ShowMessage (String message, int priority){
         outMessage.Show (message);
@@ -37,5 +43,10 @@ public class UIManager : MonoBehaviour {
     public void NextDial () {
         dial.gameObject.SetActive (false);
         manager.Next();
+    }
+
+    public void PowerBarActive(bool cond) {
+        powerBarCircle.enabled = cond;
+        powerBarIcon.enabled = cond;
     }
 }
