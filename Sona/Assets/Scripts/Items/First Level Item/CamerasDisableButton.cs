@@ -1,19 +1,24 @@
-﻿using System.Collections;
+﻿using ApplicationConstants;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
-public class CamerasDisableButton : Interactable {
+public class CamerasDisableButton : MonoBehaviour {
 
+    InteractController _interactController;
     Allarm allarm;
 
-	// Use this for initialization
-	new void Start () {
-        base.Start();
+	void Start () {
+        _interactController = GetComponent<InteractController>();
         allarm = FindObjectOfType<Allarm>();
     }
 
-    public override void Interact()
-    {
-        allarm.deactiveAllarm();
+    void Update() {
+
+        if (_interactController.IsActive() & CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)) {
+            _interactController.ForceDeActive();
+            allarm.deactiveAllarm();
+        }
     }
 }
