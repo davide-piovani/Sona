@@ -101,4 +101,6 @@ public class ButtonDoor : MonoBehaviour {
         //_doorInteractController.ReActive();
         _doorInteractController.enabled = true;
     }
+
+    public bool isUnlocked() { return active; }
 }

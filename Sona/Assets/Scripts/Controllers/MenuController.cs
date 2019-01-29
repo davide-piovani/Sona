@@ -122,11 +122,13 @@ public class MenuController : MenuMovementController {
     private void SelectLevelMenuController(){
         switch (currentButton){
             case 0:
+                sceneLoader.LoadScene(currentButton+1);
+                break;
             case 1:
-                sceneLoader.LoadScene(currentButton + 1);
+                sceneLoader.LoadScene(currentButton+1);
                 break;
             case 2:
-                sceneLoader.LoadScene(4);
+                sceneLoader.LoadScene(currentButton+2);
                 break;
             case 4:
                 LoadMenu(MenuType.mainMenu);

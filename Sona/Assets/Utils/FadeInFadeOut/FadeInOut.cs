@@ -27,9 +27,9 @@ public class FadeInOut : MonoBehaviour {
         _imgAnimator.SetBool("isFadeOut", false);
     }
 
-    public void ShowText(string tutorialText) {
+    public void ShowText(string txt) {
         text.enabled = true;
-        text.text = tutorialText;
+        text.text = txt;
     }
 
     public Image GetImage() {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteractController : MonoBehaviour {
 
 	public float radius = 2f;
-    public string _string;
+    public bool press = true;
     GameController _gameController;
     InteractiveText _text;
     bool active = false;
@@ -31,7 +31,7 @@ public class InteractController : MonoBehaviour {
             {
                 if (active & necessary)
                 {
-                    if (_text.OwnText(_string))
+                    if (_text.OwnText(press))
                     {
                         state = 1;
                     }
@@ -48,7 +48,7 @@ public class InteractController : MonoBehaviour {
                 }
                 else if (!necessary)
                 {
-                    _text.SetText("");
+                    _text.SetText(press);
                     state = 2;
                 }
             }
@@ -56,7 +56,7 @@ public class InteractController : MonoBehaviour {
             {
                 if (necessary)
                 {
-                    _text.SetText(_string);
+                    _text.SetText(press);
                     state = 1;
                 }
                 else if (!active)
@@ -95,7 +95,6 @@ public class InteractController : MonoBehaviour {
     }
 
     void Control(){
-        //Vector3 pos = new Vector3(transform.position.x, _gameController.GetActivePlayer().transform.position.y, transform.position.z);
         Vector3 pos = transform.position;
         float distance = Vector3.Distance(_gameController.GetActivePlayer().transform.position, pos);
         if (distance <= radius)

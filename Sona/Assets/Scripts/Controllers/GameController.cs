@@ -33,9 +33,6 @@ public class GameController : InputListener {
     bool pauseActive = true;
     bool changePlayerActive = true;
 
-    public bool lastDoorOpen = false;
-
-    // Use this for initialization
     void Start () {
         characterIcon.GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         audioController = BackgroundAudioController.instance;

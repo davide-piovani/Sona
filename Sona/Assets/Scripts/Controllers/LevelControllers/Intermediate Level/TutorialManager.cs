@@ -2,26 +2,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class TutorialManager : MonoBehaviour {
 
     Player currentPlayer;
-    Vector3[] positions = new Vector3[3] { new Vector3(-40.5f, -0.65f, 0.2f), new Vector3(-37f, -0.65f, -3f), new Vector3(14.49f, 0.2f, 28.539f) };
+    public InteractController _doorController;
     public CanvasManager toScreen;
     public TutorialTexts lines;
     public Camera freeCam;
+    public VideoClip video1;
+    public VideoClip video2;
+    public VideoClip video3;
 
     private GameController controller;
 
-    //used for internal functions
-    bool newMessage;
     int state = 0;
+    bool newMessage;
+    bool doorPassed = false;
+    bool doorOpen = false;
+    bool closeToAllarm = false;
+    bool allarmDeactivated = false;
+    bool levelEnd = false;
     bool waiting = false;
     bool active = false;
-    FadeInOut _fade;
 
-    // Use this for initialization
+    SceneLoader _sceneLoader;
+    FadeInOut _fadeInOut;
+
     void Start()
     {
         freeCam.enabled = false;
@@ -31,7 +40,8 @@ public class TutorialManager : MonoBehaviour {
 
     private void InitObjects()
     {
-        _fade = FindObjectOfType<FadeInOut>();
+        _fadeInOut = FindObjectOfType<FadeInOut>();
+        _sceneLoader = FindObjectOfType<SceneLoader>();
         controller = FindObjectOfType<GameController>();
         toScreen.DialogueWindowActive(false);
         toScreen.MSGEnabled(false);
@@ -46,15 +56,14 @@ public class TutorialManager : MonoBehaviour {
                 switch (state)
                 {
                     case 0:
-                        print("TUTORIAL MANAGER: State 0");
-                        //freeCam.gameObject.transform.position = new Vector3(-4.87f, 1.84f, -12.47f);
-                        //freeCam.gameObject.transform.rotation = Quaternion.Euler(30, 0, 0);
+                        freeCam.gameObject.transform.position = new Vector3(-6f, 2f, 0f);
+                        freeCam.gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
                         controller.DisableInput();
                         SetPlayer();
                         toScreen.PowerBarActive(false);
                         currentPlayer.Deactivate();
                         freeCam.enabled = true;
-                        ShowDialogueLine();
+                        ShowDialogueLine(3);
                         if (state == 1)
                         {
                             freeCam.enabled = false;
@@ -64,38 +73,116 @@ public class TutorialManager : MonoBehaviour {
                         }
                         break;
                     case 1:
-                        print("TUTORIAL MANAGER: State 1");
                         toScreen.MSGEnabled(true);
-                        toScreen.ShowMessage("Press N to change character until Charlie is selected");
-                        if (controller.GetActivePlayer().name.Equals("Charlie")) { state++; }
+                        toScreen.ShowTutorialVideoMessage(
+                            "You can control only one character at a time.\nSwitch among the characters until charlie is selected",
+                            "Press          to change character",
+                            "CHANGE_CHARACTER", video1);
+                        state++;
                         break;
                     case 2:
-                        print("TUTORIAL MANAGER: State 2");
-                        toScreen.ShowMessage("Press Z to activate power");
-                        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName))
+                        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton))
                         {
-                            toScreen.EraseMessage();
+                            toScreen.EraseTutorialVideoMessage();
                             toScreen.MSGEnabled(false);
                             state++;
                         }
                         break;
                     case 3:
-                        print("TUTORIAL MANAGER: State 3");
-                        //gioca
+                        if (controller.GetActivePlayer().name.Equals("Charlie"))
+                        {
+                            toScreen.MSGEnabled(true);
+                            toScreen.ShowTutorialVideoMessage(
+                                "Charlie has the power of pass through particular objects and materials.\nAs you may have noticed the door became blue!\nThis mean that Charlie can use his super power to pass through it.Try!",
+                                "Press          to activate power",
+                                "ACTIVE_POWER", video2);
+                            state++;
+                        }
                         break;
                     case 4:
-                        print("TUTORIAL MANAGER: State 4");
-                        /*freeCam.enabled = true;
-                        freeCam.gameObject.transform.position = new Vector3(-14.1f, 1.84f, 22.5f);
-                        freeCam.gameObject.transform.rotation = Quaternion.Euler(30, 0, 0);
-                        controller.DisableInput();
-                        SetPlayer();
-                        currentPlayer.Deactivate();
-                        ShowDocument();*/
+                        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName))
+                        {
+                            toScreen.EraseTutorialVideoMessage();
+                            toScreen.MSGEnabled(false);
+                            state++;
+                        }
                         break;
                     case 5:
-                        print("TUTORIAL MANAGER: State 5");
-                        //EndLevel();
+                        if (doorPassed) {
+                            _doorController.ForceDeActive();
+                            freeCam.gameObject.transform.position = new Vector3(7.5f, 2f, 0f);
+                            freeCam.gameObject.transform.rotation = Quaternion.Euler(20, 90, 0);
+                            controller.DisableInput();
+                            SetPlayer();
+                            toScreen.PowerBarActive(false);
+                            currentPlayer.Deactivate();
+                            freeCam.enabled = true;
+                            ShowDialogueLine(4);
+                        }
+                        if (state == 6)
+                        {
+                            _doorController.ReActive();
+                            freeCam.enabled = false;
+                            toScreen.PowerBarActive(true);
+                            currentPlayer.Activate();
+                            controller.ActiveInput();
+                        }
+                        break;
+                    case 6:
+                        if (doorOpen)
+                        {
+                            freeCam.gameObject.transform.position = new Vector3(-6f, 2f, 0f);
+                            freeCam.gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
+                            controller.DisableInput();
+                            SetPlayer();
+                            toScreen.PowerBarActive(false);
+                            currentPlayer.Deactivate();
+                            freeCam.enabled = true;
+                            ShowDialogueLine(5);
+                        }
+                        if (state == 7)
+                        {
+                            freeCam.enabled = false;
+                            toScreen.PowerBarActive(true);
+                            currentPlayer.Activate();
+                            controller.ActiveInput();
+                        }
+                        break;
+                    case 7:
+                        if (closeToAllarm) {
+                            toScreen.MSGEnabled(true);
+                            toScreen.ShowTutorialVideoMessage(
+                                "Ok, in front of you there is an area under video surveillance.\nHannah has the ability of became invisible.\nTry to pass the area without being seen and deactivate the videocameras\npressing the button at the end of the hallway, next to the door",
+                                "Press          to activate power",
+                                "ACTIVE_POWER", video3);
+                            state++;
+                        }
+                        break;
+                    case 8:
+                        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName))
+                        {
+                            toScreen.EraseTutorialVideoMessage();
+                            toScreen.MSGEnabled(false);
+                            state++;
+                        }
+                        break;
+                    case 9:
+                        if (allarmDeactivated) {
+                            toScreen.ShowTutorialMessage("Good job! Now bring the other characters\nnear Hannah to leave the room.");
+                            state++;
+                        }
+                        break;
+                    case 10:
+                        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton))
+                        {
+                            toScreen.EraseTutorialMessage();
+                            state++;
+                        }
+                        break;
+                    case 11:
+                        if (levelEnd) {
+                            StartCoroutine(Restart());
+                        }
                         break;
                 }
             }
@@ -119,10 +206,10 @@ public class TutorialManager : MonoBehaviour {
         state = 4;
     }
 
-    private void ShowDialogueLine()
+    private void ShowDialogueLine(int end)
     {
-        string name = lines.GetName();
-        string line = lines.GetDialContent();
+        string name = lines.GetName(end);
+        string line = lines.GetDialContent(end);
 
         if (name != null && line != null)
         {
@@ -135,15 +222,29 @@ public class TutorialManager : MonoBehaviour {
         }
     }
 
-    /*public void EndLevel()
+    public void DoorPassed() {
+        doorPassed = true;
+    }
+
+    public void DoorOpen()
     {
-        //Back to menu
-        FindObjectOfType<EndAnim>().End();
-        if (state < 6)
-        {
-            state++;
-        }
-    }*/
+        doorOpen = true;
+    }
+
+    public void CloseToAllarm()
+    {
+        closeToAllarm = true;
+    }
+
+    public void AllarmDeactivated()
+    {
+        allarmDeactivated = true;
+    }
+
+    public void LevelEnd()
+    {
+        levelEnd = true;
+    }
 
     public void Next()
     {
@@ -152,9 +253,20 @@ public class TutorialManager : MonoBehaviour {
 
     IEnumerator StartDialogue()
     {
-        yield return new WaitUntil(() => _fade.GetImage().color.a > 0.99);
+        yield return new WaitUntil(() => _fadeInOut.GetImage().color.a > 0.99);
         yield return new WaitForSeconds(2);
         active = true;
         toScreen.DialogueWindowActive(true);
+    }
+
+    IEnumerator Restart()
+    {
+        _fadeInOut.FadeOut(1);
+        yield return new WaitUntil(() => _fadeInOut.GetImage().color.a > 0.99);
+        _fadeInOut.ShowText("LEVEL COMPLETED");
+        yield return new WaitForSeconds(2);
+        _sceneLoader.LoadStartScene();
+        //FindObjectOfType<GameController>().RestartLevel();
+        // da cambiare e mettere passa al livello successivo
     }
 }

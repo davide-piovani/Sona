@@ -92,17 +92,17 @@ namespace ApplicationConstants {
             new string[] {"New Game", "Load Game", "Select Level", "", ""},     //Main menu
             new string[] {GameConstants.voidSlotName, GameConstants.voidSlotName, GameConstants.voidSlotName, GameConstants.voidSlotName, "Back"},       //New Game
             new string[] {GameConstants.voidSlotName, GameConstants.voidSlotName, GameConstants.voidSlotName, GameConstants.voidSlotName, "Back"},       //Load Game
-            new string[] { "First Level", "Intermediate Level", "Final Level", "", "Back"},     //Select level
+            new string[] { "Level1", "Level2", "Level3", "", "Back"},     //Select level
         };
     }
 
     public class SceneNames {
 
-	    public static string menu = "0. Main menù";
+	    public static string menu = "MainMenu";
 
-        public static string level1 = "Level2.1";//"1. First Level";
-        public static string level2 = "2. Intermediate Level";
-        public static string level3 = "3. FinalLevel";
+        public static string level1 = "Level1";//"1. First Level";
+        public static string level2 = "Level2.1";
+        public static string level3 = "Level3";
 
         public static string prototype1 = "Jack Level";
         public static string prototype2 = "Charlie level";

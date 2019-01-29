@@ -9,7 +9,10 @@ public class CamerasDisableButton : MonoBehaviour {
     InteractController _interactController;
     Allarm allarm;
 
-	void Start () {
+    TutorialManager _tutorial;
+    
+    void Start () {
+        _tutorial = FindObjectOfType<TutorialManager>();
         _interactController = GetComponent<InteractController>();
         allarm = FindObjectOfType<Allarm>();
     }
@@ -19,6 +22,7 @@ public class CamerasDisableButton : MonoBehaviour {
         if (_interactController.IsActive() & CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)) {
             _interactController.ForceDeActive();
             allarm.deactiveAllarm();
+            _tutorial.AllarmDeactivated();
         }
     }
 }

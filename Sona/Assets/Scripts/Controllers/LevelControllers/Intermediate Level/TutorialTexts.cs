@@ -5,21 +5,21 @@ using UnityEngine;
 public class TutorialTexts : MonoBehaviour {
 
     private int i = 0;
-    private int j = 0;
 
-    private string[] names = { "Hannah", "Charlie", "Charlie" };
+    private string[] names = { "Hannah", "Charlie", "Charlie", "Hannah", "Hannah" };
 
     private string[] lines = {
         "Hey Jack! So you are not dead! We are Hannah and Charlie. We are stuck in this prison. Do you remember the explosion?",
         "Our beautiful city was destroyed and then the army come and take us. So many people die, how can we survived?",
-        "We must exit from this room! The door key must be out of there. I know a way to take it!"
+        "We must exit from this room! The door key must be out of there. I know a way to take it!",
+        "Well, good job Charlie! Now try to find the key and open this door!",
+        "Ok, now I think it's better if I go exploring the rest of the area. So in case of danger I can exploit my skills"
     };
 
-    // press n to change character and z to use my power and dash through the door.
 
-    public string GetName()
+    public string GetName(int end)
     {
-        if (i < names.Length)
+        if (i < end)
         {
             return (names[i]);
         }
@@ -29,9 +29,9 @@ public class TutorialTexts : MonoBehaviour {
         }
     }
 
-    public string GetDialContent()
+    public string GetDialContent(int end)
     {
-        if (i < lines.Length)
+        if (i < end)
         {
             string line = lines[i];
             i++;

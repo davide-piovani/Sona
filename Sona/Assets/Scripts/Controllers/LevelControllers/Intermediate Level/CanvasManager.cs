@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class CanvasManager : MonoBehaviour {
 
     public TutorialManager manager;
     public DialogueManager dial;
-    public Text msg;
+    public StreamVideo tutorialMSG;
+    public Text msg; 
     public Image powerBarCircle;
     public Image powerBarIcon;
 
@@ -34,14 +36,29 @@ public class CanvasManager : MonoBehaviour {
     }
 
     public void MSGEnabled(bool cond) {
-        msg.enabled = cond;
+        tutorialMSG.gameObject.SetActive(cond);
     }
 
-    public void ShowMessage(string txt) {
+    public void ShowTutorialVideoMessage(string tutorialTxt, string pressTxt, string button, VideoClip video) {
+        tutorialMSG.setVideoSource(video);
+        tutorialMSG.Play();
+        tutorialMSG.ShowMessage(tutorialTxt, button);
+        tutorialMSG.SetPressText(pressTxt, button);
+    }
+
+    public void EraseTutorialVideoMessage() {
+        tutorialMSG.setVideoSource(null);
+        tutorialMSG.EraseMessage();
+        tutorialMSG.ErasePressText();
+    }
+
+    public void ShowTutorialMessage(string txt)
+    {
         msg.text = txt;
     }
 
-    public void EraseMessage() {
+    public void EraseTutorialMessage()
+    {
         msg.text = "";
     }
 }
