@@ -57,4 +57,10 @@ public class InteractiveText : MonoBehaviour {
         pressImage.sprite = _keyButton.GetInteractButtonImage();
     }
 
+    public void DelText() {
+        _text.text = "";
+        pressImage.color = new Vector4(pressImage.color.r, pressImage.color.g, pressImage.color.b, 0);
+        pressImage.sprite = null;
+    }
+
 }

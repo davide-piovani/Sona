@@ -48,7 +48,7 @@ public class InteractController : MonoBehaviour {
                 }
                 else if (!necessary)
                 {
-                    _text.SetText(press);
+                    _text.DelText();
                     state = 2;
                 }
             }

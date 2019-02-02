@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour {
     public Text dial_content;
     public Text dial_name;
     public Image icon;
+    public Image proceedImg;
     [SerializeField] Sprite jack;
     [SerializeField] Sprite hannah;
     [SerializeField] Sprite charlie;
@@ -17,7 +18,13 @@ public class DialogueManager : MonoBehaviour {
     int currentPosition = 0;
     float delay = 0.001f;  // 10 characters per sec.
     string tmpText = "";
-    
+    KeyButtonScript _buttonImgScript;
+
+    void Start() {
+        _buttonImgScript = FindObjectOfType<KeyButtonScript>();
+        proceedImg.sprite = _buttonImgScript.GetInteractButtonImage();
+    }
+
     public void ShowDial(String name, String content){
         WriteText(content);
         dial_name.text = name+": ";

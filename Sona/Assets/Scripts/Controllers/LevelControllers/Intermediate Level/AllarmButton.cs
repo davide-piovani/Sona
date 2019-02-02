@@ -6,11 +6,13 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class AllarmButton : MonoBehaviour {
 
+    public Grate _door;
     [SerializeField] GuardController[] guards;
     [SerializeField] float activeTime;
 
     InteractController _interactController;
     GameController _gameController;
+    bool guardPassed = false;
     bool active = false;
     float timePassed = 0f;
 
@@ -29,12 +31,17 @@ public class AllarmButton : MonoBehaviour {
         if (active)
         {
             timePassed += TimeController.GetDelTaTime();
+            if (guardPassed) { _door.LockDoor(); }
             if (timePassed > activeTime) {
                 ToggleAlarm(false);
                 timePassed = 0;
                 _interactController.Necessary(true);
             }
         }
+    }
+
+    public void GuardPassed() {
+        guardPassed = true;
     }
 
     private void ToggleAlarm(bool on)
