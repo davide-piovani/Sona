@@ -132,7 +132,6 @@ public class PlatformMovementZ : MonoBehaviour, PlatformMovement {
             {
 
                 jack = collision.gameObject;
-                jack.GetComponent<NavMeshAgent>().enabled = false;
                 //jackOffset = jack.transform.position - transform.position/*jack.transform.position.y - transform.localPosition.y*/;
 
 
@@ -140,13 +139,11 @@ public class PlatformMovementZ : MonoBehaviour, PlatformMovement {
             else if (collision.gameObject.name.Equals("Hannah"))
             {
                 hannah = collision.gameObject;
-                hannah.GetComponent<NavMeshAgent>().enabled = false;
                 //hannahOffset = hannah.transform.position - transform.position/*hannah.transform.position.y - transform.localPosition.y*/;
             }
             else if (collision.gameObject.name.Equals("Charlie"))
             {
                 charlie = collision.gameObject;
-                charlie.GetComponent<NavMeshAgent>().enabled = false;
                 //charlieOffset = charlie.transform.position - transform.position/*charlie.transform.position.y - transform.localPosition.y*/;
             }
             else { }
@@ -162,20 +159,17 @@ public class PlatformMovementZ : MonoBehaviour, PlatformMovement {
 
             if (collision.gameObject.name.Equals("Jack"))
             {
-                jack.GetComponent<NavMeshAgent>().enabled = true;
                 jack = null;
                 jackOffset = Vector3.zero;
 
             }
             else if (collision.gameObject.name.Equals("Hannah"))
             {
-                hannah.GetComponent<NavMeshAgent>().enabled = true;
                 hannah = null;
                 hannahOffset = Vector3.zero;
             }
             else if (collision.gameObject.name.Equals("Charlie"))
             {
-                charlie.GetComponent<NavMeshAgent>().enabled = true;
                 charlie = null;
                 charlieOffset = Vector3.zero;
             }

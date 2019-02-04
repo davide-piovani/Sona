@@ -6,22 +6,16 @@ public class PudController : MonoBehaviour {
 
     SceneLoader _sceneLoader;
     FadeInOut _fadeInOut;
-    //Animator _animatorController;
     float deltaTime;
     
     void Start()
     {
         _sceneLoader = FindObjectOfType<SceneLoader>();
         _fadeInOut = FindObjectOfType<FadeInOut>();
-        //_animatorController = GetComponent<Animator>();
     }
 
-    void Update()
-    {
-
+    void Update() {
         deltaTime = TimeController.GetDelTaTime();
-        //_animatorController.SetFloat("speed", deltaTime);
-
     }
 
     void OnCollisionEnter(Collision collision)

@@ -125,7 +125,6 @@ public class PlatformMovementY : MonoBehaviour, PlatformMovement {
             {
                 
                 jack = collision.gameObject;
-                jack.GetComponent<NavMeshAgent>().enabled = false;
                 jackOffset = jack.transform.position.y - transform.localPosition.y;
                 
 
@@ -133,13 +132,11 @@ public class PlatformMovementY : MonoBehaviour, PlatformMovement {
             else if (collision.gameObject.name.Equals("Hannah"))
             {
                 hannah = collision.gameObject;
-                hannah.GetComponent<NavMeshAgent>().enabled = false;
                 hannahOffset = hannah.transform.position.y - transform.localPosition.y;
             }
             else if (collision.gameObject.name.Equals("Charlie"))
             {
                 charlie = collision.gameObject;
-                charlie.GetComponent<NavMeshAgent>().enabled = false;
                 charlieOffset = charlie.transform.position.y - transform.localPosition.y;
             }
             else { }
@@ -155,20 +152,17 @@ public class PlatformMovementY : MonoBehaviour, PlatformMovement {
 
             if (collision.gameObject.name.Equals("Jack"))
             {
-                jack.GetComponent<NavMeshAgent>().enabled = true;
                 jack = null;
                 jackOffset = 0;
 
             }
             else if (collision.gameObject.name.Equals("Hannah"))
             {
-                hannah.GetComponent<NavMeshAgent>().enabled = true;
                 hannah = null;
                 hannahOffset = 0;
             }
             else if (collision.gameObject.name.Equals("Charlie"))
             {
-                charlie.GetComponent<NavMeshAgent>().enabled = true;
                 charlie = null;
                 charlieOffset = 0;
             }

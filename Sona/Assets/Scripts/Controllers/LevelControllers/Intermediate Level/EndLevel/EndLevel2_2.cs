@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EndLevel2_2 : MonoBehaviour {
 
+    bool jack = false;
+    bool hannah = false;
+    bool charlie = false;
     SceneLoader _sceneLoader;
     FadeInOut _fadeInOut;
 
@@ -12,10 +15,37 @@ public class EndLevel2_2 : MonoBehaviour {
         _fadeInOut = FindObjectOfType<FadeInOut>();
     }
 
+    void Update() {
+        if (jack & hannah & charlie)
+        {
+            StartCoroutine(LevelEnd());
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) {
+        /*if (other.CompareTag("Player")) {
             StartCoroutine(LevelEnd());
+        }*/
+
+        if (other.CompareTag("Player"))
+        {
+            if (other.gameObject.name.Equals("Jack")) { jack = true; }
+            else if (other.gameObject.name.Equals("Hannah")) { hannah = true; }
+            else if (other.gameObject.name.Equals("Charlie")) { charlie = true; }
+            else { }
+        }
+
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (other.gameObject.name.Equals("Jack")) { jack = false; }
+            else if (other.gameObject.name.Equals("Hannah")) { hannah = false; }
+            else if (other.gameObject.name.Equals("Charlie")) { charlie = false; }
+            else { }
         }
     }
 
