@@ -46,6 +46,8 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
                     {
                         _gameController.PauseActive(false); /*prova per vedere se funziona*/
                         _gameController.ChangePlayerActive(false); /*prova per vedere se funziona*/
+                        _gameController.ManagePowerActive(false); /*prova per vedere se funziona*/
+                        _gameController.DisableInput(); /*prova per vedere se funziona*/
                         _displayPad.SetActive(true);
                         PlayerScriptsActive(false);
                         state = 1;
@@ -76,6 +78,8 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
                 _combinationString.text = "";
                 _gameController.PauseActive(true); /*prova per vedere se funziona*/
                 _gameController.ChangePlayerActive(true); /*prova per vedere se funziona*/
+                _gameController.ManagePowerActive(true); /*prova per vedere se funziona*/
+                _gameController.ActiveInput(); /*prova per vedere se funziona*/
                 _displayPad.SetActive(false);
                 PlayerScriptsActive(true);
                 state = 2;
@@ -85,6 +89,8 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
                 _combinationString.text = "";
                 _gameController.PauseActive(true); /*prova per vedere se funziona*/
                 _gameController.ChangePlayerActive(true); /*prova per vedere se funziona*/
+                _gameController.ManagePowerActive(true); /*prova per vedere se funziona*/
+                _gameController.ActiveInput(); /*prova per vedere se funziona*/
                 _displayPad.SetActive(false);
                 PlayerScriptsActive(true);
                 _door.SlideDoor();

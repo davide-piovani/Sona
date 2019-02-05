@@ -26,14 +26,17 @@ public class GameController : InputListener {
 
     private Player activePlayer;
     private SceneLoader sceneLoader;
+    private FadeInOut _fadeInOut;
 
     private BackgroundAudioController audioController;
     private ActiveCharacterController characterController;
 
     bool pauseActive = true;
     bool changePlayerActive = true;
+    bool managePowerActive = true;
 
     void Start () {
+        _fadeInOut = FindObjectOfType<FadeInOut>();
         characterIcon.GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         audioController = BackgroundAudioController.instance;
         characterController = FindObjectOfType<ActiveCharacterController>();
@@ -124,6 +127,14 @@ public class GameController : InputListener {
         changePlayerActive = cond;
     }
 
+    public void ManagePowerActive(bool cond) {
+        managePowerActive = cond;
+    }
+
+    public bool IsManagePowerActive() {
+        return managePowerActive;
+    }
+
     public void CheckpointReached(){
         GameSlot gameSlot = GetCurrentGameSlot();
         Player[] players = GetScenePlayers();
@@ -168,10 +179,6 @@ public class GameController : InputListener {
         }
     }
 
-    public void ReloadFromLastCheckpoint(){
-        sceneLoader.ReloadCurrentScene();
-    }
-
     public void RestartLevel(){
         GetCurrentGameSlot().shouldRestorePos = false;
         sceneLoader.ReloadCurrentScene();
@@ -195,7 +202,7 @@ public class GameController : InputListener {
     }
 
     public void PlayerCatched(){
-        ReloadFromLastCheckpoint();
+        StartCoroutine("Restart");
     }
 
     public void SetAlarm(bool active) { alarmActive = active; }
@@ -230,4 +237,13 @@ public class GameController : InputListener {
 
         allPlayers = characterController.GetScenePlayer();
     }*/
+
+    IEnumerator Restart()
+    {
+        _fadeInOut.FadeOut(5);
+        yield return new WaitUntil(() => _fadeInOut.GetImage().color.a > 0.99);
+        _fadeInOut.ShowText("CAPTURED");
+        yield return new WaitForSeconds(0.5f);
+        sceneLoader.ReloadCurrentScene();
+    }
 }

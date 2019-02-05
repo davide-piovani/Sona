@@ -74,6 +74,7 @@ public class Stakeout : MonoBehaviour {
             {
                 _gameController.PauseActive(false); /*prova per vedere se funziona*/
                 _gameController.ChangePlayerActive(false); /*prova per vedere se funziona*/
+                _gameController.ManagePowerActive(false); /*prova per vedere se funziona*/
                 _display.Necessary(false);
                 InitialSettings();
                 //MovePlayerTowardsWall();
@@ -103,6 +104,7 @@ public class Stakeout : MonoBehaviour {
         {
             _gameController.PauseActive(true); /*prova per vedere se funziona*/
             _gameController.ChangePlayerActive(true); /*prova per vedere se funziona*/
+            _gameController.ManagePowerActive(true); /*prova per vedere se funziona*/
             PlayerScriptsActive(true);
             WallCamActive(false);
             _display.Necessary(true);

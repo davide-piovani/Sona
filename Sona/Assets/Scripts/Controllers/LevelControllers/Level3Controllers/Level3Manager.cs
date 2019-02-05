@@ -11,7 +11,7 @@ public class Level3Manager : MonoBehaviour {
     private RoomLight[] lights;
     private Interactable[] int_obj;
     //public ActiveCharacterController character;
-    public Player currentPlayer;
+    Player currentPlayer;
     private Vector3[] positions = new Vector3[3] {new Vector3 (-40.5f, -0.65f, 0.2f), new Vector3 (-37f, -0.65f, -3f), new Vector3(14.49f, 0.2f, 28.539f)};
     public ComponentBox box;
     public GeneralSwitch gen;
@@ -22,6 +22,8 @@ public class Level3Manager : MonoBehaviour {
     public Torch t;
     public Document doc;
     public Camera freeCam;
+    public Text interactiveString;
+
 
     //public AudioListener outSound;
     private GameController controller;
@@ -46,16 +48,10 @@ public class Level3Manager : MonoBehaviour {
         _fade = FindObjectOfType<FadeInOut>();
         lights = FindObjectsOfType<RoomLight>();
         controller = FindObjectOfType<GameController>();
-        Door[] doors = FindObjectsOfType<Door>();
         Switch[] switches = FindObjectsOfType <Switch>();
         toScreen.DialogueWindowActive(false);
-        int_obj = new Interactable[doors.Length + switches.Length];
-        System.Array.Copy(doors, int_obj, doors.Length);
-        System.Array.Copy(switches, 0, int_obj, doors.Length, switches.Length);
-        
-        for (i=0; i< doors.Length; i++){
-            doors[i].SetManager(this);
-        }
+        int_obj = new Interactable[switches.Length];
+        System.Array.Copy(switches, int_obj, switches.Length);
 
         for (i=0; i<switches.Length; i++){
             switches[i].manager = this;
@@ -91,6 +87,7 @@ public class Level3Manager : MonoBehaviour {
                         {
                             lights[i].ShutDown();
                         }
+                        interactiveString.color = new Vector4(1,1,1,1); /* change color string*/
                         state++;
                         break;
                     case 2:
@@ -139,7 +136,7 @@ public class Level3Manager : MonoBehaviour {
             }
             else
             {
-                if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.enterButton))
+                if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton))
                 {
                     toScreen.NextDial();
                 }
@@ -198,6 +195,8 @@ public class Level3Manager : MonoBehaviour {
                 s.power = true;
             }
         }
+
+        interactiveString.color = new Vector4(0, 0, 0, 1); /* change color string*/
     }
 
     public void repair (){

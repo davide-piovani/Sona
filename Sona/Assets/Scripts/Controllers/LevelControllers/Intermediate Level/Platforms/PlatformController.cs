@@ -35,6 +35,7 @@ public class PlatformController : MonoBehaviour {
             {
                 _gameController.PauseActive(false); /*prova per vedere se funziona*/
                 _gameController.ChangePlayerActive(false); /*prova per vedere se funziona*/
+                _gameController.ManagePowerActive(false); /*prova per vedere se funziona*/
                 PlayerScriptsActive(false);
                 _interact.Necessary(false);
                 _platformCamera.enabled = true;
@@ -74,6 +75,7 @@ public class PlatformController : MonoBehaviour {
         _interact.Necessary(true);
         _gameController.PauseActive(true); /*prova per vedere se funziona*/
         _gameController.ChangePlayerActive(true); /*prova per vedere se funziona*/
+        _gameController.ManagePowerActive(true); /*prova per vedere se funziona*/
     }
 
     void PlayerScriptsActive(bool cond) {

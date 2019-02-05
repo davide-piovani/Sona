@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ApplicationConstants;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,8 +56,8 @@ public class EndLevel2_2 : MonoBehaviour {
         yield return new WaitUntil(() => _fadeInOut.GetImage().color.a > 0.99);
         _fadeInOut.ShowText("LEVEL COMPLETED");
         yield return new WaitForSeconds(2);
-        _sceneLoader.LoadStartScene();
-        //FindObjectOfType<GameController>().RestartLevel();
-        // da cambiare e mettere passa al livello successivo
+        if (GameSettings.GetPlayMode().Equals("LEVEL")) { _sceneLoader.LoadStartScene(); }
+        else if (GameSettings.GetPlayMode().Equals("HISTORY")) { _sceneLoader.LoadScene(SceneNames.level3); }
+        else { }
     }
 }

@@ -120,6 +120,7 @@ public class MenuController : MenuMovementController {
     }
 
     private void SelectLevelMenuController(){
+        GameSettings.SetPlayMode("LEVEL");
         switch (currentButton){
             case 0:
                 sceneLoader.LoadScene(currentButton+1);

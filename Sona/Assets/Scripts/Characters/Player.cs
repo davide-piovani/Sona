@@ -36,6 +36,7 @@ public abstract class Player : InputListener {
     //private float w_speed = 2f;
 
     //private Rigidbody rb;
+    private bool canUsePower = true;
     private Animator anim;
     protected CapsuleCollider playerCollider;
     private NavMeshAgent agent;
@@ -46,6 +47,11 @@ public abstract class Player : InputListener {
 
     public bool IsPowerActive() { return powerActive; }
     public Camera GetCharacterCamera() { return characterCamera; }
+
+    public void CanUsePower(bool cond) {
+        _icon.SetActive(cond);
+        canUsePower = cond;
+    }
 
     private void Awake (){
         LoadComponents();
@@ -128,7 +134,7 @@ public abstract class Player : InputListener {
     }
 
     private void ManagePower(){
-        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName)) {
+        if (gameController.IsManagePowerActive() & canUsePower & CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName)) {
             PowerToggle(!powerActive);
             ManageBarAndPArticles(powerActive);
 

@@ -38,13 +38,15 @@ public class TutorialManager : MonoBehaviour {
         StartCoroutine(StartDialogue());
     }
 
-    private void InitObjects()
+    void InitObjects()
     {
         _fadeInOut = FindObjectOfType<FadeInOut>();
         _sceneLoader = FindObjectOfType<SceneLoader>();
         controller = FindObjectOfType<GameController>();
         toScreen.DialogueWindowActive(false);
         toScreen.MSGEnabled(false);
+        controller.ChangePlayerActive(false);
+        foreach (Player p in controller.GetScenePlayers()) { p.CanUsePower(false); }
     }
 
     void Update()
@@ -73,6 +75,7 @@ public class TutorialManager : MonoBehaviour {
                         }
                         break;
                     case 1:
+                        controller.ChangePlayerActive(true);
                         toScreen.MSGEnabled(true);
                         toScreen.ShowTutorialVideoMessage(
                             "You can control only one character at a time.\nSwitch among the characters until charlie is selected",
@@ -91,6 +94,8 @@ public class TutorialManager : MonoBehaviour {
                     case 3:
                         if (controller.GetActivePlayer().name.Equals("Charlie"))
                         {
+                            controller.ChangePlayerActive(false);
+                            controller.GetActivePlayer().CanUsePower(true);
                             toScreen.MSGEnabled(true);
                             toScreen.ShowTutorialVideoMessage(
                                 "Charlie has the power of pass through particular objects and materials.\nAs you may have noticed the door became blue!\nThis mean that Charlie can use his super power to pass through it.Try!",
@@ -102,6 +107,7 @@ public class TutorialManager : MonoBehaviour {
                     case 4:
                         if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName))
                         {
+                            controller.ChangePlayerActive(true);
                             toScreen.EraseTutorialVideoMessage();
                             toScreen.MSGEnabled(false);
                             state++;
@@ -152,6 +158,8 @@ public class TutorialManager : MonoBehaviour {
                         break;
                     case 7:
                         if (closeToAllarm) {
+                            controller.ChangePlayerActive(false);
+                            controller.GetActivePlayer().CanUsePower(true);
                             toScreen.MSGEnabled(true);
                             toScreen.ShowTutorialVideoMessage(
                                 "Ok, in front of you there is an area under video surveillance.\nHannah has the ability of became invisible.\nTry to pass the area without being seen and deactivate the videocameras\npressing the button at the end of the hallway, next to the door",
@@ -163,6 +171,7 @@ public class TutorialManager : MonoBehaviour {
                     case 8:
                         if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName))
                         {
+                            controller.ChangePlayerActive(true);
                             toScreen.EraseTutorialVideoMessage();
                             toScreen.MSGEnabled(false);
                             state++;
@@ -266,9 +275,9 @@ public class TutorialManager : MonoBehaviour {
         _fadeInOut.FadeOut(1);
         yield return new WaitUntil(() => _fadeInOut.GetImage().color.a > 0.99);
         _fadeInOut.ShowText("LEVEL COMPLETED");
-        yield return new WaitForSeconds(2);
-        _sceneLoader.LoadStartScene();
-        //FindObjectOfType<GameController>().RestartLevel();
-        // da cambiare e mettere passa al livello successivo
+        yield return new WaitForSeconds(0.5f);
+        if (GameSettings.GetPlayMode().Equals("LEVEL")) { _sceneLoader.LoadStartScene(); }
+        else if (GameSettings.GetPlayMode().Equals("HISTORY")) { _sceneLoader.LoadScene(SceneNames.level2); }
+        else { }
     }
 }
