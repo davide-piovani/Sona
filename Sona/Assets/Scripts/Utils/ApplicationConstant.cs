@@ -20,6 +20,13 @@ namespace ApplicationConstants {
 
         public static float defaultMusicVolume = 1f;
         public static float defaultEffectsVolume = 1f;
+
+        public static string keyboardPad = "Keyboard";
+        public static string xboxPad = "Xbox Pad";
+        public static string playStationPad = "PlaystationPad";
+
+        public static string levelMode = "level";
+        public static string historyMode = "history";
     }
 
     public class CameraConstants{
@@ -82,14 +89,14 @@ namespace ApplicationConstants {
         public static float deltaSliderValue = 0.01f;
 
         public static bool[][] menuActiveButtons = {
-            new bool[] {true, true, true, false, false},     //Main menu
+            new bool[] {true, true, true, true, false},     //Main menu
             new bool[] {true, true, true, false, true},     //New Game
             new bool[] {true, true, true, false, true},     //Load Game
             new bool[] {true, true, true, false, true}      //Select Level
         };
 
         public static string[][] menuButtonsText = {
-            new string[] {"New Game", "Load Game", "Select Level", "", ""},     //Main menu
+            new string[] {"New Game", "Load Game", "Select Level", "Settings", ""},     //Main menu
             new string[] {GameConstants.voidSlotName, GameConstants.voidSlotName, GameConstants.voidSlotName, GameConstants.voidSlotName, "Back"},       //New Game
             new string[] {GameConstants.voidSlotName, GameConstants.voidSlotName, GameConstants.voidSlotName, GameConstants.voidSlotName, "Back"},       //Load Game
             new string[] { "Level1", "Level2", "Level3", "", "Back"},     //Select level
@@ -100,9 +107,11 @@ namespace ApplicationConstants {
 
 	    public static string menu = "MainMenu";
 
-        public static string level1 = "Level1";//"1. First Level";
+        public static string level1 = "Level1";
         public static string level2 = "Level2.1";
         public static string level3 = "Level3";
+
+        public static string transition = "Transition";
 
         public static string prototype1 = "Jack Level";
         public static string prototype2 = "Charlie level";

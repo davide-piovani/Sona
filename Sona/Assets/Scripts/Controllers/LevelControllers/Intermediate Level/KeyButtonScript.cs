@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ApplicationConstants;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,23 +16,23 @@ public class KeyButtonScript : MonoBehaviour {
     public Sprite PLAYSTATION_interact;
     
     public Sprite GetChangeCharacterButtonImage() {
-        if (GameSettings.GetControllerType().Equals("KEYBOARD")) { return KEYBOARD_changeCharacter; }
-        else if (GameSettings.GetControllerType().Equals("XBOX")) { return XBOX_changeCharacter; }
-        else if (GameSettings.GetControllerType().Equals("PLAYSTATION")) { return PLAYSTATION_changeCharacter; }
+        if (GameSettings.GetControllerType().Equals(GameConstants.keyboardPad)) { return KEYBOARD_changeCharacter; }
+        else if (GameSettings.GetControllerType().Equals(GameConstants.xboxPad)) { return XBOX_changeCharacter; }
+        else if (GameSettings.GetControllerType().Equals(GameConstants.playStationPad)) { return PLAYSTATION_changeCharacter; }
         else { return null; }
     }
 
     public Sprite GetActivePowerButtonImage() {
-        if (GameSettings.GetControllerType().Equals("KEYBOARD")) { return KEYBOARD_activePower; }
-        else if (GameSettings.GetControllerType().Equals("XBOX")) { return XBOX_activePower; }
-        else if (GameSettings.GetControllerType().Equals("PLAYSTATION")) { return PLAYSTATION_activePower; }
+        if (GameSettings.GetControllerType().Equals(GameConstants.keyboardPad)) { return KEYBOARD_activePower; }
+        else if (GameSettings.GetControllerType().Equals(GameConstants.xboxPad)) { return XBOX_activePower; }
+        else if (GameSettings.GetControllerType().Equals(GameConstants.playStationPad)) { return PLAYSTATION_activePower; }
         else { return null; }
     }
 
     public Sprite GetInteractButtonImage() {
-        if (GameSettings.GetControllerType().Equals("KEYBOARD")) { return KEYBOARD_interact; }
-        else if (GameSettings.GetControllerType().Equals("XBOX")) { return XBOX_interact; }
-        else if (GameSettings.GetControllerType().Equals("PLAYSTATION")) { return PLAYSTATION_interact; }
+        if (GameSettings.GetControllerType().Equals(GameConstants.keyboardPad)) { return KEYBOARD_interact; }
+        else if (GameSettings.GetControllerType().Equals(GameConstants.xboxPad)) { return XBOX_interact; }
+        else if (GameSettings.GetControllerType().Equals(GameConstants.playStationPad)) { return PLAYSTATION_interact; }
         else { return null;  }
     }
 

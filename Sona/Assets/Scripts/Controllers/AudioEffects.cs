@@ -24,7 +24,7 @@ public class AudioEffects : MonoBehaviour {
         float volume = 1f;
         GameController controller = FindObjectOfType<GameController>();
         if (controller) volume = controller.GetEffectsVolume();
-        print("Riproduco clip: " + clip.name + ",   " + volume);
+        //print("Riproduco clip: " + clip.name + ",   " + volume);
         instance.audioSource.PlayOneShot(clip, volume);
     }
 }

@@ -36,6 +36,6 @@ public class EndLevel2_1 : MonoBehaviour {
         yield return new WaitUntil(() => _fadeInOut.GetImage().color.a > 0.99);
         _fadeInOut.ShowText("FIRST PART COMPLETED");
         yield return new WaitForSeconds(2);
-        _sceneLoader.LoadScene(3);
+        _sceneLoader.LoadTransitionScene();
     }
 }

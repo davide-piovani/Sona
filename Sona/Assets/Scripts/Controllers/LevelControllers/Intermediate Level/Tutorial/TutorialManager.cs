@@ -276,8 +276,8 @@ public class TutorialManager : MonoBehaviour {
         yield return new WaitUntil(() => _fadeInOut.GetImage().color.a > 0.99);
         _fadeInOut.ShowText("LEVEL COMPLETED");
         yield return new WaitForSeconds(0.5f);
-        if (GameSettings.GetPlayMode().Equals("LEVEL")) { _sceneLoader.LoadStartScene(); }
-        else if (GameSettings.GetPlayMode().Equals("HISTORY")) { _sceneLoader.LoadScene(SceneNames.level2); }
+        if (GameSettings.GetPlayMode().Equals(GameConstants.levelMode)) { _sceneLoader.LoadStartScene(); }
+        else if (GameSettings.GetPlayMode().Equals(GameConstants.historyMode)) { _sceneLoader.LoadTransitionScene(); }
         else { }
     }
 }

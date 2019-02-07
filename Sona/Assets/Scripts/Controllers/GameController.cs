@@ -31,6 +31,7 @@ public class GameController : InputListener {
     private BackgroundAudioController audioController;
     private ActiveCharacterController characterController;
 
+    bool paused = false;
     bool pauseActive = true;
     bool changePlayerActive = true;
     bool managePowerActive = true;
@@ -88,11 +89,14 @@ public class GameController : InputListener {
 
     private void PauseGame(){
         //print ("Start pause");
+        GamePaused(true);
         pauseInterface.gameObject.SetActive(true);
         if (activePlayer != null) {
             activePlayer.DisableInput();
             activePlayer.gameObject.GetComponentInChildren<CameraController>().DisableInput();
         }
+        ManagePowerActive(false);
+        ChangePlayerActive(false);
         pauseInterface.SetAsUniqueInputListener(this);
     }
 
@@ -117,6 +121,14 @@ public class GameController : InputListener {
 
     private GameSlot GetCurrentGameSlot(){
         return sceneLoader.GetGameSlot();
+    }
+
+    public void GamePaused(bool cond) {
+        paused = cond;
+    }
+
+    public bool isGamePaused(){
+        return paused;
     }
 
     public void PauseActive(bool cond) {

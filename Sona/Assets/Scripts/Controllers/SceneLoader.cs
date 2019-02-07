@@ -35,20 +35,30 @@ public class SceneLoader : MonoBehaviour {
 
     public void LoadStartScene(){
         if (gameSlot != null) gameSlot.shouldRestorePos = false;
+        GameSettings.SetCurrentSceneNumber(0);
         SceneManager.LoadScene(0);
+    }
+
+    public void LoadTransitionScene()
+    {
+        if (gameSlot != null) gameSlot.shouldRestorePos = false;
+        SceneManager.LoadScene(5);
     }
 
     public void LoadScene(int scene){
         if (gameSlot != null) gameSlot.shouldRestorePos = false;
+        GameSettings.SetCurrentSceneNumber(scene);
         SceneManager.LoadScene(scene);
     }
 
     public void LoadScene(string scene){
         if (gameSlot != null) gameSlot.shouldRestorePos = false;
+        GameSettings.SetCurrentSceneNumber(SceneManager.GetSceneByName(scene).buildIndex);
         SceneManager.LoadScene(scene);
     }
 
     public void LoadScene(SceneType sceneType){
+        GameSettings.SetCurrentSceneNumber(SceneManager.GetSceneByName(GetSceneName(sceneType)).buildIndex);
         LoadScene(GetSceneName(sceneType));
     }
 
@@ -64,6 +74,7 @@ public class SceneLoader : MonoBehaviour {
             case SceneType.Level_1: return SceneNames.level1;
             case SceneType.Level_2: return SceneNames.level2;
             case SceneType.Level_3: return SceneNames.level3;
+            case SceneType.transition: return SceneNames.transition;
             default: return SceneNames.menu;
         }
     }

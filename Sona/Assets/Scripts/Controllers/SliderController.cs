@@ -3,14 +3,14 @@ using TMPro;
 using UnityEngine.UI;
 using ApplicationConstants;
 
-public class SliderController : MonoBehaviour {
+public class SliderController : SettingsElement {
 
     public SliderType type;
     [SerializeField] TextMeshProUGUI sliderText;
     [SerializeField] Slider slider;
     [SerializeField] Image sliderFillArea;
 
-    public void Select(bool selected) {
+    public override void Select(bool selected) {
         if (selected) {
             sliderText.color = MenuConstants.selectedButtonColor;
             sliderFillArea.color = MenuConstants.sliderHighlightedColor;

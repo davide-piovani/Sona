@@ -7,8 +7,12 @@ using ApplicationConstants;
 public class PauseController : MenuMovementController {
 
     [SerializeField] SettingsController settingsController;
+    SceneLoader _sceneLoader;
+    GameController _gameController;
 
     private void Start(){
+        _sceneLoader = FindObjectOfType<SceneLoader>();
+        _gameController = FindObjectOfType<GameController>();
         InitializeMenu();
     }
 
@@ -49,26 +53,37 @@ public class PauseController : MenuMovementController {
 
     private void Resume(){
         RestoreOldListener();
+        _gameController.ManagePowerActive(true);
+        _gameController.ChangePlayerActive(true);
+        _gameController.GamePaused(false);
         gameObject.SetActive(false);
     }
 
     private void RestartLevel(){
-        FindObjectOfType<GameController>().RestartLevel();
+        _gameController.RestartLevel();
     }
 
     private void ShowSettings(){
-        for(int i = 0; i < gameObject.transform.childCount; i++){
+        for (int i = 0; i < gameObject.transform.childCount; i++){
             gameObject.transform.GetChild(i).gameObject.SetActive(false);
         }
         settingsController.gameObject.SetActive(true);
+        settingsController.InizializeButtons();
         settingsController.SetAsUniqueInputListener(this);
     }
 
     private void Save() {
-        FindObjectOfType<SceneLoader>().GetGameSlot().Save();
+        _sceneLoader.GetGameSlot().Save();
     }
 
     private void ReturnToMainMenu() {
-        FindObjectOfType<SceneLoader>().LoadStartScene();
+        _sceneLoader.LoadStartScene();
+    }
+
+    public void RestorePauseMenu() {
+        settingsController.gameObject.SetActive(false);
+        for (int i = 0; i < gameObject.transform.childCount; i++){
+            gameObject.transform.GetChild(i).gameObject.SetActive(true);
+        }
     }
 }

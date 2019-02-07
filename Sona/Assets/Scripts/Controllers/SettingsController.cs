@@ -16,6 +16,7 @@ public class SettingsController : InputListener {
     private GameSlot gameSlot;
 
     private void Start(){
+        buttons[0].GetComponent<ScrollbarController>().SetControllerType(GameSettings.GetControllerType());
         backgroundAudioSource = FindObjectOfType<BackgroundAudioController>().GetComponent<AudioSource>();
         gameSlot = FindObjectOfType<SceneLoader>().GetGameSlot();
         newEffectsVolume = gameSlot.effectsVolume;
@@ -23,15 +24,27 @@ public class SettingsController : InputListener {
         SelectButton(0, true);
         for (int i = 1; i < buttons.Length; i++) SelectButton(i, false);
 
+        InitializeScrollBar();
         InitializeSliders();
     }
 
+    private void InitializeScrollBar() {
+        buttons[0].GetComponent<ScrollbarController>().SetControllerType(GameSettings.GetControllerType());
+    }
+
     private void InitializeSliders(){
-        SliderController slider = buttons[0].GetComponent<SliderController>();
+        SliderController slider = buttons[1].GetComponent<SliderController>();
         slider.SetValue(gameSlot.musicVolume);
 
-        slider = buttons[1].GetComponent<SliderController>();
+        slider = buttons[2].GetComponent<SliderController>();
         slider.SetValue(gameSlot.effectsVolume);
+
+    }
+
+    public void InizializeButtons() {
+        SelectButton(0, true);
+        for (int i = 1; i < buttons.Length; i++) SelectButton(i, false);
+        selectedButton = 0;
     }
 
     private void Update(){
@@ -54,17 +67,29 @@ public class SettingsController : InputListener {
     }
 
     private void CheckHorizontalInput(float horizontal) {
+        ScrollbarController scroll = buttons[selectedButton].GetComponent<ScrollbarController>();
         SliderController slider = buttons[selectedButton].GetComponent<SliderController>();
-
         if (horizontal > 0) {
-            if (slider) slider.ChangeSliderValue(MenuConstants.deltaSliderValue, true);
-            LastButtonsHorizontalMovement();
-        } else if (horizontal < 0) {
-            if (slider) slider.ChangeSliderValue(MenuConstants.deltaSliderValue, false);
-            LastButtonsHorizontalMovement();
-        } else {
-            horizontalChanged = false;
+            if (scroll & !horizontalChanged) {
+                scroll.ChangeScrollbarValue(true);
+                horizontalChanged = true;
+            }
+            else if (slider) {
+                slider.ChangeSliderValue(MenuConstants.deltaSliderValue, true);
+            }
+            else { LastButtonsHorizontalMovement(); }
         }
+        else if (horizontal < 0) {
+            if (scroll & !horizontalChanged) {
+                scroll.ChangeScrollbarValue(false);
+                horizontalChanged = true;
+            }
+            else if (slider) {
+                slider.ChangeSliderValue(MenuConstants.deltaSliderValue, false);
+            }
+            else { LastButtonsHorizontalMovement(); }
+        }
+        else { horizontalChanged = false; }
 
         if (slider && slider.type == SliderType.Music) backgroundAudioSource.volume = slider.GetSliderValue();
         if (slider && slider.type == SliderType.Effects) newEffectsVolume = slider.GetSliderValue();
@@ -89,9 +114,9 @@ public class SettingsController : InputListener {
 
     public void SelectButton(int buttonIndex, bool selected){
         GameObject obj = buttons[buttonIndex];
-        SliderController slider = obj.GetComponent<SliderController>();
-        if (slider) {
-            slider.Select(selected);
+        SettingsElement element = obj.GetComponent<SettingsElement>();
+        if (element) {
+            element.Select(selected);
         } else {
             TextMeshProUGUI button = obj.GetComponent<TextMeshProUGUI>();
             button.color = selected ? MenuConstants.selectedButtonColor : MenuConstants.unselectedButtonColor;
@@ -108,12 +133,12 @@ public class SettingsController : InputListener {
 
     private void CheckEnterButton(){
         if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.enterButton)){
-            AudioEffects.PlaySound(AudioEffects.instance.menuButtonClicked);
+            //AudioEffects.PlaySound(AudioEffects.instance.menuButtonClicked);
             switch (selectedButton){
-                case 2:
-                    ReturnBack();
-                    break;
                 case 3:
+                    Cancel();
+                    break;
+                case 4:
                     SaveData();
                     break;
             }
@@ -131,18 +156,23 @@ public class SettingsController : InputListener {
     }
 
     private void RestoreOldValues(){
+        InitializeScrollBar();
+        InitializeSliders();
         backgroundAudioSource.volume = gameSlot.musicVolume;
     }
 
     private void RestoreOldMenu(){
         gameObject.SetActive(false);
 
-        Transform oldListenerTransform = oldListener.gameObject.transform;
-        for (int i = 0; i < oldListenerTransform.childCount; i++) 
-            oldListenerTransform.GetChild(i).gameObject.SetActive(true);
+        MenuController menu = oldListener.gameObject.GetComponent<MenuController>();
+        PauseController pause = oldListener.gameObject.GetComponent<PauseController>();
+
+        if (menu) menu.RestoreMainMenu();
+        else pause.RestorePauseMenu();
     }
 
     private void SaveData(){
+        GameSettings.SetControllerType(buttons[0].GetComponent<ScrollbarController>().GetControllerType());
         gameSlot.musicVolume = backgroundAudioSource.volume;
         gameSlot.effectsVolume = newEffectsVolume;
         gameSlot.Save();

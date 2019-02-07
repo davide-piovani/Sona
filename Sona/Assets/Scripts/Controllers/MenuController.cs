@@ -18,6 +18,7 @@ public class MenuController : MenuMovementController {
     GameSlot currentSlot;
 
     private void Start(){
+        GameSettings.SetControllerType(GameConstants.keyboardPad); //da mettere che riconosce se c'è joystick
         sceneLoader = FindObjectOfType<SceneLoader>();
         canvas = FindObjectOfType<Canvas>();
         LoadMenu(MenuType.mainMenu);
@@ -94,9 +95,14 @@ public class MenuController : MenuMovementController {
     }
 
     private void NewGameMenuController(){
+        GameSettings.SetPlayMode(GameConstants.historyMode);
         switch (currentButton){
             case 0:
+                CreateNewSlot(currentButton);
+                break;
             case 1:
+                CreateNewSlot(currentButton);
+                break;
             case 2:
                 CreateNewSlot(currentButton);
                 break;
@@ -107,9 +113,14 @@ public class MenuController : MenuMovementController {
     }
 
     private void LoadGameMenuController(){
+        GameSettings.SetPlayMode(GameConstants.historyMode);
         switch (currentButton){
             case 0:
+                LoadSlot(currentButton);
+                break;
             case 1:
+                LoadSlot(currentButton);
+                break;
             case 2:
                 LoadSlot(currentButton);
                 break;
@@ -120,7 +131,7 @@ public class MenuController : MenuMovementController {
     }
 
     private void SelectLevelMenuController(){
-        GameSettings.SetPlayMode("LEVEL");
+        GameSettings.SetPlayMode(GameConstants.levelMode);
         switch (currentButton){
             case 0:
                 sceneLoader.LoadScene(currentButton+1);
@@ -213,14 +224,20 @@ public class MenuController : MenuMovementController {
     public void CreateSlot(string useless){
         SaveSystem.SaveGameSlot(currentSlot);
         sceneLoader.SetGameSlot(currentSlot);
+        GameSettings.SetCurrentSceneNumber(1);
         sceneLoader.LoadScene(SceneType.Level_1);
     }
 
     public void LoadSlot(string useless){
         sceneLoader.SetGameSlot(currentSlot);
+        GameSettings.SetCurrentSceneNumber(currentSlot.sceneNumber);
         sceneLoader.LoadScene(currentSlot.sceneNumber);
     }
 
+    public void RestoreMainMenu() {
+        ShowMenu(true);
+        LoadMenu(MenuType.mainMenu);
+    }
 
     //---------------------------------   ENUMS   ---------------------------------
     private enum MenuType {

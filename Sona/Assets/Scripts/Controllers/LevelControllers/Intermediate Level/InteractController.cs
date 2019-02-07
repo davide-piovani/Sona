@@ -95,6 +95,10 @@ public class InteractController : MonoBehaviour {
     }
 
     void Control(){
+        if (_gameController.isGamePaused()) {
+            active = false;
+            return;
+        }
         Vector3 pos = transform.position;
         float distance = Vector3.Distance(_gameController.GetActivePlayer().transform.position, pos);
         if (distance <= radius)

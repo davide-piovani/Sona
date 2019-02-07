@@ -22,10 +22,10 @@ public class DialogueManager : MonoBehaviour {
 
     void Start() {
         _buttonImgScript = FindObjectOfType<KeyButtonScript>();
-        proceedImg.sprite = _buttonImgScript.GetInteractButtonImage();
     }
 
     public void ShowDial(String name, String content){
+        proceedImg.sprite = _buttonImgScript.GetInteractButtonImage();
         WriteText(content);
         dial_name.text = name+": ";
         positionTextAndSetIcon(name);
