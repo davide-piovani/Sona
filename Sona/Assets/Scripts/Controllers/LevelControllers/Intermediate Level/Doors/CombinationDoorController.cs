@@ -34,7 +34,7 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
 
     void ChangeState() {
 
-        if (state == 0 & CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton) & _interactSensor.IsActive())
+        if (state == 0 & GameSettings.GetButtonDown(PlayersConstants.interactButton) & _interactSensor.IsActive())
         {
             _interactSensor.Necessary(false);
 

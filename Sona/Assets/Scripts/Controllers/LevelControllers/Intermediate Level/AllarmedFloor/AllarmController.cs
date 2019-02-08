@@ -122,7 +122,7 @@ public class AllarmController : MonoBehaviour {
         yield return new WaitUntil(() => _fadeInOut.GetImage().color.a > 0.99);
         _fadeInOut.ShowText("CAPTURED");
         yield return new WaitForSeconds(0.5f);
-        FindObjectOfType<GameController>().RestartLevel();
+        _sceneLoader.ReloadCurrentScene();
     }
 
 }

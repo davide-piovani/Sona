@@ -49,7 +49,7 @@ public class KeyDoorController : MonoBehaviour, LockedDoor {
             active = true;
         }
 
-        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton) & _interact.IsActive() & active & (open | close))
+        if (GameSettings.GetButtonDown(PlayersConstants.interactButton) & _interact.IsActive() & active & (open | close))
         {
             keyUsed = true;
             _interact.Necessary(false);

@@ -134,7 +134,7 @@ public abstract class Player : InputListener {
     }
 
     private void ManagePower(){
-        if (gameController.IsManagePowerActive() & canUsePower & CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName)) {
+        if (gameController.IsManagePowerActive() & canUsePower & /*CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName)*/GameSettings.GetButtonDown(PlayersConstants.powerButtonName)) {
             PowerToggle(!powerActive);
             ManageBarAndPArticles(powerActive);
 
@@ -276,8 +276,8 @@ public abstract class Player : InputListener {
     
 
     private void GetPlayerDirection(){
-        float h_axis = CrossPlatformInputManager.GetAxis("Horizontal");
-        float v_axis = CrossPlatformInputManager.GetAxis("Vertical");
+        float h_axis = GameSettings.GetPlayAxis(PlayersConstants.x_Axis);
+        float v_axis = GameSettings.GetPlayAxis(PlayersConstants.y_Axis);
 
         Vector3 forward = characterCamera.transform.forward;
         Vector3 right = characterCamera.transform.right;

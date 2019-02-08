@@ -43,7 +43,6 @@ public class GameSlot {
     public float effectsVolume;
 
     public GameSlot(int slotNumber) {
-        name = "Saved Data " + slotNumber;
         number = slotNumber;
 
         sceneNumber = SceneManager.GetActiveScene().buildIndex;

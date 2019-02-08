@@ -70,7 +70,7 @@ public class Stakeout : MonoBehaviour {
     {
         if (state == 0)
         {
-            if (CrossPlatformInputManager.GetButton(PlayersConstants.interactButton) & _display.IsActive())
+            if (GameSettings.GetButton(PlayersConstants.interactButton) & _display.IsActive())
             {
                 _gameController.PauseActive(false); /*prova per vedere se funziona*/
                 _gameController.ChangePlayerActive(false); /*prova per vedere se funziona*/
@@ -82,7 +82,7 @@ public class Stakeout : MonoBehaviour {
                 state = 1;
             }
         }
-        else if (state == 1 & CrossPlatformInputManager.GetButton(PlayersConstants.interactButton) & _display.GetPlayer().GetComponent<Animator>().GetBool("isIdle")) {
+        else if (state == 1 & GameSettings.GetButton(PlayersConstants.interactButton) & _display.GetPlayer().GetComponent<Animator>().GetBool("isIdle")) {
             PlayerLean(true); /* ANIMATION */
             MovePlayerTowardsWall();
             _cameraMovement.MoveCameraOn();
@@ -91,7 +91,7 @@ public class Stakeout : MonoBehaviour {
         else if (state == 2)
         {
 
-            if (!CrossPlatformInputManager.GetButton(PlayersConstants.interactButton)) {
+            if (!GameSettings.GetButton(PlayersConstants.interactButton)) {
                 PlayerLean(false); /* ANIMATION */
                 MovePlayerAwayFromWall();
                 _cameraMovement.MoveCameraBack();
@@ -156,11 +156,11 @@ public class Stakeout : MonoBehaviour {
     }
 
     void SetSensorToActive() {
-        float x, y, z, dist1, dist2;
+        float /*x, y, z, */dist1, dist2;
 
-        x = _display.transform.position.x;
-        y = _initialPlayerPosition.y;
-        z = _display.transform.position.z;
+        //x = _display.transform.position.x;
+        //y = _initialPlayerPosition.y;
+        //z = _display.transform.position.z;
         //_display.transform.position = new Vector3(x, y, z);
 
         GameObject _player = _display.GetPlayer();

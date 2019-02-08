@@ -6,16 +6,11 @@ public class PudController : MonoBehaviour {
 
     SceneLoader _sceneLoader;
     FadeInOut _fadeInOut;
-    float deltaTime;
     
     void Start()
     {
         _sceneLoader = FindObjectOfType<SceneLoader>();
         _fadeInOut = FindObjectOfType<FadeInOut>();
-    }
-
-    void Update() {
-        deltaTime = TimeController.GetDelTaTime();
     }
 
     void OnCollisionEnter(Collision collision)
@@ -33,8 +28,6 @@ public class PudController : MonoBehaviour {
         _fadeInOut.ShowText("YOU'RE DEAD");
         yield return new WaitForSeconds(0.5f);
         _sceneLoader.ReloadCurrentScene();
-        //FindObjectOfType<GameController>().RestartLevel();
-        //FindObjectOfType<GameController>().ReloadFromLastCheckpoint();
     }
 
 }

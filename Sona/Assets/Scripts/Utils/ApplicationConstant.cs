@@ -2,6 +2,8 @@
 using UnityEngine;
 
 namespace ApplicationConstants {
+
+
     public class GameConstants {
         public static string gameExtension = ".sona";
         public static string storagePath = Application.persistentDataPath;
@@ -15,8 +17,9 @@ namespace ApplicationConstants {
         public static string okString = "Proceed";
 
         public static string voidSlotName = "---";
-        public static string createNewSlotAlertMessage = "Create a new game on this slot?";
-        public static string loadSlotAlertMessage = "Are you sure you want to load this slot?";
+        public static string createNewSlotAlertMessage = "Create a new game on this slot";
+        public static string overwriteSlotAlertMessage = "If you continue data will be overwritten";
+        public static string loadSlotAlertMessage = "Load this slot";
 
         public static float defaultMusicVolume = 1f;
         public static float defaultEffectsVolume = 1f;
@@ -29,13 +32,51 @@ namespace ApplicationConstants {
         public static string historyMode = "history";
     }
 
-    public class CameraConstants{
-        //Camera Controller
-        public static string CameraUp = "CamUp";
-        public static string CameraDown = "CamDown";
-        public static string CameraLeft = "CamLeft";
-        public static string CameraRight = "CamRight";
+
+    public class ButtonConstants {
+        public static string powerButtonName_KEYBOARD = "powerButton_Keyboard";
+        public static string changePlayerButtonName_KEYBOARD = "changePlayerButton_Keyboard";
+        public static string interactButtonName_KEYBOARD = "interactButton_Keyboard";
+        public static string pauseButtonName_KEYBOARD = "pauseButton_Keyboard";
+        public static string enterButtonName_KEYBOARD = "enterButton_Keyboard";
+
+        public static string powerButtonName_XBOX = "powerButton_Xbox";
+        public static string changePlayerButtonName_XBOX = "changePlayerButton_Xbox";
+        public static string interactButtonName_XBOX = "interactButton_Xbox";
+        public static string pauseButtonName_XBOX = "pauseButton_Xbox";
+        public static string enterButtonName_XBOX = "enterButton_Xbox";
+
+        public static string powerButtonName_PLAY = "powerButton_Play";
+        public static string changePlayerButtonName_PLAY = "changePlayerButton_Play";
+        public static string interactButtonName_PLAY = "interactButton_Play";
+        public static string pauseButtonName_PLAY = "pauseButton_Play";
+        public static string enterButtonName_PLAY = "enterButton_Play";
     }
+
+
+    public class AxisConstants {
+        public static string axisXName_KEYBOARD = "axisX_Keyboard";
+        public static string axisYName_KEYBOARD = "axisY_Keyboard";
+
+        public static string axisXName_XBOX = "axisX_Xbox";
+        public static string axisYName_XBOX = "axisY_Xbox";
+
+        public static string axisXName_PLAY = "axisX_Play";
+        public static string axisYName_PLAY = "axisY_Play";
+    }
+
+
+    public class CameraConstants{
+        public static string cameraXaxisName_KEYBOARD = "cameraXaxis_Keyboard";
+        public static string cameraYaxisName_KEYBOARD = "cameraYaxis_Keyboard";
+
+        public static string cameraXaxisName_XBOX = "cameraXaxis_Xbox";
+        public static string cameraYaxisName_XBOX = "cameraYaxis_Xbox";
+
+        public static string cameraXaxisName_PLAY = "cameraXaxis_Play";
+        public static string cameraYaxisName_PLAY = "cameraYaxis_Play";
+    }
+
 
     public class PlayersConstants{
         public static int playerLayer = 9;
@@ -59,11 +100,13 @@ namespace ApplicationConstants {
         public static string jumpButton = "Jump";
         public static string pauseButton = "PauseButton";
         public static string interactButton = "InteractButton";
+        public static string x_Axis = "X_Axis";
+        public static string y_Axis = "Y_Axis";
 
         public static string killingObjectTag = "KillingObject";
-
         public static string playerTag = "Player";
     }
+
 
     public class GuardConstants {
         public static float guardWalkingSpeed = 10f;
@@ -79,6 +122,7 @@ namespace ApplicationConstants {
 
         public static string guardTag = "Guard";
     }
+
 
     public class MenuConstants {
         public static Color selectedButtonColor = new Color(61f / 255f, 108f / 255f, 1f);
@@ -103,8 +147,8 @@ namespace ApplicationConstants {
         };
     }
 
-    public class SceneNames {
 
+    public class SceneNames {
 	    public static string menu = "MainMenu";
 
         public static string level1 = "Level1";

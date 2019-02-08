@@ -11,29 +11,17 @@ public class ButtonDoor : MonoBehaviour {
     public GameObject led;
     public Material locked;
     public Material unlocked;
-    public float eulerX;
-    public float eulerY;
-    public float eulerZ;
-    public float rotationSpeed;
-
+    
     bool active = false;
-    bool open = false;
-    bool close = true;
-    bool opening = false;
-    Quaternion initialRotation;
-    Quaternion targetRotation;
-
+    
     void Start () {
-        initialRotation = transform.rotation;
-        Vector3 dir = new Vector3(eulerX, eulerY, eulerZ);
-        targetRotation = Quaternion.Euler(transform.rotation.eulerAngles + dir);
         _camera.enabled = false;
         led.GetComponent<Renderer>().material = locked;
     }
 	
 	void Update () {
 
-        if (_buttonInteractController.IsActive() & CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)) {
+        if (_buttonInteractController.IsActive() & GameSettings.GetButtonDown(PlayersConstants.interactButton)) {
             _buttonInteractController.GetPlayer().GetComponentInChildren<Camera>().enabled = false;
             _buttonInteractController.Necessary(false);
             _camera.enabled = true;

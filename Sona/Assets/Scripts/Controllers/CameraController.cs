@@ -130,23 +130,8 @@ public class CameraController : InputListener {
         float v = 0;
 
         if (IsInputActive()){
-            if (CrossPlatformInputManager.GetButton(CameraConstants.CameraUp)){
-                v = 1;
-            }
-            if (CrossPlatformInputManager.GetButton(CameraConstants.CameraDown)){
-                v = -1;
-            }
-            if (CrossPlatformInputManager.GetButton(CameraConstants.CameraLeft)){
-                h = -1;
-            }
-            if (CrossPlatformInputManager.GetButton(CameraConstants.CameraRight)){
-                h = 1;
-            }
-
-            h += CrossPlatformInputManager.GetAxis("Mouse X");
-            v -= CrossPlatformInputManager.GetAxis("Mouse Y");
-
-
+            h = GameSettings.GetCameraAxis(PlayersConstants.x_Axis);
+            v = GameSettings.GetCameraAxis(PlayersConstants.y_Axis);
         }
         h_rotation = h * rot_speed;
         v_rotation = v * rot_speed;

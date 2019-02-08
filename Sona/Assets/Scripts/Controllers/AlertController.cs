@@ -60,7 +60,7 @@ public class AlertController : InputListener {
     }
 
     private void checkSelection(){
-        float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
+        float horizontal = GameSettings.GetMenuAxis(PlayersConstants.x_Axis);
 
         if (horizontal > 0 || horizontal < 0){
             if (!buttonChanged) NextButton();
@@ -78,9 +78,9 @@ public class AlertController : InputListener {
     }
 
     private void checkEnterButton(){
-        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.enterButton)){
-            if (currentButton == 1) callback("");
+        if (GameSettings.GetButtonDown(PlayersConstants.enterButton)){
             RestoreOldListener();
+            if (currentButton == 1) callback("");
             Destroy(gameObject);
         }
     }

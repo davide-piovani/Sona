@@ -84,7 +84,7 @@ public class TutorialManager : MonoBehaviour {
                         state++;
                         break;
                     case 2:
-                        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton))
+                        if (GameSettings.GetButtonDown(PlayersConstants.changeCharacterButton))
                         {
                             toScreen.EraseTutorialVideoMessage();
                             toScreen.MSGEnabled(false);
@@ -105,7 +105,7 @@ public class TutorialManager : MonoBehaviour {
                         }
                         break;
                     case 4:
-                        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName))
+                        if (GameSettings.GetButtonDown(PlayersConstants.powerButtonName))
                         {
                             controller.ChangePlayerActive(true);
                             toScreen.EraseTutorialVideoMessage();
@@ -169,7 +169,7 @@ public class TutorialManager : MonoBehaviour {
                         }
                         break;
                     case 8:
-                        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.powerButtonName))
+                        if (GameSettings.GetButtonDown(PlayersConstants.powerButtonName))
                         {
                             controller.ChangePlayerActive(true);
                             toScreen.EraseTutorialVideoMessage();
@@ -184,7 +184,7 @@ public class TutorialManager : MonoBehaviour {
                         }
                         break;
                     case 10:
-                        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton))
+                        if (GameSettings.GetButtonDown(PlayersConstants.changeCharacterButton))
                         {
                             toScreen.EraseTutorialMessage();
                             state++;
@@ -199,7 +199,7 @@ public class TutorialManager : MonoBehaviour {
             }
             else
             {
-                if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton))
+                if (GameSettings.GetButtonDown(PlayersConstants.interactButton))
                 {
                     toScreen.NextDial();
                 }

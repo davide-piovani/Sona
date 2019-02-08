@@ -23,7 +23,7 @@ public class AllarmButton : MonoBehaviour {
 
     void Update() {
 
-        if (_interactController.IsActive() & CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton)) {
+        if (_interactController.IsActive() & GameSettings.GetButtonDown(PlayersConstants.interactButton)) {
             _interactController.Necessary(false);
             ToggleAlarm(true);
         }

@@ -31,7 +31,7 @@ public class PlatformController : MonoBehaviour {
 
         if (state == 0)
         {
-            if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton) & _interact.IsActive())
+            if (GameSettings.GetButtonDown(PlayersConstants.interactButton) & _interact.IsActive())
             {
                 _gameController.PauseActive(false); /*prova per vedere se funziona*/
                 _gameController.ChangePlayerActive(false); /*prova per vedere se funziona*/

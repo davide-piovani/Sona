@@ -27,7 +27,7 @@ public class RotatingDoor : MonoBehaviour {
 	
 	void Update () {
 
-        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton) & _interact.IsActive() & (open | close)) {
+        if (GameSettings.GetButtonDown(PlayersConstants.interactButton) & _interact.IsActive() & (open | close)) {
             _interact.Necessary(false);
             if (open)
             {

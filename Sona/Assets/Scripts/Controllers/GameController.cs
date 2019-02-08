@@ -76,8 +76,8 @@ public class GameController : InputListener {
                 activePlayer.ActiveInput();
                 activePlayer.GetComponentInChildren<CameraController>().ActiveInput();
             }
-            if (pauseActive & CrossPlatformInputManager.GetButtonDown(PlayersConstants.pauseButton)) PauseGame();
-            if (changePlayerActive & CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton)) ChangeCharacter();
+            if (pauseActive & /*CrossPlatformInputManager.GetButtonDown(PlayersConstants.pauseButton)*/GameSettings.GetButtonDown(PlayersConstants.pauseButton)) PauseGame();
+            if (changePlayerActive & /*CrossPlatformInputManager.GetButtonDown(PlayersConstants.changeCharacterButton)*/GameSettings.GetButtonDown(PlayersConstants.changeCharacterButton)) ChangeCharacter();
         }
         if (alarmActive) ManageAlarms();
     }

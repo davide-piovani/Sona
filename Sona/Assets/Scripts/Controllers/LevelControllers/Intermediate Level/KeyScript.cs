@@ -17,7 +17,7 @@ public class KeyScript : MonoBehaviour {
     }
 
     void Update() {
-        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton) & _interact.IsActive())
+        if (GameSettings.GetButtonDown(PlayersConstants.interactButton) & _interact.IsActive())
         {
             keyDoorController.KeyTaken(_interact.GetPlayer().name);
             _interact.Necessary(false);

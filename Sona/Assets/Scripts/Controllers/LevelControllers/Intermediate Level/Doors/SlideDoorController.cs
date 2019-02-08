@@ -17,7 +17,7 @@ public class SlideDoorController : MonoBehaviour {
     void Update()
     {
 
-        if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton) & _interact.IsActive() & !_door.IsSliding())
+        if (GameSettings.GetButtonDown(PlayersConstants.interactButton) & _interact.IsActive() & !_door.IsSliding())
         {
             _door.SlideDoor();
         }
