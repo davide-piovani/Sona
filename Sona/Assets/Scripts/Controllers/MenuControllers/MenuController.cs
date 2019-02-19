@@ -21,6 +21,7 @@ public class MenuController : MenuMovementController {
 
     private void Start(){
         GameSettings.SetControllerType(GameConstants.keyboardPad); //da mettere che riconosce se c'è joystick
+        GameSettings.SetCurrentSceneNumber(1);
         sceneLoader = FindObjectOfType<SceneLoader>();
         canvas = FindObjectOfType<Canvas>();
         LoadMenu(MenuType.mainMenu);
@@ -93,6 +94,9 @@ public class MenuController : MenuMovementController {
             case 3:
                 Settings();
                 break;
+            case 4:
+                sceneLoader.LoadScene(5);
+                break;
         }
     }
 
@@ -136,13 +140,13 @@ public class MenuController : MenuMovementController {
         GameSettings.SetPlayMode(GameConstants.levelMode);
         switch (currentButton){
             case 0:
-                sceneLoader.LoadScene(currentButton+1);
+                sceneLoader.LoadScene(SceneNames.level1);
                 break;
             case 1:
-                sceneLoader.LoadScene(currentButton+1);
+                sceneLoader.LoadScene(SceneNames.level2);
                 break;
             case 2:
-                sceneLoader.LoadScene(currentButton+2);
+                sceneLoader.LoadScene(SceneNames.level3);
                 break;
             case 4:
                 LoadMenu(MenuType.mainMenu);
@@ -244,7 +248,7 @@ public class MenuController : MenuMovementController {
         currentSlot.name = newName;
         SaveSystem.SaveGameSlot(currentSlot);
         sceneLoader.SetGameSlot(currentSlot);
-        GameSettings.SetCurrentSceneNumber(1);
+        GameSettings.SetCurrentSceneNumber(2);
         sceneLoader.LoadScene(SceneType.Level_1);
     }
 

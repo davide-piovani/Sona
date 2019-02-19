@@ -35,14 +35,14 @@ public class SceneLoader : MonoBehaviour {
 
     public void LoadStartScene(){
         if (gameSlot != null) gameSlot.shouldRestorePos = false;
-        GameSettings.SetCurrentSceneNumber(0);
-        SceneManager.LoadScene(0);
+        GameSettings.SetCurrentSceneNumber(1);
+        SceneManager.LoadScene(1);
     }
 
     public void LoadTransitionScene()
     {
         if (gameSlot != null) gameSlot.shouldRestorePos = false;
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(7);
     }
 
     public void LoadScene(int scene){

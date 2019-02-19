@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameSettings : MonoBehaviour {
 
-    static int currentSceneNumber = 0; //Main Menu
+    static int currentSceneNumber = 1; //Main Menu
     static string playMode = GameConstants.historyMode; //default Value
     static string controller = GameConstants.keyboardPad; //default Value
 

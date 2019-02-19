@@ -20,12 +20,19 @@ public class CreditsScript : MonoBehaviour {
     {
         
         yield return new WaitForSeconds(2);
-        _text.text = "AAA";
+        _text.text = "Davide Piovani";
         yield return new WaitForSeconds(2);
-        _text.text = "BBB";
+        _text.text = "Federico Reale";
         yield return new WaitForSeconds(2);
-        _text.text = "CCC";
+        _text.text = "Luca Sartor";
         yield return new WaitForSeconds(2);
+        _text.text = "Gabriele Iannone";
+        yield return new WaitForSeconds(2);
+        _text.text = "Leonardo Codamo";
+        yield return new WaitForSeconds(2);
+        _text.text = "Developed for the \nVideo game Design and Programming course \nof the Politecnico di Milano";
+        yield return new WaitForSeconds(2);
+
         _sceneLoader.LoadStartScene();
     }
 }

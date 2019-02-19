@@ -11,10 +11,10 @@ public class TransitionController : MonoBehaviour {
 
     void Start () {
         sceneLoader = FindObjectOfType<SceneLoader>();
-        if (GameSettings.GetCurrentSceneNumber() == 0) { txt.text = "LOADING LEVEL 1"; }
-        else if (GameSettings.GetCurrentSceneNumber() == 1) { txt.text = "LOADING LEVEL 2"; }
-        else if (GameSettings.GetCurrentSceneNumber() == 2) { txt.text = "LOADING PART 2"; }
-        else if (GameSettings.GetCurrentSceneNumber() == 3) { txt.text = "LOADING LEVEL 3"; }
+        if (GameSettings.GetCurrentSceneNumber() == 1) { txt.text = "LOADING LEVEL 1"; }
+        else if (GameSettings.GetCurrentSceneNumber() == 2) { txt.text = "LOADING LEVEL 2"; }
+        else if (GameSettings.GetCurrentSceneNumber() == 3) { txt.text = "LOADING PART 2"; }
+        else if (GameSettings.GetCurrentSceneNumber() == 4) { txt.text = "LOADING LEVEL 3"; }
         else { txt.text = "CONGRATULATIONS! YOU HAVE FINISHED THE GAME"; }
         StartCoroutine("LaunchLevel");
     }

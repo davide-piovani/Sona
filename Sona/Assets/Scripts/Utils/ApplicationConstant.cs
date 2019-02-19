@@ -133,14 +133,14 @@ namespace ApplicationConstants {
         public static float deltaSliderValue = 0.01f;
 
         public static bool[][] menuActiveButtons = {
-            new bool[] {true, true, true, true, false},     //Main menu
+            new bool[] {true, true, true, true, true},     //Main menu
             new bool[] {true, true, true, false, true},     //New Game
             new bool[] {true, true, true, false, true},     //Load Game
             new bool[] {true, true, true, false, true}      //Select Level
         };
 
         public static string[][] menuButtonsText = {
-            new string[] {"New Game", "Load Game", "Select Level", "Settings", ""},     //Main menu
+            new string[] {"New Game", "Load Game", "Select Level", "Settings", "Credits"},     //Main menu
             new string[] {GameConstants.voidSlotName, GameConstants.voidSlotName, GameConstants.voidSlotName, GameConstants.voidSlotName, "Back"},       //New Game
             new string[] {GameConstants.voidSlotName, GameConstants.voidSlotName, GameConstants.voidSlotName, GameConstants.voidSlotName, "Back"},       //Load Game
             new string[] { "Level1", "Level2", "Level3", "", "Back"},     //Select level
