@@ -61,4 +61,12 @@ public class CanvasManager : MonoBehaviour {
     {
         msg.text = "";
     }
+
+    public void ShowPressText(string text, string button) {
+        tutorialMSG.SetPressText(text, button);
+    }
+
+    public void ErasePressText() {
+        tutorialMSG.ErasePressText();
+    }
 }

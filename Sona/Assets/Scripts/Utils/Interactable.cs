@@ -2,6 +2,7 @@
 using System;
 using UnityEngine;
 using TMPro;
+using ApplicationConstants;
 
 public class Interactable : MonoBehaviour {
 
@@ -39,7 +40,7 @@ public class Interactable : MonoBehaviour {
     {
         bool tutorialActive = false;
 
-        if (Input.GetButtonDown("InteractButton") && !hasInteracted)
+        if (GameSettings.GetButtonDown(PlayersConstants.interactButton) && !hasInteracted)
 
         {
             if (getDistanceFromPlayer() <= radius)

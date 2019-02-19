@@ -223,7 +223,7 @@ public abstract class Player : InputListener {
 
     private void ManagePlayerSpeedRotationAndAnimation(){
         if (direction.magnitude > Mathf.Epsilon){
-            if (direction.magnitude > PlayersConstants.runningMinimumMagnitude && !(CrossPlatformInputManager.GetButton("WalkButton"))) {
+            if (direction.magnitude > PlayersConstants.runningMinimumMagnitude && !(Input.GetKey(KeyCode.LeftShift))) {
                 speed = PlayersConstants.runningSpeed;
                 SetAnimBools(Mode.running);
             } else {

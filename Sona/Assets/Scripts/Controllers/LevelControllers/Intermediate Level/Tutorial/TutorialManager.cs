@@ -87,11 +87,19 @@ public class TutorialManager : MonoBehaviour {
                         if (GameSettings.GetButtonDown(PlayersConstants.changeCharacterButton))
                         {
                             toScreen.EraseTutorialVideoMessage();
-                            toScreen.MSGEnabled(false);
+                            toScreen.ShowPressText("Press          to change character", "CHANGE_CHARACTER");
                             state++;
                         }
                         break;
                     case 3:
+                        if (GameSettings.GetButtonDown(PlayersConstants.changeCharacterButton))
+                        {
+                            toScreen.ErasePressText();
+                            toScreen.MSGEnabled(false);
+                            state++;
+                        }
+                        break;
+                    case 4:
                         if (controller.GetActivePlayer().name.Equals("Charlie"))
                         {
                             controller.ChangePlayerActive(false);
@@ -104,7 +112,7 @@ public class TutorialManager : MonoBehaviour {
                             state++;
                         }
                         break;
-                    case 4:
+                    case 5:
                         if (GameSettings.GetButtonDown(PlayersConstants.powerButtonName))
                         {
                             controller.ChangePlayerActive(true);
@@ -113,7 +121,7 @@ public class TutorialManager : MonoBehaviour {
                             state++;
                         }
                         break;
-                    case 5:
+                    case 6:
                         if (doorPassed) {
                             freeCam.gameObject.transform.position = new Vector3(7.5f, 2f, 0f);
                             freeCam.gameObject.transform.rotation = Quaternion.Euler(20, 90, 0);
@@ -124,7 +132,7 @@ public class TutorialManager : MonoBehaviour {
                             freeCam.enabled = true;
                             ShowDialogueLine(4);
                         }
-                        if (state == 6)
+                        if (state == 7)
                         {
                             freeCam.enabled = false;
                             toScreen.PowerBarActive(true);
@@ -132,7 +140,7 @@ public class TutorialManager : MonoBehaviour {
                             controller.ActiveInput();
                         }
                         break;
-                    case 6:
+                    case 7:
                         if (doorOpen)
                         {
                             _doorController.Necessary(false);
@@ -146,7 +154,7 @@ public class TutorialManager : MonoBehaviour {
                             freeCam.enabled = true;
                             ShowDialogueLine(5);
                         }
-                        if (state == 7)
+                        if (state == 8)
                         {
                             _doorController.ReActive();
                             _doorController.Necessary(true);
@@ -154,9 +162,13 @@ public class TutorialManager : MonoBehaviour {
                             toScreen.PowerBarActive(true);
                             currentPlayer.Activate();
                             controller.ActiveInput();
+                            toScreen.ShowTutorialMessage("Use Hannah to explore the rest of the area!");
                         }
                         break;
-                    case 7:
+                    case 8:
+                        if (controller.GetActivePlayer().name.Equals("Hannah")) {
+                            toScreen.EraseTutorialMessage();
+                        }
                         if (closeToAllarm) {
                             controller.ChangePlayerActive(false);
                             controller.GetActivePlayer().CanUsePower(true);
@@ -168,7 +180,7 @@ public class TutorialManager : MonoBehaviour {
                             state++;
                         }
                         break;
-                    case 8:
+                    case 9:
                         if (GameSettings.GetButtonDown(PlayersConstants.powerButtonName))
                         {
                             controller.ChangePlayerActive(true);
@@ -177,20 +189,20 @@ public class TutorialManager : MonoBehaviour {
                             state++;
                         }
                         break;
-                    case 9:
+                    case 10:
                         if (allarmDeactivated) {
                             toScreen.ShowTutorialMessage("Good job! Now bring the other characters\nnear Hannah to leave the room.");
                             state++;
                         }
                         break;
-                    case 10:
+                    case 11:
                         if (GameSettings.GetButtonDown(PlayersConstants.changeCharacterButton))
                         {
                             toScreen.EraseTutorialMessage();
                             state++;
                         }
                         break;
-                    case 11:
+                    case 12:
                         if (levelEnd) {
                             StartCoroutine(Restart());
                         }

@@ -136,7 +136,7 @@ public class Level3Manager : MonoBehaviour {
             }
             else
             {
-                if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton))
+                if (GameSettings.GetButtonDown(PlayersConstants.interactButton))
                 {
                     toScreen.NextDial();
                 }

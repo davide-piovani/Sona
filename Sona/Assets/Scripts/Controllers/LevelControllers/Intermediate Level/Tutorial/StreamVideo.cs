@@ -81,6 +81,7 @@ public class StreamVideo : MonoBehaviour
         }
         videoImage.texture = videoPlayer.texture;
         videoImage.color = new Vector4(videoImage.color.r, videoImage.color.g, videoImage.color.b, 1);
+        videoPlayer.isLooping = true;
         videoPlayer.Play();
         //audioSource.Play();
     }

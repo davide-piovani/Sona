@@ -110,7 +110,7 @@ namespace ApplicationConstants {
 
     public class GuardConstants {
         public static float guardWalkingSpeed = 10f;
-        public static float guardRunningSpeed = 40f;
+        public static float guardRunningSpeed = 100f;
 
         public static float guardLookRadius = 15f;
         public static float guardCatchingRadius = 4f;

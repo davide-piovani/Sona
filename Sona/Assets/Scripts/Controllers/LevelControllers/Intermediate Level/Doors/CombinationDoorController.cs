@@ -8,8 +8,8 @@ using UnityStandardAssets.CrossPlatformInput;
 public class CombinationDoorController : MonoBehaviour, LockedDoor {
 
     public InteractController _interactSensor;
-    public Text _combinationString;
-    public GameObject _displayPad;
+    public ButtonsController _combDisplay;
+    InsertCombinationDigit _combinationString;
     ElevatorDoor _door;
     GameController _gameController;
     public string _combinationValue = "7894";
@@ -21,8 +21,10 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
     
     void Start()
     {
+        _combinationString = FindObjectOfType<InsertCombinationDigit>();
         _gameController = FindObjectOfType<GameController>();
-        _displayPad.SetActive(false);
+        _combDisplay.DisableInput();
+        _combDisplay.gameObject.SetActive(false);
         _door = GetComponent<ElevatorDoor>();
 
     }
@@ -44,11 +46,10 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
                 {
                     if (_door.IsClose())
                     {
-                        _gameController.PauseActive(false); /*prova per vedere se funziona*/
-                        _gameController.ChangePlayerActive(false); /*prova per vedere se funziona*/
-                        _gameController.ManagePowerActive(false); /*prova per vedere se funziona*/
                         _gameController.DisableInput(); /*prova per vedere se funziona*/
-                        _displayPad.SetActive(true);
+                        _combDisplay.gameObject.SetActive(true);
+                        _combDisplay.ActiveInput();
+                        _combDisplay.StartStringInsert();
                         PlayerScriptsActive(false);
                         state = 1;
                     }
@@ -73,32 +74,30 @@ public class CombinationDoorController : MonoBehaviour, LockedDoor {
         }
         else if (state == 1)
         {
-            if (CrossPlatformInputManager.GetButtonDown(PlayersConstants.interactButton))
+            if (GameSettings.GetButtonDown(PlayersConstants.changeCharacterButton))
             {
-                _combinationString.text = "";
-                _gameController.PauseActive(true); /*prova per vedere se funziona*/
-                _gameController.ChangePlayerActive(true); /*prova per vedere se funziona*/
-                _gameController.ManagePowerActive(true); /*prova per vedere se funziona*/
+                _combinationString.SetText("");
+                _combDisplay.EndStringInsert();
+                _combDisplay.DisableInput();
+                _combDisplay.gameObject.SetActive(false);
                 _gameController.ActiveInput(); /*prova per vedere se funziona*/
-                _displayPad.SetActive(false);
                 PlayerScriptsActive(true);
                 state = 2;
             }
-            else if (_combinationString.text.Equals(_combinationValue))
+            else if (_combinationString.GetText().Equals(_combinationValue))
             {
-                _combinationString.text = "";
-                _gameController.PauseActive(true); /*prova per vedere se funziona*/
-                _gameController.ChangePlayerActive(true); /*prova per vedere se funziona*/
-                _gameController.ManagePowerActive(true); /*prova per vedere se funziona*/
+                _combinationString.SetText("");
+                _combDisplay.EndStringInsert();
+                _combDisplay.DisableInput();
+                _combDisplay.gameObject.SetActive(false);
                 _gameController.ActiveInput(); /*prova per vedere se funziona*/
-                _displayPad.SetActive(false);
                 PlayerScriptsActive(true);
                 _door.SlideDoor();
                 state = 2;
             }
-            else if (_combinationString.text.Length == 4 & !_combinationString.text.Equals(_combinationValue))
+            else if (_combinationString.GetTextLenght() == 4 & !_combinationString.GetText().Equals(_combinationValue))
             {
-                _combinationString.text = "";
+                _combinationString.SetText("");
             }
         }
         else if (state == 2)

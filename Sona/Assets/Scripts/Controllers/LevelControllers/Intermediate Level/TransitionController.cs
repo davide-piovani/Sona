@@ -15,7 +15,7 @@ public class TransitionController : MonoBehaviour {
         else if (GameSettings.GetCurrentSceneNumber() == 1) { txt.text = "LOADING LEVEL 2"; }
         else if (GameSettings.GetCurrentSceneNumber() == 2) { txt.text = "LOADING PART 2"; }
         else if (GameSettings.GetCurrentSceneNumber() == 3) { txt.text = "LOADING LEVEL 3"; }
-        else { }
+        else { txt.text = "CONGRATULATIONS! YOU HAVE FINISHED THE GAME"; }
         StartCoroutine("LaunchLevel");
     }
 
