@@ -140,13 +140,13 @@ public class MenuController : MenuMovementController {
         GameSettings.SetPlayMode(GameConstants.levelMode);
         switch (currentButton){
             case 0:
-                sceneLoader.LoadScene(SceneNames.level1);
+                sceneLoader.LoadScene(2);
                 break;
             case 1:
-                sceneLoader.LoadScene(SceneNames.level2);
+                sceneLoader.LoadScene(3);
                 break;
             case 2:
-                sceneLoader.LoadScene(SceneNames.level3);
+                sceneLoader.LoadScene(5);
                 break;
             case 4:
                 LoadMenu(MenuType.mainMenu);
